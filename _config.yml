@@ -7,8 +7,3 @@ plugins:
 
 color_scheme: light
 search_enabled: true
-
-aux_links:
-  "docs.pulse.devoteam.com":
-    - "http://docs.pulse.devoteam.com/"
-aux_links_new_tab: true
