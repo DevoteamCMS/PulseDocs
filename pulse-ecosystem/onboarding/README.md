@@ -1,3 +1,12 @@
+---
+title: Onboarding
+layout: default
+parent: Pulse Ecosystem
+has_children: true
+nav_order: 3
+permalink: /pulse-ecosystem/onboarding/
+---
+
 # Cloud Onboarding
 
 This document describes what prerequisites, permissions Customer must have and actions Customer must take to onboard to Devoteam Cloud Management Platform (PULSE).

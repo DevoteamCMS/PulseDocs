@@ -1,3 +1,11 @@
+---
+title: AWS
+layout: default
+parent: Onboarding
+grand_parent: Pulse Ecosystem
+nav_order: 3
+---
+
 # AWS Onboarding
 
 ## AWS Onboarding Overview

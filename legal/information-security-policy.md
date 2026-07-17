@@ -1,3 +1,10 @@
+---
+title: Information Security Policy
+layout: default
+parent: Legal
+nav_order: 3
+---
+
 # Information Security Policy
 
 ## Purpose

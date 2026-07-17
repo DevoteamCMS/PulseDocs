@@ -1,3 +1,10 @@
+---
+title: Privacy Policy
+layout: default
+parent: Legal
+nav_order: 2
+---
+
 # Privacy Policy
 
 Please read these Privacy Policy carefully before using Our Website.

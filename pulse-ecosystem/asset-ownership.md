@@ -1,3 +1,10 @@
+---
+title: Asset Ownership
+layout: default
+parent: Pulse Ecosystem
+nav_order: 2
+---
+
 # Asset Ownership
 
 ## About

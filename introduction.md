@@ -1,3 +1,9 @@
+---
+title: Introduction
+layout: default
+nav_order: 2
+---
+
 # Introduction
 
 ## All Your Clouds in One Powerful Platform

@@ -1,3 +1,10 @@
+---
+title: Offboarding
+layout: default
+parent: Pulse Ecosystem
+nav_order: 4
+---
+
 # Offboarding
 
 ## Offboarding for Freemium Customers:

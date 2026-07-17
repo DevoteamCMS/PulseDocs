@@ -1,3 +1,11 @@
+---
+title: Azure
+layout: default
+parent: Onboarding
+grand_parent: Pulse Ecosystem
+nav_order: 1
+---
+
 # Azure Onboarding
 
 ## Customer Prerequisites - Creating SPN

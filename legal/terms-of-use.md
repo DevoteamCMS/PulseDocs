@@ -1,3 +1,10 @@
+---
+title: Terms of Use
+layout: default
+parent: Legal
+nav_order: 1
+---
+
 # Terms of Use
 
 ## Interpretation and Definitions

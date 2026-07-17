@@ -1,3 +1,10 @@
+---
+title: Home
+layout: default
+nav_order: 1
+permalink: /
+---
+
 # PulseDocs
 
 Documentation for **Pulse by Devoteam** — a single pane of glass for organisations to gain full visibility and control over their multi-cloud (AWS, Google Cloud, Azure) environments.

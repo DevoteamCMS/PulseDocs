@@ -1,3 +1,10 @@
+---
+title: Abbreviations
+layout: default
+parent: Legal
+nav_order: 4
+---
+
 # Abbreviations
 
 PULSE - current product name, the same as CMP

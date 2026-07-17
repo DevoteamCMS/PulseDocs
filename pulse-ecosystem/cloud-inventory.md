@@ -1,3 +1,10 @@
+---
+title: Cloud Inventory
+layout: default
+parent: Pulse Ecosystem
+nav_order: 1
+---
+
 # Cloud Inventory
 
 ## Overview

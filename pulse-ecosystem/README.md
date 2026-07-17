@@ -1,3 +1,11 @@
+---
+title: Pulse Ecosystem
+layout: default
+nav_order: 3
+has_children: true
+permalink: /pulse-ecosystem/
+---
+
 # Pulse Ecosystem
 
 ## All Your Clouds In One Powerful Platform

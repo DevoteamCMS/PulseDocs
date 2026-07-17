@@ -1,3 +1,11 @@
+---
+title: Google Cloud
+layout: default
+parent: Onboarding
+grand_parent: Pulse Ecosystem
+nav_order: 2
+---
+
 # Google Onboarding
 
 ## Automated Setup via Pulse (Recommended)
