@@ -8,7 +8,69 @@ nav_order: 3
 
 # AWS Onboarding
 
-## AWS Onbaording Overview
+## Table of Contents
+
+- Automated Setup via Pulse (Recommended)
+- Manual Setup
+  - AWS Onbaording Overview
+  - Customer Prerequisites - Creating IAM User and Roles
+  - Customer Prerequisites - Creating Cost Export
+  - PULSE Configuration - Onboarding SA
+  - PULSE Configuration - Onboarding Cost Export
+
+---
+
+## Onboarding AWS Accounts
+
+### Automated Setup via Pulse (Recommended)
+
+The easiest way to onboard AWS is to use Pulse's guided CloudFormation setup:
+
+1. In Pulse, go to Cloud Management → Onboarding → AWS
+2. Enter your AWS Organization's Management (payer) Account ID and a Role Name
+3. Pulse generates a CloudFormation quick-create stack URL — open it in the AWS Console (opens in a new tab), review the pre-filled stack parameters, and click Create Stack
+4. Pulse automatically detects when the stack finishes deploying (typically around 3 minutes) and completes onboarding — no need to come back and paste anything manually
+
+#### Prerequisites to run the automated setup
+
+- Sign in to the AWS Organization's **management (payer) account**, with the console region set to **us-east-1 (N. Virginia)** — the Cost and Usage Report 2.0 Data Export resource (`AWS::BCMDataExports::Export`) is only available there, and the quick-create link pre-selects it.
+- The deploying user/role needs permission to create **CloudFormation stacks, an IAM role, an S3 bucket, and a Data Export** — `AdministratorAccess` or an equivalent deployment role covers this. During stack creation, acknowledge the prompt that CloudFormation will create named IAM resources.
+- An **AWS Business Support** plan (or Enterprise On-Ramp / Enterprise Support) is only needed for Trusted Advisor–based recommendations — without it, the rest of onboarding still works, Trusted Advisor checks simply return no data.
+
+#### Stack parameters
+
+The Pulse wizard asks you for your **Management Account ID** and a **Role Name**, then pre-fills the rest directly into the generated quick-create link — you don't need to look anything else up:
+
+- **Pulse Account ID** — Pulse's own AWS account ID, filled in automatically by Pulse
+- **External ID** — a unique ID Pulse generates for your organisation, used as the `sts:ExternalId` condition on the trust policy so only Pulse can assume the role
+- **Role Name** — the IAM role Pulse will assume (defaults to `PulseCloudConnect`)
+- Cost export bucket name and report name are auto-generated if left as default
+
+#### What the stack creates
+
+Unlike Manual Setup below (a long-lived IAM user Access Key/Secret), the automated stack creates a **cross-account IAM role with no long-lived AWS credentials** — Pulse assumes the role from its own AWS account via `sts:AssumeRole`, using the External ID as a safeguard against confused-deputy access. Specifically, the stack creates:
+
+- An **S3 bucket** for Cost and Usage Reports — versioned, SSE-S3 encrypted, fully blocked from public access, with a lifecycle rule expiring report objects after 365 days (and noncurrent/overwritten versions after 7 days)
+- A **Cost and Usage Report 2.0 Data Export**, daily granularity, with resource IDs, split cost allocation data, and capacity reservation data included, delivered as gzip/CSV to that bucket
+- An **IAM role** (default name `PulseCloudConnect`) with a single inline policy granting:
+  - Account & organisation discovery — `sts:GetCallerIdentity`, `account:GetAccountInformation`, `account:ListRegions`, `organizations:DescribeOrganization`, `organizations:DescribeAccount`, `organizations:ListAccounts`
+  - Resource scanning — `backup:ListBackupJobs`, `backup:ListProtectedResources`, `cloudformation:GetResource`, `cloudformation:ListResources`, `config:DescribeDeliveryChannels`, `config:DescribeConfigurationRecorderStatus`, `config:ListDiscoveredResources`, `config:SelectResourceConfig`, `inspector:ListFindings`, `inspector:DescribeFindings`, `inspector2:ListFindings`, `ssm:DescribeMaintenanceWindows`, `ssm:ListCommandInvocations`, `tag:GetResources`
+  - Security Hub, for Managed Cloud Compliance — `securityhub:GetFindings`, `securityhub:DescribeStandards`, `securityhub:ListSecurityControlDefinitions`
+  - IAM read access, for Managed Cloud Compliance and Pulse's own permission checks — `iam:GetAccountSummary`, `iam:SimulatePrincipalPolicy`
+  - Trusted Advisor (requires a Business/Enterprise Support plan) — `trustedadvisor:List*`
+  - GuardDuty — `guardduty:ListDetectors`, `guardduty:ListFindings`, `guardduty:GetFindings`
+  - Budgets, for Managed Cloud Economics — `budgets:ViewBudget`
+  - CloudWatch metrics, for Managed Cloud Economics — `cloudwatch:GetMetricData`
+  - Cost Explorer, for real-time cost data without waiting on the S3 export — `ce:GetCostAndUsage`, `ce:GetCostAndUsageWithResources`, `ce:GetCostForecast`, `ce:GetDimensionValues`, `ce:GetTags`, `ce:GetRightsizingRecommendation`, `ce:GetReservationPurchaseRecommendation`, `ce:GetSavingsPlansPurchaseRecommendation`, `cur:DescribeReportDefinitions`
+  - Read access to the Cost and Usage Report bucket created above — `s3:GetObject`, `s3:ListBucket`
+
+Note: the S3 bucket is retained (not deleted) if the stack itself is ever deleted, so remember to remove it manually as part of offboarding.
+
+If deployment takes longer than the 10-minute window shown in the wizard, Pulse keeps checking in the background — check back on Cloud Management after a couple of hours if it hasn't completed yet.
+
+## Manual Setup
+
+### AWS Onbaording Overview
 
 AWS cloud onboarding using single credentials for Organisation with many Accounts.
 
@@ -25,7 +87,7 @@ Required parameters:
 - Role Name
 - Customer Management Account ID
 
-## Customer Prerequisites - Creating IAM User and Roles
+### Customer Prerequisites - Creating IAM User and Roles
 
 Customer must follow bellow requirements and prepare for onboarding as follows:
 
@@ -131,7 +193,7 @@ Customer must follow bellow requirements and prepare for onboarding as follows:
 
 5. For getting Cloud resources enable Config service and do this for all (or relevant where resources deployed) regions: Change Region, Open AWS Config Service, select '1-click setup', select 'Confirm'. Change Account. Enable Config for all regions. Repeat for all Accounts and all Regions.
 
-## Customer Prerequisites - Creating Cost Export
+### Customer Prerequisites - Creating Cost Export
 
 Customer must follow bellow requirements and prepare cost export to proceed on onboarding to PULSE platform. To start collecting your Cloud Billing data, you must create cost export following this guide steps you need to do:
 
@@ -157,7 +219,7 @@ Customer must follow bellow requirements and prepare cost export to proceed on o
 
 If you are using custom permission sets for access then update to include additional permissions to access this bucket, add additional set named 'Pulse_Costs_Viewer' (change `<bucketname>`).
 
-## PULSE Configuration - Onboarding SA
+### PULSE Configuration - Onboarding SA
 
 1. Login to [PULSE](https://pulse.devoteam.com/platform/login) platform
 2. Open [Cloud Management](https://pulse.devoteam.com/platform/cloud-management) under Administration (left bottom corner)
@@ -168,7 +230,7 @@ If you are using custom permission sets for access then update to include additi
    - Customer Management Account ID
 4. Save [done]
 
-## PULSE Configuration - Onboarding Cost Export
+### PULSE Configuration - Onboarding Cost Export
 
 1. Login to [PULSE](https://pulse.devoteam.com/platform/login) platform
 2. Open [Cloud Management](https://pulse.devoteam.com/platform/cloud-management) under Administration (left bottom corner)

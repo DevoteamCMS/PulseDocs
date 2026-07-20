@@ -13,10 +13,23 @@ nav_order: 2
 The easiest way to onboard Google Cloud is to use the automated onboarding script available directly in Pulse:
 
 1. In Pulse, go to Cloud Management → Onboarding → Google Cloud
-2. Follow the wizard to configure your options (host project, access model, billing export)
-3. Download and run the generated PowerShell script — it performs all the Google Cloud steps and uploads credentials to Pulse automatically
+2. Follow the wizard to configure your options:
+   - A naming prefix used for the service account and generated role titles (default `Devoteam Pulse`)
+   - Create a new Service Account (you supply a host project) or reuse an existing one (you supply its email)
+   - Organisation Access Model: **Built-in Resource Viewer role** (`roles/viewer`, simplest) or **Custom Resource Role** (a least-privilege organisation-level role containing only the permissions listed below)
+   - Billing export: auto-detect (or enter a Cost Export Table ID) or skip
+3. Download and run the generated script — available as a PowerShell script or a Cloud Shell (Bash) script, both do the same thing — it performs all the Google Cloud steps and uploads credentials to Pulse automatically
 
-The script requires the Google Cloud SDK (gcloud and bq) and PowerShell 5.1+. It can also be run from Google Cloud Shell.
+The script requires the Google Cloud SDK (`gcloud` and `bq`), plus `jq` and `curl` when run in Cloud Shell. On Windows, the PowerShell script attempts to install the Google Cloud SDK automatically if it's missing. It can also be run directly from [Google Cloud Shell](https://shell.cloud.google.com) — download the script there via **⋮ → Upload file**, then run it with `bash ~/onboard-google.sh`.
+
+#### What the script grants
+
+- **Resource access**: either the built-in `roles/viewer` role, or (Custom Resource Role) a new organisation-level custom role containing exactly the permissions listed under "Customer Prerequisites - Creating SA" below — both bound at the organisation level.
+- **Billing access**: always the built-in `roles/billing.viewer` role on the billing account, regardless of which access model you chose — Google Cloud billing accounts only accept predefined roles, so a custom role is never used here.
+- **Cost export access**: the built-in `roles/bigquery.dataViewer` role, granted at the project level if the export project is already onboarded to Pulse, or at the table/dataset level otherwise.
+- **Security Health Analytics**: enabled directly using your own `gcloud` session (not the service account) — this is a one-time, best-effort step; if it fails the script prints the exact command to run manually.
+
+Re-running a re-downloaded script is safe — it reuses the existing service account and skips any API, role, or policy step that's already done.
 
 ## Manual Setup
 
@@ -128,8 +141,8 @@ Customer must follow below requirements and prepare cost export to proceed on on
   - Open IAM and admin
   - Select Roles. Create custom role named like 'PULSE Cost Export Viewer' for this project and add this permission: "bigquery.tables.getData". Press Create Role.
   - Grant Access, there are 2 ways to do this:
-    1. Through IAM - select 'grant access' for already created Service Account by adding new role 'PULSE Cost Export Viewer'. Press Save.
-    2. BigQuery share feature - in BigQuery panel, find and click the billing export dataset. Click Sharing → Permissions → Add Principal, enter your Service Account email, assign the custom role PULSE Cost Export Viewer and click Save.
+    1. **Project level** - through IAM, select 'grant access' for already created Service Account by adding the new role 'PULSE Cost Export Viewer'. Press Save. This grants access to every dataset/table in the project, so it's the simplest option if the cost export project is dedicated to billing data (or you're otherwise comfortable granting project-wide access).
+    2. **Table level** - through the BigQuery share feature, in BigQuery panel, find and click the billing export dataset. Click Sharing → Permissions → Add Principal, enter your Service Account email, assign the custom role PULSE Cost Export Viewer and click Save. This scopes access to just the billing export dataset/table, leaving the rest of the project untouched - use this if the export lives in a project with other data you don't want to expose.
 - Ensure APIs are enabled. Enable on the project where the BigQuery dataset lives:
   - BigQuery API
 
