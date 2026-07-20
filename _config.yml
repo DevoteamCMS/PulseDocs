@@ -1,5 +1,6 @@
 title: PulseDocs
 description: "Documentation for Pulse by Devoteam"
+logo: "/assets/images/pulse-logo.png"
 
 remote_theme: just-the-docs/just-the-docs
 plugins:
