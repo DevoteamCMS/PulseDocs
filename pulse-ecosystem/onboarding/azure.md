@@ -12,17 +12,17 @@ nav_order: 1
 
 Organizations must meet these requirements and prepare a Service Principal Name (SPN) with proper roles and permissions before onboarding to PULSE:
 
-1. Access the cloud portal and authenticate
-2. Establish an App registration (SPN) following Azure's standard procedures; preserve the AppID for later reference during PULSE setup
-3. Generate a client secret for the newly created SPN, noting both the secret value and its expiration timeline for PULSE configuration
-4. Grant 'Reader' and 'Billing Reader' roles across each subscription intended for onboarding (this may be assigned at Root or Management Group level for efficiency)
-5. For CSP customers: Verify cost visibility is enabled within the Azure portal
+1. Login to Cloud portal
+2. Create one App registration (called SPN) - [Azure - Register an Application](https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#register-an-application) with default settings copy AppID for later use when onboarding to PULSE
+3. Add a client secret for newly created SPN - [Azure - Add a client secret](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=client-secret) copy secret value and expiration date for later use when onboarding to PULSE
+4. Assign 'Reader' and 'Billing Reader' roles on each Subscriptions you want to onboard - [Azure - Assign Azure roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal) (this can be done on Root or Management Group level to save time)
+5. Applicable for CSP customers: Ensure that you can see Cost via Azure portal - [Azure - How to enable cost view](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/get-started-partners#enable-the-policy-to-view-azure-usage-charges)
 
 ## PULSE Configuration - Onboarding SPN
 
-1. Authenticate into the PULSE platform
-2. Navigate to Cloud Management via Administration (located in the lower left corner)
-3. Input Azure Tenant SPN credentials:
+1. Login to [PULSE](https://pulse.devoteam.com/platform/login) platform
+2. Open [Cloud Management](https://pulse.devoteam.com/platform/cloud-management) under Administration (left bottom corner)
+3. Add Azure Tenant SPN credentials:
    - Tenant ID (your Azure tenant identifier)
    - Tenant Name (the tenant's designated name)
    - Application ID (the SPN or App registration identifier)

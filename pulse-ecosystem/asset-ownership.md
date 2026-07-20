@@ -17,6 +17,10 @@ Asset ownership pertains to the individual or business unit responsible for mana
 
 **Asset Parent** - Every asset has a parent container. In AWS, accounts parent all assets deployed within them. Google Projects serve the same function. Azure assets require a Resource Group parent, with Resource Groups themselves parented by Subscriptions.
 
+- Azure: Cloud Tenant - Subscription - Resource Group - Resource
+- AWS: Cloud Organization - Account - Resource
+- Google: Cloud Organization - Project - Resource
+
 **Asset Groups (AG)** - Logically grouped and visible collections of allocated assets for delegated users.
 
 **Delegation** - User assignment to an Asset Group.

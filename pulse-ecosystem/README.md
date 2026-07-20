@@ -54,6 +54,6 @@ Devoteam is constantly working to add new capabilities for customers. Currently 
 
 ## Next Steps
 
-- Read more about [Cloud Managed Services | Devoteam](https://www.devoteam.com/expertise/cloud-managed-services/)
+- Read more about [Cloud Managed Services | Devoteam](https://www.devoteam.com/services/cloud-managed-services)
 - Read more about Freemium [Cloud Inventory](cloud-inventory.md)
 - Start using Pulse Ecosystem Freemium versions yourself: [Cloud Onboarding](onboarding/README.md)

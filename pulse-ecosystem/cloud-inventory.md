@@ -51,6 +51,6 @@ Assesses tagging usage patterns and identifies the top five tags to highlight go
 
 ## Next Steps
 
-- Request a demonstration
+- Request Demo if you want to see PULSE Ecosystem at work: [Request Demo | Devoteam](https://www.devoteam.com/services/cloud-managed-services/#contact)
 - Learn more about [Pulse Ecosystem](README.md)
-- Begin with [onboarding](onboarding/README.md) resources
+- Start using Pulse Ecosystem Freemium versions yourself: [Cloud Onboarding](onboarding/README.md)
