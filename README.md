@@ -5,3 +5,4 @@ Documentation for **Pulse by Devoteam** — a single pane of glass for organisat
 Published site: https://devoteamcms.github.io/PulseDocs/
 
 This repo holds the source content (plain Markdown, built with Jekyll + Just the Docs for GitHub Pages). Start at [introduction.md](introduction.md), or browse the published site's navigation.
+
