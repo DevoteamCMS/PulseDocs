@@ -7,69 +7,181 @@ nav_order: 1
 ---
 
 # Azure Onboarding
+{: .no_toc }
 
-## Table of Contents
+Connect a Microsoft Azure tenant to Pulse. The recommended path is **federated** - Pulse is granted access without a client secret, so there is nothing to rotate or expire.
 
-- Automated Setup via Pulse (Recommended)
-- Manual Setup
-  - Customer Prerequisites - Creating SPN
-  - PULSE Configuration - Onboarding SPN
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
 
 ---
 
-## Onboarding Microsoft Azure using Service Principal Name (SPN)
+## Required Customer Roles
 
-### Automated Setup via Pulse (Recommended)
+Confirm you have these before you start. This is the only part of onboarding that needs privileged access - everything Pulse itself receives is read-only.
 
-The easiest way to onboard Azure is to use the automated onboarding script available directly in Pulse:
+### Automated Setup (Recommended)
+{: .no_toc }
 
-1. In Pulse, go to Cloud Management → Onboarding → Azure
-2. Follow the wizard to configure your options:
-   - SPN / App Registration name (default `pulse_by_devoteam_readonly`) and client secret expiration (12 or 24 months)
-   - Permission Scope: **Root Management Group** (covers all current and future subscriptions in your tenant), **specific Management Group(s)**, or **specific Subscription(s)**
-   - Optional: enable the **Microsoft Cloud Security Benchmark** policy initiative at the same scope — required if you want Compliance recommendations in Pulse
-   - Optional: a Partner Admin Link (PAL) ID for partner attribution (pre-filled with Devoteam's own ID by default; this does not affect access, billing, or operation of your subscription and can be cleared)
-3. Download and run the generated PowerShell script — it creates the App Registration (SPN), assigns the required Azure roles at your chosen scope, and uploads the credentials to Pulse automatically
+| Where | Role required | Used for |
+| --- | --- | --- |
+| **Microsoft Entra ID** (tenant) | `Cloud Application Administrator` or `Global Administrator` (or an equivalent custom role) | Creating the App Registration |
+| **Azure RBAC**, at your chosen scope | `Owner` or `User Access Administrator` on the target root or management group | Assigning the `Reader` and `Billing Reader` roles, and the compliance policy initiative if enabled |
 
-The script requires PowerShell 5.1+ or PowerShell 7+ with the `Az.Accounts` and `Az.Resources` modules (installed automatically if missing). It can also be run directly from [Azure Cloud Shell](https://shell.azure.com), which has everything pre-configured.
+The script runs in **Azure Cloud Shell**, so there is nothing to install locally.
 
-#### Prerequisites to run the script
+### Manual Setup
+{: .no_toc }
 
-- **Microsoft Entra ID**: ability to create App Registrations. Requires the `Application Developer` or `Global Administrator` role (or an equivalent custom role) in your Microsoft Entra ID tenant.
-- **Azure RBAC**: ability to assign roles (and the compliance policy, if enabled) at the chosen scope. Requires `Owner` or `User Access Administrator` on the target Management Group(s) or Subscription(s).
+| Where | Role required | Used for |
+| --- | --- | --- |
+| **Microsoft Entra ID** (tenant) | `Application Developer` or higher | Creating the App Registration and its client secret |
+| **Azure RBAC**, at your chosen scope | `Owner` or `User Access Administrator` | Assigning `Reader` and `Billing Reader`, and assigning the compliance policy initiative |
 
-#### What the script does
+No Microsoft Graph or Entra application permissions are used in either path, so the SPN cannot read directory data.
 
-- Creates (or reuses, if one with the same name already exists) an App Registration / Service Principal and a new client secret with your chosen expiration
-- Assigns the built-in Azure roles **`Reader`** and **`Billing Reader`** to the SPN at your chosen scope
-- If enabled, assigns the Microsoft Cloud Security Benchmark policy initiative at the same scope, registering the `Microsoft.PolicyInsights` resource provider on target subscriptions if needed
+### Not a role, but required
+{: .no_toc }
+
+- **Choosing a scope.** The automated path assigns at **Root Management Group** or **Management Group(s)**. Root is recommended - it covers all current *and future* subscriptions in your tenant. Assigning at root scope may require a Global Administrator to [elevate access](https://learn.microsoft.com/en-us/azure/role-based-access-control/elevate-access-global-admin) first, since root scope is not granted by default. On the manual path you can scope however you like, including individual **subscriptions**. See [Onboarding Q&A: What scope should I choose?](faq.md#what-scope-should-i-choose)
+- **CSP customers** must confirm cost is visible in the Azure portal - [Azure: enable the policy to view Azure usage charges](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/get-started-partners#enable-the-policy-to-view-azure-usage-charges). If cost is not visible to you, `Billing Reader` will not make it visible to Pulse either.
+
+---
+
+## Choosing an Onboarding Method
+
+Both methods grant Pulse the same read-only access - `Reader` and `Billing Reader` on an SPN - but they differ in how Pulse authenticates.
+
+| | **Automated - Federated (Recommended)** | **Manual - SPN and Client Secret** |
+| --- | --- | --- |
+| Credential given to Pulse | None. Access is federated - no client secret is created or uploaded | Client secret you create, plus its expiration date |
+| How it is done | One generated PowerShell script, pasted into Azure Cloud Shell | Console steps across Entra ID, RBAC and Azure Policy |
+| Scope coverage | Root Management Group or Management Group(s), applied in one pass | Whichever subscriptions or groups you assign by hand |
+| Microsoft cloud security benchmark | Optionally assigned for you | You assign it yourself |
+| Credential rotation | Not applicable - nothing to expire or rotate | Your responsibility - Pulse loses access when the secret expires |
+
+Use the **automated federated** flow unless your organisation specifically requires custom naming, custom roles, or a change-managed process for creating cloud credentials.
+
+Note: Azure onboarding has **no separate cost-export step** - the `Billing Reader` role alone is sufficient for Pulse to read cost and billing data.
+
+---
+
+## Automated Setup - Federated (Recommended)
+
+1. In Pulse, go to **Cloud Management → Onboarding → Azure**
+2. On step **1. Onboard**, choose **Automatic** (marked Recommended) and click Next
+3. On step **2. Set Up (Automated)**, configure:
+   - **Tenant Name** and **Azure Tenant ID** (both required)
+   - **Permission Scope & Roles** - **Root Management Group** (covers all subscriptions in your tenant automatically, including any deployed in future) or **Management Group**, which reveals a **Management Group ID** field
+   - **Azure Roles to Assign** - fixed at `Reader` and `Billing Reader`, shown for information
+   - **Compliance Policy** - the **Microsoft Cloud Security Benchmark** initiative, assigned at the same scope. Required if you want Compliance recommendations in Pulse.
+   - **Partner Admin Link (PAL)** - pre-filled with Devoteam's ID. Does not affect access, billing, or operation of your subscription, and can be cleared.
+4. On step **3. Finalize**, review the *Before running* prerequisites, then click **Copy Script and Open Cloud Shell**
+5. Paste the script into the Cloud Shell terminal and press Enter
+6. Pulse detects completion automatically and confirms with **Onboarding completed successfully**
+
+This flow is **federated**: no client secret is created and none is uploaded to Pulse, so there is nothing to rotate and nothing that expires.
+
+### Before you start
+
+The script **must be run in [Azure Cloud Shell](https://shell.azure.com) (PowerShell)**, which comes pre-configured with the required `Az.Accounts` and `Az.Resources` modules. There is no local install, and you are already authenticated.
+
+Have your **Tenant Name** and **Azure Tenant ID** to hand, plus your **Management Group ID(s)** if you are not using Root scope. You can list management groups in Cloud Shell with `Get-AzManagementGroup`, or copy the IDs from **Management Groups** in the portal.
+
+The Finalize step shows a countdown of roughly 10 minutes. If it lapses, **nothing is lost** - the timer only reflects that Pulse has not detected a deployment *yet*. The backend keeps checking afterwards and completes onboarding automatically once it detects one, so you can run the script after the countdown ends.
+
+### What the script does
+
+- Creates (or reuses, if one with the same name already exists) the App Registration and Service Principal
+- Assigns the built-in Azure roles **`Reader`** and **`Billing Reader`** at your chosen scope
+- If enabled, assigns the Microsoft Cloud Security Benchmark policy initiative at the same scope, registering the `Microsoft.PolicyInsights` resource provider on target subscriptions where needed
 - If a Partner Admin Link ID is set, links it on each target subscription
-- Uploads the resulting SPN credentials to Pulse automatically
+- Establishes federated access for Pulse - no client secret is generated
 
-Re-running a re-downloaded script is safe — it reuses the existing App Registration and skips any role or policy assignments that already exist, so it can also be used to recover from an interrupted run.
+### Verification and timing
 
-## Manual Setup
+| What | When |
+| --- | --- |
+| Script completes and Pulse detects it, showing **Onboarding completed successfully** | Usually while the Finalize step is still open; otherwise the backend picks it up later |
+| Resources, findings and costs load in Pulse | Up to 24 hours |
+
+Compliance recommendations additionally depend on Azure Policy evaluating the newly assigned initiative, which happens on Azure's own schedule.
+
+**If detection takes too long,** Pulse shows *Deployment is taking longer than expected*. The backend keeps trying in the background - return to **Cloud Management** after about 2 hours to check. If the deployment actually failed, contact support.
+
+**If the script fails partway:** re-running a re-generated script is safe. It reuses the existing App Registration and skips any role or policy assignment that already exists, so it can also be used to recover from an interrupted run.
+
+---
+
+## Manual Setup - SPN and Client Secret
+
+### Required parameters
+
+These are the five values you will enter in Pulse at the end. All are required.
+
+| Field | Notes |
+| --- | --- |
+| Tenant ID | Must be a valid GUID |
+| Tenant Name | |
+| Application ID | Must be a valid GUID |
+| Application Secret | The secret's value, shown only once at creation |
+| Expiration Date | The date the client secret expires - see [Onboarding Q&A](faq.md#what-happens-when-the-client-secret-expires) |
+
+### Order of work
+
+1. **Create the SPN and assign roles** - so Pulse can authenticate and read your tenant
+2. **Enable compliance** - so Pulse can see compliance recommendations
+3. **Onboard the SPN in Pulse**
 
 ### Customer Prerequisites - Creating SPN
 
-Organizations must meet these requirements and prepare a Service Principal Name (SPN) with proper roles and permissions before onboarding to PULSE:
-
 1. Login to Cloud portal
-2. Create one App registration (called SPN) - [Azure - Register an Application](https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#register-an-application) with default settings copy AppID for later use when onboarding to PULSE
-3. Add a client secret for newly created SPN - [Azure - Add a client secret](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=client-secret) copy secret value and expiration date for later use when onboarding to PULSE
-4. Assign **'Reader'** and **'Billing Reader'** roles on each Subscriptions you want to onboard - [Azure - Assign Azure roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal) (this can be done on Root or Management Group level to save time) — these are the same two roles the automated script assigns; onboarding requires nothing beyond them (no Microsoft Graph / Entra application permissions are used)
-5. Applicable for CSP customers: Ensure that you can see Cost via Azure portal - [Azure - How to enable cost view](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/get-started-partners#enable-the-policy-to-view-azure-usage-charges)
+2. Create one App registration (called SPN) - [Azure - Register an Application](https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#register-an-application) with default settings. Copy the **AppID** for later use when onboarding to PULSE.
+3. Add a client secret for the newly created SPN - [Azure - Add a client secret](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=client-secret). Copy the **secret value** and **expiration date** for later use when onboarding to PULSE.
 
-Note: unlike AWS and Google Cloud, Azure onboarding has no separate cost-export step — the `Billing Reader` role alone is sufficient for Pulse to read cost and billing data.
+   The secret value is displayed only once. The expiration date is required when you onboard - after it passes, Pulse can no longer authenticate until you create a new secret and update it.
+
+4. Assign the **`Reader`** and **`Billing Reader`** roles on each Subscription you want to onboard - [Azure - Assign Azure roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal). This can be done at Root or Management Group level to save time.
+
+   These are the same two roles the automated script assigns, and onboarding requires nothing beyond them. See [Onboarding Q&A: Why Reader and Billing Reader?](faq.md#why-reader-and-billing-reader-and-nothing-else)
+
+5. Applicable for CSP customers: ensure that you can see Cost via the Azure portal - [Azure - How to enable cost view](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/get-started-partners#enable-the-policy-to-view-azure-usage-charges)
+
+### Customer Prerequisites - Enabling Compliance
+
+For Pulse's Compliance recommendations to work, the built-in **Microsoft cloud security benchmark** policy initiative must be assigned at the same scope as your `Reader`/`Billing Reader` roles above. Many subscriptions already have this assigned by default - Microsoft Defender for Cloud auto-assigns it - so check first before creating a new assignment.
+
+1. Ensure the `Microsoft.PolicyInsights` resource provider is registered on each subscription in scope: **Subscriptions → your subscription → Resource providers →** search `Microsoft.PolicyInsights` → **Register** (if not already `Registered`)
+2. Go to **Azure Policy → Definitions** and search for **"Microsoft cloud security benchmark"** - then check **Policy → Compliance**, filtered to that initiative, to see if it is already assigned at or above your scope
+3. If it isn't assigned yet, click **Assign**, set the Scope to the same Management Group(s)/Subscription(s) you used for the `Reader`/`Billing Reader` roles, and complete the assignment (**Review + create**)
+
+This uses the same `Owner` or `User Access Administrator` role already required for the RBAC assignments above - no additional permission is needed.
 
 ### PULSE Configuration - Onboarding SPN
 
-1. Login to [PULSE](https://pulse.devoteam.com/platform/login) platform
-2. Open [Cloud Management](https://pulse.devoteam.com/platform/cloud-management) under Administration (left bottom corner)
-3. Add Azure Tenant SPN credentials:
-   - Tenant ID (your Azure tenant identifier)
-   - Tenant Name (the tenant's designated name)
-   - Application ID (the SPN or App registration identifier)
-   - Application Secret (the secret's actual value)
-   - Application Secret Expiration (the expiration date)
-4. Complete the process by saving your configuration
+1. Login to the [PULSE](https://pulse.devoteam.com/platform/login) platform
+2. Open [Cloud Management](https://pulse.devoteam.com/platform/cloud-management) under Administration (left bottom corner) - the same place as the onboarding wizard
+3. Go to **Onboarding → Azure**, choose **Manual** on step 1, then enter the five values listed under *Required parameters* above
+4. Save - Pulse confirms with **Onboarding completed successfully**
+
+---
+
+## Readiness Checklist
+
+Use this to confirm onboarding is complete, whichever method you used:
+
+| Item | Where | Required? |
+| --- | --- | --- |
+| App Registration (SPN) exists and Pulse holds valid access to it | Microsoft Entra ID | Required |
+| `Reader` role assigned to the SPN | Every subscription in scope (or inherited from Root / Management Group) | Required |
+| `Billing Reader` role assigned to the SPN | Every subscription in scope (or inherited) | Required for cost and billing data |
+| `Microsoft.PolicyInsights` resource provider registered | Every subscription in scope | Required for compliance |
+| Microsoft cloud security benchmark initiative assigned at the same scope | Management Group or Subscription | Required for compliance recommendations |
+| Cost view enabled - CSP customers only | Billing / partner settings | Required for cost data |
+| Client secret and its expiration date recorded in Pulse | Pulse Cloud Management | **Manual path only** - the federated path has no secret |
