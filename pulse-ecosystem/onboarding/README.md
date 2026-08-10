@@ -28,6 +28,10 @@ This document describes what prerequisites, permissions Customer must have and a
 
 2. Cost Exports - currently for AWS and Google Clouds only - required to get cost information, you need to grant additional permissions for credentials.
 
+**Order matters: Cost Exports depend on Cloud Onboarding.** Pulse maps cost data onto the accounts and projects it already knows about, so the AWS accounts or Google projects must be onboarded **before** you add a cost export. If they are not, Pulse resolves the export against the wrong account and fails to access it.
+
+The automated scripts sequence this for you, so it matters mainly when you add a cost export separately - for example when reusing an existing AWS CUR, or after skipping the billing export step in the Google wizard.
+
 Cloud specific Cloud Credentials naming's:
    1. Google - SA (Service Account), with a JSON key in both setups
    2. Azure - SPN (Service Principal Name) also known as 'App registration' - federated access with no client secret (automated setup), or an SPN client secret you supply (manual setup)

@@ -50,6 +50,16 @@ On AWS specifically, cost data cannot appear until AWS delivers the first Cost a
 
 Yes. Multiple credentials and multiple cost exports per cloud are supported.
 
+### Must accounts be onboarded before I add a cost export?
+
+Yes, on both AWS and Google Cloud. Pulse holds a mapping per account (AWS) or per project (Google Cloud), and the cost export is resolved through that mapping - it is how Pulse knows which account's costs a given export belongs to.
+
+Add a cost export for an account Pulse has not onboarded and there is no mapping to match, so Pulse attempts to reach the export using the wrong account and the access fails.
+
+The onboarding scripts sequence this correctly on their own, so in practice this matters when you register a cost export **separately** from the main onboarding - reusing an existing AWS CUR with `Create CUR export` set to `false`, or adding a Google billing export after choosing *Skip billing export upload*. In those cases, complete the cloud onboarding first, then add the export.
+
+Azure is unaffected - it has no separate cost export step.
+
 ### Can I re-run onboarding, or deploy the same setup twice?
 
 Yes. Pulse does not track how many times you deploy or re-run. Its scanners simply use whatever credentials they hold at the time they run, provided those credentials are valid, and a **reonboarding job** checks on an ongoing basis for new or expired accounts, subscriptions and projects.
@@ -169,6 +179,40 @@ To rotate, create a new secret on the same App Registration and update it in Pul
 ### I am a CSP customer - is there anything extra?
 
 Yes. Ensure you can see cost in the Azure portal first - see [Azure: enable the policy to view Azure usage charges](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/get-started-partners#enable-the-policy-to-view-azure-usage-charges). If cost is not visible to you, `Billing Reader` will not make it visible to Pulse either.
+
+### I ran the deployment twice and the second run failed with "already exists". Did something break?
+
+No, that is correct behaviour. A tenant can only hold one service principal for the Pulse application. Once it exists there is nothing left to create, so the failure is Azure telling you the deployment is already done.
+
+If your first run reached *All steps completed successfully*, you are finished - ignore the second run. If it stopped partway, see [How do I rotate the SPN, or recover from a broken deployment?](#how-do-i-rotate-the-spn-or-recover-from-a-broken-deployment) below, because simply running the script again will not repair it.
+
+### Can I create a second service principal for Pulse in my tenant?
+
+No. There is no state in which two service principal objects for the Pulse application coexist in one tenant. A different object ID is only possible by deleting the existing service principal and creating a new one, which **replaces** it - along with any role assignments tied to the old object ID.
+
+### We deploy across several tenants. Do they share an object ID?
+
+No. Each tenant gets its own independent service principal object with its own object ID. Many tenants, many object IDs - that is the expected shape, and one tenant's deployment has no bearing on another's.
+
+### Onboarding a second company to an already-onboarded tenant fails. Why?
+
+The tenant already has its service principal deployed, and Pulse binds that object ID to exactly one company. This is deliberate: it stops a tenant already onboarded by one organisation from being claimed by another. **One tenant, one deployed SPN, one owning company.**
+
+### That tenant genuinely belongs to a different company now. How do we move it?
+
+Clean up first, then redeploy. The existing Pulse connection has to be removed so the object ID binding is released; only then can the new company complete onboarding for that tenant.
+
+This is not self-service by design - releasing a binding is an internal action, precisely because self-service release would reopen the gap the binding closes. Contact support to arrange it.
+
+### How do I rotate the SPN, or recover from a broken deployment?
+
+Delete the existing service principal, recreate it, and make sure Pulse re-verifies. The new service principal has a new object ID, so the old binding no longer matches. Redeploying **without** re-verifying in Pulse leaves a stale object ID on record and a connection that will not authenticate.
+
+Note that re-running the script on its own does not repair a partial deployment. The first step fails once the service principal exists, and the script stops there - so the role, policy and PAL steps that failed the first time are skipped again. Deleting the service principal first is what lets the script run through cleanly.
+
+### What does an object ID on its own prove?
+
+Only that some tenant created a service principal for the Pulse application - not *which* tenant. Confirming it originated in the tenant you claim is what tenant-scoped verification does before the binding is written.
 
 ---
 

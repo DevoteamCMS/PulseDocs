@@ -623,6 +623,8 @@ Additional requirements to check:
 
 ### PULSE Configuration - Onboarding Cost Export
 
+**Onboard the AWS accounts first.** Pulse maps cost data onto accounts it already knows about, matched on the **Project Name** you enter below. If the account has not been onboarded yet, Pulse resolves the export against the wrong account and fails to access it. See [Onboarding Q&A: Must accounts be onboarded before adding a cost export?](faq.md#must-accounts-be-onboarded-before-i-add-a-cost-export)
+
 1. Login to the [PULSE](https://pulse.devoteam.com/platform/login) platform
 2. Open [Cloud Management](https://pulse.devoteam.com/platform/cloud-management) under Administration (left bottom corner)
 3. Add Billing Export Configuration

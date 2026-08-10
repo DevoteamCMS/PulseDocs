@@ -31,7 +31,7 @@ Confirm you have these before you start. This is the only part of onboarding tha
 
 | Where | Role required | Used for |
 | --- | --- | --- |
-| **Microsoft Entra ID** (tenant) | `Cloud Application Administrator` or `Global Administrator` (or an equivalent custom role) | Creating the App Registration |
+| **Microsoft Entra ID** (tenant) | `Cloud Application Administrator` or `Global Administrator` (or an equivalent custom role) | Creating the service principal for the Pulse application in your tenant |
 | **Azure RBAC**, at your chosen scope | `Owner` or `User Access Administrator` on the target root or management group | Assigning the `Reader` and `Billing Reader` roles, and the compliance policy initiative if enabled |
 
 The script runs in **Azure Cloud Shell**, so there is nothing to install locally.
@@ -90,19 +90,37 @@ This flow is **federated**: no client secret is created and none is uploaded to 
 
 ### Before you start
 
-The script **must be run in [Azure Cloud Shell](https://shell.azure.com) (PowerShell)**, which comes pre-configured with the required `Az.Accounts` and `Az.Resources` modules. There is no local install, and you are already authenticated.
+The script **must be run in [Azure Cloud Shell](https://shell.azure.com) (PowerShell)**. Everything it needs is pre-installed there and you are already authenticated, so there is nothing to install locally.
 
-Have your **Tenant Name** and **Azure Tenant ID** to hand, plus your **Management Group ID(s)** if you are not using Root scope. You can list management groups in Cloud Shell with `Get-AzManagementGroup`, or copy the IDs from **Management Groups** in the portal.
+**Check you are in the right directory first.** The script verifies that your active Cloud Shell session is signed in to the tenant you entered in the wizard, and stops immediately if it is not:
+
+> STOP: Wrong tenant. In the Azure portal switch directory ⚙ (top-right) to `<tenant id>`, reopen Cloud Shell with PowerShell, and run this again.
+
+If you see that, switch directory using the settings icon in the top-right of the portal, reopen Cloud Shell, and paste the script again. Nothing is changed in the wrong tenant.
+
+Have your **Tenant Name** and **Azure Tenant ID** to hand, plus your **Management Group ID(s)** if you are not using Root scope. You can copy the IDs from **Management Groups** in the portal.
 
 The Finalize step shows a countdown of roughly 10 minutes. If it lapses, **nothing is lost** - the timer only reflects that Pulse has not detected a deployment *yet*. The backend keeps checking afterwards and completes onboarding automatically once it detects one, so you can run the script after the countdown ends.
 
 ### What the script does
 
-- Creates (or reuses, if one with the same name already exists) the App Registration and Service Principal
-- Assigns the built-in Azure roles **`Reader`** and **`Billing Reader`** at your chosen scope
-- If enabled, assigns the Microsoft Cloud Security Benchmark policy initiative at the same scope, registering the `Microsoft.PolicyInsights` resource provider on target subscriptions where needed
-- If a Partner Admin Link ID is set, links it on each target subscription
-- Establishes federated access for Pulse - no client secret is generated
+It reports each step as it goes, so you can see exactly where it got to:
+
+| Step | Action |
+| --- | --- |
+| 1 | Creates the **service principal** for the Pulse application in your tenant |
+| 2 | Resolves that service principal's **object ID** |
+| 3 | Assigns the built-in **`Reader`** role at your chosen management group scope |
+| 4 | Assigns the built-in **`Billing Reader`** role at the same scope |
+| 5 | Assigns the **Microsoft Cloud Security Benchmark** policy initiative at the same scope |
+| 6 | Links the **Partner Admin Link (PAL)** ID at tenant level |
+
+Two things worth knowing:
+
+- **No client secret is created**, and nothing is uploaded to Pulse - access is federated.
+- The compliance initiative is assigned in **`DoNotEnforce`** mode. It evaluates your resources and reports compliance, but it does not block or change anything you deploy.
+
+The script stops at the first failed step: if one fails, the remaining steps are skipped and it finishes with *Onboarding incomplete - see FAILED step above* rather than *All steps completed successfully*.
 
 ### Verification and timing
 
@@ -115,7 +133,7 @@ Compliance recommendations additionally depend on Azure Policy evaluating the ne
 
 **If detection takes too long,** Pulse shows *Deployment is taking longer than expected*. The backend keeps trying in the background - return to **Cloud Management** after about 2 hours to check. If the deployment actually failed, contact support.
 
-**If the script fails partway:** re-running a re-generated script is safe. It reuses the existing App Registration and skips any role or policy assignment that already exists, so it can also be used to recover from an interrupted run.
+**If a step reports FAILED,** the steps after it are skipped and the setup is incomplete. The usual causes are being signed in to the wrong tenant, an incorrect Management Group ID, or lacking `Owner` / `User Access Administrator` at the target scope. See [Onboarding Q&A: recovering from a broken deployment](faq.md#how-do-i-rotate-the-spn-or-recover-from-a-broken-deployment).
 
 ---
 
@@ -178,10 +196,10 @@ Use this to confirm onboarding is complete, whichever method you used:
 
 | Item | Where | Required? |
 | --- | --- | --- |
-| App Registration (SPN) exists and Pulse holds valid access to it | Microsoft Entra ID | Required |
+| The SP object exists in the tenant, bound to your company | Microsoft Entra ID | Required |
 | `Reader` role assigned to the SPN | Every subscription in scope (or inherited from Root / Management Group) | Required |
 | `Billing Reader` role assigned to the SPN | Every subscription in scope (or inherited) | Required for cost and billing data |
-| `Microsoft.PolicyInsights` resource provider registered | Every subscription in scope | Required for compliance |
+| `Microsoft.PolicyInsights` resource provider registered | Every subscription in scope | Required for compliance - the automated script does not register it |
 | Microsoft cloud security benchmark initiative assigned at the same scope | Management Group or Subscription | Required for compliance recommendations |
 | Cost view enabled - CSP customers only | Billing / partner settings | Required for cost data |
 | Client secret and its expiration date recorded in Pulse | Pulse Cloud Management | **Manual path only** - the federated path has no secret |

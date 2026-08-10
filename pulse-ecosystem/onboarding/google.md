@@ -104,7 +104,7 @@ Either way, sign in with an account holding the access listed under *Required Cu
 
 - **Resource access**: either the built-in `roles/viewer` role, or (Custom Resource Role) a new organisation-level custom role containing exactly the permissions listed under *Manual Setup* below - both bound at the organisation level.
 - **Billing access**: always the built-in `roles/billing.viewer` role on the billing account, regardless of which access model you chose - Google Cloud billing accounts only accept predefined roles, so a custom role is never used here.
-- **Cost export access**: `bigquery.tables.getData`, letting the service account read rows from the billing export table. When organisation scope is selected the script first tries to create the role at organisation level, falling back to the cost export project if that is unavailable.
+- **Cost export access**: a role granting `bigquery.tables.getData` - the only permission Pulse needs to read rows from the billing export table. When organisation scope is selected the script first tries to create the role at organisation level, falling back to the cost export project if that is unavailable. A built-in role that includes the permission, such as `roles/bigquery.dataViewer`, works equally well but grants more than Pulse uses.
 - **Security Health Analytics**: enabled directly using your own `gcloud` session (not the service account). This is a one-time, best-effort step requiring `securitycenter.managedServices.update` on the organisation; if it fails the script prints the exact command to run manually.
 - **APIs**: enables the 10 core APIs on the **host project** - Cloud Resource Manager, Cloud Billing, IAM, Compute Engine, BigQuery, Billing Budgets, Recommender, Cloud Asset, Organization Policy and Security Command Center - plus **BigQuery** and **BigQuery Data Transfer** on the cost export project.
 
@@ -256,7 +256,9 @@ To start collecting your Cloud Billing data, you must enable Cloud Billing data 
 6. Enable Cloud Billing export to the BigQuery dataset - **Detailed usage cost**
 7. Grant Service Account permissions for the project used for cost export:
    - Open **IAM and admin**
-   - Select **Roles**. Create a custom role named like `PULSE Cost Export Viewer` for this project and add this permission: `bigquery.tables.getData`. Press **Create Role**.
+   - Select **Roles**. Create a custom role named like `PULSE Cost Export Viewer` for this project and add this permission: `bigquery.tables.getData` - it is the only one Pulse needs. Press **Create Role**.
+
+     Alternatively, use a built-in role that already includes that permission, such as `roles/bigquery.dataViewer`. That works too, but grants more access than Pulse uses.
    - Grant access, choosing **one** of the two scopes below:
 
      **Project level** - through IAM, select *grant access* for the already created Service Account by adding the new role `PULSE Cost Export Viewer`. Press Save.
@@ -294,6 +296,8 @@ This is wizard step **2. Add Organization**.
 ### PULSE Configuration - Onboarding Cost Export
 
 This is wizard step **3. Cost Export**.
+
+**Onboard the organisation first.** Pulse maps cost data onto projects it already knows about, matched on the **Project ID** you enter below. If the project has not been onboarded yet, Pulse resolves the export against the wrong account and fails to access it. See [Onboarding Q&A: Must accounts be onboarded before adding a cost export?](faq.md#must-accounts-be-onboarded-before-i-add-a-cost-export)
 
 1. Login to the [PULSE](https://pulse.devoteam.com/platform/login) platform
 2. Open [Cloud Management](https://pulse.devoteam.com/platform/cloud-management) under Administration (left bottom corner)
