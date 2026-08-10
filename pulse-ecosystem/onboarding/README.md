@@ -59,3 +59,7 @@ Select the page for your cloud provider and follow the instructions. Each cloud 
 Background, rationale and "why does Pulse need this?" questions are collected separately, so the step-by-step pages stay short:
 
 - [Onboarding Q&A](faq.md)
+
+When the time comes to disconnect a cloud or leave the platform:
+
+- [Offboarding](../offboarding.md)

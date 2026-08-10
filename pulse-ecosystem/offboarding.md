@@ -1,8 +1,9 @@
 ---
 title: Offboarding
 layout: default
-parent: Pulse Ecosystem
-nav_order: 4
+parent: Onboarding
+grand_parent: Pulse Ecosystem
+nav_order: 5
 ---
 
 # Offboarding
