@@ -270,157 +270,155 @@ Complete the four prerequisite blocks in this order:
 
    **Option B - custom least-privilege policy.** Create a permissions policy named `Pulse_View_Resources_policy` in IAM on each Account, containing exactly the permissions Pulse uses. This is the same permission set the automated CloudFormation stack grants. Alternatively, a combination of roles/policies can be used, so long as the result has all of the permissions listed.
 
-   Pick Option B if your organisation requires least-privilege role definitions. Important! Take note that with new functionality we may require new permissions, so this policy needs maintaining over time. The full policy JSON is in the expandable section at the end of this section.
+   Pick Option B if your organisation requires least-privilege role definitions. Important! Take note that with new functionality we may require new permissions, so this policy needs maintaining over time.
 
-<details markdown="block" class="reference-box">
-  <summary>Option B - full <code>Pulse_View_Resources_policy</code> JSON</summary>
+   <details markdown="block" class="reference-box">
+     <summary>Option B - full <code>Pulse_View_Resources_policy</code> JSON</summary>
 
-Add permissions either via services or by editing the JSON directly. For what each block is needed for, see [Onboarding Q&A: Why does Pulse need each AWS permission?](faq.md#why-does-pulse-need-each-aws-permission)
+   Add permissions either via services or by editing the JSON directly. For what each block is needed for, see [Onboarding Q&A: Why does Pulse need each AWS permission?](faq.md#why-does-pulse-need-each-aws-permission)
 
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "AccountManagement",
-            "Effect": "Allow",
-            "Action": [
-                "sts:GetCallerIdentity",
-                "account:GetAccountInformation",
-                "account:ListRegions"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "Organizations",
-            "Effect": "Allow",
-            "Action": [
-                "organizations:DescribeOrganization",
-                "organizations:DescribeAccount",
-                "organizations:ListAccounts"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "ResourceScanning",
-            "Effect": "Allow",
-            "Action": [
-                "backup:ListBackupJobs",
-                "backup:ListProtectedResources",
-                "cloudformation:GetResource",
-                "cloudformation:ListResources",
-                "config:DescribeDeliveryChannels",
-                "config:DescribeConfigurationRecorderStatus",
-                "config:DescribeConfigRules",
-                "config:ListDiscoveredResources",
-                "config:SelectResourceConfig",
-                "inspector:ListFindings",
-                "inspector:DescribeFindings",
-                "inspector2:ListFindings",
-                "ssm:DescribeMaintenanceWindows",
-                "ssm:ListCommandInvocations",
-                "tag:GetResources"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "SecurityHub",
-            "Effect": "Allow",
-            "Action": [
-                "securityhub:GetFindings",
-                "securityhub:DescribeStandards",
-                "securityhub:ListSecurityControlDefinitions",
-                "securityhub:BatchGetSecurityControls",
-                "securityhub:GetEnabledStandards"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "IAM",
-            "Effect": "Allow",
-            "Action": [
-                "iam:GetAccountSummary",
-                "iam:SimulatePrincipalPolicy"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "TrustedAdvisor",
-            "Effect": "Allow",
-            "Action": [
-                "trustedadvisor:List*"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "GuardDuty",
-            "Effect": "Allow",
-            "Action": [
-                "guardduty:ListDetectors",
-                "guardduty:ListFindings",
-                "guardduty:GetFindings"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "Budgets",
-            "Effect": "Allow",
-            "Action": [
-                "budgets:ViewBudget"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "CloudWatch",
-            "Effect": "Allow",
-            "Action": [
-                "cloudwatch:GetMetricData"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "CostExplorerAccess",
-            "Effect": "Allow",
-            "Action": [
-                "ce:GetCostAndUsage",
-                "ce:GetCostAndUsageWithResources",
-                "ce:GetCostForecast",
-                "ce:GetDimensionValues",
-                "ce:GetTags",
-                "ce:GetRightsizingRecommendation",
-                "ce:GetReservationPurchaseRecommendation",
-                "ce:GetSavingsPlansPurchaseRecommendation",
-                "cur:DescribeReportDefinitions"
-            ],
-            "Resource": "*"
-        }
-    ]
-}
-```
+   ```json
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "AccountManagement",
+               "Effect": "Allow",
+               "Action": [
+                   "sts:GetCallerIdentity",
+                   "account:GetAccountInformation",
+                   "account:ListRegions"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Sid": "Organizations",
+               "Effect": "Allow",
+               "Action": [
+                   "organizations:DescribeOrganization",
+                   "organizations:DescribeAccount",
+                   "organizations:ListAccounts"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Sid": "ResourceScanning",
+               "Effect": "Allow",
+               "Action": [
+                   "backup:ListBackupJobs",
+                   "backup:ListProtectedResources",
+                   "cloudformation:GetResource",
+                   "cloudformation:ListResources",
+                   "config:DescribeDeliveryChannels",
+                   "config:DescribeConfigurationRecorderStatus",
+                   "config:DescribeConfigRules",
+                   "config:ListDiscoveredResources",
+                   "config:SelectResourceConfig",
+                   "inspector:ListFindings",
+                   "inspector:DescribeFindings",
+                   "inspector2:ListFindings",
+                   "ssm:DescribeMaintenanceWindows",
+                   "ssm:ListCommandInvocations",
+                   "tag:GetResources"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Sid": "SecurityHub",
+               "Effect": "Allow",
+               "Action": [
+                   "securityhub:GetFindings",
+                   "securityhub:DescribeStandards",
+                   "securityhub:ListSecurityControlDefinitions",
+                   "securityhub:BatchGetSecurityControls",
+                   "securityhub:GetEnabledStandards"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Sid": "IAM",
+               "Effect": "Allow",
+               "Action": [
+                   "iam:GetAccountSummary",
+                   "iam:SimulatePrincipalPolicy"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Sid": "TrustedAdvisor",
+               "Effect": "Allow",
+               "Action": [
+                   "trustedadvisor:List*"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Sid": "GuardDuty",
+               "Effect": "Allow",
+               "Action": [
+                   "guardduty:ListDetectors",
+                   "guardduty:ListFindings",
+                   "guardduty:GetFindings"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Sid": "Budgets",
+               "Effect": "Allow",
+               "Action": [
+                   "budgets:ViewBudget"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Sid": "CloudWatch",
+               "Effect": "Allow",
+               "Action": [
+                   "cloudwatch:GetMetricData"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Sid": "CostExplorerAccess",
+               "Effect": "Allow",
+               "Action": [
+                   "ce:GetCostAndUsage",
+                   "ce:GetCostAndUsageWithResources",
+                   "ce:GetCostForecast",
+                   "ce:GetDimensionValues",
+                   "ce:GetTags",
+                   "ce:GetRightsizingRecommendation",
+                   "ce:GetReservationPurchaseRecommendation",
+                   "ce:GetSavingsPlansPurchaseRecommendation",
+                   "cur:DescribeReportDefinitions"
+               ],
+               "Resource": "*"
+           }
+       ]
+   }
+   ```
 
-</details>
+   </details>
 
-#### Trust relationship
+5. **Add the trust relationship** to the role in every account, changing `<UserAccountID>` to the Account ID where you created the IAM user, and the user name if you did not use `pulse`:
 
-Finally, add the trust relationship to the role in every account, changing `<UserAccountID>` to the Account ID where you created the IAM user, and the user name if you did not use `pulse`:
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "Statement1",
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": [
-                    "arn:aws:iam::<UserAccountID>:user/pulse"
-                ]
-            },
-            "Action": "sts:AssumeRole"
-        }
-    ]
-}
-```
+   ```json
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "Statement1",
+               "Effect": "Allow",
+               "Principal": {
+                   "AWS": [
+                       "arn:aws:iam::<UserAccountID>:user/pulse"
+                   ]
+               },
+               "Action": "sts:AssumeRole"
+           }
+       ]
+   }
+   ```
 
 Rolling this out to many accounts at once? See [Onboarding Q&A: creating the role in many accounts](faq.md#how-do-i-create-the-role-in-many-accounts-without-repeating-the-console-steps).
 
