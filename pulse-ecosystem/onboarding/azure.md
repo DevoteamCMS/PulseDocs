@@ -183,7 +183,7 @@ This uses the same `Owner` or `User Access Administrator` role already required 
 
 1. Login to the [PULSE](https://pulse.devoteam.com/platform/login) platform
 2. Open [Cloud Management](https://pulse.devoteam.com/platform/cloud-management) under Administration (left bottom corner) - the same place as the onboarding wizard
-3. Go to **Onboarding → Azure**, choose **Manual** on step 1, then enter the five values listed under *Required parameters* above
+3. Go to **Onboarding → Azure**, choose **Manual**, then enter the five values listed under *Required parameters* above
 4. Save - Pulse confirms with **Onboarding completed successfully**
 
 ---

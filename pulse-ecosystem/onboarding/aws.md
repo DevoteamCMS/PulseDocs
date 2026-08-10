@@ -101,7 +101,7 @@ Everything you answered in the wizard is pre-filled into the quick-create link, 
 
 If a value does look wrong, correct it in Pulse and regenerate the link rather than editing it on the CloudFormation page. Pulse matches the stack it is waiting for against what it generated, so an edited parameter can leave onboarding stuck.
 
-<details markdown="block">
+<details markdown="block" class="reference-box">
   <summary>Reference: the five parameter groups</summary>
 
 **1. Pulse connection** - filled in automatically by Pulse:
@@ -140,7 +140,7 @@ Unlike the manual setup, the automated stack creates **no long-lived AWS credent
 - **Security Hub CSPM** (only when the toggle is `true`) - designates your Security account as delegated administrator, switches the organisation to central configuration, and associates a policy enabling AWS Foundational Security Best Practices v1.0.0 with the organisation root.
 - **AWS Config** (only when the toggle is `true`) - enables recording of all resource types through Systems Manager Quick Setup, organisation-wide plus the management account itself.
 
-<details markdown="block">
+<details markdown="block" class="reference-box">
   <summary>Full detail: scanner role permissions and resource configuration</summary>
 
 **Scanner role**
@@ -177,7 +177,7 @@ It carries a single inline policy granting:
 
 </details>
 
-<details markdown="block">
+<details markdown="block" class="reference-box">
   <summary>When to turn the optional toggles off</summary>
 
 - **Set `Enable AWS Config everywhere` to `false`** if your organisation already manages AWS Config - for example through AWS Control Tower, or with existing recorders deployed by your own tooling. A second recorder in the same account/region will conflict. Pulse still reads whatever Config already records, through the scanner role.
@@ -272,7 +272,7 @@ Complete the four prerequisite blocks in this order:
 
    Pick Option B if your organisation requires least-privilege role definitions. Important! Take note that with new functionality we may require new permissions, so this policy needs maintaining over time. The full policy JSON is in the expandable section at the end of this section.
 
-<details markdown="block">
+<details markdown="block" class="reference-box">
   <summary>Option B - full <code>Pulse_View_Resources_policy</code> JSON</summary>
 
 Add permissions either via services or by editing the JSON directly. For what each block is needed for, see [Onboarding Q&A: Why does Pulse need each AWS permission?](faq.md#why-does-pulse-need-each-aws-permission)
@@ -503,7 +503,7 @@ Steps:
 7. Open the objects (folders) twice - the prefix and the export name - until you see `data` and `metadata` objects
 8. Copy the **browser URL** from the address bar for later use - Pulse needs the S3 console link, not an `s3://` URI or bucket endpoint. See [Onboarding Q&A](faq.md#why-wont-pulse-accept-my-cost-export-link).
 
-<details markdown="block">
+<details markdown="block" class="reference-box">
   <summary>Required: bucket policy for the Data Exports service</summary>
 
 If you let the Data Exports console create the bucket, it adds this policy for you - confirm it is there. If you brought your own bucket, add it manually, replacing `<bucketname>` and `<PayerAccountID>`:
@@ -567,7 +567,7 @@ If you let the Data Exports console create the bucket, it adds this policy for y
 
 </details>
 
-<details markdown="block">
+<details markdown="block" class="reference-box">
   <summary>Required: bucket read access for Pulse</summary>
 
 If you are using custom permission sets for access, update them to include additional permissions to access this bucket. Add an additional policy named `Pulse_Costs_Viewer` **to the `Pulse_Viewer` role in the account that owns the export bucket** (normally the management account), changing `<bucketname>`:

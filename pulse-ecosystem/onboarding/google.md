@@ -125,7 +125,12 @@ If the Security Health Analytics step failed, the script prints the exact `gclou
 
 ## Manual Setup - Service Account Key
 
-The manual flow has three wizard steps - **1. Onboard**, **2. Add Organization** and **3. Cost Export**. There is no Finalize step, because there is no script to run: you do the Google Cloud work yourself, then enter the results in Pulse.
+Manual onboarding has two stages:
+
+1. **Customer prerequisites** - create and prepare everything Pulse needs inside Google Cloud. These are the *Customer Prerequisites* sections below.
+2. **Add the information to Pulse** - the *PULSE Configuration* sections below, in this order: the **Service Account** first, then the **cost export**.
+
+Choosing **Manual** in Pulse assumes the prerequisites are already done, so work through stage 1 before you start entering anything.
 
 ### Required parameters
 
@@ -157,78 +162,76 @@ Note: general rule to wait 30 sec after any object or permission granted before 
 
    Pick Option B if your organisation requires least-privilege role definitions, and note that new Pulse functionality may require new permissions to be added over time. See [Onboarding Q&A: Built-in Viewer or Custom Resource Role?](faq.md#built-in-viewer-role-or-custom-resource-role---which-should-i-pick)
 
-<details markdown="block">
-  <summary>Option B - all 46 permissions for the custom role</summary>
+   <details markdown="block" class="reference-box">
+     <summary>Option B - all 46 permissions for the custom role</summary>
 
-Add these permissions to the created role, then assign the role to the organisation (if applicable) or to all of the projects you wish to onboard. For what each group covers, see [Onboarding Q&A: What do the 46 permissions cover?](faq.md#what-do-the-46-google-cloud-permissions-cover)
+   Add these permissions to the created role, then assign the role to the organisation (if applicable) or to all of the projects you wish to onboard. For what each group covers, see [Onboarding Q&A: What do the 46 permissions cover?](faq.md#what-do-the-46-google-cloud-permissions-cover)
 
-```text
-cloudasset.assets.searchAllResources
-cloudsecuritycompliance.frameworks.list
-monitoring.timeSeries.list
-recommender.bigqueryCapacityCommitmentsRecommendations.list
-recommender.bigqueryPartitionClusterRecommendations.list
-recommender.cloudDeprecationGeneralRecommendations.list
-recommender.cloudFunctionsPerformanceRecommendations.list
-recommender.cloudRecentChangeRecommendations.list
-recommender.cloudSecurityGeneralRecommendations.list
-recommender.cloudsqlIdleInstanceRecommendations.list
-recommender.cloudsqlInstanceOutOfDiskRecommendations.list
-recommender.cloudsqlInstancePerformanceRecommendations.list
-recommender.cloudsqlInstanceReliabilityRecommendations.list
-recommender.cloudsqlOverprovisionedInstanceRecommendations.list
-recommender.cloudsqlUnderProvisionedInstanceRecommendations.list
-recommender.computeAddressIdleResourceRecommendations.list
-recommender.computeDiskIdleResourceRecommendations.list
-recommender.computeImageIdleResourceRecommendations.list
-recommender.computeInstanceGroupManagerMachineTypeRecommendations.list
-recommender.computeInstanceIdleResourceRecommendations.list
-recommender.computeInstanceMachineTypeRecommendations.list
-recommender.containerDiagnosisRecommendations.list
-recommender.errorReportingRecommendations.list
-recommender.gmpProjectManagementRecommendations.list
-recommender.iamPolicyChangeRiskRecommendations.list
-recommender.iamPolicyRecommendations.list
-recommender.iamServiceAccountChangeRiskRecommendations.list
-recommender.loggingProductSuggestionContainerRecommendations.list
-recommender.resourcemanagerProjectChangeRiskRecommendations.list
-recommender.resourcemanagerProjectUtilizationRecommendations.list
-recommender.resourcemanagerServiceLimitRecommendations.list
-recommender.runServiceCostRecommendations.list
-recommender.runServiceIdentityRecommendations.list
-recommender.runServiceSecurityRecommendations.list
-recommender.usageCommitmentRecommendations.list
-resourcemanager.folders.get
-resourcemanager.hierarchyNodes.listEffectiveTags
-resourcemanager.organizations.get
-resourcemanager.projects.get
-resourcemanager.projects.list
-resourcemanager.tagKeys.get
-resourcemanager.tagValues.get
-securitycenter.findings.list
-securitycenter.sources.list
-securityposture.postures.get
-securityposture.postures.list
-```
+   ```text
+   cloudasset.assets.searchAllResources
+   cloudsecuritycompliance.frameworks.list
+   monitoring.timeSeries.list
+   recommender.bigqueryCapacityCommitmentsRecommendations.list
+   recommender.bigqueryPartitionClusterRecommendations.list
+   recommender.cloudDeprecationGeneralRecommendations.list
+   recommender.cloudFunctionsPerformanceRecommendations.list
+   recommender.cloudRecentChangeRecommendations.list
+   recommender.cloudSecurityGeneralRecommendations.list
+   recommender.cloudsqlIdleInstanceRecommendations.list
+   recommender.cloudsqlInstanceOutOfDiskRecommendations.list
+   recommender.cloudsqlInstancePerformanceRecommendations.list
+   recommender.cloudsqlInstanceReliabilityRecommendations.list
+   recommender.cloudsqlOverprovisionedInstanceRecommendations.list
+   recommender.cloudsqlUnderProvisionedInstanceRecommendations.list
+   recommender.computeAddressIdleResourceRecommendations.list
+   recommender.computeDiskIdleResourceRecommendations.list
+   recommender.computeImageIdleResourceRecommendations.list
+   recommender.computeInstanceGroupManagerMachineTypeRecommendations.list
+   recommender.computeInstanceIdleResourceRecommendations.list
+   recommender.computeInstanceMachineTypeRecommendations.list
+   recommender.containerDiagnosisRecommendations.list
+   recommender.errorReportingRecommendations.list
+   recommender.gmpProjectManagementRecommendations.list
+   recommender.iamPolicyChangeRiskRecommendations.list
+   recommender.iamPolicyRecommendations.list
+   recommender.iamServiceAccountChangeRiskRecommendations.list
+   recommender.loggingProductSuggestionContainerRecommendations.list
+   recommender.resourcemanagerProjectChangeRiskRecommendations.list
+   recommender.resourcemanagerProjectUtilizationRecommendations.list
+   recommender.resourcemanagerServiceLimitRecommendations.list
+   recommender.runServiceCostRecommendations.list
+   recommender.runServiceIdentityRecommendations.list
+   recommender.runServiceSecurityRecommendations.list
+   recommender.usageCommitmentRecommendations.list
+   resourcemanager.folders.get
+   resourcemanager.hierarchyNodes.listEffectiveTags
+   resourcemanager.organizations.get
+   resourcemanager.projects.get
+   resourcemanager.projects.list
+   resourcemanager.tagKeys.get
+   resourcemanager.tagValues.get
+   securitycenter.findings.list
+   securitycenter.sources.list
+   securityposture.postures.get
+   securityposture.postures.list
+   ```
 
-</details>
+   </details>
 
-#### Required APIs
+4. **Enable the required APIs** on the same project that holds the Service Account:
 
-Ensure these Services and APIs are enabled on the same project holding the Service Account created for onboarding purposes:
+   - BigQuery API
+   - Billing Budget API
+   - Cloud Recommender API
+   - Cloud Asset API
+   - Organization Policy API
+   - Security Command Center API
+   - Cloud Resource Manager API (Enabled by Default)
+   - Cloud Billing API (Enabled by Default)
+   - IAM API (Enabled by Default)
+   - Compute Engine API (Enabled by Default if Compute enabled)
 
-- BigQuery API
-- Billing Budget API
-- Cloud Recommender API
-- Cloud Asset API
-- Organization Policy API
-- Security Command Center API
-- Cloud Resource Manager API (Enabled by Default)
-- Cloud Billing API (Enabled by Default)
-- IAM API (Enabled by Default)
-- Compute Engine API (Enabled by Default if Compute enabled)
-
-Important! APIs must be enabled on the project where the Service Account is created, not the projects holding the data. See [Onboarding Q&A: Which project must the APIs be enabled on?](faq.md#which-project-must-the-apis-be-enabled-on)
+   Important! These go on the project where the Service Account was created, not the projects holding the data. See [Onboarding Q&A: Which project must the APIs be enabled on?](faq.md#which-project-must-the-apis-be-enabled-on)
 
 ### Customer Prerequisites - Billing role assignment for Budgets View
 
@@ -270,7 +273,7 @@ To start collecting your Cloud Billing data, you must enable Cloud Billing data 
 
 ### PULSE Configuration - Onboarding SA
 
-This is wizard step **2. Add Organization**.
+Stage 2, first part - do this once the prerequisites above are complete.
 
 1. Login to the [PULSE](https://pulse.devoteam.com/platform/login) platform
 2. Open [Cloud Management](https://pulse.devoteam.com/platform/cloud-management) under Administration (left bottom corner) - the same place as the onboarding wizard
@@ -295,7 +298,7 @@ This is wizard step **2. Add Organization**.
 
 ### PULSE Configuration - Onboarding Cost Export
 
-This is wizard step **3. Cost Export**.
+Stage 2, second part - add this after the Service Account is onboarded.
 
 **Onboard the organisation first.** Pulse maps cost data onto projects it already knows about, matched on the **Project ID** you enter below. If the project has not been onboarded yet, Pulse resolves the export against the wrong account and fails to access it. See [Onboarding Q&A: Must accounts be onboarded before adding a cost export?](faq.md#must-accounts-be-onboarded-before-i-add-a-cost-export)
 

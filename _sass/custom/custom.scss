@@ -1,0 +1,43 @@
+// Site-specific overrides, imported last by just-the-docs.
+//
+// Literal colour values are used deliberately rather than theme SCSS
+// variables: a renamed variable would fail the build and stop the whole
+// site publishing, whereas a slightly off colour is harmless.
+
+// Collapsed reference blocks - long permission lists, policy JSON and
+// parameter tables that would otherwise crowd the onboarding steps.
+// Marked up as <details class="reference-box"> so the page table of
+// contents, which is also a <details>, keeps its plain styling.
+details.reference-box {
+  margin: 1rem 0;
+  padding: 0;
+  border: 1px solid #e6e1e8;
+  border-radius: 4px;
+  background-color: #f9f8fa;
+
+  > summary {
+    padding: 0.5rem 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    list-style-position: outside;
+  }
+
+  > summary:hover {
+    background-color: #f0edf2;
+  }
+
+  // Indent the body and separate it from the summary once expanded.
+  > *:not(summary) {
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
+  }
+
+  > *:last-child {
+    margin-bottom: 0.8rem;
+  }
+}
+
+details.reference-box[open] > summary {
+  border-bottom: 1px solid #e6e1e8;
+  margin-bottom: 0.6rem;
+}
