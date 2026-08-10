@@ -72,7 +72,7 @@ The automated flow has four steps.
 3. **3. Cost Export** - choose **Use or Autodetect Existing Export** or **Skip billing export upload**. See *Cost export: the export must already exist* below.
 4. **4. Finalize** - choose **PowerShell** or **Cloud Shell**, then download and run the script. Both variants do the same thing, and both upload credentials to Pulse automatically.
 
-The **Host Project ID** must be entered - the script does not detect it for you. The service account's host project does not need to belong to the same organisation as the resources being scanned, so a managed service provider can host the service account in its own project and grant it access on the customer organisation.
+The **Host Project ID** must be entered - the script does not detect it for you. It can be a project in [a different organisation](faq.md#can-the-service-account-live-in-a-different-project-or-organisation) from the resources being scanned.
 
 ### Cost export: the export must already exist
 

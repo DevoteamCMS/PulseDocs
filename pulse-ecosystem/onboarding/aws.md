@@ -422,7 +422,7 @@ Finally, add the trust relationship to the role in every account, changing `<Use
 }
 ```
 
-Tip: to roll this out across many accounts without repeating the console steps, deploy the role and policy as a CloudFormation **StackSet** from the management account, or use your existing IaC pipeline. The role must exist in the management account too - service-managed StackSets skip it, so add it there separately.
+Rolling this out to many accounts at once? See [Onboarding Q&A: creating the role in many accounts](faq.md#how-do-i-create-the-role-in-many-accounts-without-repeating-the-console-steps).
 
 ### Customer Prerequisites - Enabling AWS Config
 
@@ -448,8 +448,7 @@ Faster alternative for an organisation (what the automated stack uses): from the
 
 Notes:
 
-- **Do not create a second recorder** where one already exists. If AWS Control Tower or your own tooling already manages Config, leave it alone - Pulse reads whatever is already recorded.
-- AWS Config is a **paid service**. Enabling it in every region of every account has a real cost - if that matters, enable it only in the regions where you actually run resources.
+- **Do not create a second recorder** where one already exists - if Control Tower or your own tooling already manages Config, leave it alone. See [Onboarding Q&A](faq.md#aws-config-or-security-hub-is-already-managed-in-my-organisation---what-should-i-do).
 - Verify with: `aws configservice describe-configuration-recorder-status --region <region>` in each account.
 
 ### Customer Prerequisites - Enabling Security Hub
@@ -470,18 +469,10 @@ The recommended way to achieve this across an organisation, mirroring what the a
 4. Create a **configuration policy** that enables Security Hub with the *AWS Foundational Security Best Practices v1.0.0* standard, and **associate it with the organisation root** so every current and future account inherits it.
 5. Confirm your **aggregation (home) region** and linked regions, so findings from all regions are visible in one place.
 
-If you would rather not use central configuration, enable Security Hub and the AWS Foundational Security Best Practices standard account by account and region by region instead - the end state Pulse needs is the same.
-
-Permissions required to do this (for the administrator performing the setup, not for Pulse):
-
-- In the management account: `securityhub:EnableOrganizationAdminAccount`, `securityhub:ListOrganizationAdminAccounts`, `organizations:EnableAWSServiceAccess`, `organizations:RegisterDelegatedAdministrator`
-- In the Security account: `securityhub:EnableSecurityHub`, plus permission to manage organisation configuration, configuration policies and policy associations
-
 Notes:
 
-- If a delegated administrator is **already designated** for Security Hub, keep it - do not re-point it just for Pulse. Pulse reads findings through the scanner role wherever they already are.
-- The Pulse role permissions for this are already in the policy above (`securityhub:GetFindings`, `DescribeStandards`, `ListSecurityControlDefinitions`, `BatchGetSecurityControls`, `GetEnabledStandards`) - they must be present in every account whose findings you want.
-- Security Hub is a **paid service** and its controls consume AWS Config configuration items.
+- If a delegated administrator is **already designated** for Security Hub, keep it - do not re-point it just for Pulse. See [Onboarding Q&A](faq.md#aws-config-or-security-hub-is-already-managed-in-my-organisation---what-should-i-do).
+- Prefer to do this without central configuration, or need the exact admin permissions? See [Onboarding Q&A: setting up Security Hub yourself](faq.md#what-permissions-do-i-need-to-set-up-security-hub-myself).
 
 ### Customer Prerequisites - Creating Cost Export
 
@@ -510,7 +501,7 @@ Steps:
 5. Open the **S3** service
 6. Select the S3 Bucket you just created
 7. Open the objects (folders) twice - the prefix and the export name - until you see `data` and `metadata` objects
-8. Copy the browser URL for later use.
+8. Copy the **browser URL** from the address bar for later use - Pulse needs the S3 console link, not an `s3://` URI or bucket endpoint. See [Onboarding Q&A](faq.md#why-wont-pulse-accept-my-cost-export-link).
 
 <details markdown="block">
   <summary>Required: bucket policy for the Data Exports service</summary>
@@ -603,12 +594,7 @@ If you are using custom permission sets for access, update them to include addit
 
 </details>
 
-Additional requirements to check:
-
-- The bucket must **block all public access** and stay private - Pulse reads it with the role, never anonymously.
-- If the bucket is encrypted with **SSE-KMS** rather than SSE-S3, also grant the `Pulse_Viewer` role `kms:Decrypt` on the key, and allow the Data Exports service principals to encrypt with it. SSE-S3 (AES256) avoids both.
-- If you add a **lifecycle rule**, keep at least the last 13 months of reports so Pulse can show year-over-year trends.
-- Do not point two exports at the same bucket **prefix** - overlapping report data will be read twice.
+If you brought your own bucket rather than letting the Data Exports console create one, check the [additional bucket requirements](faq.md#what-else-should-i-check-on-the-cost-export-bucket) - encryption, lifecycle rules and public access.
 
 ### PULSE Configuration - Onboarding SA
 

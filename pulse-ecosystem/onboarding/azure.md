@@ -100,8 +100,6 @@ If you see that, switch directory using the settings icon in the top-right of th
 
 Have your **Tenant Name** and **Azure Tenant ID** to hand, plus your **Management Group ID(s)** if you are not using Root scope. You can copy the IDs from **Management Groups** in the portal.
 
-The Finalize step shows a countdown of roughly 10 minutes. If it lapses, **nothing is lost** - the timer only reflects that Pulse has not detected a deployment *yet*. The backend keeps checking afterwards and completes onboarding automatically once it detects one, so you can run the script after the countdown ends.
-
 ### What the script does
 
 It reports each step as it goes, so you can see exactly where it got to:
@@ -131,7 +129,7 @@ The script stops at the first failed step: if one fails, the remaining steps are
 
 Compliance recommendations additionally depend on Azure Policy evaluating the newly assigned initiative, which happens on Azure's own schedule.
 
-**If detection takes too long,** Pulse shows *Deployment is taking longer than expected*. The backend keeps trying in the background - return to **Cloud Management** after about 2 hours to check. If the deployment actually failed, contact support.
+**If the Finalize countdown lapses,** nothing is lost. The roughly 10-minute timer only reflects that Pulse has not detected a deployment *yet*, so you can still run the script afterwards. Pulse shows *Deployment is taking longer than expected*, keeps checking in the background, and completes onboarding automatically once it detects the deployment - return to **Cloud Management** after about 2 hours to confirm. If the deployment genuinely failed, contact support.
 
 **If a step reports FAILED,** the steps after it are skipped and the setup is incomplete. The usual causes are being signed in to the wrong tenant, an incorrect Management Group ID, or lacking `Owner` / `User Access Administrator` at the target scope. See [Onboarding Q&A: recovering from a broken deployment](faq.md#how-do-i-rotate-the-spn-or-recover-from-a-broken-deployment).
 
@@ -173,7 +171,7 @@ These are the five values you will enter in Pulse at the end. All are required.
 
 ### Customer Prerequisites - Enabling Compliance
 
-For Pulse's Compliance recommendations to work, the built-in **Microsoft cloud security benchmark** policy initiative must be assigned at the same scope as your `Reader`/`Billing Reader` roles above. Many subscriptions already have this assigned by default - Microsoft Defender for Cloud auto-assigns it - so check first before creating a new assignment.
+For Pulse's Compliance recommendations to work, the built-in **Microsoft cloud security benchmark** policy initiative must be assigned at the same scope as your `Reader`/`Billing Reader` roles above. Check whether it is already assigned before creating a new one - [it often is](faq.md#what-is-the-microsoft-cloud-security-benchmark-for).
 
 1. Ensure the `Microsoft.PolicyInsights` resource provider is registered on each subscription in scope: **Subscriptions → your subscription → Resource providers →** search `Microsoft.PolicyInsights` → **Register** (if not already `Registered`)
 2. Go to **Azure Policy → Definitions** and search for **"Microsoft cloud security benchmark"** - then check **Policy → Compliance**, filtered to that initiative, to see if it is already assigned at or above your scope

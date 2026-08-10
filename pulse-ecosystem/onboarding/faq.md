@@ -80,6 +80,10 @@ The manual flow uses one IAM user credential for an entire Organisation, plus a 
 
 Whichever you choose, Pulse must be able to assume the role in the **management account** - that is how it discovers the rest of the organisation. Without it, only the account holding the credentials is onboarded.
 
+### How do I create the role in many accounts without repeating the console steps?
+
+Deploy the role and its policy as a CloudFormation **StackSet** from the management account, or use your existing IaC pipeline. Remember that the role must exist in the management account too - service-managed StackSets skip it, so add it there separately.
+
 ### Why does Pulse need each AWS permission?
 
 The scanner role's permission set is identical in the automated and manual paths. Each block maps to a Pulse capability:
@@ -120,6 +124,19 @@ Pulse's **Managed Cloud Compliance** findings come from AWS Security Hub CSPM (p
 
 Most Security Hub controls are Config-based and report `NO_DATA` without AWS Config recording in the same account and region. Security Hub is also a **paid service** and its controls consume AWS Config configuration items.
 
+### What permissions do I need to set up Security Hub myself?
+
+These are for the administrator performing the setup, not for Pulse:
+
+- In the **management account**: `securityhub:EnableOrganizationAdminAccount`, `securityhub:ListOrganizationAdminAccounts`, `organizations:EnableAWSServiceAccess`, `organizations:RegisterDelegatedAdministrator`
+- In the **Security account**: `securityhub:EnableSecurityHub`, plus permission to manage organisation configuration, configuration policies and policy associations
+
+Pulse's own Security Hub permissions are separate and already in the scanner role policy (`securityhub:GetFindings`, `DescribeStandards`, `ListSecurityControlDefinitions`, `BatchGetSecurityControls`, `GetEnabledStandards`). They must be present in every account whose findings you want.
+
+### Can I enable Security Hub without central configuration?
+
+Yes. Central configuration is the recommended route because it covers current and future accounts in one action, but you can instead enable Security Hub and the *AWS Foundational Security Best Practices v1.0.0* standard account by account and region by region. The end state Pulse needs is identical.
+
 ### Do I need a Business or Enterprise Support plan?
 
 Only for Trusted Advisor-based recommendations. Without it, the rest of onboarding still works - Trusted Advisor checks simply return no data.
@@ -134,7 +151,35 @@ Specifically: a second AWS Config recorder in the same account/region will confl
 
 Yes, if it is a **CUR 2.0 export with resource IDs enabled**. Set `Create CUR export` to `false` in the wizard, grant the scanner role read access to your existing bucket, and register the export in Pulse using the *PULSE Configuration - Onboarding Cost Export* steps.
 
-Do not point two exports at the same bucket **prefix** - overlapping report data will be read twice.
+### Why won't Pulse accept my cost export link?
+
+Almost always because a **bucket URI was pasted instead of the console browser URL**. This is the most common problem customers hit on this step.
+
+Pulse needs the URL exactly as it appears in your browser's address bar when you are looking at the export folder in the S3 console:
+
+```
+https://us-east-1.console.aws.amazon.com/s3/buckets/my-cost-bucket?region=us-east-1&bucketType=general&prefix=Pulse/DailyExports/
+```
+
+These do **not** work:
+
+| Not accepted | Why |
+| --- | --- |
+| `s3://my-cost-bucket/Pulse/DailyExports/` | S3 URI, not a URL - Pulse cannot derive the region or account from it |
+| `https://my-cost-bucket.s3.amazonaws.com/…` | Bucket endpoint rather than the console link |
+| `arn:aws:s3:::my-cost-bucket` | Bucket ARN |
+| The console URL for the bucket **root** | Must point at the folder that holds the export, not the top of the bucket |
+
+To get the right value: open **S3**, click into the bucket, then open the folders twice - the path prefix, then the export name - until you can see the `data` and `metadata` objects. Copy the address bar at that point. The region and prefix in the URL are what Pulse uses to locate the report.
+
+### What else should I check on the cost export bucket?
+
+Only relevant if you deviated from the documented steps:
+
+- The bucket must **block all public access** and stay private - Pulse reads it with the role, never anonymously.
+- If the bucket is encrypted with **SSE-KMS** rather than SSE-S3, also grant the `Pulse_Viewer` role `kms:Decrypt` on the key, and allow the Data Exports service principals to encrypt with it. SSE-S3 (AES256) avoids both.
+- If you add a **lifecycle rule**, keep at least the last 13 months of reports so Pulse can show year-over-year trends.
+- Do not point two exports at the same bucket **prefix** - overlapping report data will be read twice.
 
 ### What happens to my AWS resources when I delete the stack?
 
@@ -160,9 +205,11 @@ Assigning at the Root Management Group scope may require a Global Administrator 
 
 ### What is the Microsoft cloud security benchmark for?
 
-It is the built-in Azure Policy initiative that Pulse's **Compliance** recommendations are reported against. It must be assigned at the same scope as your `Reader`/`Billing Reader` roles. Many subscriptions already have it - Microsoft Defender for Cloud auto-assigns it - so check before creating a new assignment.
+It is the built-in Azure Policy initiative that Pulse's **Compliance** recommendations are reported against. It must be assigned at the same scope as your `Reader`/`Billing Reader` roles.
 
 Without it, the compliance sections in Pulse stay empty; the rest of onboarding is unaffected.
+
+Many subscriptions already have it assigned - **Microsoft Defender for Cloud auto-assigns it** - so on the manual path, check whether an assignment already exists at or above your scope before creating a new one. A duplicate assignment is not harmful, but it is unnecessary. On the automated path the script skips it if it is already there.
 
 ### What is the Partner Admin Link (PAL) ID?
 
@@ -265,6 +312,14 @@ Both work; pick based on what else lives in the export project.
 - **Table level** scopes access to just the billing export dataset, leaving the rest of the project untouched. Use this if the export lives in a project alongside other data you do not want to expose.
 
 If you use table-level sharing, register the cost export in Pulse using the **Service Account's** project ID, not the export project's.
+
+### Can the Service Account live in a different project or organisation?
+
+Yes. The host project holding the Service Account does not need to belong to the same organisation as the resources being scanned.
+
+This matters for managed service providers: the provider can create and hold the Service Account in its own project, then grant that Service Account access on the customer organisation or on selected customer projects. If you use an existing Service Account, Pulse derives the host project from its email address.
+
+Remember that the required APIs are enabled on the **host project** - the one owning the Service Account - not on the projects holding the data.
 
 ### My organisation does not have a Google Cloud organisation resource - can I still onboard?
 
