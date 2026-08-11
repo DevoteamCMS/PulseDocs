@@ -80,6 +80,24 @@ Note the **Unallocated** rows, one per provider. That is spend nobody owns. It i
 
 ---
 
+## What a Delegated User Sees
+
+Delegation is not a label on a group - it changes what Pulse shows. A user delegated to one group sees that group's estate and nothing else, on every page, without any filtering on their part.
+
+Compare these with the two screenshots above, which are the same screens seen by someone with visibility of the whole estate.
+
+![The Ownership tab as a delegated user, showing a single asset group and no configuration buttons](../assets/images/asset-ownership/assets-ownership-user-view.png)
+
+The **Ownership** tab lists one group instead of seven. **Assets Without Group** is absent, because unowned assets elsewhere in the estate are not this user's concern. **Setup Tagging** and **Add Asset Group** are greyed out - company-wide configuration stays with the Ownership Manager.
+
+![The Costs page Asset Group tab as a delegated user, with every figure scoped to their single group](../assets/images/asset-ownership/cost-per-asset-group-user-view.png)
+
+On the Costs page the rescoping goes further than the table. The headline figures change too: this user's **Cost for Last Month** reads €906.84 - their group's spend - where the same card shows €1,788.63 for the whole company. Six-month spend reads €4,704.89 against €10,626.77, the chart carries a single series, and the summary table has one row.
+
+That is what makes delegation safe to hand out widely. A team lead gets their own costs, their own assets and their own recommendations, in the same interface, without seeing anyone else's - and without you building a separate report for them.
+
+---
+
 ## How Assets Are Allocated
 
 Every asset belongs to exactly one group at a time. When more than one rule could apply, a strict priority decides:
