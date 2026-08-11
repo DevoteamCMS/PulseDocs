@@ -109,6 +109,10 @@ Every asset belongs to exactly one group at a time. When more than one rule coul
 
 Direct beats tag; tag beats inheritance. Most surprises about group membership come from forgetting this order - a direct allocation made months ago will quietly keep overriding the tag you just fixed.
 
+![Users delegated to an Asset Group, which is allocated cloud containers across Google Cloud, Azure and AWS, with assets beneath them inheriting the group](../assets/images/asset-ownership/ownership-model.png)
+
+The whole model in one picture. Users are delegated to an Asset Group; the group is allocated containers - a Google Cloud project, an Azure subscription, an AWS account - and the assets beneath them inherit that group without being allocated one by one. Which is why allocating at the container level and letting inheritance do the rest is so much less work than the alternative, and why direct allocation exists only to fix the cases inheritance gets wrong.
+
 ---
 
 ## Who Can Do What
@@ -249,6 +253,10 @@ Pulse maintains a read-only **Default** group that collects every asset not allo
 ---
 
 ## Scenarios
+
+![Four allocation scenarios, each showing a subscription, resource group and asset with the asset groups they end up in by tag, directly or by inheritance](../assets/images/asset-ownership/allocation-scenarios.png)
+
+The four cases below, drawn out. Each shows a subscription, a resource group and an asset, the steps taken, and which group everything lands in - by tag, directly, or by inheritance. The examples use Azure because its extra Resource Group level makes the inheritance clearest; the same rules apply to AWS accounts and Google Cloud projects with one level fewer.
 
 **Standard tag-based setup - the common case.** Configure a tag key, enable automatic creation, and let tag allocation do the work while inheritance handles untagged child resources. This leans on the tagging strategy you already have.
 
