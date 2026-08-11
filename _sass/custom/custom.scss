@@ -41,3 +41,22 @@ details.reference-box[open] > summary {
   border-bottom: 1px solid #e6e1e8;
   margin-bottom: 0.6rem;
 }
+
+// "What to do with it" blocks - the practical takeaway closing each feature
+// section. Boxed so a reader can skim a long page by them, which also stops the
+// repeated opening phrase from reading as a template.
+div.takeaway {
+  margin: 1.2rem 0;
+  padding: 0.7rem 0.9rem;
+  border-left: 3px solid #c8102e;
+  border-radius: 0 4px 4px 0;
+  background-color: #faf7f8;
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
