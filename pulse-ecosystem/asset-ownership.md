@@ -33,7 +33,7 @@ Ownership is a means to four ends, and it is worth being clear about which one y
 | **Ownership Management** | Every asset has a named responsible party, assigned through an Asset Group rather than one resource at a time |
 | **Accountability** | Ownership information that operations, internal automations and other systems can consume |
 | **Security** | A basis for granting or restricting who sees which resources and their recommendations |
-| **Economics** | Cost per Asset Group, so a team can see its own spend instead of a company total |
+| **Economics** | **Cost allocation** - cost per Asset Group, so a team sees its own spend instead of a company total, and spend can be attributed and recharged |
 
 The cost view is the one that tends to justify the setup effort on its own - see [Cost per Asset Group](#cost-per-asset-group).
 
@@ -48,6 +48,7 @@ The cost view is the one that tends to justify the setup effort on its own - see
 | **Asset Group (AG)** | A logical grouping of allocated assets, visible to the users delegated to it |
 | **Allocation** | Assigning an *asset* to an Asset Group |
 | **Delegation** | Assigning a *user* to an Asset Group as its owner |
+| **Cost allocation** | The FinOps practice of attributing cloud spend to the team or business unit responsible for it. In Pulse it is the result of the two above: once assets belong to a group, so does their cost |
 
 Allocation and delegation are easy to confuse and do different jobs: allocation decides what is in a group, delegation decides who can see it.
 
@@ -70,7 +71,7 @@ Two figures here are worth returning to:
 
 ## Cost per Asset Group
 
-Once assets are allocated, the **Asset Group** tab on the Costs page reads your cloud bill by team instead of by service or subscription.
+This is **cost allocation**: once assets are allocated, the **Asset Group** tab on the Costs page reads your cloud bill by team instead of by service or subscription. It is the practice most FinOps work depends on, and ownership is what makes it possible without restructuring your subscriptions to match your org chart.
 
 ![Costs page on the Asset Group tab, showing monthly spend stacked by asset group with a summary table per group](../assets/images/asset-ownership/cost-per-asset-group.png)
 
