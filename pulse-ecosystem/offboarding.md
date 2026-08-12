@@ -10,7 +10,7 @@ nav_order: 5
 
 This document describes what actions Customer can take to offboard to Devoteam Cloud Management Platform (PULSE).
 
-## Offboarding for Freemium Customers:
+## Offboarding for Cloud Essentials Customers:
 
 1. Remove Cost exports from PULSE Cloud Management.
 2. Remove Cloud Subscriptions from PULSE Cloud Management.

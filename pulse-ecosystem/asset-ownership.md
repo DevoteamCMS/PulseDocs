@@ -122,7 +122,9 @@ Configuring ownership - creating groups, allocating assets, setting up tagging a
 
 The **Manager** and **Analyst** roles have read-only visibility of every Asset Group, without needing to be delegated to them.
 
-A user delegated to an Asset Group sees the same pages as everyone else in the company, with everything on them limited to the assets in their group or groups. Delegation is what sets that boundary - see [What a Delegated User Sees](#what-a-delegated-user-sees).
+A user delegated to an Asset Group needs the **Company User** role, and then sees the same pages as everyone else in the company, with everything on them limited to the assets in their group or groups. Delegation is what sets that boundary - see [What a Delegated User Sees](#what-a-delegated-user-sees).
+
+These are ownership's own rules. They govern who can configure groups and whose assets a user sees - not which Pulse services your company has.
 
 ---
 

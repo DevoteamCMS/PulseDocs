@@ -53,5 +53,5 @@ Discover more about managed services at: [Cloud Managed Services | Devoteam](htt
 
 * Contact Devoteam if you are interested in Managed Services: [Contact Us | Devoteam](https://www.devoteam.com/services/cloud-managed-services/#contact)
 * Request Demo if you want to see PULSE Ecosystem at work: [Request Demo | Devoteam](https://www.devoteam.com/services/cloud-managed-services/#contact)
-* Read more about [Pulse Ecosystem](pulse-ecosystem/README.md) and Freemium
-* Start using Pulse Ecosystem Freemium versions yourself: [Cloud Onboarding](pulse-ecosystem/onboarding/README.md)
+* Read more about [Pulse Ecosystem](pulse-ecosystem/README.md) and Cloud Essentials
+* Start using Pulse Ecosystem yourself: [Cloud Onboarding](pulse-ecosystem/onboarding/README.md)

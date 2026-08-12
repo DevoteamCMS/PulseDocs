@@ -18,15 +18,15 @@ Pulse by Devoteam is a core component of managed services, designed as a single 
 
 ## Pulse Ecosystem Structure
 
-- **Freemium version**: Dashboards and generic insights
-- **Core capabilities**: Ecosystem wide reusable capabilities for both Freemium and Services
+- **Cloud Essentials**: Dashboards and generic insights, included at no cost
+- **Core capabilities**: Ecosystem wide reusable capabilities for both Cloud Essentials and Services
 - **Services area**: Service specific area for self-service
 
-## Freemium
+## Cloud Essentials
 
 - Identity - SSO to customer identity, no passwords stored. Company roles: 'Manager' to make changes and 'Analyst' for read only.
 - Cloud Inventory - AWS, Azure and Google Clouds are supported out of the box. Data aggregated for quick overview and basic assessments.
-- Basic/reduced search, filtering and export capabilities.
+- Search, filtering and CSV export across every table.
 
 ## Core Capabilities
 
@@ -48,12 +48,11 @@ Devoteam is constantly working to add new capabilities for customers and interna
 
 Devoteam is constantly working to add new capabilities for customers. Currently Services available via Insight with additional features for visibility and management:
 
-- Managed Public Cloud
-- Managed Cloud Economics
-- Managed Cloud Compliance
+- Managed Reliability
+- Managed Governance - which covers Cloud Economics and Cloud Compliance
 
 ## Next Steps
 
 - Read more about [Cloud Managed Services | Devoteam](https://www.devoteam.com/services/cloud-managed-services)
-- Read more about Freemium [Cloud Inventory](cloud-inventory.md)
-- Start using Pulse Ecosystem Freemium versions yourself: [Cloud Onboarding](onboarding/README.md)
+- Read more about [Cloud Inventory](cloud-inventory.md), the Cloud Essentials tier
+- Start using Pulse Ecosystem yourself: [Cloud Onboarding](onboarding/README.md)

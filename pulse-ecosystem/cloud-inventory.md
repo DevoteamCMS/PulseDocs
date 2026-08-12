@@ -34,11 +34,16 @@ Screenshots on this page show the page content only - the surrounding navigation
 
 | Tier | What it adds |
 | --- | --- |
-| **Cloud Essentials** | Everything described on this page |
-| **Premium** | Cloud Essentials plus Cloud Economics and Cloud Compliance |
-| **Managed Service** | Cloud Essentials plus Reliability, Governance, Economics and Compliance, delivered with service management |
+| **Cloud Essentials** | Everything described on this page, at no cost |
+| **Premium** | Cloud Essentials plus the Cloud Economics and Cloud Compliance services |
+| **Managed Service** | Cloud Essentials plus Managed Reliability and Managed Governance - which covers Economics and Compliance - delivered with service management |
 
-See [Pulse Ecosystem](README.md) for what each one covers.
+Some of the screens below belong to the Economics and Compliance services but are open to Cloud Essentials customers anyway, so you can see what they offer on your own data. Two limits apply at this tier:
+
+- **Costs** works in monthly granularity. The daily view comes with Cloud Economics.
+- **Budget & Alerts** is visibility only - you can see budgets and how spend tracks against them. Alerting itself comes with Premium or a managed service.
+
+See [Pulse Ecosystem](README.md) for what each service covers.
 
 ---
 
@@ -181,7 +186,10 @@ Costs tells you what you spent. This page tells you whether that was the plan.
 
 The **Daily Budget Progress** chart tracks running spend against the budget for the period, so overspend shows up mid-month rather than on the invoice. **Budget Coverage** splits your subscriptions into those with a budget and those without, and calls out the uncovered percentage - usually the more revealing of the two on a first visit.
 
-The table lists every budget with its current cost, its limit, a health status and its alert state. Opening a row gives the spend history and the alert configuration, where thresholds and notification recipients are set.
+The table lists every budget with its current cost, its limit, a health status and its alert state. Opening a row gives the spend history and the alert configuration - the thresholds and the recipients who would be notified.
+
+On Cloud Essentials this page is visibility only: you can read budgets and see how spend is tracking against them, but notifications are not sent. Alerting comes with Premium or a managed service.
+{: .fs-3 }
 
 <details markdown="block" class="reference-box">
   <summary>Columns in the budget table</summary>
@@ -193,7 +201,7 @@ Alert rows within a budget add: Type, Threshold, Amount, Email.
 </details>
 
 <div class="takeaway" markdown="block">
-**What to do with it.** Start with **Budget Coverage** rather than the budgets themselves - the uncovered share tells you how much of your spend has no ceiling at all, and that is usually the finding. Set thresholds below 100% so alerts arrive while there is still time to act. Watch Health Status for budgets that are consistently under: those are candidates for reallocating money rather than congratulation.
+**What to do with it.** Start with **Budget Coverage** rather than the budgets themselves - the uncovered share tells you how much of your spend has no ceiling at all, and that is usually the finding. Check the **Daily Budget Progress** chart mid-month while there is still time to act, rather than discovering the overspend on the invoice. Watch Health Status for budgets that are consistently under: those are candidates for reallocating money rather than congratulation.
 </div>
 
 ---
@@ -387,7 +395,7 @@ Resources, findings and costs load within 24 hours of a cloud being connected, a
 
 ### What is included, and what needs more than Cloud Essentials?
 
-Everything on this page is Cloud Essentials. Cloud Economics and Cloud Compliance come with Premium, and a managed service adds Reliability and Governance alongside service management - see [Where This Fits](#where-this-fits).
+Every screen on this page is open to Cloud Essentials customers, including some that belong to the Economics and Compliance services. Two limits apply at this tier: costs are monthly rather than daily, and Budget & Alerts shows budgets without sending notifications. Premium adds the Cloud Economics and Cloud Compliance services; a managed service adds Managed Reliability and Managed Governance with service management - see [Where This Fits](#where-this-fits).
 
 ### Why is a resource I know exists not in the list?
 

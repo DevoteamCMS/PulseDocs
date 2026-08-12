@@ -46,7 +46,7 @@ For each cloud provider, Pulse offers two ways to complete Cloud Onboarding:
 - **Automated Setup (Recommended)** - Pulse generates a script (Azure, Google) or a guided cloud-native deployment (AWS CloudFormation) that creates the required credentials and permissions for you, and uploads them to Pulse automatically. This is the fastest path and avoids manual permission mistakes.
 - **Manual Setup** - You create the credentials and grant the required permissions yourself in your cloud provider's console, then paste the resulting credentials into Pulse. Use this if your organisation requires custom naming, custom roles, or a change-managed process for creating cloud credentials.
 
-Both paths grant Pulse the same read-only permissions - see each cloud's page for the exact roles/permissions required. The automated paths can also enable the supporting services Pulse reads from (AWS Config and Security Hub on AWS, the Microsoft cloud security benchmark on Azure, Security Health Analytics on Google Cloud), which you would otherwise enable yourself.
+Both paths grant Pulse the same read-only permissions - see each cloud's page for the exact roles and permissions required, and for the supporting cloud services the automated path can enable for you.
 
 ## Next Steps
 
