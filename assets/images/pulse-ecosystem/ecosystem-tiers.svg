@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="100%" role="img" aria-labelledby="ecoTitle ecoDesc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="ecoTitle">How the Pulse tiers include one another</title>
+  <desc id="ecoDesc">Three nested boxes. The innermost is Cloud Essentials, containing Cloud Inventory and Asset Ownership in full plus Cloud Economics and Cloud Compliance with limits. Around it, Pulse Premium adds Cloud Economics and Cloud Compliance in full. Around that, Managed Service adds Managed Cloud Reliability, Managed Cloud Economics and Managed Cloud Compliance with Devoteam service management. A bar underneath shows the core platform that every tier stands on.</desc>
+
+  <!-- Managed Service -->
+  <rect x="16" y="16" width="968" height="584" rx="8" fill="#fbfafc" stroke="#b9b2c0" stroke-width="1.5"/>
+  <text x="36" y="46" font-size="16" font-weight="600" fill="#3d3646">Managed Service</text>
+
+  <!-- Pulse Premium -->
+  <rect x="44" y="64" width="912" height="388" rx="8" fill="#f5f2f7" stroke="#b9b2c0" stroke-width="1.5"/>
+  <text x="64" y="94" font-size="16" font-weight="600" fill="#3d3646">Pulse Premium</text>
+
+  <!-- Cloud Essentials -->
+  <rect x="72" y="112" width="856" height="224" rx="8" fill="#ffffff" stroke="#c8102e" stroke-width="1.5"/>
+  <text x="92" y="142" font-size="16" font-weight="600" fill="#c8102e">Cloud Essentials</text>
+  <text x="908" y="142" font-size="12" fill="#7a7385" text-anchor="end">included at no cost</text>
+
+  <!-- Essentials: features in full -->
+  <rect x="92" y="158" width="396" height="52" rx="5" fill="#eef2f7" stroke="#96a8c0"/>
+  <text x="290" y="189" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">Cloud Inventory</text>
+
+  <rect x="512" y="158" width="396" height="52" rx="5" fill="#eef2f7" stroke="#96a8c0"/>
+  <text x="710" y="189" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">Asset Ownership</text>
+
+  <!-- Essentials: features with limits -->
+  <rect x="92" y="226" width="396" height="64" rx="5" fill="#fdf1f3" stroke="#c8102e" stroke-dasharray="5 4"/>
+  <text x="290" y="252" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">Cloud Economics</text>
+  <text x="290" y="273" font-size="12" fill="#7a7385" text-anchor="middle">monthly costs, budget visibility</text>
+
+  <rect x="512" y="226" width="396" height="64" rx="5" fill="#fdf1f3" stroke="#c8102e" stroke-dasharray="5 4"/>
+  <text x="710" y="252" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">Cloud Compliance</text>
+  <text x="710" y="273" font-size="12" fill="#7a7385" text-anchor="middle">posture visibility</text>
+
+  <text x="500" y="318" font-size="12" fill="#7a7385" text-anchor="middle">dashed = the feature is open to you, with limits</text>
+
+  <!-- Premium: the same features in full -->
+  <rect x="64" y="356" width="420" height="56" rx="5" fill="#eef2f7" stroke="#96a8c0"/>
+  <text x="274" y="382" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">Cloud Economics</text>
+  <text x="274" y="401" font-size="12" fill="#7a7385" text-anchor="middle">in full</text>
+
+  <rect x="512" y="356" width="420" height="56" rx="5" fill="#eef2f7" stroke="#96a8c0"/>
+  <text x="722" y="382" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">Cloud Compliance</text>
+  <text x="722" y="401" font-size="12" fill="#7a7385" text-anchor="middle">in full</text>
+
+  <text x="500" y="436" font-size="12" fill="#7a7385" text-anchor="middle">Pulse Premium Trial is the same scope, for a limited period</text>
+
+  <!-- Managed services -->
+  <rect x="36" y="478" width="290" height="52" rx="5" fill="#f0edf2" stroke="#a79fb2"/>
+  <text x="181" y="509" font-size="13" font-weight="500" fill="#3d3646" text-anchor="middle">Managed Cloud Reliability</text>
+
+  <rect x="346" y="478" width="290" height="52" rx="5" fill="#f0edf2" stroke="#a79fb2"/>
+  <text x="491" y="509" font-size="13" font-weight="500" fill="#3d3646" text-anchor="middle">Managed Cloud Economics</text>
+
+  <rect x="656" y="478" width="290" height="52" rx="5" fill="#f0edf2" stroke="#a79fb2"/>
+  <text x="801" y="509" font-size="13" font-weight="500" fill="#3d3646" text-anchor="middle">Managed Cloud Compliance</text>
+
+  <text x="500" y="562" font-size="12" fill="#7a7385" text-anchor="middle">and other managed services, delivered with Devoteam service management</text>
+
+  <!-- Core platform -->
+  <rect x="16" y="624" width="968" height="60" rx="8" fill="#f0edf2" stroke="#d8d3de" stroke-width="1.5"/>
+  <text x="500" y="650" font-size="14" font-weight="600" fill="#3d3646" text-anchor="middle">Core platform - every tier stands on it</text>
+  <text x="500" y="670" font-size="12" fill="#7a7385" text-anchor="middle">SSO identity &#183; company and role management &#183; cloud integrations &#183; cloud scanners &#183; one data layer across AWS, Azure and Google Cloud</text>
+</svg>
