@@ -53,8 +53,9 @@ Devoteam is constantly working to add new capabilities for customers and interna
 
 Devoteam is constantly working to add new capabilities for customers. Currently Services available via Insight with additional features for visibility and management:
 
-- Managed Reliability
-- Managed Governance - which covers Cloud Economics and Cloud Compliance
+- Managed Cloud Reliability
+- Managed Cloud Economics
+- Managed Cloud Compliance
 
 ## Next Steps
 

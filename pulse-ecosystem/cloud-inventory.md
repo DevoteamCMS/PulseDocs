@@ -35,13 +35,13 @@ Screenshots on this page show the page content only - the surrounding navigation
 | Tier | What it adds |
 | --- | --- |
 | **Cloud Essentials** | Everything described on this page, at no cost |
-| **Premium** | Cloud Essentials plus the Cloud Economics and Cloud Compliance services |
-| **Managed Service** | Cloud Essentials plus Managed Reliability and Managed Governance - which covers Economics and Compliance - delivered with service management |
+| **Pulse Premium** | Cloud Essentials plus the Cloud Economics and Cloud Compliance features |
+| **Managed Service** | Cloud Essentials plus the managed services - Managed Cloud Reliability, Managed Cloud Economics, Managed Cloud Compliance and others - delivered with Devoteam service management |
 
 Some of the screens below belong to the Economics and Compliance services but are open to Cloud Essentials customers anyway, so you can see what they offer on your own data. Two limits apply at this tier:
 
 - **Costs** works in monthly granularity. The daily view comes with Cloud Economics.
-- **Budget & Alerts** is visibility only - you can see budgets and how spend tracks against them. Alerting itself comes with Premium or a managed service.
+- **Budget & Alerts** is visibility only - you can see budgets and how spend tracks against them. Alerting itself comes with Pulse Premium or a managed service.
 
 See [Pulse Ecosystem](README.md) for what each service covers.
 
@@ -188,7 +188,7 @@ The **Daily Budget Progress** chart tracks running spend against the budget for 
 
 The table lists every budget with its current cost, its limit, a health status and its alert state. Opening a row gives the spend history and the alert configuration - the thresholds and the recipients who would be notified.
 
-On Cloud Essentials this page is visibility only: you can read budgets and see how spend is tracking against them, but notifications are not sent. Alerting comes with Premium or a managed service.
+On Cloud Essentials this page is visibility only: you can read budgets and see how spend is tracking against them, but notifications are not sent. Alerting comes with Pulse Premium or a managed service.
 {: .fs-3 }
 
 <details markdown="block" class="reference-box">
@@ -395,7 +395,7 @@ Resources, findings and costs load within 24 hours of a cloud being connected, a
 
 ### What is included, and what needs more than Cloud Essentials?
 
-Every screen on this page is open to Cloud Essentials customers, including some that belong to the Economics and Compliance services. Two limits apply at this tier: costs are monthly rather than daily, and Budget & Alerts shows budgets without sending notifications. Premium adds the Cloud Economics and Cloud Compliance services; a managed service adds Managed Reliability and Managed Governance with service management - see [Where This Fits](#where-this-fits).
+Every screen on this page is open to Cloud Essentials customers, including some that belong to the Economics and Compliance services. Two limits apply at this tier: costs are monthly rather than daily, and Budget & Alerts shows budgets without sending notifications. Pulse Premium adds the Cloud Economics and Cloud Compliance features; a managed service adds Managed Cloud Reliability, Managed Cloud Economics, Managed Cloud Compliance and others, delivered with Devoteam service management - see [Where This Fits](#where-this-fits).
 
 ### Why is a resource I know exists not in the list?
 
