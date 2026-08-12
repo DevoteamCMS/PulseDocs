@@ -122,7 +122,7 @@ Configuring ownership - creating groups, allocating assets, setting up tagging a
 
 The **Manager** and **Analyst** roles have read-only visibility of every Asset Group, without needing to be delegated to them.
 
-A delegated user needs at least the **Company User** role, plus the relevant service-specific role for the assets in their group. Delegation grants visibility of the group; the service roles govern what they can do with what is inside it.
+A user delegated to an Asset Group sees the same pages as everyone else in the company, with everything on them limited to the assets in their group or groups. Delegation is what sets that boundary - see [What a Delegated User Sees](#what-a-delegated-user-sees).
 
 ---
 
@@ -235,7 +235,7 @@ Useful when you are working from the inventory rather than from a group - you fi
 
 Open the group, update **Delegate Asset Owners** in the Group Builder panel, and save.
 
-A delegated user still needs at least the **Company User** role, plus whichever service-specific roles the assets in that group require. Delegation alone grants visibility of the group, not the right to act on everything in it.
+From then on that user sees the company's pages scoped to the assets in this group. Delegating the same user to several groups widens the boundary to cover all of them.
 
 ---
 
@@ -313,7 +313,7 @@ Yes. Direct allocation always wins. To let the tag take effect, unallocate the a
 ### A delegated user cannot see their group
 {: .no_toc }
 
-Delegation on its own is not enough. Confirm the user also holds the **Company User** role and any service-specific roles needed for the assets in that group.
+Confirm the user holds the **Company User** role as well as being delegated, and that the group actually has assets allocated to it - a group with nothing in it looks the same as no access.
 
 ### I want groups generated from the tags I already use
 {: .no_toc }
