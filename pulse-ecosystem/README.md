@@ -24,7 +24,12 @@ Pulse by Devoteam is a core component of managed services, designed as a single 
 
 ## Cloud Essentials
 
-- Identity - SSO to customer identity, no passwords stored. Company roles: 'Manager' to make changes and 'Analyst' for read only.
+- Identity - SSO to customer identity, no passwords stored.
+- Company roles - these separate who can change the setup from who can only read it, so visibility can be shared widely without handing out control:
+  - **Manager** - makes changes
+  - **Analyst** - reads everything, changes nothing
+  - **User** - reads only the assets delegated to them
+- Feature roles - some features add a role of their own, granted on top of a company role. **Ownership Manager** configures [Asset Ownership](asset-ownership.md) - creating asset groups, allocating assets and delegating users.
 - Cloud Inventory - AWS, Azure and Google Clouds are supported out of the box. Data aggregated for quick overview and basic assessments.
 - Search, filtering and CSV export across every table.
 
