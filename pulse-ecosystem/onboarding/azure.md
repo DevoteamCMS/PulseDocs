@@ -173,11 +173,12 @@ These are the five values you will enter in Pulse at the end. All are required.
 
 For Pulse's Compliance recommendations to work, the built-in **Microsoft cloud security benchmark** policy initiative must be assigned at the same scope as your `Reader`/`Billing Reader` roles above. Check whether it is already assigned before creating a new one - [it often is](faq.md#what-is-the-microsoft-cloud-security-benchmark-for).
 
-1. Ensure the `Microsoft.PolicyInsights` resource provider is registered on each subscription in scope: **Subscriptions → your subscription → Resource providers →** search `Microsoft.PolicyInsights` → **Register** (if not already `Registered`)
-2. Go to **Azure Policy → Definitions** and search for **"Microsoft cloud security benchmark"** - then check **Policy → Compliance**, filtered to that initiative, to see if it is already assigned at or above your scope
-3. If it isn't assigned yet, click **Assign**, set the Scope to the same Management Group(s)/Subscription(s) you used for the `Reader`/`Billing Reader` roles, and complete the assignment (**Review + create**)
+1. Go to **Azure Policy → Definitions** and search for **"Microsoft cloud security benchmark"** - then check **Policy → Compliance**, filtered to that initiative, to see if it is already assigned at or above your scope
+2. If it isn't assigned yet, click **Assign**, set the Scope to the same Management Group(s)/Subscription(s) you used for the `Reader`/`Billing Reader` roles, and complete the assignment (**Review + create**)
 
 This uses the same `Owner` or `User Access Administrator` role already required for the RBAC assignments above - no additional permission is needed.
+
+Azure registers the `Microsoft.PolicyInsights` resource provider for you, so there is nothing to do there. If compliance data never appears, you can confirm it under **Subscriptions → your subscription → Resource providers**.
 
 ### PULSE Configuration - Onboarding SPN
 
@@ -197,7 +198,7 @@ Use this to confirm onboarding is complete, whichever method you used:
 | The SP object exists in the tenant, bound to your company | Microsoft Entra ID | Required |
 | `Reader` role assigned to the SPN | Every subscription in scope (or inherited from Root / Management Group) | Required |
 | `Billing Reader` role assigned to the SPN | Every subscription in scope (or inherited) | Required for cost and billing data |
-| `Microsoft.PolicyInsights` resource provider registered | Every subscription in scope | Required for compliance - the automated script does not register it |
+| `Microsoft.PolicyInsights` resource provider registered | Every subscription in scope | Registered by Azure automatically - check only if compliance data is missing |
 | Microsoft cloud security benchmark initiative assigned at the same scope | Management Group or Subscription | Required for compliance recommendations |
 | Cost view enabled - CSP customers only | Billing / partner settings | Required for cost data |
 | Client secret and its expiration date recorded in Pulse | Pulse Cloud Management | **Manual path only** - the federated path has no secret |

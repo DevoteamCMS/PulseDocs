@@ -324,4 +324,4 @@ Use this to confirm onboarding is complete, whichever method you used:
 | Security Health Analytics enabled at organisation scope | Security Command Center | Required for compliance findings |
 | Cloud Billing export to BigQuery, Detailed usage cost | Cost export project | Required for detailed cost data |
 | `bigquery.tables.getData` granted to the Service Account | Cost export project or dataset | Required for detailed cost data |
-| BigQuery API enabled | Cost export project | Required for detailed cost data |
+| BigQuery API and BigQuery Data Transfer Service API enabled | Cost export project | Required for detailed cost data |

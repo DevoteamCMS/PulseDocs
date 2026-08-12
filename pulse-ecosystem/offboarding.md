@@ -19,6 +19,15 @@ This document describes what actions Customer can take to offboard to Devoteam C
 5. Remove Users from PULSE User Management.
 6. Leave data expiration and deletion to our cleanup process.
 
+## AWS - Removing the CloudFormation Setup
+
+If you onboarded AWS with the automated stack, step 4 above means deleting that stack in the management (payer) account. Doing so removes the scanner roles, the Security Hub central configuration and the Quick Setup Config managers. Two things are deliberately left behind:
+
+- The **CUR S3 bucket** - retained on purpose, so delete it by hand once you no longer need the reports.
+- The **Security Hub delegated administrator** designation - left in place, since it is normally shared with your own tooling.
+
+Deleting the stack also turns AWS Config recording back off, if the stack was what enabled it.
+
 ## Managed Customers Offboarding:
 
 Triggered by contract end. Offboarding process will be carried out by Service Delivery Manager, here are some steps that will happen:

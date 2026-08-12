@@ -43,7 +43,10 @@ One role, in one account. The stack fans everything else out organisation-wide b
 | **Every account**, including the management account | IAM administrator (create roles and policies) | Creating the `Pulse_Viewer` role and its permission policy |
 | **One account** of your choice | IAM administrator (create users and access keys) | Creating the `pulse` IAM user and its access key |
 | **Management (payer) account** | Billing/Cost Management access to Data Exports (`bcm-data-exports:*`, `cur:*`) plus S3 bucket and bucket-policy creation | Creating the Cost and Usage Report export |
-| **Every account and region** with resources | Permission to enable AWS Config and Security Hub | Resource inventory and compliance findings |
+| **Every account and region** with resources | Permission to enable AWS Config | Resource inventory |
+| **Management account** and your **Security account** | Security Hub administration - see [Onboarding Q&A](faq.md#what-permissions-do-i-need-to-set-up-security-hub-myself) | Designating the delegated administrator and applying central configuration |
+
+If you enable Security Hub account by account rather than centrally, you need Security Hub permission in every account and region too.
 
 If the payer account is under an organisation SCP that blocks billing actions, that must be cleared before the cost export can be created.
 
@@ -79,7 +82,7 @@ Use the **automated federated** flow unless your organisation specifically requi
    - The **scanner role name** Pulse will create and assume (default `PulseCloudConnect`)
    - Whether to **create the Cost and Usage Report export**, and optionally its S3 bucket and report names
    - Whether to **configure Security Hub CSPM** and, if so, the **Security (delegated admin) account ID**
-   - Whether to **enable AWS Config** organisation-wide
+   - Whether to **enable AWS Config**, and which **regions** to enable it in
 3. Pulse generates a CloudFormation quick-create stack URL - open it in the AWS Console (opens in a new tab), review the pre-filled stack parameters, and click **Create Stack**
 4. Pulse automatically detects when the stack finishes deploying and completes onboarding - no need to come back and paste anything manually
 
@@ -125,9 +128,10 @@ If a value does look wrong, correct it in Pulse and regenerate the link rather t
 - **Configure Security Hub CSPM?** (`true`/`false`)
 - **Security (delegated admin) account ID** - the 12-digit ID of your dedicated Security account. Required when the toggle is `true`.
 
-**5. AWS Config** - organisation-wide:
+**5. AWS Config**:
 
-- **Enable AWS Config everywhere?** (`true`/`false`)
+- **Enable AWS Config?** (`true`/`false`)
+- **Target regions** - the regions you chose in the wizard
 
 </details>
 
@@ -138,7 +142,7 @@ Unlike the manual setup, the automated stack creates **no long-lived AWS credent
 - **Scanner role, in every account** - created directly in the management account, and in every member account through an embedded organisation-wide StackSet targeted at your organisation root. Auto-deployment is enabled, so accounts created later get the role automatically.
 - **Cost and Usage Report, in the management account** - a private, versioned, SSE-S3 encrypted S3 bucket with a 365-day lifecycle rule, plus a daily CUR 2.0 Data Export delivered to it as gzip/CSV.
 - **Security Hub CSPM** (only when the toggle is `true`) - designates your Security account as delegated administrator, switches the organisation to central configuration, and associates a policy enabling AWS Foundational Security Best Practices v1.0.0 with the organisation root.
-- **AWS Config** (only when the toggle is `true`) - enables recording of all resource types through Systems Manager Quick Setup, organisation-wide plus the management account itself.
+- **AWS Config** (only when the toggle is `true`) - enables recording of all resource types through Systems Manager Quick Setup, in the regions you selected, organisation-wide plus the management account itself.
 
 <details markdown="block" class="reference-box">
   <summary>Full detail: scanner role permissions and resource configuration</summary>
@@ -173,14 +177,14 @@ It carries a single inline policy granting:
 **AWS Config**
 
 - Enables **AWS Config recording of all resource types** through AWS Systems Manager Quick Setup: one organisation-wide configuration manager covering all member accounts, plus a second, single-account manager covering the management account itself (again, because organisation-wide deployments skip the management account)
-- Target regions are resolved automatically to every region that is enabled by default in AWS - opt-in regions and regions Quick Setup cannot target are excluded. Quick Setup manages its own Config delivery bucket, so there is nothing else to configure.
+- Config is enabled in the **regions you selected in the wizard**. Quick Setup manages its own Config delivery bucket, so there is nothing else to configure.
 
 </details>
 
 <details markdown="block" class="reference-box">
   <summary>When to turn the optional toggles off</summary>
 
-- **Set `Enable AWS Config everywhere` to `false`** if your organisation already manages AWS Config - for example through AWS Control Tower, or with existing recorders deployed by your own tooling. A second recorder in the same account/region will conflict. Pulse still reads whatever Config already records, through the scanner role.
+- **Set `Enable AWS Config` to `false`** if your organisation already manages AWS Config - for example through AWS Control Tower, or with existing recorders deployed by your own tooling. A second recorder in the same account/region will conflict. Pulse still reads whatever Config already records, through the scanner role.
 - **Set `Configure Security Hub CSPM` to `false`** if Security Hub is already managed in your organisation, or if a delegated administrator other than the account you would enter is already designated. Pulse still reads existing Security Hub findings through the scanner role. (If a *different* delegated administrator is already set, the stack deliberately fails rather than silently re-pointing it - either reconcile it manually or set the toggle to `false`.)
 - **Set `Create CUR export` to `false`** if you already have a CUR 2.0 export with resource IDs enabled. In that case grant the scanner role read access to your existing bucket, and register the export in Pulse using the steps under *PULSE Configuration - Onboarding Cost Export*.
 
@@ -190,8 +194,8 @@ It carries a single inline policy granting:
 
 | What | When |
 | --- | --- |
-| Stack completes, Pulse detects it automatically | ~3 minutes |
-| StackSet fan-out to member accounts, Quick Setup enabling Config across regions | Considerably longer in a large organisation - watch **CloudFormation → StackSets** and **Systems Manager → Quick Setup** |
+| Stack reaches CREATE_COMPLETE - it waits for the StackSet fan-out and the Quick Setup managers it contains, so this scales with your account and region count | Minutes for a small organisation, considerably longer for a large one - watch **CloudFormation → Events**, then **CloudFormation → StackSets** and **Systems Manager → Quick Setup** |
+| Pulse detects the completed stack and finishes onboarding | Automatically, once the stack completes |
 | Resources, findings and costs load in Pulse | Up to 24 hours |
 | Cost data - needs the first CUR delivery, which AWS usually makes within 24 hours | Up to 24 hours |
 
@@ -215,11 +219,11 @@ See [Onboarding Q&A: Which manual onboarding scenarios are supported?](faq.md#wh
 
 ### Required parameters
 
-These are the four values you will paste into Pulse at the end:
+These are the four values you will paste into Pulse at the end. All are required.
 
 - Access Key ID
 - Secret Access Key
-- Role Name
+- Role Name - the same role name you create in every account
 - Customer Management Account ID
 
 ### Order of work
@@ -439,10 +443,9 @@ Per-account, per-region console steps:
 3. Select **Confirm**
 4. Repeat for every Region where you have resources, then change Account and repeat
 
-Faster alternative for an organisation (what the automated stack uses): from the management account, open **Systems Manager → Quick Setup → Config recording** and create a configuration manager targeting your organisation root and the regions you care about. Note two things:
+Faster alternative for an organisation (what the automated stack uses): from the management account, open **Systems Manager → Quick Setup → Config recording** and create a configuration manager targeting your organisation root and the regions you care about.
 
-- An organisation-wide deployment covers **member accounts only** - create a second, single-account Quick Setup configuration manager (or use the 1-click setup above) for the **management account** itself.
-- Quick Setup can only target regions that are **enabled by default**; opt-in regions must be configured separately.
+Note that an organisation-wide deployment covers **member accounts only** - create a second, single-account Quick Setup configuration manager (or use the 1-click setup above) for the **management account** itself.
 
 Notes:
 
@@ -492,7 +495,7 @@ Steps:
    - Leave the selection **Column selection (125/125)** as is - Pulse expects the full column set
    - Select **gzip - text/csv**
    - Select **Overwrite existing data export file**
-   - Configure S3, general purpose bucket, name it for example `<prefix#-costexports-s3bucket-no#>`, and select your usually used region
+   - Configure S3, general purpose bucket, name it for example `<prefix#-costexports-s3bucket-no#>`, and select **us-east-1** unless you have a reason to put it elsewhere (see *Before you start* above)
    - Enter S3 path prefix: `Pulse`
    - Create!
 4. You need to wait for data to arrive before proceeding - AWS usually sends information twice over 24 hours.
@@ -566,9 +569,9 @@ If you let the Data Exports console create the bucket, it adds this policy for y
 </details>
 
 <details markdown="block" class="reference-box">
-  <summary>Required: bucket read access for Pulse</summary>
+  <summary>Option B only: bucket read access for Pulse</summary>
 
-If you are using custom permission sets for access, update them to include additional permissions to access this bucket. Add an additional policy named `Pulse_Costs_Viewer` **to the `Pulse_Viewer` role in the account that owns the export bucket** (normally the management account), changing `<bucketname>`:
+Option A's `ReadOnlyAccess` already covers reading the export bucket, so this applies only if you chose **Option B**, the custom least-privilege policy. Add a policy named `Pulse_Costs_Viewer` **to the `Pulse_Viewer` role in the account that owns the export bucket** (normally the management account), changing `<bucketname>`:
 
 ```json
 {
@@ -601,7 +604,7 @@ If you brought your own bucket rather than letting the Data Exports console crea
 3. Add AWS credentials
    - Access Key ID
    - Secret Access Key
-   - Role Name (optional, but the preferred way)
+   - Role Name
    - Customer Management Account ID
 4. Save [done]
 
@@ -624,11 +627,11 @@ Use this to confirm an account is fully onboarded, whichever method you used:
 
 | Item | Management (payer) account | Every other account |
 | --- | --- | --- |
-| Scanner role (`PulseCloudConnect` / `Pulse_Viewer`) exists, with the full permission set | Required | Required |
+| Scanner role (`PulseCloudConnect` / `Pulse_Viewer`) exists with a sufficient policy - the stack's inline policy (automated), or `ReadOnlyAccess` + `trustedadvisor:List*` / `Pulse_View_Resources_policy` (manual) | Required | Required |
 | Role trust policy allows Pulse (automated) or the IAM user (manual) | Required | Required |
 | IAM user with `sts:AssumeRole` on the role name - manual flow only | In one account only | - |
 | AWS Config recording all resource types, in every region with resources | Required | Required |
-| Security Hub CSPM enabled with AWS Foundational Security Best Practices v1.0.0 | Recommended | Recommended - needed for compliance findings from that account |
+| Security Hub CSPM enabled with AWS Foundational Security Best Practices v1.0.0 | Required for compliance findings | Required for compliance findings from that account |
 | CUR 2.0 Data Export with resource IDs, split cost allocation data, daily, gzip/CSV | Required | Not applicable |
-| `Pulse_Costs_Viewer` bucket read policy on the role | Required (bucket owner account) | Only if the bucket lives there |
+| Role can read the cost export bucket - `ReadOnlyAccess` (Option A) or the `Pulse_Costs_Viewer` policy (Option B) | Required (bucket owner account) | Only if the bucket lives there |
 | Business/Enterprise Support plan | Only for Trusted Advisor data | Only for Trusted Advisor data |

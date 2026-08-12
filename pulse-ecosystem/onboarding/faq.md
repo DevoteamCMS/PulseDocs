@@ -30,7 +30,7 @@ Use the **automated** path unless your organisation specifically requires custom
 
 ### Do the automated and manual paths grant Pulse different access?
 
-No. Both grant the same read-only access. They differ in *how the credential is held*:
+The same **permissions**, yes - but the **coverage** can differ. They also differ in *how the credential is held*:
 
 | | Automated | Manual |
 | --- | --- | --- |
@@ -39,6 +39,8 @@ No. Both grant the same read-only access. They differ in *how the credential is 
 | Google Cloud | Service Account created for you, JSON key uploaded automatically | Service Account JSON key you create and paste in |
 
 Only Google Cloud requires a long-lived credential on the automated path; AWS and Azure are both federated.
+
+Coverage differs because the automated path applies access more broadly than a hand-built setup usually does. On AWS the scanner role lands in every account, including ones created later, while the manual path covers only the accounts where you create the role yourself. On Google Cloud the script always binds at organisation level, while manual setup may be per project.
 
 ### How long until my data appears in Pulse?
 
@@ -64,7 +66,13 @@ Azure is unaffected - it has no separate cost export step.
 
 Yes. Pulse does not track how many times you deploy or re-run. Its scanners simply use whatever credentials they hold at the time they run, provided those credentials are valid, and a **reonboarding job** checks on an ongoing basis for new or expired accounts, subscriptions and projects.
 
-That means a failed or interrupted run is safe to repeat, and newly added accounts or subscriptions are picked up without you re-onboarding by hand.
+That means newly added accounts or subscriptions are picked up without you re-onboarding by hand. Whether repeating a *failed* run actually repairs it depends on the cloud:
+
+| Cloud | Repeating a failed or partial run |
+| --- | --- |
+| AWS | Safe and effective - fix the cause, then deploy the stack again |
+| Google Cloud | Safe and effective - the script reuses the existing service account and skips completed steps |
+| Azure | Safe, but it will **not** repair a partial run. The first step fails once the service principal exists and the script stops there - see [How do I rotate the SPN, or recover from a broken deployment?](#how-do-i-rotate-the-spn-or-recover-from-a-broken-deployment) |
 
 ---
 
@@ -104,7 +112,7 @@ In the federated flow, the scanner role's trust policy allows only Pulse's own A
 
 ### Why must the stack be deployed from the management (payer) account?
 
-Two reasons. The organisation-wide fan-out uses **service-managed CloudFormation StackSets**, which can only be created from the management account or a delegated administrator. And the Cost and Usage Report export can only be created in the payer account - an export created in a member account contains only that account's costs.
+Two reasons. The organisation-wide fan-out uses **service-managed CloudFormation StackSets**, which the template creates as the account running the stack - so that account must be the management account. (AWS also allows a registered StackSets delegated administrator to create them, but the template is not set up to run that way.) And the Cost and Usage Report export can only be created in the payer account - an export created in a member account contains only that account's costs.
 
 This also requires **AWS Organizations with all features enabled**. Service-managed StackSets and trusted access are unavailable in a consolidated-billing-only organisation.
 
