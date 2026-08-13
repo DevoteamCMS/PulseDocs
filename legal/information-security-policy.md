@@ -8,9 +8,9 @@ nav_order: 3
 # Information Security Policy
 {: .no_toc }
 
-> **Release:** version 1.1.2
-> **Last updated:** 2025-09-18
-> **Applicability / Disclosure:** Public disclosure (published on the PULSE web page)
+> **Release:** version 1.1.2<br>
+> **Last updated:** 2025-09-18<br>
+> **Applicability / Disclosure:** Public disclosure (published on the PULSE web page)<br>
 
 Devoteam Cloud Managed Services Information Security Policy
 
@@ -88,9 +88,6 @@ Devoteam Cloud Managed Services has implemented technology, management processes
 For the purposes of Security Policy:
 
 * **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to UAB Devoteam Lithuania, Konstitucijos pr. 18B, B korpusas, LT-09308 Vilnius, an affiliate of Devoteam SAS a company organised and existing under the laws of France having its registered office at 73 rue Anatole, 92300 Levallois Perret, France.
-
 * **Country** refers to: Lithuania or France were applicable
-
 * **Website** (or PULSE) refers to Cloud Management Portal, accessible from https://pulse.devoteam.com. Term 'Service' was specifically removed as not to confuse with other Devoteam Managed or Professional Services.
-
 * **You** (or User of Website or User) refers to the individual accessing or using the Website, or the company, or other legal entity on behalf of which such individual is accessing or using the Website, as applicable.

@@ -8,18 +8,17 @@ nav_order: 1
 # Terms of Use
 {: .no_toc }
 
-
-> **Release:** version 1.1.3
-> **Last updated:** 2026-08-12
-> **Applicability / Disclosure:** Public disclosure (published on the [Pulse](https://pulse.devoteam.com/) web page)
+> **Release:** version 1.1.3<br>
+> **Last updated:** 2026-08-12<br>
+> **Applicability / Disclosure:** Public disclosure (published on the [Pulse](https://pulse.devoteam.com/) web page)<br>
 
 Access to and use of this website is governed by the following terms and conditions ("Terms of Use").
 
 By accessing this website, you hereby warrant that:
 
- i) you have fully read and understood these Terms and Conditions; 
- ii) you fully agree to these Terms and Conditions; and 
- iii) you have full authority to do so. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i) you have fully read and understood these Terms and Conditions; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ii) you fully agree to these Terms and Conditions; and <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iii) you have full authority to do so. <br>
 
 <details markdown="block">
   <summary>
@@ -35,13 +34,9 @@ By accessing this website, you hereby warrant that:
 Capitalised terms used throughout these Terms of Use shall have the meaning defined below, whether they appear in singular or in plural:
 
 * **Affiliate** refers to an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
-
 * **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to UAB Devoteam Lithuania, Konstitucijos pr. 18B, B corp, LT-09308 Vilnius.
-
 * **Terms of Use** refers to these Terms of Use that form the entire agreement between You and the Company regarding the access to and use of the Website.
-
 * **Website** (or "Pulse") refers to Cloud Management Portal, accessible from the following link: [https://pulse.devoteam.com](https://pulse.devoteam.com).
-
 * **You** (or "User") refers to the individual accessing or using the Website, or the company, or other legal entity on behalf of which such individual is accessing or using the Website, as applicable. If You are an individual accessing or using the Website on behalf of, or for the benefit of, any corporation, partnership or other entity with which You are associated (an "Organization"), then You are agreeing to these Terms of Use on behalf of yourself and such Organization, and You represent and warrant that You have the legal authority to bind such Organization to these Terms of Use. References to "You" and "Your" in these Terms of Use will refer to both the individual using the Website and to any such Organization.
 
 ## Service Description
@@ -112,19 +107,12 @@ The Company retains all rights, title and interests, implied or otherwise, which
 You shall not and shall not allow others to:
 
 1. license, sublicense, sell, resell, lease, transfer, distribute the Website, or give access to the Website to third parties;
-
 2. create derivative works or modify the Website, its service, software or documentation, if any, in particular for the purpose of developing a competing product or service, marketed or for internal use;
-
 3. disassemble, reverse engineer, or decompile the Website, its service, software or documentation, if any;
-
 4. delete or modify a copyright or any other intellectual property rights appearing on the Website;
-
 5. use the Website, reproduce, distribute, display, transmit or use any copyrighted material or other intellectual property rights (including any rights of publicity or confidentiality) without the prior consent of the Company;
-
 6. violate any national or international law or regulation through the Website;
-
 7. deactivate, hack or interfere with any security measure, digital signature mechanism, management of authentication and authorization rights provided by the Service;
-
 8. send computer viruses, worms, Trojan horse or other harmful computer code via the Website or undermine the integrity of the Website by some other means;
 
 You are responsible for but not limited to, the following: (a) User use of the Website, (b) the protection of the names and passwords of Users of the Website and to prevent and to inform immediately and in written the Company of any unauthorized use of the Website, (c) use the Website within the authorized limits and only in accordance with the number of access types and identifiers of authorized users, the storage capacities and on or from locations which You may use the Website, (d) use the Website in accordance with these Terms of Use.
