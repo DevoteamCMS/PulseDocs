@@ -8,19 +8,18 @@ nav_order: 1
 # Terms of Use
 {: .no_toc }
 
-**Release:** version 1.1.3
 
-**Last updated:** 2026-08-12
-
-**Applicability / Disclosure:** Public disclosure (published on the [Pulse](https://pulse.devoteam.com/) web page)
+> **Release:** version 1.1.3
+> **Last updated:** 2026-08-12
+> **Applicability / Disclosure:** Public disclosure (published on the [Pulse](https://pulse.devoteam.com/) web page)
 
 Access to and use of this website is governed by the following terms and conditions ("Terms of Use").
 
 By accessing this website, you hereby warrant that:
 
-* i) you have fully read and understood these Terms and Conditions;
-* ii) you fully agree to these Terms and Conditions; and
-* iii) you have full authority to do so.
+ i) you have fully read and understood these Terms and Conditions; 
+ ii) you fully agree to these Terms and Conditions; and 
+ iii) you have full authority to do so. 
 
 <details markdown="block">
   <summary>

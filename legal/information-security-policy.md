@@ -6,18 +6,13 @@ nav_order: 3
 ---
 
 # Information Security Policy
+{: .no_toc }
+
+> **Release:** version 1.1.2
+> **Last updated:** 2025-09-18
+> **Applicability / Disclosure:** Public disclosure (published on the PULSE web page)
 
 Devoteam Cloud Managed Services Information Security Policy
-
-**Policy Owner:** CISO Cloud Managed Services
-
-**Approved by:** Management Board
-
-**Release:** version 1.1.2
-
-**Last updated:** 2025-09-18
-
-**Applicability / Disclosure:** Public disclosure (published on the PULSE web page)
 
 ## Purpose
 

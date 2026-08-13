@@ -6,16 +6,13 @@ nav_order: 2
 ---
 
 # Privacy Policy
+{: .no_toc }
+
+> **Release:** version 1.1.2
+> **Last updated:** 2025-09-18
+> **Applicability / Disclosure:** Public disclosure (published on the PULSE web page)
 
 Please read these Privacy Policy carefully before using Our Website.
-
-**Policy Owner:** CISO Cloud Managed Services
-
-**Release:** version 1.1.2
-
-**Last updated:** 2025-09-18
-
-**Applicability / Disclosure:** Public disclosure (published on the PULSE web page)
 
 This Privacy Policy, alongside a general Information Security policy, describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Website and tells You about Your privacy rights and how the law protects You.
 
