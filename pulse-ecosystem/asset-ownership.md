@@ -257,9 +257,9 @@ Pulse maintains a read-only **Default** group that collects every asset not allo
 
 ## Scenarios
 
-![Four allocation scenarios, each showing a subscription, resource group and asset with the asset groups they end up in by tag, directly or by inheritance](../assets/images/asset-ownership/allocation-scenarios.png)
+![Four allocation scenarios, each showing a subscription, resource group and asset with the tag it carries and the asset group it ends up in, colour coded by whether that came from a tag, a direct allocation or inheritance](../assets/images/asset-ownership/allocation-scenarios.svg)
 
-The four cases below, drawn out. Each shows a subscription, a resource group and an asset, the steps taken, and which group everything lands in - by tag, directly, or by inheritance. The examples use Azure because its extra Resource Group level makes the inheritance clearest; the same rules apply to AWS accounts and Google Cloud projects with one level fewer.
+The four cases below, drawn out: what each level carries in the cloud, and which Asset Group it ends up in. The colour shows *how* it got there - by tag, by direct allocation, or inherited from its parent - so the priority order is visible rather than something you have to work out. The same rules apply to AWS accounts and Google Cloud projects, with one level fewer.
 
 **Standard tag-based setup - the common case.** Configure a tag key, enable automatic creation, and let tag allocation do the work while inheritance handles untagged child resources. This leans on the tagging strategy you already have.
 
