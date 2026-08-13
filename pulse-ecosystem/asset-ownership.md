@@ -257,17 +257,37 @@ Pulse maintains a read-only **Default** group that collects every asset not allo
 
 ## Scenarios
 
-![Four allocation scenarios, each showing a subscription, resource group and asset with the tag it carries and the asset group it ends up in, colour coded by whether that came from a tag, a direct allocation or inheritance](../assets/images/asset-ownership/allocation-scenarios.svg)
+Four situations, each drawn out. In every diagram the cloud hierarchy runs down the left - subscription, resource group, asset - with the tag each one carries. The line shows which Asset Group it ends up in, and how it got there:
 
-The four cases below, drawn out: what each level carries in the cloud, and which Asset Group it ends up in. The colour shows *how* it got there - by tag, by direct allocation, or inherited from its parent - so the priority order is visible rather than something you have to work out. The same rules apply to AWS accounts and Google Cloud projects, with one level fewer.
+- **Blue, by tag** - the tag matched a group
+- **Red, direct** - someone allocated it by hand, which overrides the tag
+- **Grey dashed, inherited** - nothing else applied, so it followed its parent
 
-**Standard tag-based setup - the common case.** Configure a tag key, enable automatic creation, and let tag allocation do the work while inheritance handles untagged child resources. This leans on the tagging strategy you already have.
+Azure is used because its extra resource group level shows inheritance most clearly. The same rules apply to AWS accounts and Google Cloud projects, with one level fewer.
 
-**Several applications sharing one subscription, account or project.** Tags alone may not separate them. Use direct allocation to override tag or inherited allocation for the specific resources that belong elsewhere.
+### Tag-based setup - the common case
 
-**An Azure Resource Group split across teams.** Possible, but generally best avoided - it produces inheritance conflicts that are hard to reason about later. Prefer a tagging strategy over splitting at Resource Group boundaries.
+Configure a tag key, enable automatic creation, and let tag allocation do the work while inheritance handles the untagged children. This leans on the tagging strategy you already have, and is where most organisations end up.
 
-**An asset that must not follow its parent.** A virtual machine inside a Resource Group owned by another team, for example. A direct allocation on the child overrides the inherited group.
+![The subscription and resource group both carry the tag and land in AG1; the untagged asset inherits AG1 from its parent](../assets/images/asset-ownership/scenario-1-tag-based.svg)
+
+### Two applications in one subscription
+
+Tags alone cannot always separate them. Allocating the resource group directly to another group overrides its tag - and its assets follow it there rather than to the group the subscription is in.
+
+![The subscription lands in AG1 by tag, while the resource group is allocated directly to AG2 despite carrying the same tag, and its untagged asset inherits AG2](../assets/images/asset-ownership/scenario-2-two-applications.svg)
+
+### A resource group split across teams
+
+Possible, and sometimes unavoidable, but worth avoiding where you can. The asset keeps its own tag and stays in AG1 while the resource group around it belongs to AG2 - and those crossing lines are exactly what makes this hard to reason about six months later.
+
+![The subscription and the tagged asset both land in AG1 by tag, while the resource group between them is allocated directly to AG2, so the lines cross](../assets/images/asset-ownership/scenario-3-split-resource-group.svg)
+
+### An asset that must not follow its parent
+
+A virtual machine inside a resource group owned by another team, for example. Allocating the subscription directly pulls the resource group along with it by inheritance, while the tagged asset still lands in its own group.
+
+![The subscription is allocated directly to AG2 and the untagged resource group inherits AG2, while the tagged asset lands in AG1 by tag](../assets/images/asset-ownership/scenario-4-asset-not-following-parent.svg)
 
 ---
 

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 250" width="100%" role="img" aria-labelledby="t-scenario-1-tag-based d-scenario-1-tag-based" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="t-scenario-1-tag-based">Everything tagged lands in the same group</title>
+  <desc id="d-scenario-1-tag-based">The Azure hierarchy on the left - subscription, resource group, asset - with a line from each to the Asset Group it ends up in. Subscription tagged product:App1 ends up in AG1 by tag. Resource group tagged product:App1 ends up in AG1 by tag. Asset untagged ends up in AG1 inherited.</desc>
+  <defs>
+    <marker id="head-tag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3f72a8"/></marker>
+    <marker id="head-direct" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#c8102e"/></marker>
+    <marker id="head-inherited" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8c8598"/></marker>
+  </defs>
+  <rect width="660" height="250" fill="#ffffff"/>
+  <line x1="44" y1="78" x2="44" y2="98" stroke="#cfc9d6" stroke-width="1.4"/>
+  <line x1="44" y1="152" x2="44" y2="172" stroke="#cfc9d6" stroke-width="1.4"/>
+  <rect x="470" y="65" width="166" height="120" rx="6" fill="#fdfcfe" stroke="#c8102e" stroke-width="1.5"/>
+  <text x="553" y="131" font-size="17" font-weight="600" fill="#c8102e" text-anchor="middle">AG1</text>
+  <rect x="24" y="24" width="200" height="54" rx="5" fill="#f7f5f9" stroke="#cfc9d6"/>
+  <text x="124" y="47" font-size="13" font-weight="500" fill="#26313f" text-anchor="middle">Subscription</text>
+  <text x="124" y="65" font-size="10.5" fill="#6f6880" text-anchor="middle">tag: product:App1</text>
+  <line x1="228" y1="51" x2="465" y2="125" stroke="#3f72a8" stroke-width="1.6" marker-end="url(#head-tag)"/>
+  <text x="236" y="42" font-size="10.5" font-weight="500" fill="#3f72a8">by tag</text>
+  <rect x="24" y="98" width="200" height="54" rx="5" fill="#f7f5f9" stroke="#cfc9d6"/>
+  <text x="124" y="121" font-size="13" font-weight="500" fill="#26313f" text-anchor="middle">Resource group</text>
+  <text x="124" y="139" font-size="10.5" fill="#6f6880" text-anchor="middle">tag: product:App1</text>
+  <line x1="228" y1="125" x2="465" y2="125" stroke="#3f72a8" stroke-width="1.6" marker-end="url(#head-tag)"/>
+  <text x="236" y="116" font-size="10.5" font-weight="500" fill="#3f72a8">by tag</text>
+  <rect x="24" y="172" width="200" height="54" rx="5" fill="#f7f5f9" stroke="#cfc9d6"/>
+  <text x="124" y="195" font-size="13" font-weight="500" fill="#26313f" text-anchor="middle">Asset</text>
+  <text x="124" y="213" font-size="10.5" fill="#b9b2c0" text-anchor="middle">no tag</text>
+  <line x1="228" y1="199" x2="465" y2="125" stroke="#8c8598" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#head-inherited)"/>
+  <text x="236" y="215" font-size="10.5" font-weight="500" fill="#8c8598">inherited</text>
+</svg>

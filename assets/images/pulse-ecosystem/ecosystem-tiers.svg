@@ -2,6 +2,9 @@
   <title id="ecoTitle">How the Pulse tiers include one another</title>
   <desc id="ecoDesc">Three nested boxes. The innermost is Cloud Essentials, containing Cloud Inventory and Asset Ownership in full plus Cloud Economics and Cloud Compliance with limits. Around it, Pulse Premium adds Cloud Economics and Cloud Compliance in full. Around that, Managed Service adds Managed Cloud Reliability, Managed Cloud Economics and Managed Cloud Compliance with Devoteam service management. A bar underneath shows the core platform that every tier stands on.</desc>
 
+  <!-- opaque background, so the diagram survives a dark page or viewer -->
+  <rect width="1000" height="700" fill="#ffffff"/>
+
   <!-- Managed Service -->
   <rect x="16" y="16" width="968" height="584" rx="8" fill="#fbfafc" stroke="#b9b2c0" stroke-width="1.5"/>
   <text x="36" y="46" font-size="16" font-weight="600" fill="#3d3646">Managed Service</text>

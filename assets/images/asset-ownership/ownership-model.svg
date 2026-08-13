@@ -8,6 +8,9 @@
     </marker>
   </defs>
 
+  <!-- opaque background, so the diagram survives a dark page or viewer -->
+  <rect width="1120" height="540" fill="#ffffff"/>
+
   <!-- column headers -->
   <text x="80" y="42" font-size="12" font-weight="600" fill="#7a7385" text-anchor="middle">USERS</text>
   <text x="290" y="42" font-size="12" font-weight="600" fill="#7a7385" text-anchor="middle">OWNERSHIP</text>
