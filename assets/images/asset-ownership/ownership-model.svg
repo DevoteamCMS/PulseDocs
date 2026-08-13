@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 540" width="100%" role="img" aria-labelledby="ownTitle ownDesc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title id="ownTitle">How ownership flows from users to assets</title>
+  <desc id="ownDesc">Users are delegated to an Asset Group. The Asset Group is allocated cloud containers - a Google Cloud project, an Azure subscription and an AWS account. Assets beneath those containers inherit the group, with Azure adding a resource group level in between. Allocation is done by tag value or directly; everything below it inherits, and exceptions are fixed by direct allocation.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7a7385"/>
+    </marker>
+  </defs>
+
+  <!-- column headers -->
+  <text x="80" y="42" font-size="12" font-weight="600" fill="#7a7385" text-anchor="middle">USERS</text>
+  <text x="290" y="42" font-size="12" font-weight="600" fill="#7a7385" text-anchor="middle">OWNERSHIP</text>
+  <text x="545" y="42" font-size="12" font-weight="600" fill="#7a7385" text-anchor="middle">CLOUD CONTAINER</text>
+  <text x="775" y="42" font-size="12" font-weight="600" fill="#7a7385" text-anchor="middle">RESOURCE GROUP</text>
+  <text x="1005" y="42" font-size="12" font-weight="600" fill="#7a7385" text-anchor="middle">ASSETS</text>
+
+  <!-- grouping regions -->
+  <rect x="190" y="64" width="462" height="404" rx="8" fill="none" stroke="#c9c2d0" stroke-width="1.2" stroke-dasharray="6 5"/>
+  <rect x="666" y="64" width="444" height="404" rx="8" fill="none" stroke="#c9c2d0" stroke-width="1.2" stroke-dasharray="6 5"/>
+  <text x="421" y="496" font-size="12.5" fill="#3d3646" text-anchor="middle">Allocate by tag value, or directly</text>
+  <text x="888" y="496" font-size="12.5" fill="#3d3646" text-anchor="middle">Everything below inherits - fix exceptions directly</text>
+
+  <!-- users -->
+  <rect x="20" y="250" width="120" height="64" rx="5" fill="#f0edf2" stroke="#a79fb2"/>
+  <text x="80" y="288" font-size="14" font-weight="500" fill="#3d3646" text-anchor="middle">Users</text>
+
+  <!-- asset group -->
+  <rect x="200" y="238" width="180" height="88" rx="6" fill="#ffffff" stroke="#c8102e" stroke-width="1.5"/>
+  <text x="290" y="277" font-size="15" font-weight="600" fill="#c8102e" text-anchor="middle">Asset Group</text>
+  <text x="290" y="297" font-size="11.5" fill="#7a7385" text-anchor="middle">one owner, many assets</text>
+
+  <!-- delegate / allocate arrows -->
+  <line x1="142" y1="282" x2="196" y2="282" stroke="#7a7385" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="169" y="272" font-size="11" fill="#7a7385" text-anchor="middle">delegate</text>
+
+  <path d="M 382 268 C 415 268 415 122 444 122" fill="none" stroke="#7a7385" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="382" y1="282" x2="444" y2="282" stroke="#7a7385" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <path d="M 382 296 C 415 296 415 442 444 442" fill="none" stroke="#7a7385" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="413" y="274" font-size="11" fill="#7a7385" text-anchor="middle">allocate</text>
+
+  <!-- google cloud -->
+  <rect x="446" y="90" width="194" height="64" rx="5" fill="#eef2f7" stroke="#96a8c0"/>
+  <text x="543" y="116" font-size="11.5" fill="#7a7385" text-anchor="middle">Google Cloud</text>
+  <text x="543" y="136" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">project</text>
+  <line x1="642" y1="122" x2="904" y2="122" stroke="#7a7385" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="773" y="112" font-size="11" fill="#7a7385" text-anchor="middle">inherit</text>
+
+  <!-- azure -->
+  <rect x="446" y="250" width="194" height="64" rx="5" fill="#eef2f7" stroke="#96a8c0"/>
+  <text x="543" y="276" font-size="11.5" fill="#7a7385" text-anchor="middle">Azure</text>
+  <text x="543" y="296" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">subscription</text>
+  <line x1="642" y1="282" x2="678" y2="282" stroke="#7a7385" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <rect x="680" y="250" width="190" height="64" rx="5" fill="#eef2f7" stroke="#96a8c0"/>
+  <text x="775" y="276" font-size="11.5" fill="#7a7385" text-anchor="middle">Azure only</text>
+  <text x="775" y="296" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">resource group</text>
+  <line x1="872" y1="282" x2="904" y2="282" stroke="#7a7385" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- aws -->
+  <rect x="446" y="410" width="194" height="64" rx="5" fill="#eef2f7" stroke="#96a8c0"/>
+  <text x="543" y="436" font-size="11.5" fill="#7a7385" text-anchor="middle">AWS</text>
+  <text x="543" y="456" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">account</text>
+  <line x1="642" y1="442" x2="904" y2="442" stroke="#7a7385" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="773" y="432" font-size="11" fill="#7a7385" text-anchor="middle">inherit</text>
+
+  <!-- assets -->
+  <rect x="906" y="90" width="194" height="64" rx="5" fill="#ffffff" stroke="#b9b2c0"/>
+  <text x="1003" y="128" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">Assets</text>
+
+  <rect x="906" y="250" width="194" height="64" rx="5" fill="#ffffff" stroke="#b9b2c0"/>
+  <text x="1003" y="288" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">Assets</text>
+
+  <rect x="906" y="410" width="194" height="64" rx="5" fill="#ffffff" stroke="#b9b2c0"/>
+  <text x="1003" y="448" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">Assets</text>
+</svg>
