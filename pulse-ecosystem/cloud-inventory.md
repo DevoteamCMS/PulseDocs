@@ -407,7 +407,7 @@ By default the pages describe the whole connected estate. Asset Groups narrow th
 
 ### Can I get the data out?
 
-Every table exports to CSV, and the export covers the whole filtered result set rather than just the page on screen. Individual assets also expose their raw record through **JSON View**.
+Every table exports to CSV, and the export covers the whole filtered result set rather than just the page on screen. Individual assets also expose their raw record through **JSON View**. Managed service customers can request API access to AMDB and Pulse data; authorisation is manual today, and self-service is planned with no ETA.
 
 ---
 
