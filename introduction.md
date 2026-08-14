@@ -47,11 +47,11 @@ This layer of information is free. You can easily onboard your clouds and begin 
 
 PULSE by Devoteam is also the central hub for Managed Services. Customers with Managed Services contracts gain additional functionality that enhances their overall experience.
 
-Discover more about managed services at: [Cloud Managed Services | Devoteam](https://www.devoteam.com/expertise/cloud-managed-services/)
+Discover more about managed services at: [Cloud Managed Services](https://www.devoteam.com/expertise/cloud-managed-services/)
 
 ## Next Steps
 
-* Contact Devoteam if you are interested in Managed Services: [Contact Us | Devoteam](https://www.devoteam.com/services/cloud-managed-services/#contact)
-* Request Demo if you want to see PULSE Ecosystem at work: [Request Demo | Devoteam](https://www.devoteam.com/services/cloud-managed-services/#contact)
+* Contact Devoteam if you are interested in Managed Services: [Contact Us](https://www.devoteam.com/services/cloud-managed-services/#contact)
+* Request Demo if you want to see PULSE Ecosystem at work: [Request Demo](https://www.devoteam.com/services/cloud-managed-services/#contact)
 * Read more about [Pulse Ecosystem](pulse-ecosystem/README.md) and Cloud Essentials
 * Start using Pulse Ecosystem yourself: [Cloud Onboarding](pulse-ecosystem/onboarding/README.md)

@@ -416,4 +416,4 @@ Every table exports to CSV, and the export covers the whole filtered result set 
 - Start using Pulse Cloud Inventory yourself: [Cloud Onboarding](onboarding/README.md)
 - Set up ownership so costs and resources can be attributed: [Asset Ownership](asset-ownership.md)
 - Learn more about the wider platform: [Pulse Ecosystem](README.md)
-- Request a demo if you would rather be shown around: [Request Demo | Devoteam](https://www.devoteam.com/services/cloud-managed-services/#contact)
+- Request a demo if you would rather be shown around: [Request Demo](https://www.devoteam.com/services/cloud-managed-services/#contact)

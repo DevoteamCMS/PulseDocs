@@ -71,7 +71,7 @@ Everything above, plus managed services delivered by Devoteam rather than run by
 
 Other managed services sit alongside these under **Governance**, which is the umbrella term for the managed service scope. This tier is a contracted engagement with a Service Delivery Manager, not a self-service upgrade.
 
-Read more: [Cloud Managed Services | Devoteam](https://www.devoteam.com/services/cloud-managed-services).
+Read more: [Cloud Managed Services](https://www.devoteam.com/services/cloud-managed-services).
 
 ---
 
@@ -118,4 +118,4 @@ Shared by every tier, and the reason the rest works:
 - See what Cloud Essentials includes, screen by screen: [Cloud Inventory](cloud-inventory.md)
 - Set up ownership so costs and resources can be attributed: [Asset Ownership](asset-ownership.md)
 - Leaving, or removing a cloud: [Offboarding](offboarding.md)
-- Talk to us about managed services: [Cloud Managed Services | Devoteam](https://www.devoteam.com/services/cloud-managed-services)
+- Talk to us about managed services: [Cloud Managed Services](https://www.devoteam.com/services/cloud-managed-services)

@@ -61,7 +61,7 @@ Cloud infrastructure **metadata** only:
 - Compliance states
 - Usage and metric data
 
-Pulse does not collect, store, or process your application content, business records, or end-customer data. See [Cloud Inventory](https://docs.pulse.devoteam.com/pulse-ecosystem/cloud-inventory).
+Pulse does not collect, store, or process your application content, business records, or end-customer data. See [Cloud Inventory](../pulse-ecosystem/cloud-inventory.md).
 
 ### Which Azure APIs does Pulse call?
 
@@ -127,7 +127,7 @@ All databases are backed up via Azure Backup Vaults under a single uniform polic
 
 ### What happens to my data when I stop using Pulse?
 
-You can continue on **Cloud Essentials** at no cost, or ask us to delete your Pulse space. Requesting deletion expedites offboarding — the cloud connection is removed and your space is deleted, rather than leaving it to the standard cleanup process. See [Offboarding](https://docs.pulse.devoteam.com/pulse-ecosystem/offboarding).
+You can continue on **Cloud Essentials** at no cost, or ask us to delete your Pulse space. Requesting deletion expedites offboarding — the cloud connection is removed and your space is deleted, rather than leaving it to the standard cleanup process. See [Offboarding](../pulse-ecosystem/offboarding.md).
 
 ## Third Parties, Subcontractors & Subprocessors
 
