@@ -14,6 +14,15 @@ nav_order: 3
 
 Devoteam Cloud Managed Services Information Security Policy
 
+<details markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
+
 ## Purpose
 
 The purpose of this policy is to direct the design, implementation, and management of an effective Information Security Program, which ensures that Devoteam Cloud Managed Services's (after Company) information assets are appropriately identified, recorded, and always afforded suitable protection. This document sets forth certain principles regarding the responsible use of information by Devoteam Cloud Managed Services and outlines the roles and responsibilities of personnel to protect the confidentiality, integrity, and availability of Company resources and data, also, not limited to:

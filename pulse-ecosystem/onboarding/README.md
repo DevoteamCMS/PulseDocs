@@ -3,6 +3,7 @@ title: Onboarding
 layout: default
 parent: Pulse Ecosystem
 has_children: true
+has_toc: false
 nav_order: 3
 permalink: /pulse-ecosystem/onboarding/
 ---

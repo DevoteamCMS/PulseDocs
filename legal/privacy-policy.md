@@ -18,6 +18,15 @@ This Privacy Policy, alongside a general Information Security policy, describes 
 
 We use Your Personal data to provide and improve the Website. By using the Website, You agree to the collection and use of information in accordance with this Privacy Policy.
 
+<details markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
+
 ## Interpretation and Definitions
 
 ### Interpretation

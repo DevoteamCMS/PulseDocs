@@ -6,18 +6,8 @@ nav_order: 5
 ---
 
 # Audit & Compliance
-{: .no_toc }
 
 As the Cloud-native Managed Services organization within Devoteam group, we focus on delivering automation, operational excellence and support clients with a cutting-edge IT Operating Model aligned to most recognizable industry standards and certifications.
-
-<details open markdown="block">
-  <summary>
-    Table of contents
-  </summary>
-  {: .text-delta }
-- TOC
-{:toc}
-</details>
 
 ---
 
