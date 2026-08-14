@@ -153,7 +153,7 @@ Both are separate from Microsoft Azure or Google Cloud as *your* cloud providers
 
 ### What certifications does Devoteam hold?
 
-Pulse is operated by Devoteam Cloud Managed Services within a certified management system covering **ISO/IEC 27001** (information security), **ISO 9001** (quality), **ISO 14001** (environmental), and **ISO 22301** (business continuity). Certificates are available upon request. See the [Information Security Policy](information-security-policy.md).
+Pulse is operated by Devoteam Cloud Managed Services within a certified management system covering **ISO/IEC 27001** (information security), **ISO 9001** (quality), **ISO 14001** (environmental), and **ISO 22301** (business continuity). The certificates are published in full on the [Audit & Compliance](audit-compliance.md) page. See also the [Information Security Policy](information-security-policy.md).
 
 ### Do you hold a SOC 2 Type II attestation?
 
