@@ -78,6 +78,20 @@ That means newly added accounts or subscriptions are picked up without you re-on
 
 ## AWS
 
+### What access does Pulse need in my AWS accounts?
+
+A read-only IAM role in every account you want Pulse to see, including the management account - the scanner role the stack creates on the automated path (default `PulseCloudConnect`), or `Pulse_Viewer` on the manual path. The policy is identical either way, and the breakdown per capability is in [Why does Pulse need each AWS permission?](#why-does-pulse-need-each-aws-permission) below.
+
+Pulse reads the AWS **control plane** and your **billing data** only. It cannot read database contents or anything inside your instances. The one exception is object data: Pulse reads the Cost and Usage Report from the export bucket you point it at, and nothing else in S3.
+
+### What AWS permissions do I need to grant that access?
+
+On the automated path, `AdministratorAccess` (or an equivalent deployment role) in the **management (payer) account** - one role, in one account. The stack fans everything else out organisation-wide, so you need nothing in member accounts.
+
+The manual path needs considerably more: IAM administrator in **every** account, Data Exports and S3 rights in the payer account, permission to enable AWS Config per account and region, and Security Hub administration in the management and Security accounts. The full table is on the [AWS onboarding page](aws.md#required-customer-roles).
+
+This privileged access is only used to *grant* Pulse its role. Pulse itself never receives it.
+
 ### Which manual onboarding scenarios are supported?
 
 The manual flow uses one IAM user credential for an entire Organisation, plus a role of the same name in **every** account. The IAM user can live in any of these places:
@@ -197,6 +211,23 @@ The CUR **S3 bucket is retained** (remove it manually as part of offboarding) an
 
 ## Azure
 
+### What access does Pulse need in my Azure tenant?
+
+Two built-in read-only roles - `Reader` and `Billing Reader` - assigned to the Pulse service principal at the scope you choose: the Root Management Group, specific Management Group(s), or individual subscriptions on the manual path. Only what falls inside that scope is visible to Pulse.
+
+Pulse reads the Azure **control plane** and your **cost and billing data** only. It cannot read the contents of disks, databases, storage accounts or virtual machines, and no Microsoft Graph or Entra application permissions are used, so the service principal cannot read directory data. See [Why Reader and Billing Reader, and nothing else?](#why-reader-and-billing-reader-and-nothing-else) below.
+
+### What Azure permissions do I need to grant that access?
+
+Two, in your own tenant:
+
+- **Microsoft Entra ID** - `Cloud Application Administrator` or `Global Administrator` on the automated path, or `Application Developer` or higher on the manual path, to create the service principal or App Registration.
+- **Azure RBAC** at your chosen scope - `Owner` or `User Access Administrator`, to assign the two roles and the compliance policy initiative.
+
+Assigning at Root Management Group scope may require a Global Administrator to [elevate access](https://learn.microsoft.com/en-us/azure/role-based-access-control/elevate-access-global-admin) first, since root scope is not granted by default. The full table is on the [Azure onboarding page](azure.md#required-customer-roles).
+
+This privileged access is only used to *grant* Pulse its roles. Pulse itself never receives it.
+
 ### Why Reader and Billing Reader, and nothing else?
 
 `Reader` covers resource inventory and configuration; `Billing Reader` covers cost and billing data. Together they are the complete set - onboarding requires nothing beyond them. In particular, **no Microsoft Graph or Entra application permissions are used**, so the SPN cannot read directory data.
@@ -272,6 +303,26 @@ Only that some tenant created a service principal for the Pulse application - no
 ---
 
 ## Google Cloud
+
+### What access does Pulse need in my Google Cloud organisation?
+
+A Service Account holding read-only bindings at organisation level: either the built-in `roles/viewer` or a custom role containing only the 46 permissions Pulse needs, plus `roles/billing.viewer` on the billing account and read access to the billing export table in BigQuery. If you have no organisation resource, the same bindings are made per project instead.
+
+Pulse reads the Google Cloud **control plane** and your **billing export** only. It cannot read the contents of disks, databases, buckets or virtual machines. See [What do the 46 Google Cloud permissions cover?](#what-do-the-46-google-cloud-permissions-cover) below.
+
+### What Google Cloud permissions do I need to grant that access?
+
+Both paths need the same access, because the automated script performs exactly the steps you would otherwise do by hand, in your own `gcloud` session:
+
+- **Organisation** - Organisation Admin, or equivalent delegated IAM admin roles, for the organisation-level bindings and the custom role if you choose that model
+- **Host project** - permission to create service accounts and keys, and to enable APIs
+- **Billing account** - Billing Account Costs Manager or Billing Account Administrator
+- **Cost export project or dataset** - permission to grant dataset or table access
+- **Organisation, optional** - `securitycenter.managedServices.update` to enable Security Health Analytics; without it that step is skipped and the rest of onboarding is unaffected
+
+The full table is on the [Google Cloud onboarding page](google.md#required-customer-roles).
+
+This privileged access is only used to *grant* Pulse its access. Pulse itself never receives it.
 
 ### Built-in Viewer role or Custom Resource Role - which should I pick?
 
