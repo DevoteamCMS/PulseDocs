@@ -13,5 +13,4 @@ Legal and compliance documentation for Pulse by Devoteam.
 - [Terms of Use](terms-of-use.md)
 - [Privacy Policy](privacy-policy.md)
 - [Information Security Policy](information-security-policy.md)
-- [Abbreviations](abbreviations.md)
 - [Security & Data Protection Q&A](faq.md)
