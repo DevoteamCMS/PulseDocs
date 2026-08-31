@@ -8,8 +8,8 @@ nav_order: 1
 # Terms of Use
 {: .no_toc }
 
-> **Release:** version 1.1.3<br>
-> **Last updated:** 2026-08-12<br>
+> **Release:** version 1.1.4<br>
+> **Last updated:** 2026-08-31<br>
 > **Applicability / Disclosure:** Public disclosure (published on the [Pulse](https://pulse.devoteam.com/) web page)<br>
 
 Access to and use of this website is governed by the following terms and conditions ("Terms of Use").
