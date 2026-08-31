@@ -77,6 +77,12 @@ All calls are read-only and fully covered by the Reader and Billing Reader roles
 
 No. Pulse is not a SIEM or operational monitoring tool. Security findings shown in Pulse are consumed from Microsoft Defender for Cloud via its API, not from log data.
 
+### Is Pulse a CTI or Attack Surface Management (ASM) tool?
+
+No. Pulse is a cloud management platform focused on inventory, cost and governance. It does cover adjacent ground that supports attack-surface work: a continuously updated multi-cloud asset inventory across AWS, Azure and Google Cloud — the foundation any ASM practice needs — plus [security alerts](../pulse-ecosystem/cloud-inventory.md#security-alerts) aggregated from the cloud-native services (Microsoft Defender for Cloud, AWS GuardDuty, Google Security Command Center), [recommendations](../pulse-ecosystem/cloud-inventory.md#recommendations), [compliance state](../pulse-ecosystem/cloud-inventory.md#compliance-state) and a [locations](../pulse-ecosystem/cloud-inventory.md#locations) view for data-residency governance.
+
+It does not perform external attack-surface discovery, vulnerability scanning of your workloads, threat intelligence feeds or attack-path analysis. Discovery is inside-out through the cloud control plane, within the scope of the read-only identity you grant, so assets outside your connected subscriptions and accounts are not visible to Pulse. For those capabilities, dedicated tooling is the right answer, and Pulse complements it — the asset inventory is a useful reconciliation source for whatever an ASM product finds.
+
 ### Does Pulse use Artificial Intelligence?
 
 Yes, in two ways. Internally, AI supports data assessment, documentation, and categorization of specific cloud resource types — this processing uses generalized data without customer markers. In the product, AI-assisted insights are visible in the dashboard, helping you assess general information about your cloud infrastructure metadata and cloud spend overview. Customer data is never used to train AI models.
