@@ -8,3 +8,7 @@ plugins:
 
 color_scheme: light
 search_enabled: true
+
+# Renders ```mermaid fenced code blocks as diagrams
+mermaid:
+  version: "10.9.1"
