@@ -184,15 +184,10 @@ No. It marks the policy so that when a violation is detected, Risk Owners know a
 
 Scope. Exempt on this page is set by a Compliance Manager against the **policy** - every violation of it is ignored. An exemption request comes from a Risk Owner about a **specific violation** they cannot fix, and is approved or rejected on the [Exemptions](exemptions.md) page.
 
-### Why are the policy settings greyed out?
+### A framework lists policies but reports no violations
 {: .no_toc }
 
-One of two reasons, and Pulse tells you which. Either no framework is assigned yet - do step 1 first - or you do not hold the Manager role.
-
-### Why does a framework I assigned show no policies?
-{: .no_toc }
-
-The matching standard is most likely not enabled in your cloud, so there is nothing for Pulse to read. See [Enabling Standards in Your Cloud](enabling-standards.md).
+The framework list, and the policies inside each framework, are always complete - they do not depend on what your cloud evaluates. Violations are different: they come from your cloud. A standard your cloud does not evaluate still shows all of its policies, with nothing reported against them. See [Enabling Standards in Your Cloud](enabling-standards.md).
 
 ### Can I set Prevention on any policy?
 {: .no_toc }
