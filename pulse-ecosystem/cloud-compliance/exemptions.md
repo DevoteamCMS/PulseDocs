@@ -32,7 +32,10 @@ Sometimes a violation will not be fixed, and that is the right answer - the fix 
 
 The distinction is deliberate. **Approving a request does not implement it.** Approval records a decision in Pulse; making the cloud stop reporting the violation is separate work - carried out by your own team on Pulse Premium, or by Devoteam Operations where Managed Cloud Compliance is enabled.
 
-So the two tabs answer two different questions. *What have we agreed to accept?* is the first. *What is actually exempted right now?* is the second.
+So the two tabs answer two different questions:
+
+- *What have we agreed to accept?* - the first tab.
+- *What is actually exempted right now?* - the second.
 
 Both tabs show one security framework at a time, chosen from the selector beside the page title.
 
@@ -45,13 +48,22 @@ Both tabs show one security framework at a time, chosen from the selector beside
 | **Manager** | Open the page and decide requests - approve or reject |
 | **Analyst** | Open the page and review everything on it, without deciding |
 
-An Analyst sees *Read-Only View: Only Compliance Managers can approve or reject exemption requests.* in place of the decision form.
-
-The **User** role does not see this page at all.
+- An Analyst sees *Read-Only View: Only Compliance Managers can approve or reject exemption requests.* in place of the decision form.
+- The **User** role does not see this page at all.
 
 ---
 
 ## The Request Lifecycle
+
+```mermaid
+flowchart LR
+    RP["Remediation Planner<br/>Risk Owner sets<br/>Exempt Request"] --> REQ["Requested"]
+    REQ --> MGR{"Compliance Manager<br/>decides"}
+    MGR -- "Approve<br/>+ expiry date" --> APP["Approved"]
+    MGR -- "Reject<br/>+ reason" --> REJ["Rejected"]
+    REJ --> BACK["Back to the owner<br/>to remediate"]
+    APP -.->|"implemented separately<br/>in your cloud"| CLOUD["Appears under<br/>Exempted Violations"]
+```
 
 A request passes through three states, and only three:
 
@@ -69,16 +81,28 @@ Requests are raised from [Remediation Planner](remediation-planner.md#requesting
 
 ![The Exemption Requests tab, listing requests with their policy, status and requested expiry date](../../assets/images/cloud-compliance/exemptions-requests.png)
 
-Each row is one request: the asset it concerns, the policy it breaches, its current **Exemption Status**, and the **Exemption Expiry** being asked for.
+Each row is one request: the asset it concerns, the policy it breaches, its current status, and the expiry being asked for.
 
-Read that last column carefully while a request is still **Requested** - the date shown is the one the Risk Owner proposed, not one anybody has agreed to. It becomes binding only if you approve it.
+**Read the expiry column carefully while a request is still Requested** - the date shown is the one the Risk Owner proposed, not one anybody has agreed to. It becomes binding only if you approve it.
 
 <details markdown="block" class="reference-box">
-  <summary>Finding a request</summary>
+  <summary>Every column in the requests list</summary>
 
-Filters are available for Asset Name, Policy Name, Exemption Status and Exemption Expiry, alongside free-text search, and the list exports to CSV.
+| Column | What it holds | Values |
+| --- | --- | --- |
+| **Provider** | Which cloud the asset is in | AWS · Azure · Google Cloud |
+| **Violation ID** | The violation the request concerns | A number |
+| **Asset Name** | The resource in breach - click it to open the request | Your own resource names |
+| **Subscription** | The subscription, project or account it lives in | Your own names |
+| **Policy Name** | The policy being breached | The provider's own policy name |
+| **Request Date** | When the Risk Owner submitted it | A date |
+| **Exemption Status** | Where the request stands | **Requested** · **Approved** · **Rejected** |
+| **Exemption Expiry** | The expiry date - proposed while Requested, agreed once Approved | A date |
+| **Last Updated** | When the request last changed | A date |
 
-Filtering on **Exemption Status: Requested** gives you the queue of decisions waiting on you, which is the usual way to work through the page.
+Not all are shown at once - use the column control in the table toolbar. Filter by Asset Name, Policy Name, Exemption Status and Exemption Expiry, or search by name; the list exports to CSV.
+
+**Filtering on Exemption Status: Requested** gives you the queue of decisions waiting on you, which is the usual way to work through the page.
 
 </details>
 
@@ -125,12 +149,30 @@ The **Exempted Violations** tab lists what your cloud reports as exempted, wheth
 
 ![The Exempted Violations tab, listing exemptions found in the cloud with their type and scope](../../assets/images/cloud-compliance/exemptions-detected-in-cloud.png)
 
-Two columns describe the exemption itself rather than the asset:
+<details markdown="block" class="reference-box">
+  <summary>Every column in the exempted violations list</summary>
 
-- **Exemption Status** - whether the exemption is **Temporary**, **Permanent** or **Expired**.
-- **Scope Type** - whether it covers the policy wherever that policy applies (**Per Policy**), or one specific violation (**Per Violation**).
+| Column | What it holds | Values |
+| --- | --- | --- |
+| **Violation ID** | The violation being exempted | A number |
+| **Provider** | Which cloud the asset is in | AWS · Azure · Google Cloud |
+| **Asset Name** | The exempted resource | Your own resource names |
+| **Subscription** | The subscription, project or account it lives in | Your own names |
+| **Policy Name** | The policy it is exempted from | The provider's own policy name |
+| **Detection Date** | When the violation was first found | A date |
+| **Exemption Start** | When the exemption began | A date |
+| **Exemption Expires** | When it lapses | A date |
+| **Exemption Type** | How long it lasts | **Temporary** · **Permanent** · **Expired** |
+| **Scope Type** | How much it covers | **Per Policy** · **Per Violation** |
 
-Scope Type is the one to check when a violation you expected to see has disappeared from Remediation Planner. A Per Policy exemption silences far more than the single finding someone had in mind when they created it.
+Violation ID, Provider, Detection Date, Exemption Start and Exemption Type are off by default - add them from the column control. Filter by Asset Name, Policy Name, Exemption Status and Scope Type.
+
+</details>
+
+**Scope Type is the one to check when a violation you expected has disappeared** from Remediation Planner:
+
+- **Per Violation** - the exemption covers one specific finding on one asset.
+- **Per Policy** - it covers the policy wherever that policy applies, which silences far more than the single finding someone may have had in mind when they created it.
 
 Use this tab as the check on the first one. An approved request that never appears here has been agreed but not carried out.
 

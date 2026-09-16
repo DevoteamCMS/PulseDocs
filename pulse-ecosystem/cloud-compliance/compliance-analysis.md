@@ -64,7 +64,7 @@ The upper table lists every evaluated policy in the framework, with its status a
 | **Policy Category** | The security domain the policy belongs to | One of fourteen - see below |
 | **Policy Action** | What your organisation decided should happen, and a link to change it | **Pending to Assess** · **Under Investigation** · **Audit** · **Remediate** · **Exempt** · **Exemption Due Soon** · **Exempt Expired** |
 | **Prevention Preference** | Whether non-compliant deployments should be blocked | **Permit** · **Prevent** |
-| **Remediation Complexity** | How much work a fix typically takes | **Simple** · **Moderate** · **Complex** |
+| **Remediation Complexity** | How much work a fix typically takes | **Simple** · **Moderate** · **Complex** · **Redeployment** · **Guideline** |
 | **Policy Release Date** | When the provider published the policy | A date |
 
 Prevention Preference, Remediation Complexity and Policy Release Date are **not shown by default** - add them from the column control in the table toolbar.
@@ -139,7 +139,7 @@ The analysis is organised into four sections. This is the same analysis you see 
 | Field | What it tells you |
 | --- | --- |
 | **Manual Steps to Remediate** | Numbered steps describing the target state |
-| **Remediation Complexity** | Simple, Moderate or Complex |
+| **Remediation Complexity** | How much work the fix takes - see the policy table above for the five values |
 | **Roll Back Steps** | How to reverse the change if it goes wrong |
 | **Verification in JSON** | What a compliant resource looks like, as a property and value |
 
@@ -172,7 +172,7 @@ Selecting a policy fills the lower table with the individual resources breaching
 | Column | What it holds | Values |
 | --- | --- | --- |
 | **Asset Name** | The resource in breach | Your own resource names |
-| **Asset Category** | What kind of resource it is | For example Storage, Integration |
+| **Asset Category** | What kind of resource it is | Comes from your cloud provider, so the set is open-ended - for example Storage, Integration |
 | **Subscription** | The subscription, project or account it lives in | Your own names |
 | **Detection Date** | When the violation was first found | A date |
 | **Remediation Status** | What has been decided about this violation, and a link to change it | **Pending to Assess** · **Internal Investigation** · **Planned to Remediate** · **Scheduled Remediation** · **Planned to Decommission** · **Exemption Requested** |

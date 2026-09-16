@@ -25,21 +25,24 @@ Policy Manager decides what should happen when a policy is broken. Remediation P
 
 ## What the Page Is For
 
-Every violation is one asset failing one policy. The page lists them, explains each one, and asks you to commit to a course of action with a date attached.
+Every violation is one asset failing one policy. The page lists them, explains each one, and asks you to commit to a course of action with a date attached. It is the live planning tool for compliance work.
 
-It is written for the **Risk Owner** - the person who owns the application, service or subscription the asset belongs to - rather than for the compliance team. Compliance sets the policy; the owner decides how their own resource gets fixed.
+- **Written for the Risk Owner** - the person who owns the application, service or subscription the asset belongs to.
+- **Not for the compliance team.** The Compliance Manager sets the policy; the owner decides how their own resource gets fixed.
 
-As everywhere in Cloud Compliance, **setting an action changes nothing in your cloud**. It records a commitment: a note for your teams on Pulse Premium, or a task for Devoteam Operations where Managed Cloud Compliance is enabled. See [Policy Manager](policy-manager.md#nothing-here-changes-your-cloud).
+As everywhere in Cloud Compliance, **setting an action changes nothing in your cloud**. It records a commitment: a note for your teams on Pulse Premium, or a task for Devoteam Operations where Managed Cloud Compliance is enabled.
 
 ---
 
 ## Choosing a Framework
 
-Violations are always shown for one security framework at a time, chosen from the selector beside the page title. Switching framework changes which violations are listed, because a given asset may breach a policy in one framework and not appear in another.
+Violations are always shown for one security framework at a time, chosen from the selector beside the page title.
 
 ![The framework selector open, listing the assigned security frameworks with the active one ticked](../../assets/images/cloud-compliance/framework-selector.png)
 
-Only assigned frameworks appear here. If the one you expect is missing, it has not been assigned in [Policy Manager](policy-manager.md).
+- Switching framework changes which violations are listed - an asset may breach a policy in one framework and not appear in another.
+- Only assigned frameworks appear. If the one you expect is missing, it has not been assigned in [Policy Manager](policy-manager.md).
+- You open on your organisation's default framework, the same one for everyone.
 
 ---
 
@@ -47,24 +50,42 @@ Only assigned frameworks appear here. If the one you expect is missing, it has n
 
 ![The Remediation Planner violations table, with violation ID, asset name, policy name, severity, detection date and remediation status](../../assets/images/cloud-compliance/remediation-planner.png)
 
-Each row is one violation, identified by a **Violation ID** that stays stable, so it can be quoted in a ticket or an email and still mean the same thing later.
-
-The columns answer the questions an owner asks first: which asset, which policy, how severe, when it was detected, and what has been decided so far - **Remediation Status**, which reads *Pending to Assess* until someone sets an action.
+Each row is one violation, identified by a **Violation ID** that stays stable - so it can be quoted in a ticket or an email and still mean the same thing later.
 
 <details markdown="block" class="reference-box">
-  <summary>Filtering the list</summary>
+  <summary>Every column in the violations list</summary>
 
-Filters are available for Asset Name, Policy Action, Policy Name, Prevention Possibility, Remediation Status, Severity and Subscription, alongside free-text search.
+| Column | What it holds | Values |
+| --- | --- | --- |
+| **Violation ID** | The violation's stable identifier | A number |
+| **Provider** | Which cloud the asset is in | AWS · Azure · Google Cloud |
+| **Asset Name** | The resource in breach | Your own resource names |
+| **Asset Category** | What kind of resource it is | Comes from your cloud provider, so the set is open-ended - for example Storage, Integration |
+| **Subscription** | The subscription, project or account it lives in | Your own names |
+| **Policy Name** | The policy being breached | The provider's own policy name |
+| **Policy Category** | The security domain the policy belongs to | One of fourteen - see [Compliance Analysis](compliance-analysis.md) |
+| **Severity** | The assessed risk of the policy | **Low** · **Medium** · **High** · **Critical** |
+| **Remediation Complexity** | How much work a fix typically takes | **Simple** · **Moderate** · **Complex** · **Redeployment** · **Guideline** |
+| **Prevention Possibility** | Whether the policy supports blocking deployments at all | **Prevention not available** · **Default prevention available** · **Custom prevention available** |
+| **Policy Action** | What was decided about the policy as a whole, in Policy Manager | **Pending to Assess** · **Under Investigation** · **Audit** · **Remediate** · **Exempt** · **Exemption Due Soon** · **Exempt Expired** |
+| **Detection Date** | When the violation was first found | A date |
+| **Remediation Status** | What you decided about this violation | **Pending to Assess** · **Internal Investigation** · **Planned to Remediate** · **Scheduled Remediation** · **Planned to Decommission** · **Exemption Requested** |
+| **Term Begin** | Start of the period you committed to | A date |
+| **Term End** | End of that period | A date |
 
-Subscription and Severity are the two that matter most in practice: they narrow a shared list down to the assets one team owns, and then to the ones worth doing first. The list exports to CSV in full, not only the page on screen.
+**Policy Action**, **Term Begin** and **Term End** are off by default - add them from the column control. Term Begin and Term End are worth turning on once you have set actions, because they turn the list into a schedule.
+
+Filters cover Asset Name, Policy Action, Policy Name, Prevention Possibility, Remediation Status, Severity and Subscription, alongside free-text search. The list exports to CSV in full.
 
 </details>
+
+**Subscription and Severity are the two filters that matter most in practice** - they narrow a shared list down to the assets one team owns, and then to the ones worth doing first.
 
 ---
 
 ## Understanding a Violation
 
-Click the asset name to open the violation. This panel is where the page earns its place - it is the difference between being told a rule failed and being able to do something about it.
+Click the asset name to open the violation. This panel is the difference between being told a rule failed and being able to do something about it.
 
 ![The violation analysis panel, with violation information, policy review, change impact and remediation guides including manual steps, complexity, roll back steps and verification](../../assets/images/cloud-compliance/remediation-planner-violation-analysis.png)
 
@@ -75,12 +96,15 @@ The **Violation Analysis** tab is organised as sections you open as you need the
 | **Violation Information** | The violation's own ID and identifying details |
 | **Policy Review** | What the policy checks and why it exists |
 | **Change Impact** | What changes if you remediate - the question owners ask before agreeing to anything |
-| **Remediation Guides** | How to actually fix it, covered below |
-| **More Info** | Supporting references |
+| **Remediation Guides** | How to actually fix it |
+| **More Info** | Supporting references, including the equivalent control in ISO, CIS, NIST, PCI DSS and SWIFT |
 
-**Remediation Guides** is the substantive part. It contains the manual steps to remediate written out in order, the **Remediation Complexity** rating, the **roll back steps** should the change need reversing, and a **verification** expression describing what a compliant resource looks like once the work is done.
+Every field inside these sections is described on [Compliance Analysis](compliance-analysis.md#opening-a-policy).
 
-Read the roll back steps before starting, not after. They are there so a change can be proposed to a change board with an exit route already written down.
+Two things to read before you commit to anything:
+
+- **Change Impact** tells you whether a reboot or a redeployment is required, and whether running services are disrupted.
+- **Roll Back Steps**, inside Remediation Guides, exist so a change can go to a change board with an exit route already written down.
 
 The **History** tab records the actions previously set on this violation.
 
@@ -96,13 +120,32 @@ The panel explains its own purpose:
 
 > Assign an action pathway to transition this violation out of 'Pending' and establish your operational commitment for this cloud asset.
 
+```mermaid
+flowchart TD
+    Q1{"Will this be fixed?"}
+    Q1 -- "Not yet known" --> INV["Internal Investigation<br/>Period for Investigation"]
+    Q1 -- "No, accept the risk" --> EX["Exempt Request<br/>Justification + expiry"]
+    Q1 -- "No, it is going away" --> DEC["Plan to Decommission<br/>Period to Decommission"]
+    Q1 -- "Yes" --> Q2{"Who carries it out?"}
+    Q2 -- "Devoteam" --> SCH["Schedule Remediation<br/>Term + downtime window"]
+    Q2 -- "Our own team" --> PLN["Plan to Remediate<br/>Period for Remediation"]
+```
+
 | Action | When to choose it | What you must provide |
 | --- | --- | --- |
-| **Schedule Remediation** | You have an exact maintenance window and will deploy the fix in it | Term for Remediation Implementation, plus a comment - use it for the downtime window |
-| **Plan to Remediate** | You commit to fixing it within a period, without a window fixed yet | Period for Remediation, optional comment |
+| **Schedule Remediation** | Devoteam should carry out the fix. Where Managed Cloud Compliance is enabled, this is what orders the work | Term for Remediation Implementation, plus a comment - use it for the downtime window |
+| **Plan to Remediate** | Your own team will carry out the fix, within a period you commit to | Period for Remediation, optional comment |
 | **Internal Investigation** | The right fix is not yet known and you need time to find it | Period for Investigation, optional comment |
 | **Plan to Decommission** | The resource is going away rather than being fixed | Period to Decommission, optional comment |
 | **Exempt Request** | The risk should be accepted rather than fixed - this asks a Compliance Manager to approve that | Justification, an expiry date, and optionally a risk number |
+
+### Schedule or Plan?
+{: .no_toc }
+
+These two are easy to confuse and they mean different things. The difference is **who does the work**.
+
+- **Schedule Remediation** hands the fix to Devoteam. With Managed Cloud Compliance enabled it is how the work is ordered, which is why it asks for an implementation term and a downtime window rather than a loose period - Devoteam needs to know when it may touch the resource.
+- **Plan to Remediate** keeps the fix with your own team. You are recording that you will resolve it within the period you set, and nobody else is being asked to act.
 
 Every date must be today or later. Pulse confirms with *Action performed successfully!*
 
@@ -114,9 +157,9 @@ Setting an action on a violation that already has one replaces it, and Pulse war
 
 **Exempt Request** is the one action that does not end with you. The other four are commitments you are making; this one is a request someone else decides on.
 
-What you write in the justification is what the Compliance Manager reads when deciding. Business and technical constraints - why the fix is not feasible, or costs more than the risk - are what make a request approvable. "Not applicable" gives them nothing to approve.
-
-Once submitted, the request appears on the [Exemptions](exemptions.md) page for review, and the violation's exemption status reads **Requested** until it is approved or rejected.
+- What you write in the justification is what the Compliance Manager reads when deciding.
+- Business and technical constraints - why the fix is not feasible, or costs more than the risk it removes - are what make a request approvable.
+- Once submitted, the request appears on the [Exemptions](exemptions.md) page, and the violation's Remediation Status reads **Exemption Requested** until it is approved or rejected.
 
 **An approved exemption is still not an implemented one.** Approval records a decision in Pulse; making the cloud stop reporting the violation is separate work - carried out by your own team on Pulse Premium, or by Devoteam Operations where Managed Cloud Compliance is enabled. [Exemptions](exemptions.md) explains how to tell the two apart.
 
@@ -137,7 +180,9 @@ Nobody has decided anything about this violation yet. It is the starting state f
 ### Can I set an action on many violations at once?
 {: .no_toc }
 
-Yes - that is what the checkboxes are for. Select as many as you like and set one action across all of them. The same dates and comment apply to every violation in the selection, so group them by what you actually intend to do.
+Yes, and it is the efficient way through a long list - that is what the checkboxes are for.
+
+**Group your selection by policy.** The action, the dates and the comment are applied to every violation you have selected, so a selection spanning several policies produces one commitment that does not fit all of them. Filter by policy first, then select.
 
 ### Can I change an action after setting it?
 {: .no_toc }
@@ -147,7 +192,7 @@ Yes. Set a new one and it replaces the old, with a warning first. The History ta
 ### Does Schedule Remediation mean Pulse will fix it?
 {: .no_toc }
 
-No. It records that you intend to fix it in that window. The change itself is made in your cloud - by your team, or by Devoteam Operations under Managed Cloud Compliance.
+No - Pulse changes nothing in your cloud itself. Schedule Remediation records that the fix is to be carried out by Devoteam, and where Managed Cloud Compliance is enabled it is what raises that work. If your own team will do the fix, use **Plan to Remediate** instead.
 
 ### Where did my violation go after I fixed it?
 {: .no_toc }
