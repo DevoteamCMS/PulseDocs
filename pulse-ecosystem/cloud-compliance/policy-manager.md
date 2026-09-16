@@ -177,12 +177,12 @@ As with everything else on this page, setting Prevent deploys nothing. It record
 ### Does setting a policy to Remediate fix anything?
 {: .no_toc }
 
-No. It marks the policy so that when a violation is detected, Risk Owners know a fix is expected and can prepare one. The work itself happens in **Remediation Planner**, and the change in the cloud is made separately - by your teams, or by Devoteam Operations where Managed Cloud Compliance is enabled.
+No. It marks the policy so that when a violation is detected, Risk Owners know a fix is expected and can prepare one. The work itself happens in [Remediation Planner](remediation-planner.md), and the change in the cloud is made separately - by your teams, or by Devoteam Operations where Managed Cloud Compliance is enabled.
 
 ### What is the difference between Exempt here and an exemption request?
 {: .no_toc }
 
-Scope. Exempt on this page is set by a Compliance Manager against the **policy** - every violation of it is ignored. An exemption request comes from a Risk Owner about a **specific violation** they cannot fix, and is approved or rejected on the **Exemptions** page.
+Scope. Exempt on this page is set by a Compliance Manager against the **policy** - every violation of it is ignored. An exemption request comes from a Risk Owner about a **specific violation** they cannot fix, and is approved or rejected on the [Exemptions](exemptions.md) page.
 
 ### Why are the policy settings greyed out?
 {: .no_toc }
