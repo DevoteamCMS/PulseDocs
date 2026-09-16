@@ -192,7 +192,7 @@ No. Assigning a framework in Pulse changes nothing in your cloud, so it cannot b
 ### Can I unassign a framework?
 {: .no_toc }
 
-Yes, from the same place in Policy Manager - with one exception. Your active default framework cannot be unassigned while it is the default; select a different default from the framework list first.
+Yes, from the same place in Policy Manager - with one exception. Each cloud provider has one default framework, and that framework cannot be unassigned while it holds the role. Set a different default for that provider from the framework list first.
 
 Unassigning removes the framework from the service scope in Pulse. It does not disable the standard in your cloud, which continues to evaluate and produce findings until you disable it there as well.
 
