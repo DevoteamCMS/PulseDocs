@@ -29,7 +29,9 @@ Policy Manager lists the security frameworks available to your organisation and 
 
 **It applies within Pulse only. Your cloud environment is not modified.** No policy is created, no setting is changed, and nothing you deploy is blocked or altered as a result.
 
-That matters because the two sides have to agree. Your cloud runs the evaluations and produces the findings; Pulse reads them, explains them, and turns them into violations you can plan work against. If a framework is assigned in Pulse but the matching standard is not enabled in your cloud, the framework appears in Pulse with nothing behind it.
+That matters because the two sides have to agree. Your cloud runs the evaluations and produces the findings; Pulse reads them, explains them, and turns them into violations you can plan work against.
+
+Pulse lists every framework and every policy inside it regardless of what your cloud evaluates, so a framework is never missing and never looks empty. **Violations are what depend on the cloud side.** Assign a framework whose standard your cloud does not evaluate and you get the full policy list with nothing reported against it.
 
 When you assign a framework, Pulse asks you to confirm that it should apply across the entire scope of the service, and then tells you:
 
@@ -179,10 +181,12 @@ Read more: [Cloud Managed Services](https://www.devoteam.com/services/cloud-mana
 
 ## Q&A
 
-### I assigned a framework in Pulse. Why is it empty?
+### I assigned a framework in Pulse. Why are there no violations?
 {: .no_toc }
 
-Most likely the matching standard is not enabled in your cloud, so there are no findings for Pulse to read. Work through the section above for your cloud. If the standard is enabled, give it time - your cloud evaluates on its own schedule, and Pulse collects the results afterwards.
+The policies are all listed, but nothing is reported against them - which means your cloud is not evaluating that standard. Work through the section above for your cloud.
+
+If the standard is already enabled there, give it time: your cloud evaluates on its own schedule, and Pulse collects the results afterwards.
 
 ### Does assigning a framework block anything we deploy?
 {: .no_toc }

@@ -153,7 +153,9 @@ Only users with the **Manager** company role. Analysts can read the page but not
 ### A request is no longer needed - can it be withdrawn?
 {: .no_toc }
 
-There is no withdraw action in Pulse. If the risk is now going to be fixed instead, set a different action on the violation in [Remediation Planner](remediation-planner.md#setting-an-action), and tell your Compliance Manager, so the request is not decided on out-of-date information.
+There is no withdraw action in Pulse, and setting a different action on the violation in [Remediation Planner](remediation-planner.md#setting-an-action) does not close it either - the request stays in the Compliance Manager's queue as **Requested**.
+
+So tell your Compliance Manager directly. Until they reject it, the request is still open and can still be approved, which would exempt a violation you have since decided to fix.
 
 ### What happens when an exemption expires?
 {: .no_toc }
