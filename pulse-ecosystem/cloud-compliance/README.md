@@ -57,7 +57,7 @@ Read left to right, that is the working cycle:
 
 ## What You Get at Each Tier
 
-- **Cloud Essentials** - [Compliance State](compliance-state.md) only. You can see your compliance posture per subscription, scored against a framework, without holding a Cloud Compliance subscription.
+- **Cloud Essentials** - [compliance posture per subscription](../cloud-inventory.md#compliance-state) only, scored against a framework. Available without a Cloud Compliance subscription, and described with the rest of the free tier.
 - **Pulse Premium** - all five pages. Choosing frameworks, setting policy actions, planning remediation and handling exemptions are the part that Premium adds.
 - **Managed Cloud Compliance** - the same five pages, plus Devoteam operating them with you. The decisions you record in Pulse become work Devoteam carries out in your cloud, rather than a list your own team has to action.
 
