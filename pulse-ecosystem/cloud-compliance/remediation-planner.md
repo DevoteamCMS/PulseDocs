@@ -37,7 +37,7 @@ As everywhere in Cloud Compliance, **setting an action changes nothing in your c
 
 Violations are always shown for one security framework at a time, chosen from the selector beside the page title. Switching framework changes which violations are listed, because a given asset may breach a policy in one framework and not appear in another.
 
-![The framework selector open, listing the assigned security frameworks with the active one ticked](../../assets/images/cloud-compliance/remediation-planner-framework-selector.png)
+![The framework selector open, listing the assigned security frameworks with the active one ticked](../../assets/images/cloud-compliance/framework-selector.png)
 
 Only assigned frameworks appear here. If the one you expect is missing, it has not been assigned in [Policy Manager](policy-manager.md).
 
