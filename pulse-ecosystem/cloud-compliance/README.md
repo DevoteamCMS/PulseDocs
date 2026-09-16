@@ -22,7 +22,7 @@ Cloud Compliance is a **Pulse Premium** feature. Compliance posture per subscrip
 | **[Policy Manager](policy-manager.md)** | Review security frameworks, assign them, and set what happens to each policy |
 | **[Remediation Planner](remediation-planner.md)** | Review violations assigned to you and plan what to do about them |
 | **[Exemptions](exemptions.md)** | Review, approve and reject exemption requests, with expiry and risk number |
-| **Compliance Analysis** | Explore violation detail grouped by policy, down to the individual asset |
+| **[Compliance Analysis](compliance-analysis.md)** | Explore violation detail grouped by policy, down to the individual asset |
 
 ## Before the Data Arrives
 
