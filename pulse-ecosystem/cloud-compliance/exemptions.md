@@ -23,7 +23,9 @@ Sometimes a violation will not be fixed, and that is the right answer - the fix 
 
 ---
 
-## Two Tabs, Two Different Things
+## What the Page Is For
+
+The page holds two tabs, and the difference between them is the whole point:
 
 | Tab | What it holds |
 | --- | --- |

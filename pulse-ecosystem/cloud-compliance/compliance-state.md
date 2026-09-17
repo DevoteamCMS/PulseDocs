@@ -23,7 +23,7 @@ Compliance State answers the question everyone else asks you: *how compliant are
 
 ---
 
-## The Page at a Glance
+## What the Page Is For
 
 ![Compliance State with the metrics table per subscription, the scorecards alongside it and the trend chart below](../../assets/images/cloud-compliance/compliance-state.png)
 
