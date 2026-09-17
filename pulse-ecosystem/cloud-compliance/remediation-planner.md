@@ -99,7 +99,60 @@ The **Violation Analysis** tab is organised as sections you open as you need the
 | **Remediation Guides** | How to actually fix it |
 | **More Info** | Supporting references, including the equivalent control in ISO, CIS, NIST, PCI DSS and SWIFT |
 
-Every field inside these sections is described on [Compliance Analysis](compliance-analysis.md#opening-a-policy).
+<details markdown="block" class="reference-box">
+  <summary>Every field in the Violation Analysis tab</summary>
+
+**Violation Information** - which violation this is
+
+| Field | What it tells you |
+| --- | --- |
+| **Violation ID** | The violation's stable identifier |
+| **Asset and policy detail** | The resource in breach, its subscription, and the policy it fails |
+
+**Policy Review** - what the policy is and why it matters
+
+| Field | What it tells you |
+| --- | --- |
+| **Name** | The policy's name |
+| **Severity** | Low, Medium, High or Critical |
+| **Description** | The provider's own description of the control |
+| **Purpose** | What the policy enforces, in one or two sentences |
+| **Benefits of Remediation** | Three specific benefits of fixing it |
+| **Resource Type Affected** | The resource types the policy applies to |
+| **Related Services Affected** | Other services touched, and how |
+| **Possible Risk** | What leaving it unaddressed may result in |
+
+**Change Impact** - what happens to your estate if you remediate
+
+| Field | What it tells you |
+| --- | --- |
+| **Changes Made by Remediation** | Exactly what property is changed, and whether it is in-place or destructive |
+| **Preparation for Remediation** | The inputs to gather before starting |
+| **Service Reboot Required After Remediation** | **YES** or **NO**, with the reason |
+| **Resource Redeployment Required for Remediation** | **YES** or **NO** - YES means the resource must be recreated |
+| **Change Impact on Running Services** | **YES** or **NO**, naming the workload disrupted |
+
+**Remediation Guides** - how the fix is carried out
+
+| Field | What it tells you |
+| --- | --- |
+| **Manual Steps to Remediate** | Numbered steps describing the target state |
+| **Remediation Complexity** | How much work the fix takes - **Simple** · **Moderate** · **Complex** · **Redeployment** · **Guideline** |
+| **Roll Back Steps** | How to reverse the change if it goes wrong |
+| **Verification in JSON** | What a compliant resource looks like, as a property and value |
+
+**More Info** - how the policy maps to the wider world
+
+| Field | What it tells you |
+| --- | --- |
+| **Controls Covered** | The equivalent control in ISO/IEC 27001:2022, CIS Controls v8.1, NIST SP 800-53 Rev. 5, PCI DSS v4.0.1 and SWIFT CSCF v2025 |
+| **Maturity** | Where the policy sits in the provider's lifecycle |
+| **Category** | The security domain |
+| **Standard Names** | The frameworks that include this policy |
+
+The same analysis appears wherever a policy or a violation is opened, so it reads identically in [Policy Manager](policy-manager.md) and [Compliance Analysis](compliance-analysis.md).
+
+</details>
 
 Two things to read before you commit to anything:
 

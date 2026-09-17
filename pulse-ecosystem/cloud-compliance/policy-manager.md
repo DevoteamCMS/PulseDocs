@@ -23,16 +23,16 @@ Policy Manager is where your compliance baseline is decided: which security fram
 
 ---
 
-## Nothing Here Changes Your Cloud
+## What the Page Is For
 
-This is the most important thing to understand about the page, and it applies to every control on it.
+Two decisions, taken in order, and everything downstream depends on them:
 
-**No action in Pulse makes a change in your cloud environment.** Assigning a framework, setting a policy to Remediate, choosing Prevent - none of it creates, alters or deletes anything in AWS, Azure or Google Cloud. What each setting produces is a decision, recorded and routed:
+- **Which frameworks are we measured against?** Assigning a framework puts it into your organisation's active posture assessment - the set of standards Pulse scores you against and raises violations for.
+- **What should happen when each policy is broken?** Remediate, Audit, Exempt or Under Investigation, set per policy, is the instruction [Remediation Planner](remediation-planner.md) and the reports downstream act on.
 
-- **On Pulse Premium** - a note for your own teams. The record of what your organisation decided about that policy, visible to the people who act on it.
-- **With Managed Cloud Compliance** - additionally a task for Devoteam Operations, who carry out the corresponding work in your cloud as an operated service.
+The page is laid out as those two steps, and the second is disabled until the first is done.
 
-So the page is a decision-making tool, not a deployment tool. Cloud-side changes are made separately - see [Enabling Standards in Your Cloud](enabling-standards.md).
+It is written for the **Compliance Manager** - the person accountable for what the organisation is measured against, rather than for the owners of individual assets.
 
 ---
 
@@ -145,11 +145,61 @@ Policy Release Date is off by default. Which of the others appear is up to you -
 
 Click a policy name to open its panel. The header carries two counts - **Violations** and **Compliances** - the non-compliant and compliant resource counts for that policy. Below that are three tabs:
 
-- **Policy Details** - what the policy checks, why it matters, the risk of leaving it unaddressed, and how it is typically remediated. The same analysis appears in [Compliance Analysis](compliance-analysis.md#opening-a-policy), where every field is described.
-- **Settings & Status** - the two decisions you make, described below.
+- **Policy Details** - the full analysis of the policy, described below.
+- **Settings & Status** - the two decisions you make, described after it.
 - **History** - every change made to this policy's settings, each entry recording the date and time, the user who made it, the Policy Action and Prevention set, and the comment they gave.
 
 ![A policy's detail panel on the Settings and Status tab, with the Policy Action dropdown open showing the four available actions](../../assets/images/cloud-compliance/policy-manager-policy-action.png)
+
+<details markdown="block" class="reference-box">
+  <summary>Every field in the Policy Details tab</summary>
+
+**Policy Review** - what the policy is and why it matters
+
+| Field | What it tells you |
+| --- | --- |
+| **Name** | The policy's name |
+| **Severity** | Low, Medium, High or Critical |
+| **Description** | The provider's own description of the control |
+| **Purpose** | What the policy enforces, in one or two sentences |
+| **Benefits of Remediation** | Three specific benefits of fixing it |
+| **Resource Type Affected** | The resource types the policy applies to |
+| **Related Services Affected** | Other services touched, and how |
+| **Possible Risk** | What leaving it unaddressed may result in |
+
+**Change Impact** - what happens to your estate if you remediate
+
+| Field | What it tells you |
+| --- | --- |
+| **Changes Made by Remediation** | Exactly what property is changed, and whether it is in-place or destructive |
+| **Preparation for Remediation** | The inputs to gather before starting |
+| **Service Reboot Required After Remediation** | **YES** or **NO**, with the reason |
+| **Resource Redeployment Required for Remediation** | **YES** or **NO** - YES means the resource must be recreated |
+| **Change Impact on Running Services** | **YES** or **NO**, naming the workload disrupted |
+
+**Remediation Guides** - how the fix is carried out
+
+| Field | What it tells you |
+| --- | --- |
+| **Manual Steps to Remediate** | Numbered steps describing the target state |
+| **Remediation Complexity** | How much work the fix takes - the five values are listed in the policy column box above |
+| **Roll Back Steps** | How to reverse the change if it goes wrong |
+| **Verification in JSON** | What a compliant resource looks like, as a property and value |
+
+**More Info** - how the policy maps to the wider world
+
+| Field | What it tells you |
+| --- | --- |
+| **Controls Covered** | The equivalent control in ISO/IEC 27001:2022, CIS Controls v8.1, NIST SP 800-53 Rev. 5, PCI DSS v4.0.1 and SWIFT CSCF v2025 |
+| **Maturity** | Where the policy sits in the provider's lifecycle |
+| **Category** | The security domain |
+| **Standard Names** | The frameworks that include this policy |
+
+The same analysis appears wherever a policy or a violation is opened, so it reads identically in [Remediation Planner](remediation-planner.md) and [Compliance Analysis](compliance-analysis.md).
+
+</details>
+
+**Possible Risk** and **Benefits of Remediation** are written to be quoted directly to whoever approves the work, and **Controls Covered** answers the auditor's question without a mapping exercise. Both are worth reading before deciding a Policy Action rather than after.
 
 ### Policy Action
 {: .no_toc }
@@ -185,7 +235,19 @@ Prevention records whether your organisation wants non-compliant deployments **p
 
 - Which choices are offered, and how they are described, comes from the policy itself, so it varies.
 - Where a policy has no deny effect available, Pulse says so: *Prevention not supported for this type of Policy.*
-- As everywhere on this page, setting Prevent deploys nothing. It records the decision - a note for your teams on Pulse Premium, a task for Devoteam Operations where Managed Cloud Compliance is enabled.
+
+---
+
+## Nothing Here Changes Your Cloud
+
+Having seen what the page does, the boundary around it matters - and it applies to every control described above.
+
+**No action in Pulse makes a change in your cloud environment.** Assigning a framework, setting a policy to Remediate, choosing Prevent - none of it creates, alters or deletes anything in AWS, Azure or Google Cloud. What each setting produces is a decision, recorded and routed:
+
+- **On Pulse Premium** - a note for your own teams. The record of what your organisation decided about that policy, visible to the people who act on it.
+- **With Managed Cloud Compliance** - additionally a task for Devoteam Operations, who carry out the corresponding work in your cloud as an operated service.
+
+So the page is a decision-making tool, not a deployment tool. Cloud-side changes are made separately - see [Enabling Standards in Your Cloud](enabling-standards.md).
 
 ---
 

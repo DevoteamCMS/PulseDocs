@@ -152,6 +152,8 @@ The analysis is organised into four sections. This is the same analysis you see 
 | **Category** | The security domain |
 | **Standard Names** | The frameworks that include this policy |
 
+The same analysis appears wherever a policy or a violation is opened, so it reads identically in [Policy Manager](policy-manager.md) and [Remediation Planner](remediation-planner.md).
+
 </details>
 
 Two parts earn their place in a review meeting. **Possible Risk** and **Benefits of Remediation** are written to be quoted directly to whoever approves the work. **Controls Covered** answers the auditor's question - which ISO or NIST control this policy actually satisfies - without a mapping exercise.
