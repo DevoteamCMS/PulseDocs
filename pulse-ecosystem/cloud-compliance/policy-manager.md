@@ -145,14 +145,14 @@ Policy Release Date is off by default. Which of the others appear is up to you -
 
 Click a policy name to open its panel. The header carries two counts - **Violations** and **Compliances** - the non-compliant and compliant resource counts for that policy. Below that are three tabs:
 
-- **Policy Details** - the full analysis of the policy, described below.
+- **Policy Details** - the full analysis of the policy. Open *Every field in the policy analysis* below for what each section contains.
 - **Settings & Status** - the two decisions you make, described after it.
 - **History** - every change made to this policy's settings, each entry recording the date and time, the user who made it, the Policy Action and Prevention set, and the comment they gave.
 
 ![A policy's detail panel on the Settings and Status tab, with the Policy Action dropdown open showing the four available actions](../../assets/images/cloud-compliance/policy-manager-policy-action.png)
 
 <details markdown="block" class="reference-box">
-  <summary>Every field in the Policy Details tab</summary>
+  <summary>Every field in the policy analysis</summary>
 
 **Policy Review** - what the policy is and why it matters
 
