@@ -100,7 +100,7 @@ The **Violation Analysis** tab is organised as sections you open as you need the
 | **More Info** | Supporting references, including the equivalent control in ISO, CIS, NIST, PCI DSS and SWIFT |
 
 <details markdown="block" class="reference-box">
-  <summary>Every field in the Violation Analysis tab</summary>
+  <summary>Every field in the policy analysis</summary>
 
 **Violation Information** - which violation this is
 
