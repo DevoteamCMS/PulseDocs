@@ -36,6 +36,35 @@ This is the view to bring to a review meeting or an auditor.
 
 ---
 
+## Who Sees What
+
+Like [Remediation Planner](remediation-planner.md), this page is scoped by asset ownership - so two people can open the same framework and see different estates.
+
+| Role | What the page shows |
+| --- | --- |
+| **Manager** | The whole estate, and the **Policy Action** column |
+| **Analyst** | The whole estate, read-only |
+| **User** | Only the assets in the Asset Groups they are delegated to. The **Policy Action** column is not shown |
+
+A **User** is delegated to one or more Asset Groups on the [Asset Ownership](../asset-ownership.md) page, and Pulse then limits every page to the assets in those groups without that person filtering anything. On this page that means the non-compliant assets listed under a policy are their own resources rather than the company's.
+
+### Set up Asset Ownership first
+{: .no_toc }
+
+**Ownership is a prerequisite for this page, not an optional extra.** A User who is not delegated to an Asset Group owns no assets, so selecting a policy shows them nothing to investigate - and that is indistinguishable from being compliant.
+
+Configuring it is the **Ownership Manager's** job and is done on the Assets page, not here:
+
+1. Allocate assets to an Asset Group - usually by pointing Pulse at the cloud tag key your teams already use for ownership.
+2. Delegate the asset owners to that group. Each of them needs at least the **Company User** role.
+3. Allow for the next processing cycle, up to 24 hours, before tag-based allocation shows up.
+
+[Asset Ownership](../asset-ownership.md) covers the whole setup; [Before You Start](../asset-ownership.md#before-you-start) lists what has to be in place first.
+
+Managers and Analysts see every Asset Group without being delegated to any, so the full picture is available to them whether ownership has been configured or not. It is the asset owners who depend on it.
+
+---
+
 ## Choosing a Framework
 
 Everything on the page is scoped to one security framework, chosen from the selector beside the page title.
@@ -179,7 +208,7 @@ Selecting a policy fills the lower table with the individual resources breaching
 | **Detection Date** | When the violation was first found | A date |
 | **Remediation Status** | What has been decided about this violation, and a link to change it | **Pending to Assess** · **Internal Investigation** · **Planned to Remediate** · **Scheduled Remediation** · **Planned to Decommission** · **Exemption Requested** |
 
-Filter by Asset Name, Asset Category, Detection Date, Remediation Status or Subscription. **Subscription** is the one that matters most in practice: it narrows a policy's breaches down to the assets one team owns, which is what turns a finding into an assignment.
+Filter by Asset Name, Asset Category, Detection Date, Remediation Status or Subscription. **Subscription** is the one that matters most in practice: it narrows a policy's breaches down to the assets one team owns, which is what turns a finding into an assignment. For a delegated User that narrowing has already happened - see [Who Sees What](#who-sees-what).
 
 Both tables export to CSV in full, not only the page on screen.
 
@@ -202,7 +231,7 @@ When the selected policy has no violations the table says **No violations detect
 
 So the traversal through Cloud Compliance runs: a number on [Compliance State](compliance-state.md), the policies behind it here, and then either the decision in Policy Manager or the work in Remediation Planner.
 
-The **Policy Action** column is not shown to the **User** role.
+The **Policy Action** column is not shown to the **User** role - deciding what happens to a policy is a Manager's call, while a User is here for their own assets. See [Who Sees What](#who-sees-what).
 
 ---
 
@@ -211,7 +240,9 @@ The **Policy Action** column is not shown to the **User** role.
 ### Nothing is listed in the lower table
 {: .no_toc }
 
-Select a policy in the upper table first - the assets table shows the resources breaching whichever policy is selected. If one is selected and the table still says **No violations detected**, that policy is currently being met.
+Select a policy in the upper table first - the assets table shows the resources breaching whichever policy is selected. If one is selected and the table still says **No violations detected**, that policy is currently being met by every asset you can see.
+
+That last qualification matters if you hold the **User** role: you see only the assets in the Asset Groups you are delegated to, so the policy may still be breached elsewhere in the company. Delegated to no group at all, every policy looks clean. [Who Sees What](#who-sees-what) explains the scoping, and [Asset Ownership](../asset-ownership.md) is where it is configured.
 
 ### How is this different from Remediation Planner?
 {: .no_toc }
@@ -232,3 +263,8 @@ One asset can breach several policies, so no arithmetic connects the two figures
 {: .no_toc }
 
 Not on this page, but the **Policy Action** value is a link: it opens [Policy Manager](policy-manager.md) in a new tab, already filtered to that framework and policy. Changing it there requires the Manager role.
+
+### My colleague and I see different assets under the same policy
+{: .no_toc }
+
+Expected, if you hold different roles. **Manager** and **Analyst** see the whole estate; a **User** sees only the assets in the Asset Groups they are delegated to. If a resource you are responsible for is missing, ask an Ownership Manager to allocate it to your group - see [Asset Ownership](../asset-ownership.md).
