@@ -27,10 +27,39 @@ Policy Manager decides what should happen when a policy is broken. Remediation P
 
 Every violation is one asset failing one policy. The page lists them, explains each one, and asks you to commit to a course of action with a date attached. It is the live planning tool for compliance work.
 
-- **Written for the Risk Owner** - the person who owns the application, service or subscription the asset belongs to.
+- **Written for the Risk Owner** - the person who owns the application, service or subscription the asset belongs to. Who owns what is not decided here: it comes from [Asset Ownership](../asset-ownership.md), which is also what decides whose violations appear on this page.
 - **Not for the compliance team.** The Compliance Manager sets the policy; the owner decides how their own resource gets fixed.
 
 As everywhere in Cloud Compliance, **setting an action changes nothing in your cloud**. It records a commitment: a note for your teams on Pulse Premium, or a task for Devoteam Operations where Managed Cloud Compliance is enabled.
+
+---
+
+## Who Sees Which Violations
+
+This page is scoped by asset ownership, because planning a fix only makes sense for a resource you are answerable for.
+
+| Role | What the page lists |
+| --- | --- |
+| **Manager** | Every violation in the framework, across the whole estate |
+| **Analyst** | Every violation in the framework, across the whole estate, read-only |
+| **User** | Only violations on the assets in the Asset Groups they are delegated to |
+
+A **User** is delegated to one or more Asset Groups on the [Asset Ownership](../asset-ownership.md) page. From then on Pulse narrows every page to the assets in those groups, without that person filtering anything - so they open Remediation Planner already looking at their own worklist, and at nothing else.
+
+### Set up Asset Ownership first
+{: .no_toc }
+
+**Ownership is a prerequisite for this page, not an optional extra.** A User who is not delegated to an Asset Group owns no assets, so there are no violations here for them to plan - and an empty list looks exactly like having nothing to do. The same applies to a User delegated to a group that has no assets allocated to it yet.
+
+Configuring it is the **Ownership Manager's** job and is done on the Assets page, not here:
+
+1. Allocate assets to an Asset Group - usually by pointing Pulse at the cloud tag key your teams already use for ownership.
+2. Delegate the asset owners to that group. Each of them needs at least the **Company User** role.
+3. Allow for the next processing cycle, up to 24 hours, before tag-based allocation shows up.
+
+[Asset Ownership](../asset-ownership.md) covers the whole setup; [Before You Start](../asset-ownership.md#before-you-start) lists what has to be in place first.
+
+Managers and Analysts see every Asset Group without being delegated to any, so nothing on this page waits on ownership for them. It is the owners doing the planning who need it.
 
 ---
 
@@ -79,7 +108,7 @@ Filters cover Asset Name, Policy Action, Policy Name, Prevention Possibility, Re
 
 </details>
 
-**Subscription and Severity are the two filters that matter most in practice** - they narrow a shared list down to the assets one team owns, and then to the ones worth doing first.
+**Subscription and Severity are the two filters that matter most in practice** - they narrow a shared list down to the assets one team owns, and then to the ones worth doing first. Where [Asset Ownership](../asset-ownership.md) is configured and you are a delegated User, the first of those has already been done for you.
 
 ---
 
@@ -223,7 +252,21 @@ Setting an action on a violation that already has one replaces it, and Pulse war
 ### Nothing is listed, or far less than I expected
 {: .no_toc }
 
-Check the framework selector first - you are looking at one framework at a time. After that, check the filters: Subscription and Severity persist as you move around the page.
+Three things narrow this list, in this order:
+
+1. **The framework selector** - you are looking at one framework at a time.
+2. **Asset ownership** - if you hold the **User** role, you see violations only on the assets in the Asset Groups you are delegated to. Delegated to none, you see none.
+3. **The filters** - Subscription and Severity persist as you move around the page.
+
+### I am delegated to an Asset Group but still see nothing
+{: .no_toc }
+
+Check that the group actually has assets allocated to it - a group with nothing in it looks the same as no access - and that you hold the **Company User** role as well as the delegation. Tag-based allocation is not immediate either: allow up to 24 hours for the next processing cycle. [Asset Ownership](../asset-ownership.md) covers both.
+
+### Why can my colleague see violations I cannot?
+{: .no_toc }
+
+Because you own different assets, or they hold a different role. **Manager** and **Analyst** see the whole estate; a **User** sees only the Asset Groups they are delegated to. If a resource you are responsible for is missing, ask an Ownership Manager to allocate it to your group - see [Asset Ownership](../asset-ownership.md).
 
 ### What does Pending to Assess mean?
 {: .no_toc }
