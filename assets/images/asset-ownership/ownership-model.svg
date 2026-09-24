@@ -19,10 +19,10 @@
   <text x="1005" y="42" font-size="12" font-weight="600" fill="#7a7385" text-anchor="middle">ASSETS</text>
 
   <!-- grouping regions -->
-  <rect x="190" y="64" width="462" height="404" rx="8" fill="none" stroke="#c9c2d0" stroke-width="1.2" stroke-dasharray="6 5"/>
-  <rect x="666" y="64" width="444" height="404" rx="8" fill="none" stroke="#c9c2d0" stroke-width="1.2" stroke-dasharray="6 5"/>
-  <text x="421" y="496" font-size="12.5" fill="#3d3646" text-anchor="middle">Allocate by tag value, or directly</text>
-  <text x="888" y="496" font-size="12.5" fill="#3d3646" text-anchor="middle">Everything below inherits - fix exceptions directly</text>
+  <rect x="188" y="74" width="464" height="416" rx="8" fill="none" stroke="#c9c2d0" stroke-width="1.2" stroke-dasharray="6 5"/>
+  <rect x="668" y="74" width="444" height="416" rx="8" fill="none" stroke="#c9c2d0" stroke-width="1.2" stroke-dasharray="6 5"/>
+  <text x="420" y="516" font-size="12.5" fill="#3d3646" text-anchor="middle">Allocate by tag value, or directly</text>
+  <text x="890" y="516" font-size="12.5" fill="#3d3646" text-anchor="middle">Everything below inherits - fix exceptions directly</text>
 
   <!-- users -->
   <rect x="20" y="250" width="120" height="64" rx="5" fill="#f0edf2" stroke="#a79fb2"/>
