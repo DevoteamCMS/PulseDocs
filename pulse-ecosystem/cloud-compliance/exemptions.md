@@ -63,19 +63,23 @@ flowchart LR
     REQ --> MGR{"Compliance Manager<br/>decides"}
     MGR -- "Approve<br/>+ expiry date" --> APP["Approved"]
     MGR -- "Reject<br/>+ reason" --> REJ["Rejected"]
+    REQ -- "Owner sets another<br/>action instead" --> CAN["Cancelled"]
     REJ --> BACK["Back to the owner<br/>to remediate"]
     APP -.->|"implemented separately<br/>in your cloud"| CLOUD["Appears under<br/>Exempted Violations"]
 ```
 
-A request passes through three states, and only three:
+A request passes through four states, and only four:
 
 | Status | Meaning |
 | --- | --- |
 | **Requested** | Submitted by a Risk Owner, awaiting a decision |
 | **Approved** | A Compliance Manager accepted the risk, with an expiry date |
 | **Rejected** | A Compliance Manager refused it; the violation returns to the owner to be remediated |
+| **Cancelled** | The Risk Owner chose a different pathway for the violation, so the request no longer reflects what they want |
 
 Requests are raised from [Remediation Planner](remediation-planner.md#requesting-an-exemption) by choosing **Exempt Request** on a violation. They are never created from this page - this page is where they are reviewed.
+
+**A violation holds at most one open request, and it always reflects the owner's current intention.** Setting any of the other four actions on that violation cancels the request; choosing Exempt Request again while one is still pending revises the one already there rather than adding a second. Approved, Rejected and Cancelled requests are final - a later request starts a new one alongside them, with its own justification and date.
 
 ---
 
@@ -98,7 +102,7 @@ Each row is one request: the asset it concerns, the policy it breaches, its curr
 | **Subscription** | The subscription, project or account it lives in | Your own names |
 | **Policy Name** | The policy being breached | The provider's own policy name |
 | **Request Date** | When the Risk Owner submitted it | A date |
-| **Exemption Status** | Where the request stands | **Requested** · **Approved** · **Rejected** |
+| **Exemption Status** | Where the request stands | **Requested** · **Approved** · **Rejected** · **Cancelled** |
 | **Exemption Expiry** | The expiry date - proposed while Requested, agreed once Approved | A date |
 | **Last Updated** | When the request last changed | A date |
 
@@ -197,9 +201,14 @@ Only users with the **Manager** company role. Analysts can read the page but not
 ### A request is no longer needed - can it be withdrawn?
 {: .no_toc }
 
-There is no withdraw action in Pulse, and setting a different action on the violation in [Remediation Planner](remediation-planner.md#setting-an-action) does not close it either - the request stays in the Compliance Manager's queue as **Requested**.
+There is no withdraw control, and none is needed. Say what you will do instead: set any of the other four actions on that violation in [Remediation Planner](remediation-planner.md#setting-an-action) - Schedule Remediation, Plan to Remediate, Internal Investigation or Plan to Decommission - and the request moves to **Cancelled** and leaves the Compliance Manager's queue.
 
-So tell your Compliance Manager directly. Until they reject it, the request is still open and can still be approved, which would exempt a violation you have since decided to fix.
+### I asked for the wrong expiry date - do I raise a second request?
+{: .no_toc }
+
+No. Choose **Exempt Request** again on the same violation while the first is still **Requested**, and it revises the request already there - the justification, expiry date and risk number are replaced, and the original request date is kept. A violation never holds two open requests, so the Compliance Manager always sees one current version rather than guessing which is live.
+
+Once a request has been **Approved**, **Rejected** or **Cancelled** it is settled and a later Exempt Request starts a new one alongside it.
 
 ### What happens when an exemption expires?
 {: .no_toc }

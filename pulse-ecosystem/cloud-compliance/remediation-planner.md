@@ -241,7 +241,14 @@ Setting an action on a violation that already has one replaces it, and Pulse war
 
 - What you write in the justification is what the Compliance Manager reads when deciding.
 - Business and technical constraints - why the fix is not feasible, or costs more than the risk it removes - are what make a request approvable.
-- Once submitted, the request appears on the [Exemptions](exemptions.md) page, and the violation's Remediation Status reads **Exemption Requested** until it is approved or rejected.
+- Once submitted, the request appears on the [Exemptions](exemptions.md) page, and the violation's Remediation Status reads **Exemption Requested** until it is decided.
+
+**You can change your mind without asking anyone.** A violation holds at most one open request, and it always reflects what you currently want:
+
+- Set any of the other four actions on that violation and the pending request is **Cancelled**, leaving the Compliance Manager's queue.
+- Choose **Exempt Request** again while one is still pending and it revises the request already there, rather than queueing a second. The justification, expiry date and risk number are replaced; the original request date is kept.
+
+A request that has already been approved, rejected or cancelled is settled - a later Exempt Request starts a new one alongside it.
 
 **An approved exemption is still not an implemented one.** Approval records a decision in Pulse; making the cloud stop reporting the violation is separate work - carried out by your own team on Pulse Premium, or by Devoteam Operations where Managed Cloud Compliance is enabled. [Exemptions](exemptions.md) explains how to tell the two apart.
 
