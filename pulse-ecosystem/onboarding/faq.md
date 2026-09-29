@@ -306,9 +306,9 @@ Only that some tenant created a service principal for the Pulse application - no
 
 ### What access does Pulse need in my Google Cloud organisation?
 
-A Service Account holding read-only bindings at organisation level: either the built-in `roles/viewer` or a custom role containing only the 46 permissions Pulse needs, plus `roles/billing.viewer` on the billing account and read access to the billing export table in BigQuery. If you have no organisation resource, the same bindings are made per project instead.
+A Service Account holding read-only bindings at organisation level: either the built-in `roles/viewer` or a custom role containing only the 51 permissions Pulse needs, plus `roles/billing.viewer` on the billing account and read access to the billing export table in BigQuery. If you have no organisation resource, the same bindings are made per project instead.
 
-Pulse reads the Google Cloud **control plane** and your **billing export** only. It cannot read the contents of disks, databases, buckets or virtual machines. See [What do the 46 Google Cloud permissions cover?](#what-do-the-46-google-cloud-permissions-cover) below.
+Pulse reads the Google Cloud **control plane** and your **billing export** only. It cannot read the contents of disks, databases, buckets or virtual machines. See [What do the 51 Google Cloud permissions cover?](#what-do-the-51-google-cloud-permissions-cover) below.
 
 ### What Google Cloud permissions do I need to grant that access?
 
@@ -329,11 +329,11 @@ This privileged access is only used to *grant* Pulse its access. Pulse itself ne
 Both give Pulse the same functionality.
 
 - **Built-in `roles/viewer`** is the simplest option and the default. It is a broad read-only role covering far more than Pulse actually reads.
-- **Custom Resource Role** creates an organisation-level custom role containing only the 46 permissions Pulse needs. Pick this if your organisation requires least-privilege role definitions, and be aware that new Pulse functionality may require new permissions to be added to it over time.
+- **Custom Resource Role** creates an organisation-level custom role containing only the 51 permissions Pulse needs. Pick this if your organisation requires least-privilege role definitions, and be aware that new Pulse functionality may require new permissions to be added to it over time.
 
 Note that this choice applies to *resource* access only. Billing access always uses the built-in `roles/billing.viewer` role, because Google Cloud billing accounts only accept predefined roles - a custom role is never used there.
 
-### What do the 46 Google Cloud permissions cover?
+### What do the 51 Google Cloud permissions cover?
 
 They are all read-only (`list`, `get`, `searchAll`) and group by API:
 
@@ -342,7 +342,9 @@ They are all read-only (`list`, `get`, `searchAll`) and group by API:
 | `resourcemanager.*` | 7 | Organisations, folders, projects and effective tags - your resource hierarchy |
 | `cloudasset.assets.searchAllResources` | 1 | Resource inventory |
 | `recommender.*` | 32 | Google Cloud Recommender output: idle and overprovisioned resources, machine-type sizing, commitments, IAM policy and change-risk recommendations |
-| `securitycenter.*`, `securityposture.*`, `cloudsecuritycompliance.frameworks.list` | 5 | Security Command Center findings, sources, postures and compliance frameworks |
+| `compute.machineImages.list` | 1 | Compute Engine machine images |
+| `securitycenter.*`, `securityposture.*`, `cloudsecuritycompliance.*` | 6 | Security Command Center findings, sources, postures, compliance frameworks and cloud controls |
+| `osconfig.*` | 3 | VM Manager patch deployments and patch jobs |
 | `monitoring.timeSeries.list` | 1 | Cloud Monitoring metrics |
 
 The full list is on the [Google Cloud onboarding page](google.md) under *Manual Setup*. Choosing the built-in `roles/viewer` instead grants all of this and considerably more.
