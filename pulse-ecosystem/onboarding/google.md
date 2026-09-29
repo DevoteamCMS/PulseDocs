@@ -158,19 +158,24 @@ Note: general rule to wait 30 sec after any object or permission granted before 
 
    **Option A - built-in Viewer role (simplest).** Assign the built-in `Viewer` role to the created SA per organisation, or on specific projects for the PULSE access scope.
 
-   **Option B - custom least-privilege role.** Create a role definition on organisation level containing exactly the 46 permissions Pulse uses. If the cloud doesn't have an organisation, roles will have to be created per project. Alternatively, a combination of roles can be used, so long as the result has all of the permissions listed.
+   **Option B - custom least-privilege role.** Create a role definition on organisation level containing exactly the 51 permissions Pulse uses. If the cloud doesn't have an organisation, roles will have to be created per project. Alternatively, a combination of roles can be used, so long as the result has all of the permissions listed.
 
    Pick Option B if your organisation requires least-privilege role definitions, and note that new Pulse functionality may require new permissions to be added over time. See [Onboarding Q&A: Built-in Viewer or Custom Resource Role?](faq.md#built-in-viewer-role-or-custom-resource-role---which-should-i-pick)
 
    <details markdown="block" class="reference-box">
-     <summary>Option B - all 46 permissions for the custom role</summary>
+     <summary>Option B - all 51 permissions for the custom role</summary>
 
-   Add these permissions to the created role, then assign the role to the organisation (if applicable) or to all of the projects you wish to onboard. For what each group covers, see [Onboarding Q&A: What do the 46 permissions cover?](faq.md#what-do-the-46-google-cloud-permissions-cover)
+   Add these permissions to the created role, then assign the role to the organisation (if applicable) or to all of the projects you wish to onboard. For what each group covers, see [Onboarding Q&A: What do the 51 permissions cover?](faq.md#what-do-the-51-google-cloud-permissions-cover)
 
    ```text
    cloudasset.assets.searchAllResources
+   cloudsecuritycompliance.cloudControls.list
    cloudsecuritycompliance.frameworks.list
+   compute.machineImages.list
    monitoring.timeSeries.list
+   osconfig.patchDeployments.list
+   osconfig.patchJobs.get
+   osconfig.patchJobs.list
    recommender.bigqueryCapacityCommitmentsRecommendations.list
    recommender.bigqueryPartitionClusterRecommendations.list
    recommender.cloudDeprecationGeneralRecommendations.list
