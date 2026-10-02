@@ -222,6 +222,8 @@ What to do with a rogue exemption is a decision for your Compliance Manager: hav
 
 On Exempted Violations, **click the asset name** to open the **Exemption Details** panel. It is not the panel that opens on the Exemption Requests tab: that one shows the request and lets a Manager decide it, while this one shows the exemption that exists in your cloud and what Pulse knows about it.
 
+![The Exemption Details panel with the Exemption Status section open, showing a Not Processed exemption](../../assets/images/cloud-compliance/exemptions-details-status.png)
+
 The panel has two tabs, **Exemption Details** and **Policy Details**. Exemption Details opens with an **Exemption Status** section showing, in this order:
 
 | Field | What it holds |
@@ -236,6 +238,8 @@ The panel has two tabs, **Exemption Details** and **Policy Details**. Exemption 
 A field with nothing to show - justification, approval reason or risk ID - is left out rather than shown empty. A **Not Processed** exemption has no request behind it, so its panel normally carries only the status and the dates.
 
 Below it, a **Policy Action** section shows what Pulse has decided about the policy itself, as set in [Policy Manager](policy-manager.md):
+
+![The Exemption Details panel with the Policy Action section open, showing the policy name, action, justification and dates](../../assets/images/cloud-compliance/exemptions-details-policy-action.png)
 
 | Field | What it holds |
 | --- | --- |
