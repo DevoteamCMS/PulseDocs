@@ -185,7 +185,6 @@ Violation ID, Provider, Detection Date, Exemption Start and Exemption Type are o
 | **Requested** | Per Violation | A request was submitted in Pulse and is awaiting review |
 | **Approved** | Per Violation | The request was approved in Pulse, and the exemption is active in your cloud |
 | **Rejected** | Per Violation | The request was rejected in Pulse, yet the exemption is still active in your cloud |
-| **Canceled** | Per Violation | The request was cancelled in Pulse, yet the exemption is still active in your cloud |
 | **Not Processed** | Per Violation | The exemption is active in your cloud and Pulse has no active request for it - either none was ever made, or the request was cancelled |
 | **Authorised** | Per Policy | The policy exemption was applied in Pulse by a Compliance Manager |
 | **Not Authorised** | Per Policy | The policy exemption is active in your cloud but was not applied in Pulse |
@@ -208,7 +207,6 @@ A **rogue exemption** is one that is live in your cloud without Pulse's authoris
 Three Approval Status values mark an exemption as rogue:
 
 - **Rejected** - a Compliance Manager refused the request, but the exemption exists in the cloud anyway.
-- **Canceled** - the Risk Owner chose a different pathway and the request was cancelled, but the exemption exists in the cloud anyway.
 - **Not Processed** - the exemption exists in the cloud and Pulse has no active request for it, either because none was ever made or because the request was cancelled.
 - **Not Authorised** - a Per Policy exemption exists in the cloud but was not applied in Pulse.
 
