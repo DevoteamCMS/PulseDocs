@@ -167,7 +167,7 @@ The **Exempted Violations** tab lists what your cloud reports as exempted, wheth
 | **Asset Name** | The exempted resource | Your own resource names |
 | **Subscription** | The subscription, project or account it lives in | Your own names |
 | **Policy Name** | The policy it is exempted from | The provider's own policy name |
-| **Approval Status** | Whether Pulse authorised this exemption - sortable and filterable | For a **Per Violation** exemption: **Requested** · **Approved** · **Rejected** · **Canceled** · **Not Processed**. For a **Per Policy** exemption: **Authorised** · **Not Authorised** |
+| **Approval Status** | Whether Pulse authorised this exemption - sortable and filterable | For a **Per Violation** exemption: **Requested** · **Approved** · **Rejected** · **Not Processed**. For a **Per Policy** exemption: **Authorised** · **Not Authorised** |
 | **Detection Date** | When the violation was first found | A date |
 | **Exemption Start** | When the exemption began | A date |
 | **Exemption Expires** | When it lapses | A date |
@@ -186,11 +186,11 @@ Violation ID, Provider, Detection Date, Exemption Start and Exemption Type are o
 | **Approved** | Per Violation | The request was approved in Pulse, and the exemption is active in your cloud |
 | **Rejected** | Per Violation | The request was rejected in Pulse, yet the exemption is still active in your cloud |
 | **Canceled** | Per Violation | The request was cancelled in Pulse, yet the exemption is still active in your cloud |
-| **Not Processed** | Per Violation | The exemption is active in your cloud and Pulse has no matching request |
+| **Not Processed** | Per Violation | The exemption is active in your cloud and Pulse has no active request for it - either none was ever made, or the request was cancelled |
 | **Authorised** | Per Policy | The policy exemption was applied in Pulse by a Compliance Manager |
 | **Not Authorised** | Per Policy | The policy exemption is active in your cloud but was not applied in Pulse |
 
-A Per Policy exemption has no request to approve, so it is Authorised or Not Authorised rather than carrying a request status. The column spells **Canceled** with one *l*, whereas the request lifecycle above says Cancelled.
+A Per Policy exemption has no request to approve, so it is Authorised or Not Authorised rather than carrying a request status. A request that was [Cancelled](#the-request-lifecycle) is not shown as a separate value here: the exemption appears as **Not Processed**.
 
 </details>
 
@@ -205,16 +205,16 @@ Use this tab as the check on the first one. An approved request that never appea
 
 A **rogue exemption** is one that is live in your cloud without Pulse's authorisation. It silences a finding, so the violation stops being reported, yet nobody with the authority to accept that risk accepted it.
 
-Four Approval Status values mark an exemption as rogue:
+Three Approval Status values mark an exemption as rogue:
 
 - **Rejected** - a Compliance Manager refused the request, but the exemption exists in the cloud anyway.
 - **Canceled** - the Risk Owner chose a different pathway and the request was cancelled, but the exemption exists in the cloud anyway.
-- **Not Processed** - the exemption exists in the cloud and no request was ever made in Pulse.
+- **Not Processed** - the exemption exists in the cloud and Pulse has no active request for it, either because none was ever made or because the request was cancelled.
 - **Not Authorised** - a Per Policy exemption exists in the cloud but was not applied in Pulse.
 
 These values appear in amber or red rather than the green of Approved and Authorised, and the Approval Status badge in the Exemption Details panel carries a tooltip saying the exemption is active in the cloud without a matching approval.
 
-To isolate them, filter **Approval Status** on **Rejected** and **Not Processed** together. Add **Canceled** and **Not Authorised** to the filter to catch every rogue state. Approved and Authorised are separate values, so to list everything Pulse has authorised, select both.
+To isolate them, filter **Approval Status** on **Rejected** and **Not Processed** together. Add **Not Authorised** to catch Per Policy exemptions as well. Approved and Authorised are separate values, so to list everything Pulse has authorised, select both.
 
 What to do with a rogue exemption is a decision for your Compliance Manager: have the exemption removed from the cloud so the violation is reported again, or raise it properly through [Remediation Planner](remediation-planner.md#requesting-an-exemption) so it can be reviewed.
 
