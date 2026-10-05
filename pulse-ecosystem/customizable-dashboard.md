@@ -12,7 +12,7 @@ Build your own dashboards in Pulse from ready-made cards, arrange them the way y
 {: .fs-6 .fw-300 }
 
 {: .important }
-The Customizable Dashboard is available to **Enterprise** customers for now. It is marked **Beta** in Pulse while we collect feedback.
+The Customizable Dashboard is available to selected **Enterprise** customers for now. It is marked **Beta** in Pulse while we collect feedback.
 
 <details open markdown="block">
   <summary>
