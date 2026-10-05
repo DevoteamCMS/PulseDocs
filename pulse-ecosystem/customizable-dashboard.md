@@ -38,7 +38,7 @@ With the Customizable Dashboard you can:
 
 Your dashboards are saved in Pulse, so they are the same on every browser and device you sign in from.
 
-![A customizable dashboard with KPI cards and charts]({{ '/assets/images/customizable-dashboard/overview.png' | relative_url }})
+![A customizable dashboard with KPI cards and charts](../assets/images/customizable-dashboard/overview.png)
 
 ## Main features
 
@@ -52,7 +52,7 @@ The dashboard selector in the page header lists every dashboard you can see, gro
 | **Share** | Opens the sharing settings for the selected dashboard. |
 | **New** (+) | Creates a new, empty dashboard. |
 
-![The dashboard selector, opened]({{ '/assets/images/customizable-dashboard/selector.png' | relative_url }})
+![The dashboard selector, opened](../assets/images/customizable-dashboard/selector.png)
 
 New dashboards are personal: only you can see them until you share them. A ready-made **My Dashboard** template shows the same cards as the default dashboard, so you have a starting point to adjust.
 
@@ -66,7 +66,7 @@ In edit mode a toolbar appears under the header:
 
 Each card and separator shows an edit (pencil) and a delete (bin) button. When you delete something, a message with **Undo** appears for a few seconds.
 
-![A dashboard in edit mode, with the edit toolbar and card buttons]({{ '/assets/images/customizable-dashboard/edit-mode.png' | relative_url }})
+![A dashboard in edit mode, with the edit toolbar and card buttons](../assets/images/customizable-dashboard/edit-mode.png)
 
 ### Layout and sizes
 
@@ -78,7 +78,7 @@ Cards sit on a grid of **12 columns**. Heights are measured in **cells**; one ce
 - **Resizing:** drag the bottom-right corner of a card, or set the width and height in the card builder.
 - **Separators** always span the full width and are one thin row high. They do not hold cards: you can move cards freely above and below them.
 
-![Resizing a card by dragging its bottom-right corner]({{ '/assets/images/customizable-dashboard/resize.png' | relative_url }})
+![Resizing a card by dragging its bottom-right corner](../assets/images/customizable-dashboard/resize.png)
 
 New cards start at a size that fits their type:
 
@@ -104,7 +104,7 @@ On top of that, each card can have its own filters, depending on its data source
 {: .note }
 If you choose cloud providers on a card, that card **stops following the cloud provider filter in the header** and shows only the providers you chose. The card builder reminds you of this when you set them.
 
-![Card filters with a cloud provider chosen, and the notice that the header filter is disabled]({{ '/assets/images/customizable-dashboard/card-filters.png' | relative_url }})
+![Card filters with a cloud provider chosen, and the notice that the header filter is disabled](../assets/images/customizable-dashboard/card-filters.png)
 
 ## Card types
 
@@ -121,7 +121,7 @@ If you choose cloud providers on a card, that card **stops following the cloud p
 
 The card builder shows a live preview while you choose.
 
-![The card builder with a live preview]({{ '/assets/images/customizable-dashboard/card-builder.png' | relative_url }})
+![The card builder with a live preview](../assets/images/customizable-dashboard/card-builder.png)
 
 ## Data sources
 
@@ -150,7 +150,7 @@ Cost sources show values in the currency selected in the header.
 
 For anything the curated sources do not cover, you can pick data straight from the Pulse API. You then choose which part of the response to chart: the list of rows, the label, the value (a sum or a count of rows) and, optionally, a series for multi-line charts.
 
-![An API source with its data mapping options]({{ '/assets/images/customizable-dashboard/api-source.png' | relative_url }})
+![An API source with its data mapping options](../assets/images/customizable-dashboard/api-source.png)
 
 | Group | Data sources |
 | --- | --- |
