@@ -10,18 +10,20 @@ permalink: /pulse-ecosystem/cloud-economics/
 
 # Cloud Economics
 
-Cloud Economics brings the billing data of AWS, Azure and Google Cloud into one process for understanding, planning and reducing spend. Three pages, each answering one question, in the order you meet them:
+Cloud Economics brings the billing data of AWS, Azure and Google Cloud into one process for understanding, planning and reducing spend. Four pages, each answering one question, in the order you meet them:
 
 ```mermaid
 flowchart LR
     A["1 - Cost Analysis<br/>Where is the money going?"]
     B["2 - Budget #amp; Alerts<br/>Is it going to plan?"]
     C["3 - Cost Savings<br/>What can we stop<br/>paying for?"]
-    A --> B --> C
-    C -.-> A
+    D["4 - Rate Optimisation<br/>Are we paying<br/>the best rate?"]
+    A --> B --> C --> D
+    D -.-> A
     click A "/pulse-ecosystem/cloud-economics/cost-analysis/"
     click B "/pulse-ecosystem/cloud-economics/budget-alerts/"
     click C "/pulse-ecosystem/cloud-economics/cost-savings/"
+    click D "/pulse-ecosystem/cloud-economics/rate-optimisation/"
 ```
 
 Read left to right, that is the working cycle:
@@ -29,7 +31,8 @@ Read left to right, that is the working cycle:
 - **See where the money goes.** [Cost Analysis](cost-analysis.md) cuts the combined bill six ways - by service, subscription, team and more - month by month or day by day, with last month and the forecast beside every figure.
 - **Decide what it should be.** [Budget & Alerts](budget-alerts.md) puts a monthly cap on any of those same slices, and emails the people you name as spend approaches it.
 - **Find what you can stop paying for.** [Cost Savings](cost-savings.md) lists cost recommendations resource by resource, with the monthly saving each option would bring.
-- **Check that it landed.** The dotted line back: an implemented saving shows as lower spend in Cost Analysis, and is counted as implemented in the history of Cost Savings.
+- **Pay less for what you keep.** [Rate Optimisation](rate-optimisation.md) shows how much of your estate your reservations cover, how much of them is used, and what they save against what they could.
+- **Check that it landed.** The dotted line back: an implemented saving or a better rate shows as lower spend in Cost Analysis, and an implemented recommendation is counted in the history of Cost Savings.
 
 ---
 
@@ -40,16 +43,17 @@ Read left to right, that is the working cycle:
 | **[Cost Analysis](cost-analysis.md)** | Break spend down six ways, monthly or daily, and save the days you want to come back to |
 | **[Budget & Alerts](budget-alerts.md)** | Track spend against monthly caps, see which alert thresholds have been passed, and set up budgets with email alerts |
 | **[Cost Savings](cost-savings.md)** | Review cost recommendations per resource, compare optimisation options, exempt what you will not act on, and track what was implemented |
+| **[Rate Optimisation](rate-optimisation.md)** | See how well your reservations cover your usage, how much of them is used, and what they save now against what they could |
 
 ---
 
 ## What You Get at Each Tier
 
 - **Cloud Essentials** - costs in monthly granularity, and budgets you can see but that send no alerts. Available without a Cloud Economics subscription, and described with the rest of the free tier under [Costs](../cloud-inventory.md#costs) and [Budget & Alerts](../cloud-inventory.md#budget--alerts).
-- **Pulse Premium** - all three pages. The daily view and saved views in Cost Analysis, budget alerting, and Cost Savings are the part that Premium adds.
-- **Managed Cloud Economics** - the same three pages, plus Devoteam operating them with you as a managed service.
+- **Pulse Premium** - all four pages. The daily view and saved views in Cost Analysis, budget alerting, Cost Savings and Rate Optimisation are the part that Premium adds.
+- **Managed Cloud Economics** - the same four pages, plus Devoteam operating them with you as a managed service.
 
-The menu tells you which you have. Without Cloud Economics, the cost page is called **Costs** and sits under Cloud Essentials; with it, the page is called **Cost Analysis** and moves into its own **Cloud Economics** section alongside the other two.
+The menu tells you which you have. Without Cloud Economics, the cost page is called **Costs** and sits under Cloud Essentials; with it, the page is called **Cost Analysis** and moves into its own **Cloud Economics** section alongside the others.
 
 For how the tiers fit together across the whole platform, see [Pulse Ecosystem](../README.md).
 
