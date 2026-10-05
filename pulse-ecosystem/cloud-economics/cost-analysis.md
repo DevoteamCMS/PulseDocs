@@ -69,6 +69,7 @@ Each tab re-cuts the same total along a different dimension. Switching tab never
 | **Cloud Service** | The provider's own service names, such as Virtual Machines or Storage | Find the services driving the bill |
 | **Cloud Tenant** | Tenant or organisation | Split an estate that spans more than one |
 | **Cloud Subscription** | Subscription, account or project | Find who is spending, where subscriptions follow your organisation |
+| **Tags** | Cloud tags| The spending analysis based on business units, departments, and teams |
 
 The last two follow the terminology of the provider you have selected: **Cloud Tenant** reads **Cloud Organization**, and **Cloud Subscription** reads **Cloud Account** or **Cloud Project**.
 
