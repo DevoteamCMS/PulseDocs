@@ -125,6 +125,8 @@ The **Ownership** card is the one to read first. It tells you which Asset Group 
 
 ![The Historical Recommendations tab, with Cumulative Savings, the Cost Optimisation Summary and the Implementation Status donut](../../assets/images/cloud-economics/cost-savings-historical.png)
 
+This is the main page to analyze existing savings, what opportunities were missed, and what impact savings have over time.
+
 - **Cumulative Savings** - month by month over the last six months, two series: **Active Savings** and **Implemented**. Implemented carries the note *Previously implemented savings that continue to have an impact on current spending*: a change made in spring is still saving money in autumn, and this chart keeps counting it.
 - **Date** - sets the period for everything below it, by when recommendations were raised: **Last 12 months**, **Last 6 months** (the default), **Last 3 months**, **Last month**, **Current month**, or a range of your own.
 - **Cost Optimisation Summary** - one row per category, with the savings **Implemented**, **Exempted** and **Expired**. Select a row to focus Implementation Status on that category.
