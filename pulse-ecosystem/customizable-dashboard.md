@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Customizable Dashboard
-nav_order: 1
+parent: Pulse Ecosystem
+nav_order: 6
 ---
 
 # Customizable Dashboard
