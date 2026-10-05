@@ -56,7 +56,7 @@ Start here: [Cloud Onboarding](onboarding/README.md).
 
 Adds the two features above in full.
 
-- **Cloud Economics** - Cost Analysis with daily granularity, Budget & Alerts including the alerting itself, and Cost Savings.
+- **Cloud Economics** - Cost Analysis with daily granularity, Budget & Alerts including the alerting itself, Cost Savings and Rate Optimisation.
 - **Cloud Compliance** - Compliance State, Policy Manager, Remediation Planner, Exemptions and Compliance Analysis.
 
 **Pulse Premium Trial** is the same scope for a limited period, so the features can be evaluated on real data rather than on a demo.
