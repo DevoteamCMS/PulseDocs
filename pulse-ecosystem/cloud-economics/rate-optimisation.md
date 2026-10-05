@@ -91,7 +91,7 @@ Cost avoidance is spend that did not happen: what the same usage would have cost
 - **Current Savings** - what the reservations you already have are saving.
 - **Potential Savings** - what could be saved with rates optimised further. It is a projection, not money already saved.
 
-**Full Period Costs**, above the chart, totals the selected period.
+Hover any month to see both figures for it. **Full Period Costs**, above the chart, totals the selected period.
 
 **The gap between the two is the opportunity.** Current Savings is already in the bill; the distance up to Potential Savings is what better coverage, or better-sized reservations, would add. A gap that stays wide month after month is the case for the next commitment.
 
