@@ -104,7 +104,7 @@ On top of that, each card can have its own filters, depending on its data source
 {: .note }
 If you choose cloud providers on a card, that card **stops following the cloud provider filter in the header** and shows only the providers you chose. The card builder reminds you of this when you set them.
 
-![Card filters with a cloud provider chosen, and the notice that the header filter is disabled](../assets/images/customizable-dashboard/card-filters.png)
+![Card filters in the card builder, with AWS and Google chosen as the cloud providers and the preview showing only those two](../assets/images/customizable-dashboard/card-filters.png)
 
 ## Card types
 
