@@ -29,7 +29,7 @@ Every user has exactly one company role. The four roles build on each other, fro
 
 | Role | What it allows |
 | --- | --- |
-| **Company User** | Access is limited to what an Asset Group delegation grants. Without delegation, sees nothing beyond Cloud Essentials; with it, can view or manage the pages covered by the company's managed or premium services. |
+| **User** | Access is limited to what an Asset Group delegation grants. Without delegation, sees nothing beyond Cloud Essentials; with it, can view or manage the pages covered by the company's managed or premium services. |
 | **Analyst** | Read-only across the company. Views Cloud Essentials and every page covered by the company's managed or premium services, but changes nothing. |
 | **Manager** | Full operational access. Everything Analyst can view, plus managing users, cloud integrations, and the pages covered by the company's managed or premium services. Cannot assign the Owner role. |
 | **Owner** | Full access to the company. Everything Manager can do, plus company settings and assigning any role. Sole access to billing and plans - no other role can view or change them. Only an Owner can make another user an Owner. |
