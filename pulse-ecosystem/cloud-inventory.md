@@ -57,7 +57,7 @@ Three selectors sit in the header and apply everywhere:
 | **Company** | Switches the active organisation when your tenant holds more than one. |
 | **Currency** | Re-states all monetary values - costs, savings, budgets - in your preferred currency. |
 
-Most pages also carry a **date range** control. Recommendations, Tags, Locations and Security Alerts offer presets - Last 7 Days, Last 30 Days, Last 90 Days - while Assets and Costs take a custom range.
+Most pages also carry a **date range** control. Recommendations, Tags, Locations and Security Alerts offer presets - Last 7 Days, Last 30 Days, Last 90 Days. Assets offers the same presets, and a custom range with Pulse Premium. Costs takes a custom range.
 
 Every table behaves the same way: free-text search, sortable columns, a column show/hide menu, pagination, and **CSV export of the whole result set** rather than just the page on screen.
 
@@ -212,38 +212,48 @@ Alert rows within a budget add: Type, Threshold, Amount, Email.
 
 An asset is anything Pulse discovers in your clouds - not only virtual machines, databases and IP addresses, but the containers too: subscriptions, accounts, projects and resource groups. The single-asset example further down is an AWS account, which is why it carries costs and recommendations of its own.
 
-![Assets page Overview tab with three charts above the assets list](../assets/images/cloud-inventory/assets.png)
+![Assets page Overview tab with three charts above the assets list, which includes Last Month and Current Month cost columns](../assets/images/cloud-inventory/assets.png)
 
 Three charts sit above the list: **Resources Total Count** over time, **Service Name** showing which services hold the most resources, and **Infrastructure Split** by asset category. An estate heavily weighted toward IaaS is a signal that some of it could move to managed or SaaS equivalents.
 
+### What each asset costs
+
+The **Assets List** shows each asset's cost next to its details: **Last Month** and **Current Month**. Both columns sort, so the most expensive resources are one click away, and both export to CSV as plain numbers. A cost cell is empty when Pulse holds no cost data for that asset.
+
 ### Filtering the inventory
 
-The **Assets List** is the part you will live in, and the filters are what turn 11,000 rows into an answer:
+The **Assets List** is the part you will live in, and the filters are what turn 11,000 rows into an answer. The most used ones sit in the bar above the charts:
 
 | Filter | What it narrows to |
 | --- | --- |
 | **Search** | Free text across asset names |
-| **Date** | The discovery window - see below |
+| **Date** | The assets that were alive during a range - see below |
 | **Allocation Type** | How an asset got its owner: direct, tag-based, inherited or unassigned |
 | **Asset Group** | One ownership group, so you see only what a given team is responsible for |
 | **Asset Type** | A kind of resource - virtual machines, resource groups, public IP addresses |
 | **Location** | A single cloud region |
 | **Subscription Name** | One subscription, account or project |
 
-**Date deserves a word, because it is not the filter you might assume.** It filters on when Pulse last *discovered* each asset, not when the asset was created. The default recent window therefore answers "what exists right now" - a live view of the estate. Widening it brings back resources seen earlier in the period, including ones that have since been deleted, which is how you check what a subscription looked like last month or confirm something is really gone.
+**All Filters** opens the full set. Besides the ones above, it adds **Cloud Asset Category**, **Cloud Asset Service**, **Cloud Asset Service Model**, **Cloud Subscription Id**, **Data Store** and **Tag**. **Tag** filters on tag key and value pairs, such as `owner : Devoteam`, so you can narrow the list to everything carrying a given tag.
+
+![The All Filters panel listing every asset filter, with a tag filter set to owner : Devoteam](../assets/images/cloud-inventory/assets-all-filters.png)
+
+**Date deserves a word, because it is not the filter you might assume.** It shows only the assets that were alive within the range you set, not the ones created in it, and it applies to the three charts as well as the list. The default, **Last 7 Days**, therefore answers "what exists right now" - a live view of the estate. **Last 30 Days** and **Last 90 Days** bring back resources that were alive earlier in the period, including ones that have since been deleted, which is how you check what a subscription looked like last month or confirm something is really gone. With Pulse Premium you can also set a custom range, by typing a **Start Date** and **End Date** or picking both on the calendar.
+
+![The Date filter open, with the Last 7, 30 and 90 days presets on the left and a custom range picked on the calendar](../assets/images/cloud-inventory/assets-date-filter.png)
 
 Two row actions save the most time: **View Cloud Resource** opens the resource in its provider's own console, and **Copy ID** puts the identifier on your clipboard.
 
 <div class="takeaway" markdown="block">
-**What to do with it.** Answer the questions that otherwise need three consoles: how many resources of this type exist, where, and in whose subscription. Use it as the authoritative list for audits, migration planning and licence counts. Filter by Allocation Type to find assets nobody owns, and by Location to check nothing has appeared in a region you do not permit. Export the filtered list to CSV to feed a CMDB, ticket or spreadsheet elsewhere. Watch **Infrastructure Split** over time: an estate drifting toward IaaS is accumulating operational work that PaaS or SaaS equivalents would remove.
+**What to do with it.** Answer the questions that otherwise need three consoles: how many resources of this type exist, where, in whose subscription, and what they cost. Sort by **Current Month** to find the resources driving this month's spend. Use it as the authoritative list for audits, migration planning and licence counts. Filter by Allocation Type to find assets nobody owns, by Location to check nothing has appeared in a region you do not permit, and by Tag to check what a tag actually covers. Export the filtered list to CSV to feed a CMDB, ticket or spreadsheet elsewhere. Watch **Infrastructure Split** over time: an estate drifting toward IaaS is accumulating operational work that PaaS or SaaS equivalents would remove.
 </div>
 
 <details markdown="block" class="reference-box">
   <summary>Columns in the assets list</summary>
 
-Last Discovery, Provider, Subscription Name, Location, Asset Type, Allocation Type, Asset Group, Asset Name.
+Last Discovery, Provider, Subscription Name, Location, Asset Type, Last Month, Current Month, Asset Group, Asset Name.
 
-The Subscription column is labelled with the terminology of the selected provider - subscription, account or project. Further columns, including Asset ID, are available from the column show/hide menu.
+The Subscription column is labelled with the terminology of the selected provider - subscription, account or project. Further columns, including Allocation Type and Asset ID, are available from the column show/hide menu.
 
 </details>
 
