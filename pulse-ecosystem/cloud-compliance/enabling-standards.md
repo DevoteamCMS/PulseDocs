@@ -140,6 +140,13 @@ Compliance data depends on Azure Policy evaluating the newly assigned initiative
 
 Compliance findings reach Pulse from **Security Command Center**. Two services are involved: Security Health Analytics detects the misconfigurations, and Compliance Manager maps those findings to regulatory frameworks.
 
+### What you need
+{: .no_toc }
+
+- Security Command Center active for your organisation
+- **Security Health Analytics** enabled and **Compliance Manager** switched on, as described below
+- Access in Security Command Center to enable services and to assign frameworks to resources. The exact Google Cloud roles are set by Google, so check them against Google's documentation for your organisation
+
 ### Enabling the services
 {: .no_toc }
 
@@ -150,12 +157,30 @@ Compliance findings reach Pulse from **Security Command Center**. Two services a
 
 You can verify the second step from **Settings → Services** as well, where **Compliance Manager** should be **ON**.
 
-### Adding a specific standard
+Once the services are on, a number of compliance standards are already evaluated and visible for review on the original **Monitor** tab.
+
+### Enabling a standard
 {: .no_toc }
 
-A specific standard is deployed as a **security posture** - a policy set, built-in or custom, applied to a scope. Policy sets can be scoped to an **organisation**, a **folder** or a **project**, and support muting findings and adding or removing individual policies, which is what makes a customised evaluation possible.
+Compliance Manager measures your cloud against **frameworks**. A framework is a set of **cloud controls**, and it can be built in or custom. You choose which part of your hierarchy a framework applies to by assigning resources to it, so you decide which standards apply where rather than reading whatever is on by default.
 
-Once the services above are on, a number of compliance standards are already evaluated and visible for review. Deploying a posture is what lets you choose which standards apply to which part of your hierarchy, rather than reading whatever is on by default.
+1. Go to **Security → Compliance** and open the **Configure** tab.
+2. Under **Frameworks**, find the framework for the standard you want and click its name to open **Framework details**. The list shows each framework's platform, categories and **Tier**, and the **Assigned** column shows whether it is already assigned.
+3. Click **Actions**, then **Manage resource assignments**. A **Monitor** panel opens on the right.
+4. Under **Select resources to monitor**, click **Browse** in the **Resource** field and choose the **organization**, **folder** or **project** the framework should apply to.
+5. Under **Define framework parameters**, enter a value for any cloud control that asks for one. Many frameworks have none, in which case the panel says so.
+6. Click **Monitor**. Google Cloud confirms with **Framework Deployment initiated successfully**.
+
+The framework then appears in the **Frameworks** table on the **Monitor** tab marked **New**, where **Assigned to** shows the resource and **Controls passing** shows the share of controls that pass.
+
+Choose **Monitor**, not **Enforce**: monitoring gives Pulse the findings it reports on, and does not enforce compliance or remediate violations in your cloud.
+
+If no built-in framework matches what you need, click **Create custom framework** on the **Configure → Frameworks** tab and build it from the **Cloud controls** tab's controls. Assign a custom framework to resources in the same way.
+
+### Timing
+{: .no_toc }
+
+Google Cloud notes that the monitoring information on the **Monitor** tab may have a lag of up to 30 hours. This is longer than the general allowance under [After You Enable a Standard](#after-you-enable-a-standard).
 
 ---
 
