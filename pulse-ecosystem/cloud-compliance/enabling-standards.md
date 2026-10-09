@@ -157,25 +157,30 @@ Compliance findings reach Pulse from **Security Command Center**. Two services a
 
 You can verify the second step from **Settings → Services** as well, where **Compliance Manager** should be **ON**.
 
-Once the services are on, a number of compliance standards are already evaluated and visible for review on the **Monitor** tab.
+Once the services are on, a number of compliance standards are already evaluated and visible for review on the original **Monitor** tab.
 
 ### Enabling a standard
 {: .no_toc }
 
 Compliance Manager measures your cloud against **frameworks**. A framework is a set of **cloud controls**, and it can be built in or custom. You choose which part of your hierarchy a framework applies to by assigning resources to it, so you decide which standards apply where rather than reading whatever is on by default.
 
-1. Go to **Security → Compliance**.
-2. Open **Frameworks** to see the frameworks available to you.
-3. Find the framework for the standard you want. The **Assigned to** column shows what each framework is already applied to.
-4. Choose **Assign resources to monitor** and select the **organisation**, **folder** or **project** it should apply to.
-5. Save the assignment.
+1. Go to **Security → Compliance** and open the **Configure** tab.
+2. Under **Frameworks**, find the framework for the standard you want and click its name to open **Framework details**. The list shows each framework's platform, categories and **Tier**, and the **Assigned** column shows whether it is already assigned.
+3. Click **Actions**, then **Manage resource assignments**. A **Monitor** panel opens on the right.
+4. Under **Select resources to monitor**, click **Browse** in the **Resource** field and choose the **organization**, **folder** or **project** the framework should apply to.
+5. Under **Define framework parameters**, enter a value for any cloud control that asks for one. Many frameworks have none, in which case the panel says so.
+6. Click **Monitor**. Google Cloud confirms with **Framework Deployment initiated successfully**.
 
-If no available framework matches what you need, use **Manage frameworks** and then **Create a custom framework**, and choose the cloud controls it should contain. Assign a custom framework to resources in the same way.
+The framework then appears in the **Frameworks** table on the **Monitor** tab marked **New**, where **Assigned to** shows the resource and **Controls passing** shows the share of controls that pass.
+
+Choose **Monitor**, not **Enforce**: monitoring gives Pulse the findings it reports on, and does not enforce compliance or remediate violations in your cloud.
+
+If no built-in framework matches what you need, click **Create custom framework** on the **Configure → Frameworks** tab and build it from the **Cloud controls** tab's controls. Assign a custom framework to resources in the same way.
 
 ### Timing
 {: .no_toc }
 
-Google Cloud notes that monitoring data may have a lag of up to 30 hours. This is longer than the general allowance under [After You Enable a Standard](#after-you-enable-a-standard).
+Google Cloud notes that the monitoring information on the **Monitor** tab may have a lag of up to 30 hours. This is longer than the general allowance under [After You Enable a Standard](#after-you-enable-a-standard).
 
 ---
 
