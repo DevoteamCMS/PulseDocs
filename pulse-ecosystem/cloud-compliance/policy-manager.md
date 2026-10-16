@@ -113,6 +113,8 @@ The note above the button changes with the status, so the panel tells you what w
 - **Ready to Activate** - *Compliance data for this standard is available. Activating includes it in your posture assessment immediately.*
 - **Not Ready** - *This standard is not enabled in your Cloud environment. You can activate it in Pulse now, but it becomes Active only after you enable the standard in Cloud.* This note links onward too.
 
+![The Activation section of the framework panel in each of its four states - Active, Awaiting Cloud, Ready to Activate and Not Ready - each with its status badge, the note explaining it, and the Activate or Deactivate button](../../assets/images/cloud-compliance/policy-manager-activation-states.png)
+
 If the matching standard is not enabled cloud-side, the framework and all its policies still appear - but with no violations reported against them, and the Status reads **Awaiting Cloud** once you activate it. [Enabling Standards in Your Cloud](enabling-standards.md) covers that half.
 
 ### The default framework
