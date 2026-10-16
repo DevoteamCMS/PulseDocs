@@ -69,9 +69,9 @@ Managers and Analysts see every Asset Group without being delegated to any, so t
 
 Everything on the page is scoped to one security framework, chosen from the selector beside the page title.
 
-![The framework selector open, listing the assigned security frameworks with the active one ticked](../../assets/images/cloud-compliance/framework-selector.png)
+![The framework selector open, listing the activated security frameworks with the active one ticked](../../assets/images/cloud-compliance/framework-selector.png)
 
-- Only assigned frameworks appear - assigning them is done in [Policy Manager](policy-manager.md).
+- Only activated frameworks appear - activating them is done in [Policy Manager](policy-manager.md).
 - The framework you open on is your organisation's **default framework**, the same one for everyone.
 - Changing the selection resets the filters on both tables, because a filter that made sense for one framework rarely means anything in another.
 

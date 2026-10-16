@@ -27,7 +27,7 @@ Policy Manager is where your compliance baseline is decided: which security fram
 
 Two decisions, taken in order, and everything downstream depends on them:
 
-- **Which frameworks are we measured against?** Assigning a framework puts it into your organisation's active posture assessment - the set of standards Pulse scores you against and raises violations for.
+- **Which frameworks are we measured against?** Activating a framework puts it into your organisation's active posture assessment - the set of standards Pulse scores you against and raises violations for.
 - **What should happen when each policy is broken?** Remediate, Audit, Exempt or Under Investigation, set per policy, is the instruction [Remediation Planner](remediation-planner.md) and the reports downstream act on.
 
 The page is laid out as those two steps, and the second is disabled until the first is done.
@@ -40,18 +40,18 @@ It is written for the **Compliance Manager** - the person accountable for what t
 
 | Role | Can do |
 | --- | --- |
-| **Manager** | Assign and unassign frameworks, set the default framework, set Policy Action and Prevention Preference |
+| **Manager** | Activate and deactivate frameworks, set the default framework, set Policy Action and Prevention Preference |
 | **Analyst**, **User** | Read everything on the page. Forms are visible but disabled |
 
 Without the Manager role the page shows *Read-Only View: Setting Policy Actions requires elevated Compliance Manager permissions.*
 
-A second gate applies to everyone, Managers included: **the per-policy settings stay disabled until a framework is assigned.** Until then you will see *Please assign a Security Framework to enable configuration (Exempt, Audit, Remediate).* Step 1 has to happen before step 2 is usable.
+A second gate applies to everyone, Managers included: **the per-policy settings stay disabled until a framework is activated.** Until then you will see *Please activate a Security Framework to enable configuration (Exempt, Audit, Remediate).* Step 1 has to happen before step 2 is usable.
 
 ---
 
-## Step 1 - Assess and Assign Security Framework
+## Step 1 - Assess and Activate Security Framework
 
-The upper card lists every security framework available to your organisation and whether it is currently assigned.
+The upper card lists every security framework available to your organisation, and the **Status** of each one.
 
 ![Policy Manager with the security framework list in the upper card and the policies of the selected framework in the lower one](../../assets/images/cloud-compliance/policy-manager.png)
 
@@ -67,46 +67,67 @@ The upper card lists every security framework available to your organisation and
 | **Name** | The framework - click it to open the assessment | For example ISO/IEC 27001 2022, Microsoft cloud security benchmark |
 | **Category** | What kind of framework it is | For example Regulatory Compliance, Security Center |
 | **Type** | Whether it came from the provider or was built by you | **builtin** · **custom** |
-| **Assignment** | Whether it is in your active posture assessment | **Assigned** · **Not assigned** |
+| **Status** | Whether the framework is activated in Pulse, and whether compliance data is arriving from your cloud | **Active** · **Awaiting Cloud** · **Ready to Activate** · **Not Ready** |
 
 Managers see one further column holding the **default framework** flag.
 
 </details>
 
+### What the Status tells you
+{: .no_toc }
+
+Status answers two questions at once: have you activated the framework in Pulse, and is your cloud actually evaluating the matching standard. Those are separate halves, and a framework needs both before it reports anything.
+
+| Status | What it means | What to do |
+| --- | --- | --- |
+| **Active** | Activated in Pulse, data flowing | Nothing. It is measuring you |
+| **Awaiting Cloud** | Activated in Pulse, standard not enabled in Cloud | Enable the standard in your cloud - Pulse is ready and waiting |
+| **Ready to Activate** | Not activated, data available | Activate it. It starts reporting immediately |
+| **Not Ready** | Not activated, standard not enabled in Cloud | Both halves are outstanding. You can activate now, but it stays dormant until the cloud side is done |
+
+**Awaiting Cloud is the one worth watching.** It means you have done your part and nothing is coming back - the framework will sit in your posture assessment reporting no violations until the standard is switched on in AWS, Azure or Google Cloud. Hovering any badge shows the same meaning as a tooltip.
+
 ### Reviewing a framework
 {: .no_toc }
 
-Click the framework name to open its detail panel. It opens on **Security Framework Assessment**, followed by review sections describing the framework and what adopting it involves.
+Click the framework name to open its detail panel. It opens on **Activation**, which holds the framework's Status, a note explaining what that status means for you, and the action available. Below it sit **Assessment**, **Review** and **More Info** - the material describing the framework and what adopting it involves.
 
-Read this before assigning. It is the same material your auditors and your own security team will ask you about.
+Read the assessment before activating. It is the same material your auditors and your own security team will ask you about.
 
-### Assigning and unassigning
+### Activating and deactivating
 {: .no_toc }
 
-The panel footer carries the action - **Assign** if the framework is not currently assigned, **Unassign** if it is - and Pulse asks you to confirm that the framework should apply across the entire scope of the service.
+The **Activation** section carries the action - **Activate** if the framework is not currently activated, **Deactivate** if it is - and Pulse asks you to confirm that the framework should apply across the entire scope of the service.
 
 On confirmation:
 
 > Request will be implemented in the next business day.
 
-- **Assigning** adds the framework to your organisation's active posture assessment: the set of standards Pulse scores you against and raises violations for. It does not switch anything on in your cloud.
-- **Unassigning** removes it from the service scope in Pulse, and likewise leaves your cloud untouched.
+- **Activating** adds the framework to your organisation's active posture assessment: the set of standards Pulse scores you against and raises violations for. It does not switch anything on in your cloud.
+- **Deactivating** removes it from the service scope in Pulse, and likewise leaves your cloud untouched.
 
-If the matching standard is not enabled cloud-side, the framework and all its policies still appear - but with no violations reported against them. [Enabling Standards in Your Cloud](enabling-standards.md) covers that half.
+The note above the button changes with the status, so the panel tells you what will happen before you press anything:
+
+- **Active** - *This standard is Active - it is included in your posture assessment and compliance data is being retrieved. Deactivating removes it from Pulse only; your Cloud environment is not modified.*
+- **Awaiting Cloud** - *This standard is activated in Pulse but not enabled in your Cloud environment, so no compliance data is retrieved.* The note links to [Enabling Standards in Your Cloud](enabling-standards.md) to close the gap.
+- **Ready to Activate** - *Compliance data for this standard is available. Activating includes it in your posture assessment immediately.*
+- **Not Ready** - *This standard is not enabled in your Cloud environment. You can activate it in Pulse now, but it becomes Active only after you enable the standard in Cloud.* This note links onward too.
+
+If the matching standard is not enabled cloud-side, the framework and all its policies still appear - but with no violations reported against them, and the Status reads **Awaiting Cloud** once you activate it. [Enabling Standards in Your Cloud](enabling-standards.md) covers that half.
 
 ### The default framework
 {: .no_toc }
 
-Each cloud provider has one **default framework**, marked with a flag in the framework list. Managers set it by clicking the flag on any assigned framework for that provider.
+Each cloud provider has one **default framework**, marked with a flag in the framework list. Managers set it by clicking the flag on any activated framework for that provider.
 
-**The default is organisation-wide.** It decides which framework every user in your organisation opens on when they sign in to Pulse - not just the person who set it. They can switch to any other assigned framework during their session, but the default is where everyone starts.
+**The default is organisation-wide.** It decides which framework every user in your organisation opens on when they sign in to Pulse - not just the person who set it. They can switch to any other activated framework during their session, but the default is where everyone starts.
 
 That makes it a reporting decision as much as a configuration one: whichever framework is default is the one your organisation will see first, and the one people will quote.
 
 Two more things worth knowing:
 
-- The flag only appears on frameworks that are already assigned. Assign first, then set as default.
-- **The current default cannot be unassigned while it holds that role.** Pulse will stop you and ask you to choose a different default for that provider first.
+- The flag only appears on frameworks that are already activated. Activate first, then set as default.
+- **The current default cannot be deactivated while it holds that role.** Pulse stops you with *You are trying to deactivate your active default framework* and asks you to choose a different default for that provider first.
 
 ---
 
@@ -242,7 +263,7 @@ Prevention records whether your organisation wants non-compliant deployments **p
 
 Having seen what the page does, the boundary around it matters - and it applies to every control described above.
 
-**No action in Pulse makes a change in your cloud environment.** Assigning a framework, setting a policy to Remediate, choosing Prevent - none of it creates, alters or deletes anything in AWS, Azure or Google Cloud. What each setting produces is a decision, recorded and routed:
+**No action in Pulse makes a change in your cloud environment.** Activating a framework, setting a policy to Remediate, choosing Prevent - none of it creates, alters or deletes anything in AWS, Azure or Google Cloud. What each setting produces is a decision, recorded and routed:
 
 - **On Pulse Premium** - a note for your own teams. The record of what your organisation decided about that policy, visible to the people who act on it.
 - **With Managed Cloud Compliance** - additionally a task for Devoteam Operations, who carry out the corresponding work in your cloud as an operated service.
@@ -269,7 +290,9 @@ Scope:
 ### A framework lists policies but reports no violations
 {: .no_toc }
 
-The framework list, and the policies inside each framework, are always complete - they do not depend on what your cloud evaluates. Violations are different: they come from your cloud. A standard your cloud does not evaluate still shows all of its policies, with nothing reported against them. See [Enabling Standards in Your Cloud](enabling-standards.md).
+Check its **Status**. If it reads **Awaiting Cloud**, that is exactly this situation: the framework is activated in Pulse, but your cloud is not evaluating the matching standard, so there is nothing to report. [Enabling Standards in Your Cloud](enabling-standards.md) covers the cloud-side step.
+
+This is why the framework list and the policies inside each framework are always complete - they do not depend on what your cloud evaluates. Violations are different: they come from your cloud.
 
 ### Can I set Prevention on any policy?
 {: .no_toc }
