@@ -10,7 +10,7 @@ permalink: /pulse-ecosystem/cloud-compliance/enabling-standards/
 # Enabling Standards in Your Cloud
 {: .no_toc }
 
-Assigning a security framework in **Policy Manager** tells Pulse what to measure you against. It does not change anything in your cloud. This page covers the other half: enabling the matching standard in AWS, Azure or Google Cloud, so that there is compliance data for Pulse to report on.
+Activating a security framework in **Policy Manager** tells Pulse what to measure you against. It does not change anything in your cloud. This page covers the other half: enabling the matching standard in AWS, Azure or Google Cloud, so that there is compliance data for Pulse to report on.
 
 <details open markdown="block">
   <summary>
@@ -23,28 +23,28 @@ Assigning a security framework in **Policy Manager** tells Pulse what to measure
 
 ---
 
-## What Assigning a Framework Does
+## What Activating a Framework Does
 
-Policy Manager lists the security frameworks available to your organisation and lets you assign or unassign them. Assigning one adds it to your organisation's active posture assessment in Pulse - the set of standards Pulse scores you against, reports on, and raises violations for.
+Policy Manager lists the security frameworks available to your organisation and lets you activate or deactivate them. Activating one adds it to your organisation's active posture assessment in Pulse - the set of standards Pulse scores you against, reports on, and raises violations for.
 
 **It applies within Pulse only. Your cloud environment is not modified.** No policy is created, no setting is changed, and nothing you deploy is blocked or altered as a result.
 
 That matters because the two sides have to agree. Your cloud runs the evaluations and produces the findings; Pulse reads them, explains them, and turns them into violations you can plan work against.
 
-Pulse lists every framework and every policy inside it regardless of what your cloud evaluates, so a framework is never missing and never looks empty. **Violations are what depend on the cloud side.** Assign a framework whose standard your cloud does not evaluate and you get the full policy list with nothing reported against it.
+Pulse lists every framework and every policy inside it regardless of what your cloud evaluates, so a framework is never missing and never looks empty. **Violations are what depend on the cloud side.** Activate a framework whose standard your cloud does not evaluate and you get the full policy list with nothing reported against it - and its Status in Policy Manager reads **Awaiting Cloud**, which is the page telling you that this half is done and the other one is not.
 
-When you assign a framework, Pulse asks you to confirm that it should apply across the entire scope of the service, and then tells you:
+When you activate a framework, Pulse asks you to confirm that it should apply across the entire scope of the service, and then tells you:
 
 > Request will be implemented in the next business day.
 
-Assigning a framework is also what unlocks the rest of Policy Manager. Until one is assigned, the per-policy settings - Exempt, Audit, Remediate and the prevention preferences - stay disabled.
+Activating a framework is also what unlocks the rest of Policy Manager. Until one is activated, the per-policy settings - Exempt, Audit, Remediate and the prevention preferences - stay disabled.
 
 ---
 
 ## Before You Start
 
 - **Cloud Compliance is a Pulse Premium feature.** See [Pulse Ecosystem](../README.md) for what each tier includes.
-- **Assigning and unassigning frameworks requires the Manager company role.** Pulse describes this in Policy Manager as Compliance Manager permissions. With any other role the page is read-only.
+- **Activating and deactivating frameworks requires the Manager company role.** Pulse describes this in Policy Manager as Compliance Manager permissions. With any other role the page is read-only.
 - **The cloud-side steps below are performed in your cloud, by your own administrators**, and need privileged access there. The roles required differ per cloud and are listed in each section.
 
 ---
@@ -186,9 +186,10 @@ Google Cloud notes that the monitoring information on the **Monitor** tab may ha
 
 ## After You Enable a Standard
 
-1. **Assign the matching framework in Policy Manager**, if you have not already. The cloud produces the findings; the assignment is what puts them in scope for Pulse.
+1. **Activate the matching framework in Policy Manager**, if you have not already. The cloud produces the findings; activating is what puts them in scope for Pulse.
 2. **Allow time for the data to arrive.** Findings appear in Pulse after your cloud has evaluated the new standard and Pulse has collected the results - allow up to 24 hours for data to load into Pulse, on top of your cloud's own evaluation schedule.
-3. **Check Compliance State.** The framework should start reporting metrics rather than sitting empty.
+3. **Watch the Status in Policy Manager.** It moves from **Awaiting Cloud** to **Active** once data starts arriving, which is the clearest confirmation that both halves are now in place.
+4. **Check Compliance State.** The framework should start reporting metrics rather than sitting empty.
 
 ---
 
@@ -206,31 +207,31 @@ Read more: [Cloud Managed Services](https://www.devoteam.com/services/cloud-mana
 
 ## Q&A
 
-### I assigned a framework in Pulse. Why are there no violations?
+### I activated a framework in Pulse. Why are there no violations?
 {: .no_toc }
 
-The policies are all listed, but nothing is reported against them - which means your cloud is not evaluating that standard. Work through the section above for your cloud.
+Check its **Status** in Policy Manager. **Awaiting Cloud** means exactly this: activated in Pulse, but your cloud is not evaluating that standard, so there is nothing to report. Work through the section above for your cloud.
 
-If the standard is already enabled there, give it time: your cloud evaluates on its own schedule, and Pulse collects the results afterwards.
+If the standard is already enabled there, give it time: your cloud evaluates on its own schedule, and Pulse collects the results afterwards. The Status changes to **Active** once data arrives.
 
-### Does assigning a framework block anything we deploy?
+### Does activating a framework block anything we deploy?
 {: .no_toc }
 
-No. Assigning a framework in Pulse changes nothing in your cloud, so it cannot block or alter a deployment. Preventive controls are a separate decision, configured per policy, and they take effect through your cloud rather than through the assignment.
+No. Activating a framework in Pulse changes nothing in your cloud, so it cannot block or alter a deployment. Preventive controls are a separate decision, configured per policy, and they take effect through your cloud rather than through the activation.
 
-### Can I unassign a framework?
+### Can I deactivate a framework?
 {: .no_toc }
 
-Yes, from the same place in Policy Manager - with one exception. Each cloud provider has one default framework, and that framework cannot be unassigned while it holds the role. Set a different default for that provider from the framework list first.
+Yes, from the same place in Policy Manager - with one exception. Each cloud provider has one default framework, and that framework cannot be deactivated while it holds the role. Set a different default for that provider from the framework list first.
 
-Unassigning removes the framework from the service scope in Pulse. It does not disable the standard in your cloud, which continues to evaluate and produce findings until you disable it there as well.
+Deactivating removes the framework from the service scope in Pulse. It does not disable the standard in your cloud, which continues to evaluate and produce findings until you disable it there as well.
 
 ### We already have a standard enabled that Pulse does not show
 {: .no_toc }
 
-A standard your cloud evaluates is only reported by Pulse once the matching framework is assigned in Policy Manager. Assigning it is the step that brings existing findings into scope.
+A standard your cloud evaluates is only reported by Pulse once the matching framework is activated in Policy Manager. Until then its Status reads **Ready to Activate** - the data is there, waiting for you to bring it into scope.
 
-### Who can assign frameworks?
+### Who can activate frameworks?
 {: .no_toc }
 
 Users with the **Manager** company role. Other roles see Policy Manager as read-only, and the per-policy settings stay disabled for them.

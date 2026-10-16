@@ -35,7 +35,7 @@ flowchart LR
 
 Read left to right, that is the working cycle:
 
-- **Choose what you are measured against.** Assign security frameworks in [Policy Manager](policy-manager.md), and decide what should happen when each policy inside them is broken.
+- **Choose what you are measured against.** Activate security frameworks in [Policy Manager](policy-manager.md), and decide what should happen when each policy inside them is broken.
 - **See where you stand.** [Compliance State](compliance-state.md) scores every subscription against the framework and plots it over time.
 - **Find out what is behind the number.** [Compliance Analysis](compliance-analysis.md) groups the violations by policy, down to the individual asset.
 - **Commit to doing something.** [Remediation Planner](remediation-planner.md) is where the owner of an asset says what will happen to it, and by when.
@@ -48,7 +48,7 @@ Read left to right, that is the working cycle:
 | Page | What you do there |
 | --- | --- |
 | **[Compliance State](compliance-state.md)** | Track compliance metrics over time and compare subscriptions |
-| **[Policy Manager](policy-manager.md)** | Review security frameworks, assign them, and set what happens to each policy |
+| **[Policy Manager](policy-manager.md)** | Review security frameworks, activate them, and set what happens to each policy |
 | **[Remediation Planner](remediation-planner.md)** | Review violations assigned to you and plan what to do about them |
 | **[Exemptions](exemptions.md)** | Review, approve and reject exemption requests, with expiry and risk number |
 | **[Compliance Analysis](compliance-analysis.md)** | Explore violation detail grouped by policy, down to the individual asset |

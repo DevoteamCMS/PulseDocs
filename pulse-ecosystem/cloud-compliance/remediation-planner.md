@@ -67,10 +67,10 @@ Managers and Analysts see every Asset Group without being delegated to any, so n
 
 Violations are always shown for one security framework at a time, chosen from the selector beside the page title.
 
-![The framework selector open, listing the assigned security frameworks with the active one ticked](../../assets/images/cloud-compliance/framework-selector.png)
+![The framework selector open, listing the activated security frameworks with the active one ticked](../../assets/images/cloud-compliance/framework-selector.png)
 
 - Switching framework changes which violations are listed - an asset may breach a policy in one framework and not appear in another.
-- Only assigned frameworks appear. If the one you expect is missing, it has not been assigned in [Policy Manager](policy-manager.md).
+- Only activated frameworks appear. If the one you expect is missing, it has not been activated in [Policy Manager](policy-manager.md).
 - You open on your organisation's default framework, the same one for everyone.
 
 ---

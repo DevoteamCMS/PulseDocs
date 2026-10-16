@@ -131,7 +131,7 @@ Three shapes are worth recognising:
 
 - **Score rises, violations flat, exemptions rise** - risk is being accepted rather than removed. Legitimate, but it should be a decision someone made, not a surprise.
 - **Score flat, violations flat, compliances rise** - the estate is growing and new resources are passing. Holding a score while growing is real progress.
-- **Score drops sharply on one day** - usually a newly assigned framework or a newly onboarded subscription bringing its findings with it, rather than a sudden regression.
+- **Score drops sharply on one day** - usually a newly activated framework or a newly onboarded subscription bringing its findings with it, rather than a sudden regression.
 
 ---
 
@@ -140,7 +140,7 @@ Three shapes are worth recognising:
 ### Which framework am I looking at?
 {: .no_toc }
 
-The one named in the selector beside the page title. Only assigned frameworks appear there - assigning them is done in [Policy Manager](policy-manager.md).
+The one named in the selector beside the page title. Only activated frameworks appear there - activating them is done in [Policy Manager](policy-manager.md).
 
 ### Am I looking at the whole tenant or one subscription?
 {: .no_toc }
