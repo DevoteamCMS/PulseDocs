@@ -53,7 +53,7 @@ A second gate applies to everyone, Managers included: **the per-policy settings 
 
 The upper card lists every security framework available to your organisation, and the **Status** of each one.
 
-![Policy Manager with the security framework list in the upper card and the policies of the selected framework in the lower one](../../assets/images/cloud-compliance/policy-manager.png)
+![The Assess and Activate Security Framework card, listing each framework with its provider, category, type and Status badge, and the default-framework flag on the right](../../assets/images/cloud-compliance/policy-manager.png)
 
 - Selecting a row filters the policies table beneath it, so the two cards always show a framework and that framework's contents.
 - One framework is selected at a time, and the selection is held in the page address - so a link to Policy Manager can point at a specific framework.
