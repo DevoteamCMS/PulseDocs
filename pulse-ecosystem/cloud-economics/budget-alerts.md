@@ -3,7 +3,7 @@ title: Budget & Alerts
 layout: default
 parent: Cloud Economics
 grand_parent: Pulse Ecosystem
-nav_order: 2
+nav_order: 3
 permalink: /pulse-ecosystem/cloud-economics/budget-alerts/
 ---
 

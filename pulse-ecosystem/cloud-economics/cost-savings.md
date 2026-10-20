@@ -3,7 +3,7 @@ title: Cost Savings
 layout: default
 parent: Cloud Economics
 grand_parent: Pulse Ecosystem
-nav_order: 3
+nav_order: 4
 permalink: /pulse-ecosystem/cloud-economics/cost-savings/
 ---
 
