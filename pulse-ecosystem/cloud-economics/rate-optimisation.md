@@ -3,7 +3,7 @@ title: Rate Optimisation
 layout: default
 parent: Cloud Economics
 grand_parent: Pulse Ecosystem
-nav_order: 4
+nav_order: 5
 permalink: /pulse-ecosystem/cloud-economics/rate-optimisation/
 ---
 

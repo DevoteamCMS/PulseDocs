@@ -10,25 +10,28 @@ permalink: /pulse-ecosystem/cloud-economics/
 
 # Cloud Economics
 
-Cloud Economics brings the billing data of AWS, Azure and Google Cloud into one process for understanding, planning and reducing spend. Four pages, each answering one question, in the order you meet them:
+Cloud Economics brings the billing data of AWS, Azure and Google Cloud into one process for understanding, planning and reducing spend. Five pages, each answering one question, in the order you meet them:
 
 ```mermaid
 flowchart LR
     A["1 - Cost Analysis<br/>Where is the money going?"]
-    B["2 - Budget #amp; Alerts<br/>Is it going to plan?"]
-    C["3 - Cost Savings<br/>What can we stop<br/>paying for?"]
-    D["4 - Rate Optimisation<br/>Are we paying<br/>the best rate?"]
-    A --> B --> C --> D
-    D -.-> A
+    B["2 - Anomaly Detection<br/>Did something<br/>unusual happen?"]
+    C["3 - Budget #amp; Alerts<br/>Is it going to plan?"]
+    D["4 - Cost Savings<br/>What can we stop<br/>paying for?"]
+    E["5 - Rate Optimisation<br/>Are we paying<br/>the best rate?"]
+    A --> B --> C --> D --> E
+    E -.-> A
     click A "/pulse-ecosystem/cloud-economics/cost-analysis/"
-    click B "/pulse-ecosystem/cloud-economics/budget-alerts/"
-    click C "/pulse-ecosystem/cloud-economics/cost-savings/"
-    click D "/pulse-ecosystem/cloud-economics/rate-optimisation/"
+    click B "/pulse-ecosystem/cloud-economics/anomaly-detection/"
+    click C "/pulse-ecosystem/cloud-economics/budget-alerts/"
+    click D "/pulse-ecosystem/cloud-economics/cost-savings/"
+    click E "/pulse-ecosystem/cloud-economics/rate-optimisation/"
 ```
 
 Read left to right, that is the working cycle:
 
 - **See where the money goes.** [Cost Analysis](cost-analysis.md) cuts the combined bill six ways - by service, subscription, team and more - month by month or day by day, with last month and the forecast beside every figure.
+- **Catch the surprises.** [Anomaly Detection](anomaly-detection.md) flags days that break an asset's normal spending pattern, and budgets that have gone over their cap, for someone to review.
 - **Decide what it should be.** [Budget & Alerts](budget-alerts.md) puts a monthly cap on any of those same slices, and emails the people you name as spend approaches it.
 - **Find what you can stop paying for.** [Cost Savings](cost-savings.md) lists cost recommendations resource by resource, with the monthly saving each option would bring.
 - **Pay less for what you keep.** [Rate Optimisation](rate-optimisation.md) shows how much of your estate your reservations cover, how much of them is used, and what they save against what they could.
@@ -41,6 +44,7 @@ Read left to right, that is the working cycle:
 | Page | What you do there |
 | --- | --- |
 | **[Cost Analysis](cost-analysis.md)** | Break spend down six ways, monthly or daily, and save the days you want to come back to |
+| **[Anomaly Detection](anomaly-detection.md)** | See spend that broke its normal pattern or went over a budget, how severe each anomaly is, and mark it as reviewed |
 | **[Budget & Alerts](budget-alerts.md)** | Track spend against monthly caps, see which alert thresholds have been passed, and set up budgets with email alerts |
 | **[Cost Savings](cost-savings.md)** | Review cost recommendations per resource, compare optimisation options, exempt what you will not act on, and track what was implemented |
 | **[Rate Optimisation](rate-optimisation.md)** | See how well your reservations cover your usage, how much of them is used, and what they save now against what they could |
@@ -50,8 +54,8 @@ Read left to right, that is the working cycle:
 ## What You Get at Each Tier
 
 - **Cloud Essentials** - costs in monthly granularity, and budgets you can see but that send no alerts. Available without a Cloud Economics subscription, and described with the rest of the free tier under [Costs](../cloud-inventory.md#costs) and [Budget & Alerts](../cloud-inventory.md#budget--alerts).
-- **Pulse Premium** - all four pages. The daily view and saved views in Cost Analysis, budget alerting, Cost Savings and Rate Optimisation are the part that Premium adds.
-- **Managed Cloud Economics** - the same four pages, plus Devoteam operating them with you as a managed service.
+- **Pulse Premium** - all five pages. The daily view and saved views in Cost Analysis, Anomaly Detection, budget alerting, Cost Savings and Rate Optimisation are the part that Premium adds.
+- **Managed Cloud Economics** - the same five pages, plus Devoteam operating them with you as a managed service.
 
 The menu tells you which you have. Without Cloud Economics, the cost page is called **Costs** and sits under Cloud Essentials; with it, the page is called **Cost Analysis** and moves into its own **Cloud Economics** section alongside the others.
 
