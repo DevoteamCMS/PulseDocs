@@ -71,7 +71,7 @@ The chart shows one anomaly at a time. Select it with the chart icon at the star
 
 **Every day is drawn against a typical day.** The line plots each day's spend as a percentage above or below the typical daily spend, so 0% is an ordinary day:
 
-- **Normal Range** - the shaded band: the daily spend that counts as normal.
+- **Normal Range** - the shaded band: the daily spend that counts as normal - or, on the Budget-Based tab, spend that stays within the budget.
 - **Spend** - the line itself, green while it stays inside the band.
 - **Spend Anomaly** - where the line leaves the band it turns red, and each anomalous day is marked with **!**.
 
@@ -82,10 +82,13 @@ Above the chart, up to three figures summarise the selected anomaly:
 | Figure | What it tells you |
 | --- | --- |
 | **Above Normal** | How far the anomaly is above or below the normal range, as a multiple - for example 0.36x. Pattern-Based only |
-| **Normal Range** | The lower and upper bound of normal daily spend |
+| **Normal Range** | The lower and upper limit of normal daily spend. On the Pattern-Based tab it is learnt from the spend itself; on the Budget-Based tab it is set by the budget, with the budget cap as its limit |
 | **Peak** | The highest daily spend in the chart |
 
-**How the Normal Range is worked out.** The bounds are calculated with a *leave-one-out* approach: each day is judged against a range calculated from the other days, never including itself. A spike therefore cannot widen its own normal range and hide inside it.
+**How the Normal Range is worked out** depends on the tab:
+
+- **Pattern-Based** - the bounds are calculated with a *leave-one-out* approach: each day is judged against a range calculated from the other days, never including itself. A spike therefore cannot widen its own normal range and hide inside it.
+- **Budget-Based** - the range is not learnt from past spend. It comes from the budget: spend is measured against the budget's thresholds, and the budget cap - set either in your cloud or in Pulse - is the limit of the range.
 
 ---
 
@@ -190,7 +193,7 @@ Because it is just as far outside the normal range as a spike. An unplanned drop
 ### What does leave-one-out mean?
 {: .no_toc }
 
-The normal range for a day is calculated from the other days, never including the day being judged. Without it, a large spike would raise the average it is compared with, and partly hide itself.
+On the Pattern-Based tab, the normal range for a day is calculated from the other days, never including the day being judged. Without it, a large spike would raise the average it is compared with, and partly hide itself. Budget-Based anomalies do not use it: their range is set by the budget.
 
 ### Why can I not change the review state?
 {: .no_toc }
