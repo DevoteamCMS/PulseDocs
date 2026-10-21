@@ -132,7 +132,7 @@ An initiative can be assigned at a **management group**, a **subscription** or a
 ### Timing
 {: .no_toc }
 
-Compliance data depends on Azure Policy evaluating the newly assigned initiative, which happens on Azure's own schedule.
+Compliance data depends on Azure Policy evaluating the newly assigned initiative, which happens on Azure's own schedule. If a subscription shows no compliance results for the new assignment, you can ask Azure to evaluate it now - see [the standard is assigned, but a subscription has no compliance results](#azure-the-standard-is-assigned-but-a-subscription-has-no-compliance-results).
 
 ---
 
@@ -213,6 +213,21 @@ Read more: [Cloud Managed Services](https://www.devoteam.com/services/cloud-mana
 Check its **Status** in Policy Manager. **Awaiting Cloud** means exactly this: activated in Pulse, but your cloud is not evaluating that standard, so there is nothing to report. Work through the section above for your cloud.
 
 If the standard is already enabled there, give it time: your cloud evaluates on its own schedule, and Pulse collects the results afterwards. The Status changes to **Active** once data arrives.
+
+### Azure: the standard is assigned, but a subscription has no compliance results
+{: .no_toc }
+
+Azure Policy evaluates a newly assigned initiative on its own schedule, and does not always reach every subscription promptly. A subscription can go several days with no compliance results for a new assignment, including the Microsoft Cloud Security Benchmark assigned during onboarding. Until Azure has evaluated it there is nothing for Pulse to collect, so the subscription has no data in Compliance State.
+
+You can ask Azure to evaluate a subscription straight away. In Azure Cloud Shell, run:
+
+```bash
+az policy state trigger-scan --subscription <subscription-id>
+```
+
+- It needs `Resource Policy Contributor` on the subscription - the same role as assigning the initiative.
+- The evaluation runs in Azure and takes a while to finish. Check its progress in **Policy → Compliance**, scoped to the subscription.
+- Once Azure shows results there, allow up to 24 hours for them to appear in Pulse.
 
 ### Does activating a framework block anything we deploy?
 {: .no_toc }
