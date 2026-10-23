@@ -157,12 +157,17 @@ For anything the curated sources do not cover, you can pick data straight from t
 | --- | --- |
 | Costs | Costs monthly, Costs daily, Costs summary, Costs totals, Budgets, Budget coverage, Cost scope values, Saved cost views |
 | Cost savings | Savings recommendations, Savings action summary, Savings comparison, Cumulative savings, Savings by category, Savings by state |
-| Assets | Assets list, Asset groups, Asset count history, Assets by service, Assets by infrastructure, Asset locations |
+| Assets | Assets list, Asset groups, Asset count history, Assets by service, Assets by infrastructure, Asset locations, Asset grouping: by cloud provider, by category, by asset type, by location, by subscription, by asset group |
 | Governance | Recommendations list, Recommendation aggregates, Recommendation impacted assets, Security alerts list, Security alerts history, Security affected assets history, Security alert totals |
 | Tags | Tag names, Assets by tag count, Top tag names, Untagged assets, Organization tags |
 | Compliance | Compliance standards, Violations, Compliance analysis: violations, Compliance analysis: rules, Policy rules, Exempted violations, Exemption requests |
 | ITSM | Tickets list, Tickets count, Open incident split, Incident SLA, Incident resolve times, ITSM integrations |
 | Organization | Users, Managed services, Service contracts, Billing subscriptions |
+| Rate optimisation | Commitments: summary, Commitments: monthly, Commitments: daily utilisation, Commitments: cost by service, Reservations list, Coverage: summary, Coverage: monthly, Coverage: by service, Coverage: by subscription, Coverage: by region, Effective rate by SKU, Reservation coverage by resource |
+
+**Asset grouping** sources give one row per group - its name, asset count, and last and current month cost - and follow the card's cloud provider filter and the currency in the header. They are the quickest way to chart spend or asset counts by category, location or team.
+
+**Rate optimisation** sources show the same figures as the [Rate Optimisation](cloud-economics/rate-optimisation.md) page for the **last 6 months**, in the currency selected in the header. They have no period or cloud provider filter, and are offered to users who can open Rate Optimisation.
 
 ## Sharing and permissions
 

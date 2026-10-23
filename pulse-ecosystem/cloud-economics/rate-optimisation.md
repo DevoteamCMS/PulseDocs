@@ -10,7 +10,7 @@ permalink: /pulse-ecosystem/cloud-economics/rate-optimisation/
 # Rate Optimisation
 {: .no_toc }
 
-Rate Optimisation answers the question that remains once you only run what you need: *are we paying the best rate for it?* It shows how much of your estate your reservations cover, how much of what you reserved is actually used, and what those commitments save you now against what they could.
+Rate Optimisation answers the question that remains once you only run what you need: *are we paying the best rate for it?* It shows how much of your eligible usage your commitments - reservations and savings plans - cover, how much of what you committed to is actually used, and what those commitments save against pay-as-you-go prices.
 
 <details open markdown="block">
   <summary>
@@ -30,90 +30,200 @@ A cloud bill is usage multiplied by rate, and Cloud Economics works on both:
 - **Usage** - [Cost Savings](cost-savings.md) finds what to resize, stop or remove.
 - **Rate** - Rate Optimisation looks at what you keep running, and whether it is paid for at a committed rate or at the full on-demand price.
 
-The page has two tabs:
+The page has four tabs:
 
-- **Coverage Dashboard** - how your reservations are performing: coverage, utilisation, the savings they bring and where the reserved hours go. This is the tab you read from.
-- **Coverage Optimisation** - the tab for acting on what the dashboard shows.
+| Tab | The question it answers |
+| --- | --- |
+| **Overview** | How are our commitments doing, at a glance? |
+| **Commitments** | What have we committed to, is it used, and what does it cost? |
+| **Coverage** | How much of the usage that could be committed is, and what does that save? |
+| **Resources** | Which resources run under a commitment, partly, or not at all? |
 
-![The Coverage Dashboard tab, with the Reservation Utilisation Score, the Cost Avoidance chart and three charts of reserved hours below them](../../assets/images/cloud-economics/rate-optimisation.png)
-
-Like the rest of Cloud Economics, the tab follows the cloud provider and currency selected in the header.
-
----
-
-## How Reservations Save Money
-
-A reservation is a commitment to a level of usage for a set period, in return for a lower rate than on demand. Two measures decide whether it pays off:
-
-- **Coverage** - how much of the usage that could be reserved actually is. Anything outside a reservation is billed at the on-demand rate.
-- **Utilisation** - how much of the reserved capacity is actually used. A reservation is paid for whether it is used or not, so unused reserved hours are money spent for nothing.
-
-**The two pull in opposite directions.** Reserve too little and steady workloads pay on-demand prices; reserve too much and you pay for capacity nobody uses. The dashboard puts both side by side so that neither is improved at the expense of the other.
+Like the rest of Cloud Economics, the page follows the cloud provider and currency selected in the header. It covers Azure and AWS; with neither provider selected, the page stays empty.
 
 ---
 
-## Choosing the Period
+## Commitments: Reservations and Savings Plans
 
-**Date**, above the cards, sets the period for everything on the tab: the last 3, 6, 12 (the default), 24 or 36 months, or **All Commitment Period**, the full span of your commitments.
+Both clouds offer two ways to commit in return for a lower rate than on demand, and the page shows both side by side:
 
-The 24- and 36-month options are offered only when Pulse holds that much history for your company.
+| | Reservation | Savings plan |
+| --- | --- | --- |
+| **You commit to** | A quantity of a specific resource type (an instance size, a database tier) in a region | An amount of spend per hour, for example €0.065/h |
+| **It applies to** | Matching usage only | Eligible compute usage across sizes, regions and services |
+| **Shown with** | Its SKU, region and quantity | Its hourly commitment; SKU and region do not apply |
+
+**Reservations apply first; savings plans cover what is left.** This is how both Azure and AWS bill them, and how the page counts them, so the same hour is never counted twice.
+
+Two measures decide whether a commitment pays off:
+
+- **Coverage** - how much of the usage that could run under a commitment actually does. Anything outside one is billed at the on-demand rate.
+- **Utilisation** - how much of what you committed to is actually used. A commitment is paid for whether it is used or not, so unused commitment is money spent for nothing.
+
+**The two pull in opposite directions.** Commit too little and steady workloads pay on-demand prices; commit too much and you pay for capacity nobody uses. The page puts both side by side so that neither is improved at the expense of the other.
 
 ---
 
-## Reservation Utilisation Score
+## Choosing What to Look At
 
-![The Reservation Utilisation Score card, with the share of eligible resources covered and the share of reserved instances utilised](../../assets/images/cloud-economics/rate-optimisation-score.png)
+The bar above the tabs applies to all four:
 
-Two scores, one for each measure:
+| Control | What it does |
+| --- | --- |
+| **Period** | **Last 30 days**, **This month**, **Last month**, **Last 3 months** or **Last 6 months** (the default). Every figure covers this period |
+| **Subscription** | Narrows to the subscriptions or accounts where the benefit landed |
+| **Service** | Narrows to a service, such as virtual machines or SQL databases |
+| **Region** | Narrows to one or more regions |
+| **Amortized / Actual** | On the **Commitments** tab only: amortized cost (the purchase spread over the term) or the cash actually paid in the period |
 
-| Score | Measured across | What it tells you | Legend |
-| --- | --- | --- | --- |
-| **Covered** | **Eligible Resources** - everything that could run under a reservation | The share of it that does | **Covered** · **Uncovered** |
-| **Utilized** | **Reserved Instances** - everything you have reserved | The share of it that is used | **Utilized** · **Underutilized** |
+**Cost data as of**, on the right, is the last day with cost data. Cost data arrives one to three days late, so the period ends there rather than today.
 
-In the example above, 70% covered means 30% of eligible usage is still billed on demand, and 75% utilised means a quarter of the reserved capacity is paid for but not used.
+---
 
-**Read the two scores together:**
+## Overview
+
+The tab to read first. Across the top:
+
+- **Reservation score** - two rings: **Covered** (the share of eligible usage that runs under a commitment) and **Utilised** (the share of commitments that is used).
+- **Cost avoidance: current vs potential** - month by month, what your commitments saved against pay-as-you-go prices (**Current savings**) and what committing at the best available rate per SKU could have saved (**Potential savings**). The total potential for the period sits above the chart. Potential savings is an estimate, not money saved.
+
+Along the bottom:
+
+| Chart | What it shows |
+| --- | --- |
+| **Used vs purchased** | Committed cost used against committed cost paid in the period. The difference is commitment paid for and not used |
+| **Usage by service (h)** | Hours per service, split into hours run under a commitment and hours run on demand |
+| **Reserved vs on-demand (h)** | All eligible hours, under a commitment or on demand |
+
+**Read the two rings together:**
 
 | | Low utilisation | High utilisation |
 | --- | --- | --- |
-| **High coverage** | More is reserved than is used. Adjust or retire reservations before buying more | The goal - most eligible usage is reserved, and the reservations are used |
-| **Low coverage** | The reservations are in the wrong place: they go unused while eligible usage pays on demand | What is reserved works. There is room to reserve more |
+| **High coverage** | More is committed than is used. Adjust or let commitments expire before buying more | The goal - most eligible usage is committed, and the commitments are used |
+| **Low coverage** | The commitments are in the wrong place: they go unused while eligible usage pays on demand | What is committed works. There is room to commit more |
+
+For example, 98.9% utilised with 75.6% covered means the commitments you hold are fully used, but a quarter of eligible usage still pays on-demand prices - usually because commitments expired and were not renewed.
 
 ---
 
-## Cost Avoidance: Current vs Potential
+## Commitments
 
-![The Cost Avoidance chart, with Potential Savings as a shaded area above the Current Savings line, month by month](../../assets/images/cloud-economics/rate-optimisation-avoidance.png)
+### Key figures
 
-Cost avoidance is spend that did not happen: what the same usage would have cost at on-demand rates, less what it cost under a reservation. The chart shows it month by month across the period, as two series:
+Five cards: **Active reservations** (commitments in force today, savings plans included), **Expiring within 90 days**, **Utilisation (amortized)**, **Unused cost (amortized)** and **Reservation cost** - or **Cash paid** when **Actual** is selected.
 
-- **Current Savings** - what the reservations you already have are saving.
-- **Potential Savings** - what could be saved with rates optimised further. It is a projection, not money already saved.
+### Charts
 
-Hover any month to see both figures for it. **Full Period Costs**, above the chart, totals the selected period.
+- **Used vs unused** - monthly committed cost, split into the used and the unused part. With **Actual**, it shows the cash paid each month instead.
+- **Utilisation trend** - daily utilisation, weighted by cost, with reference lines at **95%** (target) and **80%** (minimum).
+- **Cost by service** - committed cost per service. A savings plan is split across the services where its benefit landed.
 
-**The gap between the two is the opportunity.** Current Savings is already in the bill; the distance up to Potential Savings is what better coverage, or better-sized reservations, would add. A gap that stays wide month after month is the case for the next commitment.
+### The commitments table
+
+One row per commitment that is in force today or whose term overlaps the period - expired ones included, so you can see what lapsed. The most unused cost comes first.
+
+| Column | What it shows |
+| --- | --- |
+| **Name** | The commitment's name, with warnings below it: **Expiring** (ends within 90 days), **Auto-renew off**, **Partial visibility** (shared scope reaching subscriptions not connected to Pulse) |
+| **Provider** | Azure or AWS |
+| **Type** | Reservation or Savings plan |
+| **Service and SKU** | What it covers. For a savings plan, the kind of plan |
+| **Region**, **Scope** | Where it applies: a single subscription, shared, regional, an availability zone, a payer account |
+| **Term and payment** | 1 or 3 years; monthly, upfront, no upfront, partial upfront |
+| **Quantity / commitment** | The reserved quantity, or the savings plan's spend per hour |
+| **Ends** | The last day of the term, and the days left - negative once expired |
+| **Utilisation** | Green from 95%, amber from 80%, red below |
+| **Unused cost**, **Reservation cost** (or **Cash paid**), **Net savings** | For the period |
+| **30-day utilisation** | A bar per day; gaps are days without cost |
+
+**Tag filter.** Pick a tag key and a value next to the table title to keep only the commitments whose benefit landed on resources carrying that tag - for example `platform-update : tr-test-1`. It narrows the table; the cards and charts above stay for the whole selection.
+
+The table exports to CSV.
+
+### Inside a commitment
+
+Click a name to open its panel:
+
+- **Attributes** - type, service, SKU, region, quantity or hourly commitment, term and payment, scope, purchase date, end date, auto-renew, state, where it is billed, cost, unused cost, net savings and utilisation.
+- **Daily utilisation** - day by day, with the 95% and 80% lines.
+- **Where the benefit landed** - every resource that used the commitment in the period, with its subscription, resource group, region, hours used, cost and saving. Pick a **tag key** to add a column with each resource's value and a one-line summary such as *Benefit by cost-center: kcentras 62% · ltg link 30% · No value 8%*. A resource without a value of its own takes the value of the nearest parent that has one - its scale set, resource group or subscription.
+- **Payment history** - purchases and refunds in the period.
 
 ---
 
-## Where the Reserved Hours Go
+## Coverage
 
-Three charts along the bottom of the tab, all in hours (h):
+Always amortized. Coverage is weighted by pay-as-you-go value: the value of the usage that ran under a commitment, against the value of all usage that could have.
 
-| Chart | What it shows | How to read it |
-| --- | --- | --- |
-| **Used vs Purchased (h)** | Reserved hours used against reserved hours purchased, across the whole estate | The difference is reserved capacity paid for and not used - the hours behind the **Utilized** score |
-| **Reserved Resources Overview (h)** | Reserved hours by resource type - compute, storage, network and so on | Where your commitments sit. Compare it with where your spend sits in [Cost Analysis](cost-analysis.md) |
-| **Reserved vs On-Demand (h)** | Hours run under a reservation against hours run at on-demand rates, across the whole estate | On-demand hours are paid at the full rate. Where they could be reserved, they make up the **Uncovered** share of the score |
+### Key figures
+
+| Card | What it shows |
+| --- | --- |
+| **Coverage** | Covered pay-as-you-go value as a share of the eligible one |
+| **Net savings** | What commitments saved against pay-as-you-go prices, less their unused cost |
+| **Effective savings rate** | Net savings as a share of the eligible pay-as-you-go value |
+| **Uncovered on-demand spend** | What eligible usage cost at on-demand rates |
+
+A line below the cards says when the commitment prices were last updated, and how many usage rows were left out because the provider reported no pay-as-you-go price for them.
+
+### Charts
+
+- **What you pay vs pay-as-you-go** - monthly, the pay-as-you-go value of eligible usage next to what it actually cost. The gap is the saving.
+- **Coverage & utilisation trend** - the two measures month by month. Utilisation that stays high while coverage falls is the typical sign of commitments expiring without renewal.
+
+### Coverage by
+
+The same figures split by **Service**, **Subscription**, **Region** or **SKU**, largest eligible value first. Rows with uncovered spend link to the reservation recommendations in [Cost Savings](cost-savings.md).
+
+### Effective rate by SKU
+
+What one hour of each SKU really costs:
+
+| Column | What it shows |
+| --- | --- |
+| **Hours** | Eligible hours of the SKU in the region |
+| **PayG rate** | The pay-as-you-go price per hour |
+| **Effective rate** | What an hour actually cost, commitments included |
+| **Best commitment rate**, **Best term** | The lowest committed rate available for the SKU in the region, and its term |
+| **Discount realised** | How far the effective rate sits below the pay-as-you-go rate |
+
+A wide gap between the effective and the best commitment rate is where a new commitment would pay off most.
+
+---
+
+## Resources
+
+The same picture, resource by resource: every resource that ran under a commitment or could have.
+
+**Status** sorts them into three:
+
+| Status | Meaning |
+| --- | --- |
+| **Reserved** | All its eligible usage ran under a commitment |
+| **Partly reserved** | Some of it ran on demand |
+| **Not reserved** | All of it ran on demand, though a commitment could have covered it |
+
+Filter by status, search by name or resource ID, and pick a **tag key** to add a column and a **Coverage by** table for that tag: per tag value, the resources, reserved and on-demand hours, coverage, reserved cost, uncovered on-demand cost and savings. Coverage here is the reserved share of **hours**, not of pay-as-you-go value, so it can differ slightly from the Coverage tab.
+
+| Column | What it shows |
+| --- | --- |
+| **Resource**, **Status**, **Provider** | What it is and how it is covered |
+| **Subscription**, **Resource group**, **SKU** | Where it is and what size |
+| **Reserved**, **On demand** | Hours in the period |
+| **Coverage (usage)** | The reserved share of its hours |
+| **Savings**, **Total cost** | For the period |
+
+Click a resource to open its panel: its details, its **daily usage** split into hours under a commitment and hours on demand, and the **commitments it used**, each with its hours, cost, saving and the dates it applied. A virtual machine covered first by a reservation and, after it expired, by a savings plan shows both.
+
+The same figures appear as a **Reservation coverage** card on the resource's own page in [Cloud Inventory](../cloud-inventory.md), and as the **Reservation status** grouping in the Assets **Aggregation** tab.
 
 ---
 
 ## Nothing Here Changes Your Cloud
 
-**Rate Optimisation reads your reservations and usage; it does not buy, change or cancel anything.** Reservations are purchased and managed in your cloud provider, and Pulse reports on them from there.
+**Rate Optimisation reads your commitments and usage; it does not buy, change or cancel anything.** Reservations and savings plans are purchased and managed in your cloud provider, and Pulse reports on them from there.
 
-- **On Pulse Premium** - by your own teams, using the dashboard to decide what to commit to and what to adjust.
+- **On Pulse Premium** - by your own teams, using the page to decide what to commit to and what to renew.
 - **With Managed Cloud Economics** - with Devoteam, as part of the managed service.
 
 ---
@@ -123,29 +233,39 @@ Three charts along the bottom of the tab, all in hours (h):
 ### How is this different from Cost Savings?
 {: .no_toc }
 
-[Cost Savings](cost-savings.md) reduces usage - a smaller machine, a stopped resource, a deleted disk. Rate Optimisation reduces the price of the usage that remains. They work best in that order: resize first, then reserve what is left, so you do not commit to capacity you are about to remove.
+[Cost Savings](cost-savings.md) reduces usage - a smaller machine, a stopped resource, a deleted disk. Rate Optimisation reduces the price of the usage that remains. They work best in that order: resize first, then commit to what is left, so you do not commit to capacity you are about to remove.
 
 ### Should coverage be 100%?
 {: .no_toc }
 
-Usually not. Steady, predictable usage is what reservations suit. Usage that is temporary, seasonal or about to change is often better left on demand, because a reservation keeps costing money after the usage it was bought for has gone.
+Usually not. Steady, predictable usage is what commitments suit. Usage that is temporary, seasonal or about to change is often better left on demand, because a commitment keeps costing money after the usage it was bought for has gone.
 
 ### Why is utilisation below 100%?
 {: .no_toc }
 
-Part of what was reserved is not being used. Typically the workload it was bought for has shrunk, moved or been resized since the purchase. **Used vs Purchased** shows how many hours that is.
+Part of what was committed is not being used. Typically the workload it was bought for has shrunk, moved or been resized, or runs fewer hours - at night or at weekends, for example. The commitment's panel shows on which days, and the **Used vs unused** chart how much it cost.
+
+### Utilisation is high but coverage keeps falling. Why?
+{: .no_toc }
+
+Commitments are expiring without being renewed. An expired commitment drops out of utilisation - there is nothing left to measure - but the resources it covered keep running on demand, which lowers coverage. Look for **Auto-renew off** and negative **Ends** values in the commitments table, and for **Not reserved** resources on the Resources tab.
+
+### Reservation or savings plan?
+{: .no_toc }
+
+A reservation gives the deeper discount but only for the exact resource type and region. A savings plan gives a smaller discount but follows your usage across sizes, regions and services. Steady workloads that will not change suit reservations; workloads that are steady in spend but change in shape suit savings plans. Because reservations apply first, the two can be combined.
 
 ### Is Potential Savings money I will save?
 {: .no_toc }
 
-No. It is a projection of what further rate optimisation could achieve. Only Current Savings reflects reservations you already have.
+No. It is an estimate of what committing at the best available rate could achieve. Only Current savings and Net savings reflect commitments you already have.
 
-### Why can I not choose 24 or 36 months?
+### Why does the period end a few days ago?
 {: .no_toc }
 
-Those periods are offered only when Pulse holds that much history for your company. Until then, the longest choices are 12 months and **All Commitment Period**.
+Providers deliver cost data one to three days late. **Cost data as of** shows the last complete day, and every period ends there.
 
-### Do I need to add my reservations to Pulse?
+### Do I need to add my commitments to Pulse?
 {: .no_toc }
 
-No. Reservations are bought and managed in your cloud provider, and Rate Optimisation reports on them from there. Nothing needs to be entered in Pulse, and nothing in Pulse changes them.
+No. Reservations and savings plans are bought and managed in your cloud provider, and Rate Optimisation reports on them from there. Nothing needs to be entered in Pulse, and nothing in Pulse changes them.

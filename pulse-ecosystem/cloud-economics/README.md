@@ -34,7 +34,7 @@ Read left to right, that is the working cycle:
 - **Catch the surprises.** [Anomaly Detection](anomaly-detection.md) flags days that break an asset's normal spending pattern, and budgets that have gone over their cap, for someone to review.
 - **Decide what it should be.** [Budget & Alerts](budget-alerts.md) puts a monthly cap on any of those same slices, and emails the people you name as spend approaches it.
 - **Find what you can stop paying for.** [Cost Savings](cost-savings.md) lists cost recommendations resource by resource, with the monthly saving each option would bring.
-- **Pay less for what you keep.** [Rate Optimisation](rate-optimisation.md) shows how much of your estate your reservations cover, how much of them is used, and what they save against what they could.
+- **Pay less for what you keep.** [Rate Optimisation](rate-optimisation.md) shows how much of your eligible usage your reservations and savings plans cover, how much of them is used, and what they save against pay-as-you-go prices.
 - **Check that it landed.** The dotted line back: an implemented saving or a better rate shows as lower spend in Cost Analysis, and an implemented recommendation is counted in the history of Cost Savings.
 
 ---
@@ -47,7 +47,7 @@ Read left to right, that is the working cycle:
 | **[Anomaly Detection](anomaly-detection.md)** | See spend that broke its normal pattern or went over a budget, how severe each anomaly is, and mark it as reviewed |
 | **[Budget & Alerts](budget-alerts.md)** | Track spend against monthly caps, see which alert thresholds have been passed, and set up budgets with email alerts |
 | **[Cost Savings](cost-savings.md)** | Review cost recommendations per resource, compare optimisation options, exempt what you will not act on, and track what was implemented |
-| **[Rate Optimisation](rate-optimisation.md)** | See how well your reservations cover your usage, how much of them is used, and what they save now against what they could |
+| **[Rate Optimisation](rate-optimisation.md)** | See how well your reservations and savings plans cover your usage, how much of them is used, and what they save - commitment by commitment and resource by resource |
 
 ---
 
