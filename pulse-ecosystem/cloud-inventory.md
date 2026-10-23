@@ -257,6 +257,46 @@ The Subscription column is labelled with the terminology of the selected provide
 
 </details>
 
+### Aggregation
+
+The **Aggregation** tab answers questions that a filtered list cannot: *how much do we run, and spend, in each combination of category, location, team or tag?* Instead of filtering one slice at a time, it puts every combination that exists in one table.
+
+**Group by** joins up to three dimensions, read as "and":
+
+`[ Asset category ▾ ✕ ] & [ Location ▾ ✕ ] & [ + ]`
+
+- **+** adds a dimension, up to three; **✕** inside a box removes it.
+- **Drag a box** onto another to change the order. The columns, the export and the chart labels follow it.
+- A dimension can appear only once; **Tag** can appear more than once with different keys.
+
+| Dimension | Groups by |
+| --- | --- |
+| **Cloud provider**, **Location** | Provider; cloud region |
+| **Subscription / account** | Subscription, account or project, shown by name |
+| **Resource group (Azure)** | Azure resource group; assets of other providers are left out when it is used |
+| **Asset type**, **Asset category**, **Asset service** | What the resource is, from the most specific to the broadest - for example `microsoft.compute/virtualmachines`, **Compute**, **Virtual Machines** |
+| **Asset group**, **Allocation type** | Ownership: the group that holds the asset and how it got there |
+| **Tag** | The values of one tag key you choose, shown as `key:value` |
+| **Reservation status** | **Reserved**, **Partly reserved**, **Not reserved** or **Not eligible**, from the last 30 days of [Rate Optimisation](cloud-economics/rate-optimisation.md) |
+
+Each row is one combination that exists - for example:
+
+| Asset category | Location | Assets | Share | Last month | Current month |
+| --- | --- | --- | --- | --- | --- |
+| Compute | northeurope | 154 | 31.2% | €1,226.55 | €966.69 |
+| Storage | northeurope | 94 | 12.4% | €287.00 | €304.06 |
+| Storage | westeurope | 61 | 4.8% | €111.20 | €98.40 |
+
+**Share** is the row's part of last month's cost. Expand a row to see its assets, most expensive first, each linking to its own page. The table sorts, pages and exports to CSV with a separate column per dimension.
+
+Above the table: **Assets in scope**, **Combinations**, **Last month cost** and **Assets with cost data**, and a chart of the ten most expensive combinations.
+
+**Costs are summed from the assets, without hierarchy assets.** Subscriptions, resource groups, accounts, projects, tenants and organizations carry the total of what they contain, so counting them as well would count the same spend two or three times. The tab uses the same filters and **Date** range as the Overview list.
+
+<div class="takeaway" markdown="block">
+**What to do with it.** Answer "what do we run where, and what does it cost" in one view: **Asset category & Location** shows where each kind of workload lives; **Location & Tag: environment** shows which environments run in which region; **Reservation status & Tag: cost-center** shows which teams' resources pay on-demand prices. Export the table to take the breakdown into a report.
+</div>
+
 ### Inside a Single Asset
 
 Clicking any row opens that resource's own page, which gathers everything Pulse knows about it in one place. This is where the multi-cloud story pays off at the level of a single thing you can act on: identity, owner, tags, cost and outstanding recommendations, without opening the provider console.
@@ -270,6 +310,8 @@ Three cards sit across the top:
 - **Tags** - every tag on the resource, or a clear statement that it has none.
 
 **Asset Cost** then charts this one resource's daily spend over the last 30 days alongside a 30-day forecast, with four figures above it: **Actual Cost**, **Predicted Cost Before Savings**, **Estimated Cost Savings** and **Estimated Cost After Savings**. **Available Cost Saving** lists the specific opportunities behind that savings figure, each with a severity and a euro value. Underneath, **Recommendations** lists everything raised against this asset alone, with the same filters and export as the main page.
+
+**Reservation coverage**, for resources a reservation or savings plan can cover, shows the last 30 days from [Rate Optimisation](cloud-economics/rate-optimisation.md): the resource's status (**Reserved**, **Partly reserved**, **Not reserved** or **Not eligible**), the share of its hours under a commitment, reserved and on-demand hours, the saving, the cost still paid on demand, and the commitments it used.
 
 **JSON View**, beside the title, shows the raw record Pulse holds for the resource - useful when you need a field that no card surfaces, or to confirm exactly what was scanned.
 
@@ -288,7 +330,7 @@ Identifier fields have a copy button. Fields that do not apply to the resource s
 
 ### Ownership
 
-The page's second tab answers a different question: not what exists, but who is answerable for it. Assets are grouped into **Asset Groups**, each with its own delegated users, which is what makes the **Asset Group** and **Allocation Type** filters above useful and what puts a per-team figure on the Costs page's Asset Group tab.
+The **Ownership** tab answers a different question: not what exists, but who is answerable for it. Assets are grouped into **Asset Groups**, each with its own delegated users, which is what makes the **Asset Group** and **Allocation Type** filters above useful and what puts a per-team figure on the Costs page's Asset Group tab.
 
 It is a feature in its own right, with its own page: see [Asset Ownership](asset-ownership.md).
 
