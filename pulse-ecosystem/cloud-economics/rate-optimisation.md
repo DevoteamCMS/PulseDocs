@@ -21,6 +21,9 @@ Rate Optimisation answers the question that remains once you only run what you n
 {:toc}
 </details>
 
+Screenshots on this page show the page content only - the surrounding navigation and header are omitted so each one focuses on the screen being described. Subscription and account names, resource names, customer-specific tag values and anything identifying a person are blurred; figures, service names, regions and dates are shown as they are.
+{: .fs-3 }
+
 ---
 
 ## What the Page Is For
@@ -55,6 +58,8 @@ Both clouds offer two ways to commit in return for a lower rate than on demand, 
 
 **Reservations apply first; savings plans cover what is left.** This is how both Azure and AWS bill them, and how the page counts them, so the same hour is never counted twice.
 
+On AWS, reservations are Reserved Instances. EC2 Reserved Instances and Savings Plans are the main focus, and commitments for other AWS services are included too.
+
 Two measures decide whether a commitment pays off:
 
 - **Coverage** - how much of the usage that could run under a commitment actually does. Anything outside one is billed at the on-demand rate.
@@ -75,6 +80,7 @@ The bar above the tabs applies to all four:
 | **Service** | Narrows to a service, such as virtual machines or SQL databases |
 | **Region** | Narrows to one or more regions |
 | **Amortized / Actual** | On the **Commitments** tab only: amortized cost (the purchase spread over the term) or the cash actually paid in the period |
+| **Tags** | Not part of this bar. Tag filters and tag breakdowns are on the **Commitments** and **Resources** tabs - see [Filtering and Grouping by Tag](#filtering-and-grouping-by-tag) |
 
 **Cost data as of**, on the right, is the last day with cost data. Cost data arrives one to three days late, so the period ends there rather than today.
 
@@ -94,6 +100,11 @@ Along the bottom:
 | **Used vs purchased** | Committed cost used against committed cost paid in the period. The difference is commitment paid for and not used |
 | **Usage by service (h)** | Hours per service, split into hours run under a commitment and hours run on demand |
 | **Reserved vs on-demand (h)** | All eligible hours, under a commitment or on demand |
+
+> **Screenshot needed:** The Overview tab in full - the Reservation score rings, the Cost avoidance chart with the period total, and the three charts along the bottom.  
+> File: `assets/images/cloud-economics/rate-optimisation-overview.png`
+
+<!-- Replace the placeholder above with: ![The Overview tab, with the Covered and Utilised rings, the Cost avoidance chart of current and potential savings, and the Used vs purchased, Usage by service and Reserved vs on-demand charts below](../../assets/images/cloud-economics/rate-optimisation-overview.png) -->
 
 **Read the two rings together:**
 
@@ -118,6 +129,11 @@ Five cards: **Active reservations** (commitments in force today, savings plans i
 - **Utilisation trend** - daily utilisation, weighted by cost, with reference lines at **95%** (target) and **80%** (minimum).
 - **Cost by service** - committed cost per service. A savings plan is split across the services where its benefit landed.
 
+> **Screenshot needed:** The top of the Commitments tab - the five cards and the Used vs unused, Utilisation trend (with the 95% and 80% lines) and Cost by service charts.  
+> File: `assets/images/cloud-economics/rate-optimisation-commitments.png`
+
+<!-- Replace the placeholder above with: ![The Commitments tab, with the five key figure cards above the Used vs unused, Utilisation trend and Cost by service charts](../../assets/images/cloud-economics/rate-optimisation-commitments.png) -->
+
 ### The commitments table
 
 One row per commitment that is in force today or whose term overlaps the period - expired ones included, so you can see what lapsed. The most unused cost comes first.
@@ -136,7 +152,17 @@ One row per commitment that is in force today or whose term overlaps the period 
 | **Unused cost**, **Reservation cost** (or **Cash paid**), **Net savings** | For the period |
 | **30-day utilisation** | A bar per day; gaps are days without cost |
 
-**Tag filter.** Pick a tag key and a value next to the table title to keep only the commitments whose benefit landed on resources carrying that tag - for example `platform-update : tr-test-1`. It narrows the table; the cards and charts above stay for the whole selection.
+> **Screenshot needed:** The commitments table with rows that show the Expiring, Auto-renew off and Partial visibility warnings, utilisation in all three colours and the 30-day bars.  
+> File: `assets/images/cloud-economics/rate-optimisation-commitments-table.png`
+
+<!-- Replace the placeholder above with: ![The commitments table, with warnings under the names, utilisation coloured green, amber and red, and a 30-day utilisation bar per row](../../assets/images/cloud-economics/rate-optimisation-commitments-table.png) -->
+
+**Tag filter.** Pick a tag key and a value next to the table title to keep only the commitments whose benefit landed on resources carrying that tag - for example `cost-center : finance`. Each row then shows that tag's share of the commitment, based on actual consumption. The cards and charts above stay for the whole selection. See [Filtering and Grouping by Tag](#filtering-and-grouping-by-tag).
+
+> **Screenshot needed:** The tag key and value picker open next to the table title, and the table filtered by one tag - including a shared reservation or savings plan whose row shows only that tag's share.  
+> File: `assets/images/cloud-economics/rate-optimisation-tag-filter.png`
+
+<!-- Replace the placeholder above with: ![The commitments table filtered by a cost-center tag, with the tag key and value picker open next to the table title](../../assets/images/cloud-economics/rate-optimisation-tag-filter.png) -->
 
 The table exports to CSV.
 
@@ -146,8 +172,13 @@ Click a name to open its panel:
 
 - **Attributes** - type, service, SKU, region, quantity or hourly commitment, term and payment, scope, purchase date, end date, auto-renew, state, where it is billed, cost, unused cost, net savings and utilisation.
 - **Daily utilisation** - day by day, with the 95% and 80% lines.
-- **Where the benefit landed** - every resource that used the commitment in the period, with its subscription, resource group, region, hours used, cost and saving. Pick a **tag key** to add a column with each resource's value and a one-line summary such as *Benefit by cost-center: kcentras 62% · ltg link 30% · No value 8%*. A resource without a value of its own takes the value of the nearest parent that has one - its scale set, resource group or subscription.
+- **Where the benefit landed** - every resource that used the commitment in the period, with its subscription, resource group, region, hours used, cost and saving. Pick a **tag key** to add a column with each resource's value and a one-line summary of shares of actual consumption, such as *Benefit by cost-center: finance 62% · platform 30% · No value 8%*. A resource without a value of its own takes the value of the nearest parent that has one - on Azure its scale set, resource group or subscription; on AWS its account.
 - **Payment history** - purchases and refunds in the period.
+
+> **Screenshot needed:** A commitment's panel with a tag key picked under Where the benefit landed - the tag column on each resource and the Benefit by summary line. A savings plan or shared reservation that reached several tag values shows this best.  
+> File: `assets/images/cloud-economics/rate-optimisation-benefit-by-tag.png`
+
+<!-- Replace the placeholder above with: ![A commitment's panel, with Where the benefit landed split by a cost-center tag and the Benefit by summary above the resources](../../assets/images/cloud-economics/rate-optimisation-benefit-by-tag.png) -->
 
 ---
 
@@ -171,9 +202,19 @@ A line below the cards says when the commitment prices were last updated, and ho
 - **What you pay vs pay-as-you-go** - monthly, the pay-as-you-go value of eligible usage next to what it actually cost. The gap is the saving.
 - **Coverage & utilisation trend** - the two measures month by month. Utilisation that stays high while coverage falls is the typical sign of commitments expiring without renewal.
 
+> **Screenshot needed:** The top of the Coverage tab - the four cards, the line about commitment prices, and the What you pay vs pay-as-you-go and Coverage & utilisation trend charts.  
+> File: `assets/images/cloud-economics/rate-optimisation-coverage.png`
+
+<!-- Replace the placeholder above with: ![The Coverage tab, with the Coverage, Net savings, Effective savings rate and Uncovered on-demand spend cards above the What you pay vs pay-as-you-go and Coverage & utilisation trend charts](../../assets/images/cloud-economics/rate-optimisation-coverage.png) -->
+
 ### Coverage by
 
 The same figures split by **Service**, **Subscription**, **Region** or **SKU**, largest eligible value first. Rows with uncovered spend link to the reservation recommendations in [Cost Savings](cost-savings.md).
+
+> **Screenshot needed:** The Coverage by table with its dimension switch, including a row with uncovered spend and its link to Cost Savings.  
+> File: `assets/images/cloud-economics/rate-optimisation-coverage-by.png`
+
+<!-- Replace the placeholder above with: ![The Coverage by table split by service, with a row linking to the reservation recommendations in Cost Savings](../../assets/images/cloud-economics/rate-optimisation-coverage-by.png) -->
 
 ### Effective rate by SKU
 
@@ -188,6 +229,11 @@ What one hour of each SKU really costs:
 | **Discount realised** | How far the effective rate sits below the pay-as-you-go rate |
 
 A wide gap between the effective and the best commitment rate is where a new commitment would pay off most.
+
+> **Screenshot needed:** The Effective rate by SKU table, ideally with one SKU showing a wide gap between the effective and the best commitment rate.  
+> File: `assets/images/cloud-economics/rate-optimisation-effective-rate.png`
+
+<!-- Replace the placeholder above with: ![The Effective rate by SKU table, comparing pay-as-you-go, effective and best commitment rates per SKU](../../assets/images/cloud-economics/rate-optimisation-effective-rate.png) -->
 
 ---
 
@@ -213,9 +259,70 @@ Filter by status, search by name or resource ID, and pick a **tag key** to add a
 | **Coverage (usage)** | The reserved share of its hours |
 | **Savings**, **Total cost** | For the period |
 
+> **Screenshot needed:** The Resources tab with a tag key picked - the status filter, the tag column in the table, and all three statuses visible.  
+> File: `assets/images/cloud-economics/rate-optimisation-resources.png`
+
+<!-- Replace the placeholder above with: ![The Resources tab, with Reserved, Partly reserved and Not reserved resources and a column for the picked tag key](../../assets/images/cloud-economics/rate-optimisation-resources.png) -->
+
+> **Screenshot needed:** The Coverage by table for the picked tag key - per tag value, the resources, reserved and on-demand hours, coverage, reserved cost, uncovered on-demand cost and savings, with a No value row.  
+> File: `assets/images/cloud-economics/rate-optimisation-coverage-by-tag.png`
+
+<!-- Replace the placeholder above with: ![The Coverage by table for a cost-center tag, with coverage, reserved cost, uncovered on-demand cost and savings per tag value](../../assets/images/cloud-economics/rate-optimisation-coverage-by-tag.png) -->
+
 Click a resource to open its panel: its details, its **daily usage** split into hours under a commitment and hours on demand, and the **commitments it used**, each with its hours, cost, saving and the dates it applied. A virtual machine covered first by a reservation and, after it expired, by a savings plan shows both.
 
+> **Screenshot needed:** A resource's panel showing daily usage under a commitment and on demand, and the commitments it used - ideally a VM covered first by a reservation and then by a savings plan.  
+> File: `assets/images/cloud-economics/rate-optimisation-resource-panel.png`
+
+<!-- Replace the placeholder above with: ![A resource's panel, with daily usage split into reserved and on-demand hours and the commitments it used listed below](../../assets/images/cloud-economics/rate-optimisation-resource-panel.png) -->
+
 The same figures appear as a **Reservation coverage** card on the resource's own page in [Cloud Inventory](../cloud-inventory.md), and as the **Reservation status** grouping in the Assets **Aggregation** tab.
+
+---
+
+## Filtering and Grouping by Tag
+
+Tags answer who your commitments work for: which cost center, team or application gets the benefit, and which still pays on-demand prices. **Pulse reads tags only from the resources a commitment's benefit landed on**, never from the reservation or savings plan itself.
+
+| Where | What you can do |
+| --- | --- |
+| **Commitments** tab, the commitments table | Pick a tag key and a value next to the table title to keep only the commitments whose benefit landed on resources carrying that tag, for example `cost-center : finance`. Each row then shows that tag's share of the commitment, based on actual consumption: its cost, savings and unused cost in the same proportion |
+| **Commitments** tab, a commitment's panel | Under **Where the benefit landed**, pick a tag key to add a column with each resource's value and a summary of shares of actual consumption, such as *Benefit by cost-center: finance 62% · platform 30% · No value 8%* |
+| **Resources** tab | Pick a tag key to add a column and a **Coverage by** table for that tag: per tag value, the resources, reserved and on-demand hours, coverage, reserved cost, uncovered on-demand cost and savings |
+| CSV export | The commitments table export includes the tag key and value |
+
+### How a resource gets its tag value
+{: .no_toc }
+
+A resource without a value of its own takes the value of the nearest parent that has one: on Azure its scale set, resource group or subscription; on AWS its account. Two labels mark what cannot be given a value:
+
+| Label | Meaning |
+| --- | --- |
+| **No value** | Neither the resource nor any of its parents has a value for the tag key |
+| **No data** | The benefit landed in subscriptions or accounts not connected to Pulse, so their resources and tags cannot be seen. The commitments table marks these commitments **Partial visibility** |
+
+A large **No value** share means part of your commitment benefit cannot be charged back to anyone; tagging the resource group, subscription or account fixes it for every resource below.
+
+### Savings plans and shared reservations
+{: .no_toc }
+
+A savings plan, or a reservation with shared scope, can cover many resources at once, often with different tag values. Its benefit is split across them by actual consumption, and its cost and savings follow the same split. The same commitment therefore appears under every tag value it reached, each with its own share.
+
+### Unused commitment
+{: .no_toc }
+
+Unused commitment has no resource behind it, so it is shared out across tag values in proportion to their consumption. A cost center that used 62% of a reservation also carries 62% of its unused cost.
+
+### What tags do not change
+{: .no_toc }
+
+- The **Overview** tab.
+- The cards and charts on the **Commitments** tab. They stay for the whole selection while the table narrows.
+- The **Coverage** tab. **Coverage by** splits by Service, Subscription, Region or SKU, not by tag. For coverage per tag value, use the **Coverage by** table on the Resources tab.
+
+Coverage by tag on the Resources tab is the reserved share of **hours**, not of pay-as-you-go value, so it can differ slightly from the Coverage tab.
+
+For example, to see what the finance cost center gets from your commitments: on the Resources tab, pick **cost-center** and read the **finance** row - its coverage, reserved cost, uncovered on-demand cost and savings. To see which commitments serve it and what they cost it, filter the commitments table by `cost-center : finance`; each row shows finance's share of that commitment.
 
 ---
 
@@ -254,6 +361,31 @@ Commitments are expiring without being renewed. An expired commitment drops out 
 {: .no_toc }
 
 A reservation gives the deeper discount but only for the exact resource type and region. A savings plan gives a smaller discount but follows your usage across sizes, regions and services. Steady workloads that will not change suit reservations; workloads that are steady in spend but change in shape suit savings plans. Because reservations apply first, the two can be combined.
+
+### Can I see what each cost center gets from our commitments?
+{: .no_toc }
+
+Yes, through tags. On the Resources tab, pick your cost center tag key: the **Coverage by** table shows, per value, reserved and on-demand hours, coverage, reserved cost and savings. To see which commitments a cost center uses and its share of each, filter the commitments table by that tag. See [Filtering and Grouping by Tag](#filtering-and-grouping-by-tag).
+
+### Why are a commitment's figures lower when I filter by tag?
+{: .no_toc }
+
+With a tag filter, each commitment shows only the share consumed by resources carrying that tag: its cost, savings and unused cost in that proportion. Open the commitment and pick the tag key under **Where the benefit landed** to see the full split.
+
+### Who pays for unused commitment?
+{: .no_toc }
+
+The resources that used the commitment, in proportion to what they consumed. Unused commitment is shared out across tag values the same way as the benefit, so a cost center that used 62% of a reservation also carries 62% of its unused cost. To keep it low, see [Why is utilisation below 100%?](#why-is-utilisation-below-100)
+
+### Does Pulse use the tags on the reservation or savings plan itself?
+{: .no_toc }
+
+No. Pulse uses only the tags of the resources the commitment's benefit landed on, because that shows who the commitment works for.
+
+### What do No value and No data mean?
+{: .no_toc }
+
+**No value**: neither the resource nor any of its parents has a value for that tag key. Tagging the resource group, subscription or account gives every resource below it that value. **No data**: the benefit landed in subscriptions or accounts not connected to Pulse, so their resources and tags cannot be seen.
 
 ### Is Potential Savings money I will save?
 {: .no_toc }
