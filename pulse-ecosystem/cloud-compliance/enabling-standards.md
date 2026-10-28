@@ -232,28 +232,17 @@ az policy state trigger-scan --subscription <subscription-id>
 ### Azure: a subscription added to the management group later has no compliance results
 {: .no_toc }
 
-An initiative assigned at a management group also applies to subscriptions added under it later, including the Microsoft Cloud Security Benchmark assigned during onboarding. Two things do not carry over to a new subscription automatically:
+An initiative assigned at a management group also applies to subscriptions added under it later, including the Microsoft Cloud Security Benchmark assigned during onboarding. Azure evaluates a new subscription on its own schedule, which can take days, so it can have no compliance results in the meantime.
 
-- **The `Microsoft.PolicyInsights` resource provider.** It has to be registered on each subscription before Azure Policy produces compliance results for it.
-- **An evaluation.** Azure evaluates the new subscription on its own schedule, which can take days.
+To start an evaluation straight away, in Azure Cloud Shell:
 
-For each new subscription, in Azure Cloud Shell:
+```bash
+az policy state trigger-scan --subscription <subscription-id>
+```
 
-1. Check whether the resource provider is registered:
-   ```bash
-   az provider show --namespace Microsoft.PolicyInsights --subscription <subscription-id> --query registrationState -o tsv
-   ```
-2. If it does not return `Registered`, register it. `--wait` returns once registration has finished:
-   ```bash
-   az provider register --namespace Microsoft.PolicyInsights --subscription <subscription-id> --wait
-   ```
-3. Start an evaluation:
-   ```bash
-   az policy state trigger-scan --subscription <subscription-id>
-   ```
+If the command fails, check that the `Microsoft.PolicyInsights` resource provider is registered on the subscription. Azure usually registers it for you; if it shows anything other than **Registered** under **Subscriptions → [your subscription] → Settings → Resource providers**, register it and run the command again.
 
-- Registering a resource provider needs `Contributor` or `Owner` on the subscription. Starting an evaluation needs `Resource Policy Contributor`.
-- You can also check and register the provider in the Azure portal, under **Subscriptions → [your subscription] → Settings → Resource providers**.
+- Starting an evaluation needs `Resource Policy Contributor`. Registering a resource provider needs `Contributor` or `Owner`.
 - Once Azure shows results in **Policy → Compliance**, allow up to 24 hours for them to appear in Pulse.
 
 ### Does activating a framework block anything we deploy?
