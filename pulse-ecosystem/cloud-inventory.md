@@ -61,6 +61,24 @@ Most pages also carry a **date range** control. Recommendations, Tags, Locations
 
 Every table behaves the same way: free-text search, sortable columns, a column show/hide menu, pagination, and **CSV export of the whole result set** rather than just the page on screen.
 
+### Downloading data in CSV format
+
+Filter first, then export: the CSV holds the whole filtered result, not only the page on screen. The files open in Excel or any other spreadsheet tool. Some exports carry more than the table shows:
+
+| Where | What the export holds |
+| --- | --- |
+| [Assets](#filtering-the-inventory) | The filtered assets list, with each asset's last month and current month cost |
+| [Aggregation](#aggregation) | Every combination, with a separate column per dimension |
+| [Tags](#tags) | Every tag key with its value-and-count pairs |
+| [Cost Analysis](cloud-economics/cost-analysis.md#cost-summary) | The Cost Summary, in full or the page on screen; a saved view exports its day's costs |
+| [Cost Savings](cloud-economics/cost-savings.md) | Recommendation Information, on both tabs |
+| [Rate Optimisation](cloud-economics/rate-optimisation.md#commitments) | The commitments table, with the tag key and value when a tag filter is set |
+| [Budget & Alerts](cloud-economics/budget-alerts.md) | The budget table, without Alert State |
+| [Compliance State](cloud-compliance/compliance-state.md) and [Compliance Analysis](cloud-compliance/compliance-analysis.md) | Their tables, in full |
+| [User Management](user-management.md) | The full user list |
+
+To hand a summary to people who do not use Pulse, a [report](reporting.md) is usually the better fit.
+
 ---
 
 ## Dashboard
@@ -161,8 +179,9 @@ The tabs beneath them re-cut the same spend along a different dimension:
 | **Cloud Service** | Find the individual services driving the bill |
 | **Cloud Tenant** | Split by tenant or organisation |
 | **Cloud Subscription** | Split by subscription, account or project |
+| **Tags** | Split by the values of one tag key, with spend on assets without it shown as **Untagged** |
 
-The last two are labelled with the terminology of whichever provider you have selected. A **Saved Views** tab keeps combinations of tab, period and filters you expect to return to.
+**Cloud Tenant** and **Cloud Subscription** are labelled with the terminology of whichever provider you have selected. A **Saved Views** tab keeps combinations of tab, period and filters you expect to return to.
 
 The chart and the table below it follow the tab you pick. The toolbar controls the period - last 3, 6 or 12 months, current year or last year - and an **Include Current Month** toggle decides whether the incomplete month is drawn.
 
@@ -234,7 +253,7 @@ The **Assets List** is the part you will live in, and the filters are what turn 
 | **Location** | A single cloud region |
 | **Subscription Name** | One subscription, account or project |
 
-**All Filters** opens the full set. Besides the ones above, it adds **Cloud Asset Category**, **Cloud Asset Service**, **Cloud Asset Service Model**, **Cloud Subscription Id**, **Data Store** and **Tag**. **Tag** filters on tag key and value pairs, such as `owner : Devoteam`, so you can narrow the list to everything carrying a given tag.
+**All Filters** opens the full set. Besides the ones above, it adds **Cloud Asset Category**, **Cloud Asset Service**, **Cloud Asset Service Model**, **Cloud Subscription Id**, **Data Store** and **Tag**. **Tag** filters on tag key and value pairs, such as `owner : Devoteam`, so you can narrow the list to everything carrying a given tag. Add more than one pair and they combine with AND: only assets carrying every pair stay in the list, so `environment : production` with `cost-center : finance` gives the finance cost center's production assets.
 
 ![The All Filters panel listing every asset filter, with a tag filter set to owner : Devoteam](../assets/images/cloud-inventory/assets-all-filters.png)
 
@@ -339,6 +358,8 @@ It is a feature in its own right, with its own page: see [Asset Ownership](asset
 ## Tags
 
 Tags are what make cost allocation and ownership possible. This page tells you whether yours are good enough to rely on.
+
+Pulse works with the tag keys you already use - there is no fixed list. Standard keys such as `cost-center`, `environment` and `application` (or `app`) work like any other: in the asset **Tag** filter, in [Aggregation](#aggregation), on the **Tags** tab of [Cost Analysis](cloud-economics/cost-analysis.md), in [Cost Savings](cloud-economics/cost-savings.md) and in [Rate Optimisation](cloud-economics/rate-optimisation.md#filtering-and-grouping-by-tag).
 
 ![Tags page with three tagging charts above the all tag names table](../assets/images/cloud-inventory/tags.png)
 
@@ -459,7 +480,7 @@ By default the pages describe the whole connected estate. Asset Groups narrow th
 
 ### Can I get the data out?
 
-Every table exports to CSV, and the export covers the whole filtered result set rather than just the page on screen. Individual assets also expose their raw record through **JSON View**. Managed service customers can request API access to AMDB and Pulse data; authorisation is manual today, and self-service is planned with no ETA.
+Every table exports to CSV, and the export covers the whole filtered result set rather than just the page on screen - see [Downloading data in CSV format](#downloading-data-in-csv-format). Individual assets also expose their raw record through **JSON View**. Managed service customers can request API access to AMDB and Pulse data; authorisation is manual today, and self-service is planned with no ETA.
 
 ---
 
