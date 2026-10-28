@@ -12,7 +12,7 @@ Build your own dashboards in Pulse from ready-made cards, arrange them the way y
 {: .fs-6 .fw-300 }
 
 {: .important }
-The Customizable Dashboard is set up on request: tell us what you need it to show, and we enable it where Pulse holds the matching data. It is marked **Beta** in Pulse while we collect feedback.
+The Customizable Dashboard is set up on request: tell us what you need it to show, and we enable it where Pulse holds the matching data.
 
 <details open markdown="block">
   <summary>
