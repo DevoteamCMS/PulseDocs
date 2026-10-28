@@ -240,7 +240,7 @@ To start an evaluation straight away, in Azure Cloud Shell:
 az policy state trigger-scan --subscription <subscription-id>
 ```
 
-If the command fails, check that the `Microsoft.PolicyInsights` resource provider is registered on the subscription. Azure usually registers it for you; if it shows anything other than **Registered** under **Subscriptions → [your subscription] → Settings → Resource providers**, register it and run the command again.
+If the command fails, check that the `Microsoft.PolicyInsights` resource provider is registered on the subscription, under **Subscriptions → [your subscription] → Settings → Resource providers**. If it shows anything other than **Registered**, register it and run the command again.
 
 - Starting an evaluation needs `Resource Policy Contributor`. Registering a resource provider needs `Contributor` or `Owner`.
 - Once Azure shows results in **Policy → Compliance**, allow up to 24 hours for them to appear in Pulse.
