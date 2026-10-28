@@ -280,6 +280,8 @@ The Subscription column is labelled with the terminology of the selected provide
 
 The **Aggregation** tab answers questions that a filtered list cannot: *how much do we run, and spend, in each combination of category, location, team or tag?* Instead of filtering one slice at a time, it puts every combination that exists in one table.
 
+![Assets page Aggregation tab grouped by Tag: Cost_Center and Tag: Project_Name, with four KPI cards, a chart of the top 10 combinations and the combinations table](../assets/images/cloud-inventory/assets-aggregation.png)
+
 **Group by** joins up to three dimensions, read as "and":
 
 `[ Asset category ▾ ✕ ] & [ Location ▾ ✕ ] & [ + ]`
