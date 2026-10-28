@@ -54,10 +54,11 @@ Start here: [Cloud Onboarding](onboarding/README.md).
 
 ## Pulse Premium
 
-Adds the two features above in full.
+Adds the two features above in full, and Reporting.
 
 - **Cloud Economics** - Cost Analysis with daily granularity, Anomaly Detection, Budget & Alerts including the alerting itself, Cost Savings and Rate Optimisation.
 - **Cloud Compliance** - Compliance State, Policy Manager, Remediation Planner, Exemptions and Compliance Analysis.
+- **[Reporting](reporting.md)** - reports about your cloud estate, configured in Pulse and downloaded as a PDF.
 
 **Pulse Premium Trial** is the same scope for a limited period, so the features can be evaluated on real data rather than on a demo.
 

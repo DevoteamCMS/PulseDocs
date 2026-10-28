@@ -12,6 +12,9 @@ permalink: /pulse-ecosystem/reporting/
 Configure a report about your cloud estate in Pulse and download it as a PDF - a summary of costs, savings, security and reliability to share with people who do not use Pulse themselves, or to bring to a review.
 {: .fs-6 .fw-300 }
 
+{: .important }
+Reporting is part of **Pulse Premium**. See [Pulse Ecosystem](README.md#pulse-premium) for what each tier includes.
+
 <details open markdown="block">
   <summary>
     Table of contents
