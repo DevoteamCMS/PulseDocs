@@ -300,6 +300,8 @@ The **Aggregation** tab answers questions that a filtered list cannot: *how much
 | **Tag** | The values of one tag key you choose, shown as `key:value` |
 | **Reservation status** | **Reserved**, **Partly reserved**, **Not reserved** or **Not eligible**, from the last 30 days of [Rate Optimisation](cloud-economics/rate-optimisation.md) |
 
+![Aggregation table grouped by Reservation status, with one row each for Not eligible, Reserved, Not reserved and Partly reserved](../assets/images/cloud-inventory/assets-aggregation-reservation-status.png)
+
 Each row is one combination that exists - for example:
 
 | Asset category | Location | Assets | Share | Last month | Current month |
