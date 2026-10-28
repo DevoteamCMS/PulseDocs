@@ -30,7 +30,7 @@ flowchart LR
 
 Read left to right, that is the working cycle:
 
-- **See where the money goes.** [Cost Analysis](cost-analysis.md) cuts the combined bill six ways - by service, subscription, team and more - month by month or day by day, with last month and the forecast beside every figure.
+- **See where the money goes.** [Cost Analysis](cost-analysis.md) cuts the combined bill seven ways - by service, subscription, team, tag and more - month by month or day by day, with last month and the forecast beside every figure.
 - **Catch the surprises.** [Anomaly Detection](anomaly-detection.md) flags days that break an asset's normal spending pattern, and budgets that have gone over their cap, for someone to review.
 - **Decide what it should be.** [Budget & Alerts](budget-alerts.md) puts a monthly cap on any of those same slices, and emails the people you name as spend approaches it.
 - **Find what you can stop paying for.** [Cost Savings](cost-savings.md) lists cost recommendations resource by resource, with the monthly saving each option would bring.
@@ -43,7 +43,7 @@ Read left to right, that is the working cycle:
 
 | Page | What you do there |
 | --- | --- |
-| **[Cost Analysis](cost-analysis.md)** | Break spend down six ways, monthly or daily, and save the days you want to come back to |
+| **[Cost Analysis](cost-analysis.md)** | Break spend down seven ways, monthly or daily, and save the days you want to come back to |
 | **[Anomaly Detection](anomaly-detection.md)** | See spend that broke its normal pattern or went over a budget, how severe each anomaly is, and mark it as reviewed |
 | **[Budget & Alerts](budget-alerts.md)** | Track spend against monthly caps, see which alert thresholds have been passed, and set up budgets with email alerts |
 | **[Cost Savings](cost-savings.md)** | Review cost recommendations per resource, compare optimisation options, exempt what you will not act on, and track what was implemented |

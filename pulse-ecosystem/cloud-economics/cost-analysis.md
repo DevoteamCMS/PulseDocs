@@ -10,7 +10,7 @@ permalink: /pulse-ecosystem/cloud-economics/cost-analysis/
 # Cost Analysis
 {: .no_toc }
 
-Cost Analysis answers the question the invoice leaves open: *where is the money going, and is this month better or worse than the last?* It takes the combined bill of every connected cloud and cuts it six ways, month by month or day by day, with last month and the forecast beside every figure.
+Cost Analysis answers the question the invoice leaves open: *where is the money going, and is this month better or worse than the last?* It takes the combined bill of every connected cloud and cuts it seven ways, month by month or day by day, with last month and the forecast beside every figure.
 
 <details open markdown="block">
   <summary>
@@ -57,7 +57,7 @@ The forecast badge is the quickest single check on the page. A positive figure m
 
 ---
 
-## Six Ways to Cut the Same Spend
+## Seven Ways to Cut the Same Spend
 
 Each tab re-cuts the same total along a different dimension. Switching tab never changes how much was spent, only how it is divided.
 
@@ -69,11 +69,13 @@ Each tab re-cuts the same total along a different dimension. Switching tab never
 | **Cloud Service** | The provider's own service names, such as Virtual Machines or Storage | Find the services driving the bill |
 | **Cloud Tenant** | Tenant or organisation | Split an estate that spans more than one |
 | **Cloud Subscription** | Subscription, account or project | Find who is spending, where subscriptions follow your organisation |
-| **Tags** | Cloud tags| The spending analysis based on business units, departments, and teams |
+| **Tags** | The values of one tag key you choose, such as `cost-center`, `environment` or `application` | Read spend per cost center, environment, application or any other tag you use |
 
-The last two follow the terminology of the provider you have selected: **Cloud Tenant** reads **Cloud Organization**, and **Cloud Subscription** reads **Cloud Account** or **Cloud Project**.
+Two tabs follow the terminology of the provider you have selected: **Cloud Tenant** reads **Cloud Organization**, and **Cloud Subscription** reads **Cloud Account** or **Cloud Project**.
 
 On the **Asset Group** tab, the **Unallocated** row is spend on assets no group owns - one row per provider. It is the accountability gap in currency, and it shrinks as ownership is set up. See [Cost per Asset Group](../asset-ownership.md#cost-per-asset-group).
+
+On the **Tags** tab, spend is split by the values of one tag key at a time - keys are not combined. Any key found on your resources can be used; there is no fixed list. Spend on assets that do not carry the key is shown as **Untagged**, the tag equivalent of Unallocated. The daily view and saved views work as on every other tab. To read two tags together, such as environment within a cost center, use [Aggregation](../cloud-inventory.md#aggregation) on the Assets page.
 
 ---
 

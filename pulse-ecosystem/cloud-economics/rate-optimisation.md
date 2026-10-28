@@ -42,7 +42,7 @@ The page has four tabs:
 | **Coverage** | How much of the usage that could be committed is, and what does that save? |
 | **Resources** | Which resources run under a commitment, partly, or not at all? |
 
-Like the rest of Cloud Economics, the page follows the cloud provider and currency selected in the header. It covers Azure and AWS; with neither provider selected, the page stays empty.
+Like the rest of Cloud Economics, the page follows the cloud provider and currency selected in the header. It covers Azure and AWS; with neither of them selected, the page stays empty. Google Cloud committed use discounts are planned for a future release.
 
 ---
 
@@ -81,6 +81,8 @@ The bar above the tabs applies to all four:
 | **Region** | Narrows to one or more regions |
 | **Amortized / Actual** | On the **Commitments** tab only: amortized cost (the purchase spread over the term) or the cash actually paid in the period |
 | **Tags** | Not part of this bar. Tag filters and tag breakdowns are on the **Commitments** and **Resources** tabs - see [Filtering and Grouping by Tag](#filtering-and-grouping-by-tag) |
+
+Rate Optimisation can also be filtered by [Asset Group](../asset-ownership.md), to read it for a team or business unit rather than for a subscription or a tag value.
 
 **Cost data as of**, on the right, is the last day with cost data. Cost data arrives one to three days late, so the period ends there rather than today.
 
@@ -401,3 +403,8 @@ Providers deliver cost data one to three days late. **Cost data as of** shows th
 {: .no_toc }
 
 No. Reservations and savings plans are bought and managed in your cloud provider, and Rate Optimisation reports on them from there. Nothing needs to be entered in Pulse, and nothing in Pulse changes them.
+
+### Does Rate Optimisation cover Google Cloud?
+{: .no_toc }
+
+Not yet. Google Cloud committed use discounts are planned for a future release. Until then the page covers reservations and savings plans on Azure and AWS.

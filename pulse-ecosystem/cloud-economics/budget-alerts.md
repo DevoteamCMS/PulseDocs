@@ -139,7 +139,7 @@ The selected budget is held in the page address, so a link to Budget & Alerts ca
 
 Save, and Pulse confirms *Budget created.* The cap and each threshold must be a number greater than 0, and a budget cannot be saved without at least one threshold: *Add at least one alert threshold.*
 
-**The six scopes are the six tabs of [Cost Analysis](cost-analysis.md#six-ways-to-cut-the-same-spend).** Whatever slice of spend you were reading there can be given a budget here. An **Asset Group** budget is a team budget, and needs [Asset Ownership](../asset-ownership.md) set up first.
+**The six scopes are the tabs of [Cost Analysis](cost-analysis.md#seven-ways-to-cut-the-same-spend), apart from Tags.** Whatever slice of spend you were reading on one of them can be given a budget here. An **Asset Group** budget is a team budget, and needs [Asset Ownership](../asset-ownership.md) set up first.
 
 Each threshold carries its own recipients, which lets one budget warn in stages: an early threshold to the team that owns the spend, a late one to whoever approves the money.
 

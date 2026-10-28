@@ -63,7 +63,7 @@ Two bars side by side: **Estimated Estate Cost**, the monthly cost of the estate
 
 The working list. Each row is one category on one provider, with its **Estimated Savings** and number of **Impacted Resources**. Expand a row to see the resources underneath it; the first row opens expanded.
 
-Filter by **Created At**, **Recommendation Category**, **State** and **Type**, choose columns, and export the table to CSV.
+Filter by **Created At**, **Recommendation Category**, **State**, **Type** and **Tag**, choose columns, and export the table to CSV. **Tag** keeps the recommendations for resources carrying a tag key and value, such as `cost-center : finance` - the way to read the savings open for one cost center, environment or application.
 
 <details markdown="block" class="reference-box">
   <summary>Every column in the resource rows</summary>
@@ -194,6 +194,11 @@ They come from different lists. Total Savings per Month is taken from the cost r
 {: .no_toc }
 
 The owner of the resource. Open **Asset Details** from the row menu and read the **Ownership** card - it names the Asset Group and the users delegated to it. Where it reads **Unallocated**, the resource has no owner yet; see [Asset Ownership](../asset-ownership.md).
+
+### Can I see the savings for one cost center, environment or application?
+{: .no_toc }
+
+Yes. Filter Recommendation Information by **Tag**, for example `cost-center : finance`. Only the recommendations for resources carrying that tag stay in the list, with their savings.
 
 ### Can I get the list out of Pulse?
 {: .no_toc }
