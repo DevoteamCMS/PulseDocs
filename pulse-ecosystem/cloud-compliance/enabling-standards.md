@@ -229,6 +229,33 @@ az policy state trigger-scan --subscription <subscription-id>
 - The evaluation runs in Azure and takes a while to finish. Check its progress in **Policy → Compliance**, scoped to the subscription.
 - Once Azure shows results there, allow up to 24 hours for them to appear in Pulse.
 
+### Azure: a subscription added to the management group later has no compliance results
+{: .no_toc }
+
+An initiative assigned at a management group also applies to subscriptions added under it later, including the Microsoft Cloud Security Benchmark assigned during onboarding. Two things do not carry over to a new subscription automatically:
+
+- **The `Microsoft.PolicyInsights` resource provider.** It has to be registered on each subscription before Azure Policy produces compliance results for it.
+- **An evaluation.** Azure evaluates the new subscription on its own schedule, which can take days.
+
+For each new subscription, in Azure Cloud Shell:
+
+1. Check whether the resource provider is registered:
+   ```bash
+   az provider show --namespace Microsoft.PolicyInsights --subscription <subscription-id> --query registrationState -o tsv
+   ```
+2. If it does not return `Registered`, register it. `--wait` returns once registration has finished:
+   ```bash
+   az provider register --namespace Microsoft.PolicyInsights --subscription <subscription-id> --wait
+   ```
+3. Start an evaluation:
+   ```bash
+   az policy state trigger-scan --subscription <subscription-id>
+   ```
+
+- Registering a resource provider needs `Contributor` or `Owner` on the subscription. Starting an evaluation needs `Resource Policy Contributor`.
+- You can also check and register the provider in the Azure portal, under **Subscriptions → [your subscription] → Settings → Resource providers**.
+- Once Azure shows results in **Policy → Compliance**, allow up to 24 hours for them to appear in Pulse.
+
 ### Does activating a framework block anything we deploy?
 {: .no_toc }
 
