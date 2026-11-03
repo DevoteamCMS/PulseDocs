@@ -243,7 +243,7 @@ Click a resource to open its panel: its details, its **daily usage** split into 
 
 ![A virtual machine's panel, with daily usage split into reserved and on-demand hours and the reservation and savings plan it used listed below](../../assets/images/cloud-economics/rate-optimisation-resource-panel.png)
 
-The same figures appear as a **Reservation coverage** card on the resource's own page in [Cloud Inventory](../cloud-inventory.md), and as the **Reservation status** grouping in the Assets **Aggregation** tab.
+The same figures appear as a **Reservation coverage** card on the resource's own page in [Cloud Essentials](../cloud-inventory.md), and as the **Reservation status** grouping in the Assets **Aggregation** tab.
 
 ---
 

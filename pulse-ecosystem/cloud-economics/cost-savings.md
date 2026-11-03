@@ -180,7 +180,7 @@ No. It recalculates the saving shown for that resource, and is forgotten when yo
 
 Not from this page. Exempt takes effect immediately and has no confirmation step, so use it once the decision has been made rather than as a way to hide a row.
 
-### How is this different from Recommendations in Cloud Inventory?
+### How is this different from Recommendations in Cloud Essentials?
 {: .no_toc }
 
 [Recommendations](../cloud-inventory.md#recommendations) collects every kind of advice from your clouds - security, reliability, performance and more, as well as cost. Cost Savings is about cost only, and goes further with it: a saving per resource, a choice of options with their risk, exemptions, and a history of what was implemented.

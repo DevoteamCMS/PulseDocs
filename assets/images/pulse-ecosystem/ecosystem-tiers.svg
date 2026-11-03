@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="100%" role="img" aria-labelledby="ecoTitle ecoDesc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
   <title id="ecoTitle">How the Pulse tiers include one another</title>
-  <desc id="ecoDesc">Three nested boxes. The innermost is Cloud Essentials, containing Cloud Inventory and Asset Ownership in full plus Cloud Economics and Cloud Compliance with limits. Around it, Pulse Premium adds Cloud Economics and Cloud Compliance in full. Around that, Managed Service adds Managed Cloud Reliability, Managed Cloud Economics and Managed Cloud Compliance with Devoteam service management. A bar underneath shows the core platform that every tier stands on.</desc>
+  <desc id="ecoDesc">Three nested boxes. The innermost is the Cloud Essentials tier, containing the Cloud Essentials pages and Asset Ownership in full plus Cloud Economics and Cloud Compliance with limits. Around it, Pulse Premium adds Cloud Economics and Cloud Compliance in full. Around that, Managed Service adds Managed Cloud Reliability, Managed Cloud Economics and Managed Cloud Compliance with Devoteam service management. A bar underneath shows the core platform that every tier stands on.</desc>
 
   <!-- opaque background, so the diagram survives a dark page or viewer -->
   <rect width="1000" height="700" fill="#ffffff"/>
@@ -20,7 +20,7 @@
 
   <!-- Essentials: features in full -->
   <rect x="92" y="158" width="396" height="52" rx="5" fill="#eef2f7" stroke="#96a8c0"/>
-  <text x="290" y="189" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">Cloud Inventory</text>
+  <text x="290" y="189" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">Cloud Essentials</text>
 
   <rect x="512" y="158" width="396" height="52" rx="5" fill="#eef2f7" stroke="#96a8c0"/>
   <text x="710" y="189" font-size="14" font-weight="500" fill="#26313f" text-anchor="middle">Asset Ownership</text>

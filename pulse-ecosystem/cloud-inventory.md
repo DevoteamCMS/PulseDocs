@@ -1,11 +1,11 @@
 ---
-title: Cloud Inventory
+title: Cloud Essentials
 layout: default
 parent: Pulse Ecosystem
 nav_order: 1
 ---
 
-# Cloud Inventory
+# Cloud Essentials
 {: .no_toc }
 
 **Cloud Essentials** is where every Pulse customer starts, at no cost. Connect AWS, Azure and Google Cloud and you get a single inventory of everything running in them - costs, resources, tags, regions, security alerts and compliance posture. This page walks through each screen, what it tells you and what to do with it.
@@ -85,7 +85,7 @@ To hand a summary to people who do not use Pulse, a [report](reporting.md) is us
 
 The landing page after login, and the answer to "what changed since last week".
 
-![Pulse Cloud Inventory dashboard, showing four KPI cards above six insight charts](../assets/images/cloud-inventory/dashboard.png)
+![Pulse Cloud Essentials dashboard, showing four KPI cards above six insight charts](../assets/images/cloud-inventory/dashboard.png)
 
 Four KPI cards run across the top. Each is a link into the page that explains it:
 
@@ -492,7 +492,7 @@ Every table exports to CSV, and the export covers the whole filtered result set 
 
 ## Next Steps
 
-- Start using Pulse Cloud Inventory yourself: [Cloud Onboarding](onboarding/README.md)
+- Start using Pulse Cloud Essentials yourself: [Cloud Onboarding](onboarding/README.md)
 - Set up ownership so costs and resources can be attributed: [Asset Ownership](asset-ownership.md)
 - Learn more about the wider platform: [Pulse Ecosystem](README.md)
 - Request a demo if you would rather be shown around: [Request Demo](https://www.devoteam.com/services/cloud-managed-services/#contact)

@@ -351,6 +351,6 @@ Groups must be empty before they can be deleted. Unallocate every asset in it fi
 
 ## Next Steps
 
-- See ownership in context of the wider inventory: [Cloud Inventory](cloud-inventory.md)
+- See ownership in context of the wider inventory: [Cloud Essentials](cloud-inventory.md)
 - Connect a cloud so there are assets to allocate: [Cloud Onboarding](onboarding/README.md)
 - Learn more about the platform: [Pulse Ecosystem](README.md)

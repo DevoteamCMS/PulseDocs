@@ -61,7 +61,7 @@ Generating a report reads your data only; it changes nothing in your cloud.
 ### Are the figures in a report the same as in Pulse?
 {: .no_toc }
 
-Yes, as of the moment the report was generated. They come from the same data as Cloud Inventory, Cloud Economics and the other pages. Later differences come from Pulse having moved on, not from a different calculation.
+Yes, as of the moment the report was generated. They come from the same data as Cloud Essentials, Cloud Economics and the other pages. Later differences come from Pulse having moved on, not from a different calculation.
 
 ### Where do I act on what the report finds?
 {: .no_toc }
