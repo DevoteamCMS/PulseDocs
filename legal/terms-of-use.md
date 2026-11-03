@@ -8,8 +8,8 @@ nav_order: 1
 # Terms of Use
 {: .no_toc }
 
-> **Release:** version 1.1.4<br>
-> **Last updated:** 2026-08-31<br>
+> **Release:** version 1.1.5<br>
+> **Last updated:** 2026-11-03<br>
 > **Applicability / Disclosure:** Public disclosure (published on the [Pulse](https://pulse.devoteam.com/) web page)<br>
 
 Access to and use of this website is governed by the following terms and conditions ("Terms of Use").
@@ -37,7 +37,7 @@ Capitalised terms used throughout these Terms of Use shall have the meaning defi
 * **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to UAB Devoteam Lithuania, Konstitucijos pr. 18B, B corp, LT-09308 Vilnius.
 * **Terms of Use** refers to these Terms of Use that form the entire agreement between You and the Company regarding the access to and use of the Website.
 * **Website** (or "Pulse") refers to Cloud Management Portal, accessible from the following link: [https://pulse.devoteam.com](https://pulse.devoteam.com).
-* **You** (or "User") refers to the individual accessing or using the Website, or the company, or other legal entity on behalf of which such individual is accessing or using the Website, as applicable. If You are an individual accessing or using the Website on behalf of, or for the benefit of, any corporation, partnership or other entity with which You are associated (an "Organization"), then You are agreeing to these Terms of Use on behalf of yourself and such Organization, and You represent and warrant that You have the legal authority to bind such Organization to these Terms of Use. References to "You" and "Your" in these Terms of Use will refer to both the individual using the Website and to any such Organization.
+* **You** (or "User") refers to the individual accessing or using the Website, or the company, or other legal entity on behalf of which such individual is accessing or using the Website, as applicable. If You are an individual accessing or using the Website on behalf of, or for the benefit of, any corporation, partnership or other entity with which You are associated (an "Organization"), then You are agreeing to these Terms of Use on behalf of yourself and such Organization, and You represent and warrant that You have the legal authority to bind such Organization to these Terms of Use. A delegation of authority may be requested at any time for verification purposes. References to "You" and "Your" in these Terms of Use will refer to both the individual using the Website and to any such Organization.
 
 ## Service Description
 
@@ -45,7 +45,7 @@ Capitalised terms used throughout these Terms of Use shall have the meaning defi
 
 Pulse is a cloud-native solution designed to help You seamlessly monitor and manage Your cloud infrastructure. It automates the collection of metadata from different third-party cloud providers, such as Amazon Web Services, Microsoft Azure, and Google Cloud, and aggregates this data to provide a meaningful Pulse that can help You optimize costs, identify trends, and improve the overall performance of Your cloud environment.
 
-With Pulse, You can track and control cloud costs, surface configuration and security risks in Your cloud infrastructure, and maintain oversight of Your cloud environment. The product offers detailed cost reporting, budgeting, and forecasting features to help You manage Your cloud expenses efficiently. Additionally, Pulse consolidates the security findings, recommendations and compliance states published by Your cloud providers' own security services, so that You can review them for all connected clouds in one place. Pulse performs no active scanning of Your infrastructure and operates on a read-only basis.
+With Pulse, You can track and control cloud costs, surface configuration and cloud security risks in Your cloud infrastructure, and maintain oversight of Your cloud environment. The product offers detailed cost reporting, budgeting, and forecasting features to help You manage Your cloud expenses efficiently. Additionally, Pulse consolidates the security findings, recommendations and compliance states published by Your cloud providers' own security services, so that You can review them for all connected clouds in one place. Pulse performs no active scanning of Your infrastructure and operates on a read-only basis.
 
 In summary, Pulse is a powerful cloud management solution that offers comprehensive features and benefits to help you streamline your cloud infrastructure management, optimise costs, and enhance security and compliance.
 
@@ -68,7 +68,7 @@ By connecting Your cloud infrastructure to Pulse, you acknowledge and agree that
 
 **Authentication methods:**
 
-* **Service Account** - User is responsible to assign required permissions and provide Service Principal Name (SPN) or Service principal (SA) credentials. Website requires reader role for assets/resources, cost/billing and reservations.
+* **Service Account** - User is responsible to assign required permissions and provide Service Principal Name (SPN) or Service principal (SA) credentials. Website requires a reader role for assets/resources, cost/billing and reservations.
 
 * **Self Service** - You (user) are granting permissions for Pulse Website backend 'on behalf of You' to create SPN/SA and assigning reader role for visible subscriptions or projects.
 
@@ -79,6 +79,47 @@ For more detailed onboarding guide check website documentation following link: [
 **Continuous delivery**
 
 The Website follows a continuous delivery approach, meaning new features (new releases), updates and upgrades may be carried out as soon as available, without prior notice. Feature request form and roadmap pages will be introduced when available, until then please provide any new suggestions via contact form.
+
+## Plans and Pulse Premium Subscriptions
+
+### Plans and eligibility
+
+X.1 Plans. Pulse is offered under the following plans:
+
+- **Essentials:** free of charge, with the features described at [https://www.devoteam.com/pulse/](https://www.devoteam.com/pulse/).
+- **Premium Trial:** time-limited access to all Premium features free of charge, for the period stated when the trial is activated. When the trial ends, You (and/or Your Organization) automatically return to Essentials unless a Premium subscription is purchased. Each User and/or Organization is eligible for one trial only.
+- **Premium:** a paid monthly subscription giving access to Premium features.
+- **Premium Enterprise:** available under a separate written agreement between You and the Company. Where such an agreement exists, it prevails over this Section X to the extent of any conflict.
+
+X.2 Eligibility.
+
+Business customers. Pulse Premium and Premium Enterprise is offered exclusively to businesses and organisations acting in a professional capacity. By subscribing, You confirm You are authorised to bind Your Organization to these Terms.
+
+X.3 Who can purchase it? Only users with the Owner role can start, change, cancel or reactivate a subscription, manage payment details, or apply discount codes.
+
+### Pricing, tiers and billing
+
+X.4 Pricing and tiers. The Premium fee depends on the pricing tier applicable to Your Organization. Tiers are based on Your Organization's cloud spend managed in Pulse over the 30 days preceding each billing date. Current tiers and prices are published at [https://www.devoteam.com/pulse/](https://www.devoteam.com/pulse/). All prices are in EUR and exclusive of VAT, which is charged in addition, along with any other applicable taxes.
+
+X.5 Automatic tier changes. The applicable tier is recalculated automatically on the last day of each billing period, before payment is collected. If Your Organization's spend qualifies for a different tier, the new tier's price applies to that payment, and You are notified on the payment date.
+
+X.6 Spend above the self-service tiers. If Your Organization's cloud spend exceeds the highest self-service tier, it remains on Premium, billed at the highest self-service tier price, until a Premium Enterprise agreement is signed. Either You or the Company may start discussions on such an agreement. If no agreement is reached, the Company may stop renewing the subscription and therefore terminate Your (including Your organisation's) access to Pulse. In such an event, Premium will remain accessible to You (and/or Your organisation) until the end of the period already paid for, after which You (and/or Your organization) will return to Essentials under X.13.
+
+X.7 Changes to pricing and tiers. The Company may change prices, tier thresholds or tier structure. You will be notified in advance, at least 30 days, and changes apply from the next billing period after the notice period ends.
+
+X.8 Billing and renewal. Premium is billed monthly, in advance, and renews automatically until cancelled. The first payment is processed at the date of subscription of the plan. Payments are processed by Stripe; payment details are held by Stripe, not by the Company. Invoices are available in Pulse.
+
+X.9 Failed payments. If a payment fails, You have a 7-day grace period to update their payment method, during which Premium remains available. If payment is not received by the end of the grace period, Your Organization returns to Essentials.
+
+### Discounts, cancellation and downgrade
+
+X.10 Discount codes. The Company may issue promotional codes giving a percentage discount for one billing month. Only one code can be active at a time. Codes have no cash value and cannot be combined.
+
+X.11 Cancellation and reactivation. The Owner can cancel at any time. Cancellation takes effect at the end of the current billing period, and Premium remains available until then. The Owner can reverse a scheduled cancellation before the period ends.
+
+X.12 Refunds. Fees paid are non-refundable, including for partial billing periods, except where required by law.
+
+X.13 Return to Essentials. When Your Organization returns to Essentials, whether at trial end, on cancellation, or after non-payment, access to Premium features and to data available only through Premium features is disabled. Data is retained in accordance with the Company's data cleanup process and, for personal data, the "Retention of Your Personal Data" section of the Privacy Policy. If Your Organization resubscribes to Premium, features and data are restored as they were, except for any data deleted in the meantime under those retention terms.
 
 ## Acknowledgment
 
@@ -131,9 +172,11 @@ We may terminate or suspend Your access immediately, without prior notice or lia
 
 Upon termination, Your right to use the Website will cease immediately.
 
+Where Your Organization has a paid Premium subscription, termination for any reason other than Your breach of these Terms of Use takes effect at the end of the billing period already paid for.
+
 ## Limitation of Liability
 
-The Website is provided as is and free of charge version with limited capabilities for everyone.
+The Website is provided as is. The Essentials plan is free of charge with limited capabilities; Premium plans are subject to Section Plans and Pulse Premium Subscriptions.
 
 To the maximum extent permitted by applicable law, in no event shall the Company or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever (including, but not limited to, damages for loss of profits, loss of data or other information, for business interruption, for personal injury, loss of privacy arising out of or in any way related to the use of or inability to use the Website, third-party software and/or third-party hardware used with the Website, or otherwise in connection with any provision of these Terms), even if the Company or any supplier has been advised of the possibility of such damages and even if the remedy fails of its essential purpose.
 
@@ -156,7 +199,7 @@ Some jurisdictions do not allow the exclusion of certain types of warranties or 
 
 ## For European Union (EU) Users
 
-If You are a European Union consumer, you will benefit from any mandatory provisions of the law of the country in which you are resident in.
+If You are a European Union customer, you will benefit from any mandatory provisions of the law of the country in which you are resident in.
 
 ## United States Legal Compliance
 
