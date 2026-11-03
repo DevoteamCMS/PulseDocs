@@ -3,7 +3,7 @@ title: Onboarding Q&A
 layout: default
 parent: Onboarding
 grand_parent: Pulse Ecosystem
-nav_order: 4
+nav_order: 5
 ---
 
 # Onboarding Q&A
