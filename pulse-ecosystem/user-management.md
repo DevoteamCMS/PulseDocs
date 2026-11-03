@@ -34,7 +34,7 @@ Every user has exactly one company role. The four roles build on each other, fro
 | **Manager** | Full operational access. Everything Analyst can view, plus managing users, cloud integrations, and the pages covered by the company's managed or premium services. Cannot assign the Owner role. |
 | **Owner** | Full access to the company. Everything Manager can do, plus company settings and assigning any role. Sole access to billing and plans - no other role can view or change them. Only an Owner can make another user an Owner. |
 
-Which pages a role opens depends on the services your company has. A role gives access to those pages but does not add services. See [Cloud Inventory](cloud-inventory.md) for what Cloud Essentials includes.
+Which pages a role opens depends on the services your company has. A role gives access to those pages but does not add services. See [Cloud Essentials](cloud-inventory.md) for what it includes.
 
 ### Feature roles
 

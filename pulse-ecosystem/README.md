@@ -28,7 +28,7 @@ Pulse is one platform, packaged three ways. This page explains how it is put tog
 Three things are easy to confuse, and separating them makes everything else simpler:
 
 - **The core platform** - identity, company and role management, cloud integrations, scanners and the data layer that turns three clouds into one set of numbers. Every customer has all of it. It is not sold in pieces; it is what everything else stands on.
-- **Features** - the functional areas you actually work in: Cloud Inventory, Asset Ownership, Cloud Economics, Cloud Compliance.
+- **Features** - the functional areas you actually work in: Cloud Essentials, Asset Ownership, Cloud Economics, Cloud Compliance.
 - **Tiers** - how those features are packaged commercially: Cloud Essentials, Pulse Premium, Managed Service.
 
 Features are what you use. Tiers decide how much of each you get.
@@ -43,7 +43,7 @@ Each tier contains the one before it, which is why the boxes nest. A feature can
 
 Included at no cost, self-service, no contract. Connect your clouds and you get:
 
-- **[Cloud Inventory](cloud-inventory.md)** - every resource across AWS, Azure and Google Cloud, with costs, tags, regions, security alerts, recommendations and compliance posture. One dashboard over all three.
+- **[Cloud Essentials](cloud-inventory.md)** - every resource across AWS, Azure and Google Cloud, with costs, tags, regions, security alerts, recommendations and compliance posture. One dashboard over all three.
 - **[Asset Ownership](asset-ownership.md)** - asset groups, delegated owners and cost allocation per team.
 
 Both in full. On top of that, several Cloud Economics and Cloud Compliance screens are open to you as well, so you can see those features working on your own data before deciding whether you need them - see [Where Features Are Partly Available](#where-features-are-partly-available).
@@ -117,7 +117,8 @@ Shared by every tier, and the reason the rest works:
 ## Next Steps
 
 - Start with the free tier: [Cloud Onboarding](onboarding/README.md)
-- See what Cloud Essentials includes, screen by screen: [Cloud Inventory](cloud-inventory.md)
+- See what Cloud Essentials includes, screen by screen: [Cloud Essentials](cloud-inventory.md)
 - Set up ownership so costs and resources can be attributed: [Asset Ownership](asset-ownership.md)
+- Upgrade to Pulse Premium, cancel it or pay an invoice: [Plans & Billing](billing.md)
 - Leaving, or removing a cloud: [Offboarding](offboarding.md)
 - Talk to us about managed services: [Cloud Managed Services](https://www.devoteam.com/services/cloud-managed-services)

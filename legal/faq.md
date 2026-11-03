@@ -61,7 +61,7 @@ Cloud infrastructure **metadata** only:
 - Compliance states
 - Usage and metric data
 
-Pulse does not collect, store, or process your application content, business records, or end-customer data. See [Cloud Inventory](../pulse-ecosystem/cloud-inventory.md).
+Pulse does not collect, store, or process your application content, business records, or end-customer data. See [Cloud Essentials](../pulse-ecosystem/cloud-inventory.md).
 
 ### Which Azure APIs does Pulse call?
 
