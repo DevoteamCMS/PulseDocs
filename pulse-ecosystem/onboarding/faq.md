@@ -306,9 +306,9 @@ Only that some tenant created a service principal for the Pulse application - no
 
 ### What access does Pulse need in my Google Cloud organisation?
 
-A Service Account holding read-only bindings at organisation level: either the built-in `roles/viewer` or a custom role containing only the 51 permissions Pulse needs, plus `roles/billing.viewer` on the billing account and read access to the billing export table in BigQuery. If you have no organisation resource, the same bindings are made per project instead.
+A Service Account holding read-only bindings at organisation level: either the built-in `roles/viewer` with `roles/browser`, or a custom role containing only the 53 permissions Pulse needs, plus `roles/billing.viewer` on the billing account and read access to the billing export table in BigQuery. If you have no organisation resource, the same bindings are made per project instead.
 
-Pulse reads the Google Cloud **control plane** and your **billing export** only. It cannot read the contents of disks, databases, buckets or virtual machines. See [What do the 51 Google Cloud permissions cover?](#what-do-the-51-google-cloud-permissions-cover) below.
+Pulse reads the Google Cloud **control plane** and your **billing export** only. It cannot read the contents of disks, databases, buckets or virtual machines. See [What do the 53 Google Cloud permissions cover?](#what-do-the-53-google-cloud-permissions-cover) below.
 
 ### What Google Cloud permissions do I need to grant that access?
 
@@ -328,12 +328,12 @@ This privileged access is only used to *grant* Pulse its access. Pulse itself ne
 
 Both give Pulse the same functionality.
 
-- **Built-in `roles/viewer`** is the simplest option and the default. It is a broad read-only role covering far more than Pulse actually reads.
-- **Custom Resource Role** creates an organisation-level custom role containing only the 51 permissions Pulse needs. Pick this if your organisation requires least-privilege role definitions, and be aware that new Pulse functionality may require new permissions to be added to it over time.
+- **Built-in `roles/viewer` with `roles/browser`** is the simplest option and the default. It is a broad read-only role covering far more than Pulse actually reads.
+- **Custom Resource Role** creates an organisation-level custom role containing only the 53 permissions Pulse needs. Pick this if your organisation requires least-privilege role definitions, and be aware that new Pulse functionality may require new permissions to be added to it over time.
 
 Note that this choice applies to *resource* access only. Billing access always uses the built-in `roles/billing.viewer` role, because Google Cloud billing accounts only accept predefined roles - a custom role is never used there.
 
-### What do the 51 Google Cloud permissions cover?
+### What do the 53 Google Cloud permissions cover?
 
 They are all read-only (`list`, `get`, `searchAll`) and group by API:
 
@@ -341,19 +341,18 @@ They are all read-only (`list`, `get`, `searchAll`) and group by API:
 | --- | --- | --- |
 | `resourcemanager.*` | 7 | Organisations, folders, projects and effective tags - your resource hierarchy |
 | `cloudasset.assets.searchAllResources` | 1 | Resource inventory |
-| `recommender.*` | 32 | Google Cloud Recommender output: idle and overprovisioned resources, machine-type sizing, commitments, IAM policy and change-risk recommendations |
+| `recommender.*` | 33 | Google Cloud Recommender output: idle and overprovisioned resources, machine-type sizing, commitments, IAM policy and change-risk recommendations, and the locations they are listed in |
 | `compute.machineImages.list` | 1 | Compute Engine machine images |
 | `securitycenter.*`, `securityposture.*`, `cloudsecuritycompliance.*` | 6 | Security Command Center findings, sources, postures, compliance frameworks and cloud controls |
 | `osconfig.*` | 3 | VM Manager patch deployments and patch jobs |
 | `monitoring.timeSeries.list` | 1 | Cloud Monitoring metrics |
+| `serviceusage.services.list` | 1 | Which APIs are enabled in each project |
 
-The full list is on the [Google Cloud onboarding page](google.md) under *Manual Setup*. Choosing the built-in `roles/viewer` instead grants all of this and considerably more.
+The full list is on the [Google Cloud onboarding page](google.md) under *Manual Setup*. Choosing the built-in `roles/viewer` and `roles/browser` instead grants all of this and considerably more.
 
 ### Which project must the APIs be enabled on?
 
-The 10 core APIs go on the project where the **Service Account was created** - not the projects holding the data being read. This catches people out, because the APIs need enabling somewhere that may contain no resources at all.
-
-Two more go on the project where the cost export dataset lives: **BigQuery** and **BigQuery Data Transfer**.
+The APIs go on the project where the **Service Account was created** - not the projects holding the data being read.
 
 ### Does Pulse create the Cloud Billing export for me?
 
@@ -371,8 +370,6 @@ Both work; pick based on what else lives in the export project.
 
 - **Project level** grants access to every dataset and table in the project. Simplest option if the project is dedicated to billing data, or you are otherwise comfortable granting project-wide access.
 - **Table level** scopes access to just the billing export dataset, leaving the rest of the project untouched. Use this if the export lives in a project alongside other data you do not want to expose.
-
-If you use table-level sharing, register the cost export in Pulse using the **Service Account's** project ID, not the export project's.
 
 ### Can the Service Account live in a different project or organisation?
 
