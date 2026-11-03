@@ -137,7 +137,7 @@ Choosing **Manual** in Pulse assumes the prerequisites are already done, so work
 These are the values you will paste into Pulse at the end:
 
 - The Service Account **JSON key** file contents
-- **Project ID** and **Cost Export Table ID** for the cost export (if you are configuring one)
+- **Cost Export Table ID** for the cost export (if you are configuring one)
 
 ### Order of work
 
@@ -308,12 +308,11 @@ Stage 2, first part - do this once the prerequisites above are complete.
 
 Stage 2, second part - add this after the Service Account is onboarded.
 
-**Onboard the organisation first.** Pulse maps cost data onto projects it already knows about, matched on the **Project ID** you enter below. If the project has not been onboarded yet, Pulse resolves the export against the wrong account and fails to access it. See [Onboarding Q&A: Must accounts be onboarded before adding a cost export?](faq.md#must-accounts-be-onboarded-before-i-add-a-cost-export)
+**Onboard the organisation first.** Pulse maps cost data onto projects it already knows about, matched on the project in the **Cost Export Table ID** you enter below. If the project has not been onboarded yet, Pulse resolves the export against the wrong account and fails to access it. See [Onboarding Q&A: Must accounts be onboarded before adding a cost export?](faq.md#must-accounts-be-onboarded-before-i-add-a-cost-export)
 
 1. Login to the [PULSE](https://pulse.devoteam.com/platform/login) platform
 2. Open [Cloud Management](https://pulse.devoteam.com/platform/cloud-management) under Administration (left bottom corner)
 3. Add Billing Export Configuration
-   - **Project ID** - project where the cost export data set is located
    - **Cost Export Table ID** - `projectname.datasetname.tablename`, can be copied from: BigQuery → SQL Workspace → Project → DataSet → Table → Details → Table ID
 4. Save [done]
 
