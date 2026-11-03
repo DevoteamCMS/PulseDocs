@@ -3,7 +3,7 @@ title: Offboarding
 layout: default
 parent: Onboarding
 grand_parent: Pulse Ecosystem
-nav_order: 5
+nav_order: 6
 ---
 
 # Offboarding
