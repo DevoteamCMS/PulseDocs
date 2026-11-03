@@ -156,16 +156,16 @@ Note: general rule to wait 30 sec after any object or permission granted before 
 2. Create one Service Account in any existing project, then add Key, JSON type, download key for later use.
 3. Grant the Service Account resource access - choose **one** of the two options below.
 
-   **Option A - built-in Viewer role (simplest).** Assign the built-in `Viewer` role to the created SA per organisation, or on specific projects for the PULSE access scope.
+   **Option A - built-in Viewer role (simplest).** Assign the built-in `Viewer` and `Browser` roles to the created SA per organisation, or on specific projects for the PULSE access scope.
 
-   **Option B - custom least-privilege role.** Create a role definition on organisation level containing exactly the 51 permissions Pulse uses. If the cloud doesn't have an organisation, roles will have to be created per project. Alternatively, a combination of roles can be used, so long as the result has all of the permissions listed.
+   **Option B - custom least-privilege role.** Create a role definition on organisation level containing exactly the 53 permissions Pulse uses. If the cloud doesn't have an organisation, roles will have to be created per project. Alternatively, a combination of roles can be used, so long as the result has all of the permissions listed.
 
    Pick Option B if your organisation requires least-privilege role definitions, and note that new Pulse functionality may require new permissions to be added over time. See [Onboarding Q&A: Built-in Viewer or Custom Resource Role?](faq.md#built-in-viewer-role-or-custom-resource-role---which-should-i-pick)
 
    <details markdown="block" class="reference-box">
-     <summary>Option B - all 51 permissions for the custom role</summary>
+     <summary>Option B - all 53 permissions for the custom role</summary>
 
-   Add these permissions to the created role, then assign the role to the organisation (if applicable) or to all of the projects you wish to onboard. For what each group covers, see [Onboarding Q&A: What do the 51 permissions cover?](faq.md#what-do-the-51-google-cloud-permissions-cover)
+   Add these permissions to the created role, then assign the role to the organisation (if applicable) or to all of the projects you wish to onboard. For what each group covers, see [Onboarding Q&A: What do the 53 permissions cover?](faq.md#what-do-the-53-google-cloud-permissions-cover)
 
    ```text
    cloudasset.assets.searchAllResources
@@ -200,6 +200,7 @@ Note: general rule to wait 30 sec after any object or permission granted before 
    recommender.iamPolicyChangeRiskRecommendations.list
    recommender.iamPolicyRecommendations.list
    recommender.iamServiceAccountChangeRiskRecommendations.list
+   recommender.locations.list
    recommender.loggingProductSuggestionContainerRecommendations.list
    recommender.resourcemanagerProjectChangeRiskRecommendations.list
    recommender.resourcemanagerProjectUtilizationRecommendations.list
@@ -219,22 +220,24 @@ Note: general rule to wait 30 sec after any object or permission granted before 
    securitycenter.sources.list
    securityposture.postures.get
    securityposture.postures.list
+   serviceusage.services.list
    ```
 
    </details>
 
 4. **Enable the required APIs** on the same project that holds the Service Account:
 
-   - BigQuery API
    - Billing Budget API
    - Cloud Recommender API
    - Cloud Asset API
-   - Organization Policy API
+   - Cloud Monitoring API
+   - OS Config API
+   - Cloud Security Compliance API
    - Security Command Center API
+   - Security Posture API
    - Cloud Resource Manager API (Enabled by Default)
    - Cloud Billing API (Enabled by Default)
    - IAM API (Enabled by Default)
-   - Compute Engine API (Enabled by Default if Compute enabled)
 
    Important! These go on the project where the Service Account was created, not the projects holding the data. See [Onboarding Q&A: Which project must the APIs be enabled on?](faq.md#which-project-must-the-apis-be-enabled-on)
 
@@ -310,7 +313,7 @@ Stage 2, second part - add this after the Service Account is onboarded.
 1. Login to the [PULSE](https://pulse.devoteam.com/platform/login) platform
 2. Open [Cloud Management](https://pulse.devoteam.com/platform/cloud-management) under Administration (left bottom corner)
 3. Add Billing Export Configuration
-   - **Project ID** - project where the cost export data set is located, or if table-level sharing was used, the Service Account's project ID
+   - **Project ID** - project where the cost export data set is located
    - **Cost Export Table ID** - `projectname.datasetname.tablename`, can be copied from: BigQuery → SQL Workspace → Project → DataSet → Table → Details → Table ID
 4. Save [done]
 
@@ -323,8 +326,8 @@ Use this to confirm onboarding is complete, whichever method you used:
 | Item | Where | Required? |
 | --- | --- | --- |
 | Service Account exists with a valid JSON key held by Pulse | Host project | Required |
-| Resource access bound - `roles/viewer` or the custom role | Organisation (or every project, if no organisation) | Required |
-| All 10 APIs enabled | Host project (where the Service Account lives) | Required |
+| Resource access bound - `roles/viewer` with `roles/browser`, or the custom role | Organisation (or every project, if no organisation) | Required |
+| The APIs listed under *Manual Setup* enabled | Host project (where the Service Account lives) | Required |
 | `roles/billing.viewer` / Billing Account Viewer bound to the Service Account | Billing account | Required for cost and budget data |
 | Security Health Analytics enabled at organisation scope | Security Command Center | Required for compliance findings |
 | Cloud Billing export to BigQuery, Detailed usage cost | Cost export project | Required for detailed cost data |
