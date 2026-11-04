@@ -155,7 +155,7 @@ It carries a single inline policy granting:
 
 - Account & organisation discovery - `sts:GetCallerIdentity`, `account:GetAccountInformation`, `account:ListRegions`, `organizations:DescribeOrganization`, `organizations:DescribeAccount`, `organizations:ListAccounts`
 - Resource scanning - `backup:ListBackupJobs`, `backup:ListProtectedResources`, `cloudformation:GetResource`, `cloudformation:ListResources`, `config:DescribeDeliveryChannels`, `config:DescribeConfigurationRecorderStatus`, `config:DescribeConfigRules`, `config:ListDiscoveredResources`, `config:SelectResourceConfig`, `inspector:ListFindings`, `inspector:DescribeFindings`, `inspector2:ListFindings`, `ssm:DescribeMaintenanceWindows`, `ssm:ListCommandInvocations`, `tag:GetResources`
-- Security Hub, for Managed Cloud Compliance - `securityhub:GetFindings`, `securityhub:DescribeStandards`, `securityhub:ListSecurityControlDefinitions`, `securityhub:BatchGetSecurityControls`, `securityhub:GetEnabledStandards`
+- Security Hub, for Managed Cloud Compliance - `securityhub:GetFindings`, `securityhub:DescribeStandards`, `securityhub:ListSecurityControlDefinitions`, `securityhub:BatchGetSecurityControls`, `securityhub:GetEnabledStandards`, `securityhub:ListFindingAggregators`
 - IAM read access, for Managed Cloud Compliance and Pulse's own permission checks - `iam:GetAccountSummary`, `iam:SimulatePrincipalPolicy`
 - Trusted Advisor (requires a Business/Enterprise Support plan) - `trustedadvisor:List*`
 - GuardDuty - `guardduty:ListDetectors`, `guardduty:ListFindings`, `guardduty:GetFindings`
@@ -335,7 +335,8 @@ Complete the four prerequisite blocks in this order:
                    "securityhub:DescribeStandards",
                    "securityhub:ListSecurityControlDefinitions",
                    "securityhub:BatchGetSecurityControls",
-                   "securityhub:GetEnabledStandards"
+                   "securityhub:GetEnabledStandards",
+                   "securityhub:ListFindingAggregators"
                ],
                "Resource": "*"
            },

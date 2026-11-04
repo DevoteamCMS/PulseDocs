@@ -114,7 +114,7 @@ The scanner role's permission set is identical in the automated and manual paths
 | --- | --- |
 | `AccountManagement`, `Organizations` | Account discovery - Pulse enumerates the organisation by assuming the role in the **management account**. Without it, only the account holding the credentials is onboarded. |
 | `ResourceScanning` | Resource inventory, backup and patching data - depends on AWS Config being enabled |
-| `SecurityHub` | Managed Cloud Compliance findings and control definitions |
+| `SecurityHub` | Managed Cloud Compliance findings and control definitions, and the region where each account's findings are aggregated |
 | `IAM` | Compliance checks and Pulse's own "are my permissions correct" self-check |
 | `TrustedAdvisor` | Trusted Advisor recommendations - requires a Business or Enterprise Support plan on the account |
 | `GuardDuty` | Threat-detection findings |
@@ -153,7 +153,7 @@ These are for the administrator performing the setup, not for Pulse:
 - In the **management account**: `securityhub:EnableOrganizationAdminAccount`, `securityhub:ListOrganizationAdminAccounts`, `organizations:EnableAWSServiceAccess`, `organizations:RegisterDelegatedAdministrator`
 - In the **Security account**: `securityhub:EnableSecurityHub`, plus permission to manage organisation configuration, configuration policies and policy associations
 
-Pulse's own Security Hub permissions are separate and already in the scanner role policy (`securityhub:GetFindings`, `DescribeStandards`, `ListSecurityControlDefinitions`, `BatchGetSecurityControls`, `GetEnabledStandards`). They must be present in every account whose findings you want.
+Pulse's own Security Hub permissions are separate and already in the scanner role policy (`securityhub:GetFindings`, `DescribeStandards`, `ListSecurityControlDefinitions`, `BatchGetSecurityControls`, `GetEnabledStandards`, `ListFindingAggregators`). They must be present in every account whose findings you want.
 
 ### Can I enable Security Hub without central configuration?
 
