@@ -171,6 +171,8 @@ Compliance Manager measures your cloud against **frameworks**. A framework is a 
 5. Under **Define framework parameters**, enter a value for any cloud control that asks for one. Many frameworks have none, in which case the panel says so.
 6. Click **Monitor**. Google Cloud confirms with **Framework Deployment initiated successfully**.
 
+If Security Health Analytics is active on the resource you choose, the panel warns that its detectors may produce duplicate findings and suggests disabling it before the deployment. Leave Security Health Analytics enabled unless Devoteam advises otherwise: Pulse reports violations from the findings it produces.
+
 The framework then appears in the **Frameworks** table on the **Monitor** tab marked **New**, where **Assigned to** shows the resource and **Controls passing** shows the share of controls that pass.
 
 Choose **Monitor**, not **Enforce**: monitoring gives Pulse the findings it reports on, and does not enforce compliance or remediate violations in your cloud.
