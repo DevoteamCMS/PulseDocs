@@ -41,7 +41,7 @@ On a first visit, start with coverage rather than with the budgets themselves. T
 
 The table holds budgets from two sources, and they behave differently:
 
-| | Cloud-native budget | Pulse budget |
+| | Cloud-native budget | Pulse budget (virtual) |
 | --- | --- | --- |
 | **Where it is defined** | In your cloud provider - for example an Azure budget on a subscription | In Pulse, with **Add New Budget** |
 | **How it gets here** | Read from your cloud automatically | Created here, and exists only in Pulse |
@@ -49,9 +49,11 @@ The table holds budgets from two sources, and they behave differently:
 | **Alert rules** | The notifications configured on it in your cloud, shown as they are set there | Thresholds and email recipients you set in Pulse |
 | **Changing it** | In your cloud provider's own console. Read-only in Pulse | In Pulse, by the owners of the assets it covers, or by a Manager |
 
+**A Pulse budget is a virtual budget.** It lives only in Pulse and is never synced to your cloud provider, which is what lets it be set on scopes your cloud has no budget for - an Asset Group, for example, is Pulse's own grouping. A cloud-native budget is the opposite: it lives in your cloud, and Pulse only reads it.
+
 **Creating a budget in Pulse creates nothing in your cloud, and a cloud-native budget cannot be changed from Pulse.** It is the same read-only boundary that applies to the whole platform - see [The Core Platform](../README.md#the-core-platform).
 
-To see one kind at a time, use **All Filters** and filter on **Cloud Native**.
+To see one kind at a time, use **All Filters** and filter on **Cloud Native** - virtual budgets are the ones that are not cloud-native.
 
 ---
 
@@ -199,10 +201,15 @@ Check three things. The tier: on Cloud Essentials no notifications are sent. The
 
 Yes. Choose **Asset Group** as the scope. The budget then follows the assets allocated to that group, wherever they sit - which needs [Asset Ownership](../asset-ownership.md) configured first.
 
+### What is a virtual budget?
+{: .no_toc }
+
+A Pulse budget - one created in Pulse with **Add New Budget**. It is called virtual because it exists only in Pulse: nothing is created in your cloud provider, and its alerts, on the tiers that send them, are emails sent by Pulse. The other kind, a cloud-native budget, is defined in your cloud and read into Pulse. See [Two Kinds of Budget](#two-kinds-of-budget).
+
 ### Does creating a budget here create one in my cloud?
 {: .no_toc }
 
-No. A Pulse budget exists only in Pulse. Budgets that already exist in your cloud are read into Pulse as cloud-native budgets, but nothing is written back.
+No. A Pulse budget is virtual - it exists only in Pulse. Budgets that already exist in your cloud are read into Pulse as cloud-native budgets, but nothing is written back.
 
 ### Can I get the budget list out of Pulse?
 {: .no_toc }
