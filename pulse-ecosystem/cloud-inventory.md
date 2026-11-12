@@ -205,7 +205,7 @@ Costs tells you what you spent. This page tells you whether that was the plan.
 
 The **Daily Budget Progress** chart tracks running spend against the budget for the period, so overspend shows up mid-month rather than on the invoice. **Budget Coverage** splits your subscriptions into those with a budget and those without, and calls out the uncovered percentage - usually the more revealing of the two on a first visit.
 
-The table lists every budget with its current cost, its limit, a health status and its alert state. Opening a row gives the spend history and the alert configuration - the thresholds and the recipients who would be notified.
+The table lists every budget with its current cost, its limit, a health status and its alert state - both cloud-native budgets, read from your cloud, and virtual budgets, which are created in Pulse and exist only there (see [Two Kinds of Budget](cloud-economics/budget-alerts.md#two-kinds-of-budget)). Opening a row gives the spend history and the alert configuration - the thresholds and the recipients who would be notified.
 
 On Cloud Essentials this page is visibility only: you can read budgets and see how spend is tracking against them, but notifications are not sent. Alerting comes with Pulse Premium or a managed service.
 {: .fs-3 }
