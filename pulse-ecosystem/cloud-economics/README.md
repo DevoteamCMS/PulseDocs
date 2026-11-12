@@ -69,5 +69,5 @@ Pulse reports on billing data your clouds produce. A few things decide what you 
 
 - **Costs arrive within 24 hours** of a cloud being connected, and refresh from then on. The most recent day in the daily view is normally yesterday - the current day has not yet been billed.
 - **AWS costs come from the Cost and Usage Report export** set up during onboarding. See [AWS onboarding](../onboarding/aws.md).
-- **Budgets you already have in your cloud appear on their own**, as cloud-native budgets. Pulse reads them; it does not change them.
+- **Budgets you already have in your cloud appear on their own**, as cloud-native budgets. Pulse reads them; it does not change them. Budgets you add in Pulse are virtual budgets - they exist only in Pulse. See [Two Kinds of Budget](budget-alerts.md#two-kinds-of-budget).
 - **Every figure follows the header selectors** - cloud provider, company and currency - and, for a user delegated to an Asset Group, that group's assets. See [Controls Shared by Every Page](../cloud-inventory.md#controls-shared-by-every-page) and [What a Delegated User Sees](../asset-ownership.md#what-a-delegated-user-sees).
