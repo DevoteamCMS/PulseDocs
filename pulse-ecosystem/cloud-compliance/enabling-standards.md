@@ -177,6 +177,8 @@ The framework then appears in the **Frameworks** table on the **Monitor** tab ma
 
 Choose **Monitor**, not **Enforce**: monitoring gives Pulse the findings it reports on, and does not enforce compliance or remediate violations in your cloud.
 
+**Assured Workloads frameworks** - such as EU Data Boundary, US Data Boundary, CJIS, FedRAMP and IL2, IL4 and IL5 - are not listed under **Security → Compliance → Configure**. They are on the **Compliance** page of the Google Cloud console instead. Go to **Compliance → Frameworks**, open the **⋮** menu on the framework's row, choose **Apply to resources → Monitor**, then select the resource and location and click **Monitor**. You do not need to create an Assured Workloads folder to monitor a framework.
+
 If no built-in framework matches what you need, click **Create custom framework** on the **Configure → Frameworks** tab and build it from the **Cloud controls** tab's controls. Assign a custom framework to resources in the same way.
 
 ### Timing
