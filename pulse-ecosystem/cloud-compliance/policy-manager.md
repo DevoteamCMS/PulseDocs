@@ -166,7 +166,7 @@ Policy Release Date is off by default. Which of the others appear is up to you -
 ### Reviewing a policy
 {: .no_toc }
 
-Click a policy name to open its panel. The header carries two counts - **Violations** and **Compliances** - the non-compliant and compliant resource counts for that policy. Below that are three tabs:
+Click a policy name to open its panel. The header carries two counts - **Violations** and **Compliances** - the non-compliant and compliant resource counts for that policy. A count reads **N/A**, rather than 0, when the policy has not been evaluated or has no assets to evaluate. Below that are three tabs:
 
 - **Policy Details** - the full analysis of the policy. Open *Every field in the policy analysis* below for what each section contains.
 - **Settings & Status** - the two decisions you make, described after it.
@@ -247,7 +247,13 @@ Justification is required for exactly the two choices that leave a finding unfix
 
 Two further values appear on exempted policies - **Exemption Due Soon** and **Exempt Expired** - when the expiry date you set is approaching or has passed. Both still show as **Exempt** on the policy's own badge, so the policy list is where to look when reviewing exemptions that need renewing.
 
-**Compliance Status** is a different column and not a decision at all: it reads **Compliant** or **Non-Compliant**, and reports what your cloud found.
+**Compliance Status** is a different column and not a decision at all: it reports what your cloud found.
+
+- **Compliant** · **Non-Compliant** - the policy was checked against your assets.
+- **Not Evaluated** - the policy has not been checked yet, because the framework is not enabled in your cloud or no discovery has run for it.
+- **No Assets Deployed** - there is nothing in your cloud the policy applies to.
+
+Neither of the last two is a pass.
 
 </details>
 

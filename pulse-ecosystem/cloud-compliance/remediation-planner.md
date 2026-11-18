@@ -254,6 +254,22 @@ A request that has already been approved, rejected or cancelled is settled - a l
 
 ---
 
+## When the List Is Empty
+
+An empty list says why, in place of the table:
+
+| What the page says | What it means |
+| --- | --- |
+| **Nothing to remediate** | Every check in the framework passed at the last discovery, on the date shown. New violations appear as soon as a scan finds them |
+| **The Security Framework is Not Active** | The framework is activated in Pulse but not enabled in your cloud, so there is nothing to report against it yet |
+| **No data collected yet** | The framework is enabled, but no discovery has recorded results against it. Data appears after the next scan |
+
+The last two carry a **Learn how to enable Security Framework** button, which opens [Enabling Standards in Your Cloud](enabling-standards.md).
+
+When the latest data for some subscriptions is more than 30 days old, a banner above the list says so: *The last discovery for 1 or more subscriptions is more than 30 days old. Values shown may not reflect the current cloud state.* The violations stay listed - they are the latest Pulse has.
+
+---
+
 ## Q&A
 
 ### Nothing is listed, or far less than I expected
