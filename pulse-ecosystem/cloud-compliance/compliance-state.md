@@ -69,6 +69,17 @@ The score is not a judgement. It is arithmetic on three counts:
 
 When you report this figure, report the exemption count with it.
 
+### No score is not 0%
+{: .no_toc }
+
+A score needs something to have been checked. When nothing has been measured for the framework - for a subscription, or for the whole scope - there is no score, and Pulse shows a yellow **⊘** icon (a circle with a slash) instead of a number, in the score dial, the scorecards and the table:
+
+> Nothing has been measured for this Security Framework yet, so no score can be calculated.
+
+That is different from **0%**, which Pulse shows in red with a full red ring. 0% is a measurement: checks were run and every one of them failed. Do not read the ⊘ icon as either a pass or a failure - nothing was checked.
+
+The same icon marks any count Pulse has no figure for, such as Violations on a subscription that has not been scanned.
+
 ---
 
 ## Compliance Metrics per Subscription
@@ -82,20 +93,67 @@ Each row is one subscription. Work the table by score ascending: the weakest sub
 | --- | --- | --- |
 | **Subscription** | The subscription, project or account being scored | Your own names |
 | **Provider** | Which cloud it belongs to | AWS · Azure · Google Cloud |
-| **Compliance Score** | The score for that subscription, colour-coded | 0–100% |
-| **Violations** | Checks that failed | A count |
-| **Exemptions** | Failed checks with accepted risk | A count |
-| **Compliances** | Checks that passed | A count |
-| **State** | Whether the subscription is still being scanned | **Active** · **Not Active** |
-| **Last Discovery** | When Pulse last collected compliance data for it | A date, or **Never** |
+| **Compliance Score** | The score for that subscription, colour-coded | 0–100%, or **⊘** when nothing has been measured |
+| **Violations** | Checks that failed | A count, or **⊘** |
+| **Exemptions** | Failed checks with accepted risk | A count, or **⊘** |
+| **Compliances** | Checks that passed | A count, or **⊘** |
+| **State** | Whether the subscription is being scanned, and whether anything is stopping it | **Active** · **Not Active** · **Issues** |
+| **Last Discovery** | When Pulse last collected compliance data for it | A date |
 
 Filter by **State** and **Subscription**, or search by name. The table exports to CSV in full - which is the usual way to get these figures into an audit pack or a board report.
 
 </details>
 
-**Last Discovery is the first thing to check when a figure looks wrong.** A score that has not moved may be a score that has not been recollected. **Never** means Pulse has not yet scanned that subscription at all.
+**Last Discovery is the first thing to check when a figure looks wrong.** A score that has not moved may be a score that has not been recollected.
 
 **Not Active** means the subscription is no longer being scanned, so its figures are frozen at the last collection rather than current.
+
+Every subscription connected to Pulse is listed, whether or not compliance data has been collected for it. A subscription with no data shows **⊘** in its figures rather than being left out.
+
+---
+
+## Subscriptions with Issues
+
+**Issues** in the State column means Pulse has no current compliance data for that subscription, and knows why. The badge reads **1 Issue »** or **n Issues »**; click it to open a panel titled with the subscription's name, listing each cause with a code and a description.
+
+| Code | What it means | What to do |
+| --- | --- | --- |
+| A readiness check code, for example `azure:sub:permissions:missing` | A readiness check that compliance collection depends on has failed - missing permissions, an unregistered resource provider, or a cloud service that is switched off | Use **Open readiness checks** in the panel. It opens the readiness checks in Cloud Onboarding, filtered to that subscription |
+| `generic:cred:none` | Pulse has no credentials for this subscription, so it cannot be scanned | Connect it in Cloud Onboarding |
+| `mcc:scan:not_found` | Pulse cannot find this subscription (on Google Cloud, this project) | Check that Pulse still has access, or remove it in Cloud Onboarding if it no longer exists |
+| `mcc:scan:unknown` | The subscription was not scanned and the cause could not be identified | Contact Devoteam support, quoting the subscription and the code |
+| `mcc:standard:not_enabled` | The framework is activated in Pulse but not enabled in your cloud, so it is not assessed | Follow **Learn how to enable Security Framework** in the panel, or see [Enabling Standards in Your Cloud](enabling-standards.md) |
+
+Each entry has a copy control, which copies the code and description together - useful when raising a ticket.
+
+A subscription can show figures and Issues at the same time. That happens when its last successful scan is older than the latest run: the figures and the Last Discovery date are from that older scan, and the Issues badge says why nothing newer has arrived.
+
+---
+
+## Banners at the Top of the Table
+
+Pulse shows one banner at a time above the table when the figures need a caveat. When more than one applies, the first in this list is shown:
+
+| Banner | When it shows |
+| --- | --- |
+| *No Compliance Metrics collected as no discovery has run for this Security Framework* | The framework is activated in Pulse but not enabled in your cloud. Every subscription is still listed, each with the `mcc:standard:not_enabled` issue |
+| *Compliance metrics are more than 30 days old for 1 or more subscriptions. Values shown may not reflect the current cloud state.* | Some subscriptions have issues **and** some data is more than 30 days old |
+| *Compliance metrics are not available for 1 or more subscriptions.* | Some subscriptions have issues |
+| *The last discovery for 1 or more subscriptions is more than 30 days old. Values shown may not reflect the current cloud state.* | The oldest Last Discovery date in the table is more than 30 days ago |
+
+The two banners about issues carry a **Show subscriptions with Issues** switch. Turn it on to filter the table to the subscriptions with issues; turn it off to see them all again.
+
+**Old data stays visible.** Under the 30-day banner the rows keep their figures - they are still the latest Pulse has, just not recent. Check Last Discovery before quoting them.
+
+### No data collected yet
+{: .no_toc }
+
+When the framework is enabled in your cloud but no discovery has recorded results against it, the table is replaced by:
+
+> **No data collected yet**
+> The Security Framework is active, but no discovery has recorded results against it. Thus the graph has no data. Data appears after the next scan.
+
+Its **Learn how to enable Security Framework** button opens [Enabling Standards in Your Cloud](enabling-standards.md).
 
 ---
 
@@ -133,6 +191,8 @@ Three shapes are worth recognising:
 - **Score flat, violations flat, compliances rise** - the estate is growing and new resources are passing. Holding a score while growing is real progress.
 - **Score drops sharply on one day** - usually a newly activated framework or a newly onboarded subscription bringing its findings with it, rather than a sudden regression.
 
+When the selected period holds no measured score at all, the chart collapses to its header with the badge **Compliance History Unavailable**. That happens when nothing has been measured yet, and also when the latest data is older than the period you chose - widen the period to see it.
+
 ---
 
 ## Q&A
@@ -147,10 +207,15 @@ The one named in the selector beside the page title. Only activated frameworks a
 
 Check the badge on the scorecards and the chart. **Full Scope** is the whole tenant; anything else is the subscription named on the badge. Clicking the selected row again returns you to Full Scope.
 
-### A subscription shows Never under Last Discovery
+### A subscription shows ⊘ instead of figures
 {: .no_toc }
 
-Pulse has not yet collected compliance data for it. Newly onboarded subscriptions show this until the first collection completes.
+Pulse has no compliance data for it against this framework. Check its State: if it reads **Issues**, open the badge for the cause and what to do. Newly onboarded subscriptions show ⊘ until the first collection completes.
+
+### The score shows ⊘ - is that bad?
+{: .no_toc }
+
+Neither good nor bad: nothing has been measured, so there is no score. A measured failure shows as a red **0%**. See [No score is not 0%](#no-score-is-not-0).
 
 ### Our score went up but we have not fixed anything
 {: .no_toc }

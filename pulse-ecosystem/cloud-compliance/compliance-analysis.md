@@ -87,8 +87,8 @@ The upper table lists every evaluated policy in the framework, with its status a
 | Column | What it holds | Values |
 | --- | --- | --- |
 | **Policy Name** | The policy - click it to open the full analysis | The provider's own policy name |
-| **Compliance Status** | Whether the estate currently meets it | **Compliant** · **Non-Compliant** |
-| **Violations** | How many assets are breaching it | A count |
+| **Compliance Status** | Whether the estate currently meets it | **Compliant** · **Non-Compliant** · **Not Evaluated** · **No Assets Deployed** |
+| **Violations** | How many assets are breaching it | A count, or **⊘** when the policy has not been evaluated |
 | **Severity** | The assessed risk of the policy | **Low** · **Medium** · **High** · **Critical** |
 | **Policy Category** | The security domain the policy belongs to | One of fourteen - see below |
 | **Policy Action** | What your organisation decided should happen, and a link to change it | **Pending to Assess** · **Under Investigation** · **Audit** · **Remediate** · **Exempt** · **Exemption Due Soon** · **Exempt Expired** |
@@ -125,6 +125,8 @@ Every policy belongs to exactly one security domain:
 Filtering by category is how you review one control area at a time - all your logging controls, or everything touching keys and secrets.
 
 </details>
+
+**Not Evaluated** and **No Assets Deployed** are not passes. Not Evaluated means the policy has not been checked yet - because the framework is not enabled in your cloud, or because no discovery has run for it. No Assets Deployed means there is nothing in your cloud the policy applies to. Neither has a violations count, so the Violations column shows a yellow **⊘** icon: *This policy has not been evaluated yet*.
 
 Filter by **Compliance Status** to see only what is failing. Sorting by Violations descending puts the widest failures first, which is usually not the same order as severity: a Low severity policy breached on two hundred assets may matter more than a High one breached on one.
 
@@ -214,7 +216,17 @@ Both tables export to CSV in full, not only the page on screen.
 
 </details>
 
-When the selected policy has no violations the table says **No violations detected** - the answer you want, rather than an error.
+When there are no assets to list, the table says why, in place of the rows:
+
+| What the page says | What it means |
+| --- | --- |
+| **No resources to review** | Every resource assessed against the selected policy passed. There is nothing to remediate - the answer you want, rather than an error |
+| **Policy not evaluated** | The selected policy has not been evaluated yet. When the framework is not active in your cloud, the text says so and a **Learn how to enable Security Framework** button opens [Enabling Standards in Your Cloud](enabling-standards.md) |
+| **No Assets Deployed** | There are no assets deployed to evaluate against this policy |
+| **The Security Framework is Not Active** | The framework is activated in Pulse but not enabled in your cloud. No resources have been assessed |
+| **No data collected yet** | The framework is enabled, but no discovery has run for it yet. No resources have been assessed |
+
+When the framework is not active or has no data, a banner above the policy table also says so: *No Compliance Metrics collected as no discovery has run for this Security Framework*. When the latest data for some subscriptions is more than 30 days old, the banner reads *The last discovery for 1 or more subscriptions is more than 30 days old. Values shown may not reflect the current cloud state.*
 
 ---
 
@@ -240,7 +252,7 @@ The **Policy Action** column is not shown to the **User** role - deciding what h
 ### Nothing is listed in the lower table
 {: .no_toc }
 
-Select a policy in the upper table first - the assets table shows the resources breaching whichever policy is selected. If one is selected and the table still says **No violations detected**, that policy is currently being met by every asset you can see.
+Select a policy in the upper table first - the assets table shows the resources breaching whichever policy is selected. If one is selected and the table says **No resources to review**, that policy is currently being met by every asset you can see. **Policy not evaluated** and **No Assets Deployed** mean something different - nothing was checked, or there was nothing to check. See [Step 2](#step-2---review-non-compliant-assets).
 
 That last qualification matters if you hold the **User** role: you see only the assets in the Asset Groups you are delegated to, so the policy may still be breached elsewhere in the company. Delegated to no group at all, every policy looks clean. [Who Sees What](#who-sees-what) explains the scoping, and [Asset Ownership](../asset-ownership.md) is where it is configured.
 

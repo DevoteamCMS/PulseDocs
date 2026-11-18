@@ -191,7 +191,20 @@ Google Cloud notes that the monitoring information on the **Monitor** tab may ha
 1. **Activate the matching framework in Policy Manager**, if you have not already. The cloud produces the findings; activating is what puts them in scope for Pulse.
 2. **Allow time for the data to arrive.** Findings appear in Pulse after your cloud has evaluated the new standard and Pulse has collected the results - allow up to 24 hours for data to load into Pulse, on top of your cloud's own evaluation schedule.
 3. **Watch the Status in Policy Manager.** It moves from **Awaiting Cloud** to **Active** once data starts arriving, which is the clearest confirmation that both halves are now in place.
-4. **Check Compliance State.** The framework should start reporting metrics rather than sitting empty.
+4. **Check Compliance State.** The framework should start reporting metrics rather than showing **⊘** where the score would be.
+
+---
+
+## When a Compliance Page Has No Data
+
+The **Learn how to enable Security Framework** button that brought you here appears when a Compliance page has nothing to show for the selected framework. The page names one of two reasons:
+
+| What the page says | What it means | What to do |
+| --- | --- | --- |
+| **The Security Framework is Not Active** | The framework is activated in Pulse, but the matching standard is not enabled in your cloud. Its Status in Policy Manager reads **Awaiting Cloud** | Enable the standard in your cloud - see the section above for your provider |
+| **No data collected yet** | The standard is enabled in your cloud, but no discovery has recorded results against it yet | Allow time for your cloud to evaluate the standard and for Pulse to collect the results - see [After You Enable a Standard](#after-you-enable-a-standard). On Azure, you can [ask Azure to evaluate a subscription now](#azure-the-standard-is-assigned-but-a-subscription-has-no-compliance-results) |
+
+Either way, Pulse shows no score rather than a made-up one: the score dial and the counts show a yellow **⊘** icon until data arrives. See [Compliance State](compliance-state.md#no-score-is-not-0).
 
 ---
 

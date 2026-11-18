@@ -251,6 +251,23 @@ This **Expires** date belongs to the policy's action in Pulse. It is not the sam
 
 ---
 
+## When a Tab Is Empty
+
+An empty tab says why, in place of the table:
+
+| What the page says | Tab | What it means |
+| --- | --- | --- |
+| **No unimplemented Exemption Requests at the moment.** | Exemption Requests | No request is waiting. **Review implemented Exemptions** opens the Exempted Violations tab |
+| **No exempted violations** | Exempted Violations | No violation in this framework is currently exempted in your cloud |
+| **The Security Framework is Not Active** | Either | The framework is activated in Pulse but not enabled in your cloud, so there is nothing to report against it yet |
+| **No data collected yet** | Either | The framework is enabled, but no discovery has recorded results against it. Data appears after the next scan |
+
+The last two carry a **Learn how to enable Security Framework** button, which opens [Enabling Standards in Your Cloud](enabling-standards.md).
+
+When the latest data for some subscriptions is more than 30 days old, a banner above the tabs says so: *The last discovery for 1 or more subscriptions is more than 30 days old. Values shown may not reflect the current cloud state.*
+
+---
+
 ## Q&A
 
 ### We approved an exemption but the violation is still being reported
