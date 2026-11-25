@@ -9,7 +9,7 @@ nav_order: 2
 # Google Cloud Onboarding
 {: .no_toc }
 
-Connect a Google Cloud organisation to Pulse using a Service Account.
+Connect a Google Cloud organisation to Pulse. The recommended path is **federated** - Pulse impersonates a read-only service account in your project, so no Service Account key is created, uploaded or rotated.
 
 <details open markdown="block">
   <summary>
@@ -24,7 +24,22 @@ Connect a Google Cloud organisation to Pulse using a Service Account.
 
 ## Required Customer Roles
 
-Confirm you have these before you start. Both onboarding methods need the same access - the automated script performs exactly the steps you would otherwise do by hand, using your own `gcloud` session. Everything Pulse itself receives is read-only.
+Confirm you have these before you start. This is the only part of onboarding that needs privileged access - everything Pulse itself receives is read-only.
+
+### Automated Setup (Recommended)
+{: .no_toc }
+
+| Where | Access required | Used for |
+| --- | --- | --- |
+| **Organisation** | Organisation Admin, or equivalent delegated IAM admin roles | Creating the custom read-only role at organisation level and binding it to the service account |
+| **Host project** (where the service account lives) | Permission to enable APIs, create service accounts, and manage access to a service account | Enabling the APIs, creating the service account, and letting Pulse impersonate it |
+| **Billing account** *(if you configure the billing role)* | Permission to grant roles on the billing account, such as Billing Account Administrator | Granting the service account `roles/billing.viewer` |
+| **Cost export table** *(if you enter one)* | Permission to grant access on the BigQuery table | Granting the service account `roles/bigquery.dataViewer` on that table |
+
+The script runs in **Google Cloud Shell**, so there is nothing to install locally.
+
+### Manual Setup
+{: .no_toc }
 
 | Where | Access required | Used for |
 | --- | --- | --- |
@@ -32,94 +47,189 @@ Confirm you have these before you start. Both onboarding methods need the same a
 | **Host project** (where the Service Account lives) | Project-level permission to create service accounts and keys, and to enable APIs | Creating the Service Account and its JSON key, enabling the required APIs |
 | **Billing account** | Billing Account Costs Manager or Billing Account Administrator | Granting the Service Account `roles/billing.viewer`, and activating the detailed-usage cost export |
 | **Cost export project or dataset** | Permission to grant dataset or table access | Letting the Service Account read the billing export table |
-| **Organisation** *(optional)* | `securitycenter.managedServices.update` | Enabling Security Health Analytics. If missing, the script skips it and prints the command to run later - the rest of onboarding is unaffected. |
+| **Organisation** | `securitycenter.managedServices.update` | Enabling Security Health Analytics |
 
-Google Cloud onboarding is **key-based**: both paths produce a Service Account JSON key that Pulse holds. Store and rotate it in line with your own policy.
+The manual path is **key-based**: it produces a Service Account JSON key that Pulse holds. Store and rotate it in line with your own policy.
 
-**If your Google Cloud has no organisation resource**, roles must be created and assigned **per project** instead of once at organisation level, and repeated for every project you want Pulse to see. See [Onboarding Q&A](faq.md#my-organisation-does-not-have-a-google-cloud-organisation-resource---can-i-still-onboard).
+### Not a role, but required
+{: .no_toc }
+
+- **An organisation resource, for the automated path.** The automated flow needs your **Organization ID** and binds Pulse's role at organisation level. If your Google Cloud has no organisation resource, use the manual path, where roles must be created and assigned **per project** and repeated for every project you want Pulse to see. See [Onboarding Q&A](faq.md#my-organisation-does-not-have-a-google-cloud-organisation-resource---can-i-still-onboard).
+- **An existing Cloud Billing export, for cost data.** Neither path creates the export to BigQuery - see *Cost export: the export must already exist* below.
 
 ---
 
 ## Choosing an Onboarding Method
 
-Both methods grant Pulse the same read-only access and produce the same result - a Service Account key held by Pulse.
+Both methods give Pulse read-only access through a service account, but they differ in how Pulse authenticates.
 
-| | **Automated - Pulse script** | **Manual** |
+| | **Automated - Federated (Recommended)** | **Manual - Service Account Key** |
 | --- | --- | --- |
-| How it is done | One generated PowerShell or Bash script, run once | Console steps repeated across IAM, Billing, Security Command Center and BigQuery |
-| Credential upload | Uploaded to Pulse automatically | You download the JSON key and paste it into Pulse |
-| APIs, roles, billing binding | Done for you | You configure each one yourself |
-| Cost export access \* | Done for you | You configure it yourself |
-| Security Health Analytics | Enabled for you (best-effort) | You enable it yourself |
+| Credential given to Pulse | None. Pulse impersonates the service account - no key is created or uploaded | Service Account JSON key you create and paste into Pulse |
+| How it is done | One generated script, pasted into Google Cloud Shell | Console steps across IAM, Billing, Security Command Center and BigQuery |
+| Resource access | A custom read-only role with 49 permissions, bound at organisation level | `roles/viewer` with `roles/browser`, or a custom role with 50 permissions, at organisation or project level |
+| Billing and cost export access \* | Done for you | You configure it yourself |
+| Credential rotation | Not applicable - there is no key to expire or rotate | Your responsibility |
 
 \* **Access** to the cost export only. Neither path creates the export itself - a Cloud Billing export to BigQuery must already exist, or you must create it by hand. See *Cost export: the export must already exist*.
 
-Use the **automated** flow unless your organisation specifically requires custom naming, custom least-privilege roles, or a change-managed process for creating cloud credentials.
+Use the **automated federated** flow unless your Google Cloud has no organisation resource, or your organisation requires a change-managed process for creating cloud credentials.
 
 ---
 
-## Automated Setup via Pulse (Recommended)
+## Automated Setup - Federated (Recommended)
 
-The automated flow has four steps.
+1. In Pulse, go to **Cloud Management → Onboarding → Google Cloud**
+2. On step **1. Onboard**, choose **Automatic** (marked Recommended) and click Next
+3. On step **2. Cloud Set Up (Automated)**, configure:
+   - **Service Account Prefix** - names the service account the script creates (default `pulse-reader`; up to 12 lowercase letters, numbers and hyphens). Pulse adds a generated suffix, so the account looks like `pulse-reader-<suffix>@<host-project-id>.iam.gserviceaccount.com`.
+   - **Custom Resource Role** - display name of the read-only role the script creates at organisation level (default `Pulse Reader Role`). The role ID is the title in camel case without spaces, for example `pulseReaderRole`.
+   - **Host Project ID** - the project where the service account is created. It can be any project you control and does not need to contain the resources Pulse monitors.
+   - **Organization ID** - the numeric ID of your organisation. Find it in **IAM & Admin → Settings**, or run `gcloud organizations list`.
+   - **Configure Billing role for budget discovery** - **Yes** asks for your **Billing Account ID** (format `XXXXXX-XXXXXX-XXXXXX`) and grants the service account `roles/billing.viewer` on it. **No** skips this, and Pulse does not discover your budgets.
+4. On step **3. Cost Export**, choose **Use Existing Export** and enter the **Cost Export Table ID**, or choose **Skip billing export upload**. See *Cost export: the export must already exist* below.
+5. On step **4. Finalize**, review the *Before running* prerequisites, then click **Copy Script and Open Cloud Shell**
+6. Paste the script into the Cloud Shell terminal and press Enter
+7. Pulse detects completion automatically and confirms with **Onboarding completed successfully**
 
-1. **1. Onboard** - in Pulse, go to **Cloud Management → Onboarding → Google Cloud** and choose **Automatic** (marked Recommended)
-2. **2. Cloud Set Up (Automated)** - configure:
-   - **Default Prefix** - naming standard for the service account and generated role titles (default `Devoteam Pulse`). Pulse shows the generated service account ID as you type.
-   - **Credential Mode** - **Create New Service Account** (you supply a **Host Project ID**) or **Use Existing Service Account** (you supply its **email**, and the host project is derived from it)
-   - **Organization ID** - optional; leave blank to auto-detect at runtime
-   - **Organization Access Model** - **Built-in Resource Viewer Role** (`roles/viewer`, simplest) or **Create Custom Resource Roles** (least-privilege, organisation-level). Pulse shows the resulting role badges, always including `roles/billing.viewer`.
-   - **Billing Account ID** - optional; leave blank to auto-detect at runtime
-3. **3. Cost Export** - choose **Use or Autodetect Existing Export** or **Skip billing export upload**. See *Cost export: the export must already exist* below.
-4. **4. Finalize** - choose **PowerShell** or **Cloud Shell**, then download and run the script. Both variants do the same thing, and both upload credentials to Pulse automatically.
-
-The **Host Project ID** must be entered - the script does not detect it for you. It can be a project in [a different organisation](faq.md#can-the-service-account-live-in-a-different-project-or-organisation) from the resources being scanned.
+This flow is **federated**: no Service Account key is created and nothing is uploaded to Pulse, so there is nothing to rotate and nothing that expires.
 
 ### Cost export: the export must already exist
 
-The script **cannot create or enable a Cloud Billing export** - it only grants the service account access to one. Three situations:
+The script **cannot create or enable a Cloud Billing export** - it only grants the service account read access to one.
 
 | Your situation | What to do |
 | --- | --- |
-| The export exists and you know its table | Choose **Use or Autodetect Existing Export** and enter the **Cost Export Table ID** |
-| The export exists but you don't know the table | Choose **Use or Autodetect Existing Export** and leave the Table ID **blank** - the script lists accessible projects and export tables so you can pick at runtime |
+| The export exists | Choose **Use Existing Export** and enter the full **Cost Export Table ID**, in the format `project.dataset.table`. Find it in Google Cloud console under **Billing → Billing export → Detailed usage cost**. |
 | There is no export yet | Choose **Skip billing export upload**, then create the export by hand using *Customer Prerequisites - Creating Cost Export* below, and register it in Pulse afterwards |
 
 Skipping still onboards the service account to Pulse; only the billing export configuration is left out.
 
-You also set a **Cost Export Viewer Role Title** on this step - the name of the role carrying `bigquery.tables.getData`, equivalent to the `PULSE Cost Export Viewer` role in the manual steps below.
+The script grants `roles/bigquery.dataViewer` on the **export table only** - not on the dataset or the project that holds it.
 
 ### Before you start
 
-**Cloud Shell (no installation required)** - download the script, then in [Google Cloud Shell](https://shell.cloud.google.com) click **⋮ → Upload file** and select it. You are already authenticated with `gcloud`, and `bq`, `jq` and `curl` come pre-installed. Run it with:
+The script **must be run in [Google Cloud Shell](https://shell.cloud.google.com)**. You are already authenticated with `gcloud` there, and `bq` comes pre-installed, so there is nothing to install locally.
 
-```bash
-bash ~/onboard-google.sh
+Sign in with an account holding the access listed under *Required Customer Roles - Automated Setup* above. If the script does not copy, click **Download Script**, open the file and paste its contents into Cloud Shell instead.
+
+### What the script does
+
+**Before it changes anything,** the script checks whether a role with your chosen role ID already exists in the organisation and was not created by Pulse. If so, it shows the role's current title and asks:
+
+> Replace role "`<role id>`"? (yes/no)
+
+Answer `yes` to let Pulse replace that role's title and permissions. Any other answer stops the script with nothing changed - start the onboarding again in Pulse with a different **Custom Resource Role** title.
+
+It then reports each step as it goes, so you can see exactly where it got to:
+
+| Step | Action |
+| --- | --- |
+| 1 | Enables the required **APIs** on the host project |
+| 2 | Creates the **service account** in the host project, or reuses it if it already exists |
+| 3 | Creates the **custom read-only role** at organisation level, or updates it if it already exists |
+| 4 | Grants that role to the service account on the **organisation** |
+| 5 | Lets Pulse **impersonate** the service account |
+| 6 | Grants `roles/billing.viewer` on the **billing account** - only if you chose to configure the billing role |
+| 7 | Grants `roles/bigquery.dataViewer` on the **cost export table** - only if you entered one |
+
+Steps 6 and 7 are numbered only when they run, so if you skipped the billing role, the cost export step is reported as step 6.
+
+<details markdown="block" class="reference-box">
+  <summary>Step 1 - the 11 APIs enabled on the host project</summary>
+
+- Billing Budget API
+- Cloud Asset API
+- Cloud Billing API
+- Cloud Resource Manager API
+- Cloud Security Compliance API
+- IAM API
+- Cloud Monitoring API
+- OS Config API
+- Cloud Recommender API
+- Security Command Center API
+- Security Posture API
+
+</details>
+
+<details markdown="block" class="reference-box">
+  <summary>Step 3 - the 49 permissions in the custom role</summary>
+
+These are the same permissions as the manual path's custom role, except `resourcemanager.projects.get`, which the automated path does not use.
+
+```text
+cloudasset.assets.searchAllResources
+cloudsecuritycompliance.cloudControls.list
+cloudsecuritycompliance.controlComplianceSummaries.list
+cloudsecuritycompliance.frameworkComplianceSummaries.list
+cloudsecuritycompliance.frameworks.list
+compute.commitments.list
+compute.machineImages.list
+monitoring.timeSeries.list
+osconfig.patchDeployments.list
+osconfig.patchJobs.get
+osconfig.patchJobs.list
+recommender.bigqueryCapacityCommitmentsRecommendations.list
+recommender.bigqueryPartitionClusterRecommendations.list
+recommender.cloudDeprecationGeneralRecommendations.list
+recommender.cloudFunctionsPerformanceRecommendations.list
+recommender.cloudRecentChangeRecommendations.list
+recommender.cloudSecurityGeneralRecommendations.list
+recommender.cloudsqlIdleInstanceRecommendations.list
+recommender.cloudsqlInstanceOutOfDiskRecommendations.list
+recommender.cloudsqlInstancePerformanceRecommendations.list
+recommender.cloudsqlInstanceReliabilityRecommendations.list
+recommender.cloudsqlOverprovisionedInstanceRecommendations.list
+recommender.cloudsqlUnderProvisionedInstanceRecommendations.list
+recommender.computeAddressIdleResourceRecommendations.list
+recommender.computeDiskIdleResourceRecommendations.list
+recommender.computeImageIdleResourceRecommendations.list
+recommender.computeInstanceGroupManagerMachineTypeRecommendations.list
+recommender.computeInstanceIdleResourceRecommendations.list
+recommender.computeInstanceMachineTypeRecommendations.list
+recommender.containerDiagnosisRecommendations.list
+recommender.errorReportingRecommendations.list
+recommender.gmpProjectManagementRecommendations.list
+recommender.iamPolicyChangeRiskRecommendations.list
+recommender.iamPolicyRecommendations.list
+recommender.iamServiceAccountChangeRiskRecommendations.list
+recommender.locations.list
+recommender.loggingProductSuggestionContainerRecommendations.list
+recommender.resourcemanagerProjectChangeRiskRecommendations.list
+recommender.resourcemanagerProjectUtilizationRecommendations.list
+recommender.resourcemanagerServiceLimitRecommendations.list
+recommender.runServiceCostRecommendations.list
+recommender.runServiceIdentityRecommendations.list
+recommender.runServiceSecurityRecommendations.list
+recommender.usageCommitmentRecommendations.list
+resourcemanager.hierarchyNodes.listEffectiveTags
+resourcemanager.organizations.get
+securitycenter.findings.list
+securityposture.postures.list
+serviceusage.services.list
 ```
 
-**PowerShell** - requires PowerShell 5.1+ or 7+ with the Google Cloud SDK (`gcloud` and `bq`). On Windows the script attempts to install the SDK automatically with `winget` if it is missing.
+</details>
 
-Either way, sign in with an account holding the access listed under *Required Customer Roles* above, and confirm your active project and organisation before running.
+Things worth knowing:
 
-### What the script grants
+- **No key is created**, and nothing is uploaded to Pulse. In step 5, Pulse's own service account, `pulse-gateway-prod`, is granted `roles/iam.serviceAccountTokenCreator` on your service account only. That lets Pulse act as the service account, with exactly the read-only access the other steps grant it. See [Onboarding Q&A: How does Pulse use my service account without a key?](faq.md#how-does-pulse-use-my-service-account-without-a-key)
+- The script does **not** enable Security Health Analytics.
 
-- **Resource access**: either the built-in `roles/viewer` role, or (Custom Resource Role) a new organisation-level custom role containing exactly the permissions listed under *Manual Setup* below - both bound at the organisation level.
-- **Billing access**: always the built-in `roles/billing.viewer` role on the billing account, regardless of which access model you chose - Google Cloud billing accounts only accept predefined roles, so a custom role is never used here.
-- **Cost export access**: a role granting `bigquery.tables.getData` - the only permission Pulse needs to read rows from the billing export table. When organisation scope is selected the script first tries to create the role at organisation level, falling back to the cost export project if that is unavailable. A built-in role that includes the permission, such as `roles/bigquery.dataViewer`, works equally well but grants more than Pulse uses.
-- **Security Health Analytics**: enabled directly using your own `gcloud` session (not the service account). This is a one-time, best-effort step requiring `securitycenter.managedServices.update` on the organisation; if it fails the script prints the exact command to run manually.
-- **APIs**: enables the 10 core APIs on the **host project** - Cloud Resource Manager, Cloud Billing, IAM, Compute Engine, BigQuery, Billing Budgets, Recommender, Cloud Asset, Organization Policy and Security Command Center - plus **BigQuery** and **BigQuery Data Transfer** on the cost export project.
+The script stops at the first failed step: it prints *FAILED Step N*, lists what is already in place in your organisation, and finishes with *Onboarding incomplete - see FAILED step above* rather than *All steps completed successfully*.
 
 ### Verification and timing
 
 | What | When |
 | --- | --- |
-| Script uploads the credentials, Pulse validates them and the Google organisation appears under Cloud Management | As soon as the script finishes |
+| Script completes and Pulse detects it, showing **Onboarding completed successfully** | Usually while the Finalize step is still open - the script itself ends with *Pulse picks it up within a few minutes* |
 | Resources, findings and costs load in Pulse | Up to 24 hours |
 
 Detailed cost data additionally depends on your BigQuery billing export, which Google populates on its own schedule.
 
-**If the script fails partway:** re-running a re-downloaded script is safe. It reuses the existing service account and skips any API, role, or policy step that is already done, so it can also be used to recover from an interrupted run.
+**If the Finalize countdown lapses,** nothing is lost. The roughly 10-minute timer only reflects that Pulse has not detected the onboarding *yet*. Pulse shows *Deployment is taking longer than expected*, keeps checking in the background, and completes onboarding automatically once it detects it - return to **Cloud Management** after about 2 hours to confirm. If the deployment genuinely failed, contact support.
 
-If the Security Health Analytics step failed, the script prints the exact `gcloud` command to run manually - compliance findings will stay empty until that is done, but the rest of onboarding is unaffected.
+**If a step reports FAILED,** fix the cause and run the same script again. A second run reuses the service account and the role it finds instead of failing on them, and applies the remaining steps. Click **Download Script** on the Finalize step to keep a copy for this.
 
 ---
 
@@ -321,11 +431,13 @@ Use this to confirm onboarding is complete, whichever method you used:
 
 | Item | Where | Required? |
 | --- | --- | --- |
-| Service Account exists with a valid JSON key held by Pulse | Host project | Required |
-| Resource access bound - `roles/viewer` with `roles/browser`, or the custom role | Organisation (or every project, if no organisation) | Required |
-| The APIs listed under *Manual Setup* enabled | Host project (where the Service Account lives) | Required |
+| Service Account exists | Host project | Required |
+| Pulse can impersonate the Service Account - `pulse-gateway-prod` holds `roles/iam.serviceAccountTokenCreator` on it | Service Account | **Automated path only** |
+| A valid JSON key for the Service Account held by Pulse | Pulse Cloud Management | **Manual path only** - the federated path has no key |
+| Resource access bound - the custom role, or on the manual path `roles/viewer` with `roles/browser` | Organisation (or every project, if no organisation - manual path only) | Required |
+| The 11 required APIs enabled | Host project (where the Service Account lives) | Required |
 | `roles/billing.viewer` / Billing Account Viewer bound to the Service Account | Billing account | Required for cost and budget data |
 | Security Health Analytics enabled at organisation scope | Security Command Center | Required for compliance findings |
 | Cloud Billing export to BigQuery, Detailed usage cost | Cost export project | Required for detailed cost data |
-| `bigquery.tables.getData` granted to the Service Account | Cost export project or dataset | Required for detailed cost data |
+| Read access to the export table granted to the Service Account - `roles/bigquery.dataViewer` on the table (automated), or a role with `bigquery.tables.getData` (manual) | Cost export table, dataset or project | Required for detailed cost data |
 | BigQuery API and BigQuery Data Transfer Service API enabled | Cost export project | Required for detailed cost data |

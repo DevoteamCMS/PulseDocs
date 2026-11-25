@@ -41,7 +41,7 @@ That is your choice: roles can be assigned per subscription or at Management Gro
 
 That depends on the path you choose at onboarding.
 
-On the recommended **automated** path, Azure and AWS are **federated**: no client secret or access key is created, and none is uploaded to Pulse, so there is nothing to rotate and nothing that expires. Google Cloud is the exception — a service account key is created and uploaded for you.
+On the recommended **automated** path, Azure, AWS and Google Cloud are all **federated**: no client secret, access key or service account key is created, and none is uploaded to Pulse, so there is nothing to rotate and nothing that expires.
 
 On the **manual** path, you create the credential yourself and register it in Pulse: an Azure client secret plus its expiration date (recommended validity up to 2 years — the date is registered at onboarding and you are notified well before expiry), an AWS access key you rotate under your own policy, or a Google Cloud service account key.
 

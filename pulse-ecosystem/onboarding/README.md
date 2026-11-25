@@ -34,11 +34,11 @@ This document describes what prerequisites, permissions Customer must have and a
 The automated scripts sequence this for you, so it matters mainly when you add a cost export separately - for example when reusing an existing AWS CUR, or after skipping the billing export step in the Google wizard.
 
 Cloud specific Cloud Credentials naming's:
-   1. Google - SA (Service Account), with a JSON key in both setups
+   1. Google - SA (Service Account) - impersonated by Pulse with no key (automated setup), or a JSON key you supply (manual setup)
    2. Azure - SPN (Service Principal Name) also known as 'App registration' - federated access with no client secret (automated setup), or an SPN client secret you supply (manual setup)
    3. AWS - a federated cross-account IAM role assumed by Pulse (automated setup), or IAM user credentials for programmatic access (manual setup)
 
-On AWS and Azure the automated path is **federated**: Pulse holds no long-lived secret for your cloud. Google Cloud still uses a Service Account key in both paths.
+On every cloud the automated path is **federated**: Pulse holds no long-lived secret for your cloud.
 
 ## Automated vs Manual Setup
 
