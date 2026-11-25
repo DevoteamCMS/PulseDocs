@@ -36,9 +36,9 @@ The same **permissions**, yes - but the **coverage** can differ. They also diffe
 | --- | --- | --- |
 | AWS | Federated - Pulse assumes a cross-account role, no secret leaves your account | Long-lived Access Key ID + Secret Access Key |
 | Azure | Federated - no client secret is created or uploaded | SPN and client secret you create and paste in, plus its expiration date |
-| Google Cloud | Service Account created for you, JSON key uploaded automatically | Service Account JSON key you create and paste in |
+| Google Cloud | Federated - Pulse impersonates a read-only service account in your project, no key is created or uploaded | Service Account JSON key you create and paste in |
 
-Only Google Cloud requires a long-lived credential on the automated path; AWS and Azure are both federated.
+On all three clouds the automated path is federated, and only the manual path uses a long-lived credential.
 
 Coverage differs because the automated path applies access more broadly than a hand-built setup usually does. On AWS the scanner role lands in every account, including ones created later, while the manual path covers only the accounts where you create the role yourself. On Google Cloud the script always binds at organisation level, while manual setup may be per project.
 
@@ -71,7 +71,7 @@ That means newly added accounts or subscriptions are picked up without you re-on
 | Cloud | Repeating a failed or partial run |
 | --- | --- |
 | AWS | Safe and effective - fix the cause, then deploy the stack again |
-| Google Cloud | Safe and effective - the script reuses the existing service account and skips completed steps |
+| Google Cloud | Safe and effective - fix the cause, then run the same script again. It reuses the service account and role it created, and applies the remaining steps |
 | Azure | Safe, but it will **not** repair a partial run. The first step fails once the service principal exists and the script stops there - see [How do I rotate the SPN, or recover from a broken deployment?](#how-do-i-rotate-the-spn-or-recover-from-a-broken-deployment) |
 
 ---
@@ -306,25 +306,31 @@ Only that some tenant created a service principal for the Pulse application - no
 
 ### What access does Pulse need in my Google Cloud organisation?
 
-A Service Account holding read-only bindings at organisation level: either the built-in `roles/viewer` with `roles/browser`, or a custom role containing only the 50 permissions Pulse needs, plus `roles/billing.viewer` on the billing account and read access to the billing export table in BigQuery. If you have no organisation resource, the same bindings are made per project instead.
+A Service Account holding read-only bindings, plus `roles/billing.viewer` on the billing account and read access to the billing export table in BigQuery. The resource access depends on the path:
+
+- **Automated** - a custom role containing 49 read-only permissions, bound at organisation level.
+- **Manual** - either the built-in `roles/viewer` with `roles/browser`, or a custom role containing the 50 permissions Pulse needs, at organisation level. If you have no organisation resource, the same bindings are made per project instead.
 
 Pulse reads the Google Cloud **control plane** and your **billing export** only. It cannot read the contents of disks, databases, buckets or virtual machines. See [What do the 50 Google Cloud permissions cover?](#what-do-the-50-google-cloud-permissions-cover) below.
 
 ### What Google Cloud permissions do I need to grant that access?
 
-Both paths need the same access, because the automated script performs exactly the steps you would otherwise do by hand, in your own `gcloud` session:
+On the **automated** path the script runs in your own `gcloud` session, so you need:
 
-- **Organisation** - Organisation Admin, or equivalent delegated IAM admin roles, for the organisation-level bindings and the custom role if you choose that model
-- **Host project** - permission to create service accounts and keys, and to enable APIs
-- **Billing account** - Billing Account Costs Manager or Billing Account Administrator
-- **Cost export project or dataset** - permission to grant dataset or table access
-- **Organisation, optional** - `securitycenter.managedServices.update` to enable Security Health Analytics; without it that step is skipped and the rest of onboarding is unaffected
+- **Organisation** - Organisation Admin, or equivalent delegated IAM admin roles, to create the custom role and bind it at organisation level
+- **Host project** - permission to enable APIs, create service accounts, and manage access to a service account
+- **Billing account** - permission to grant roles on it, such as Billing Account Administrator, if you configure the billing role
+- **Cost export table** - permission to grant access on the table, if you enter one
 
-The full table is on the [Google Cloud onboarding page](google.md#required-customer-roles).
+The **manual** path also needs permission to create Service Account keys, and `securitycenter.managedServices.update` on the organisation to enable Security Health Analytics.
+
+The full tables are on the [Google Cloud onboarding page](google.md#required-customer-roles).
 
 This privileged access is only used to *grant* Pulse its access. Pulse itself never receives it.
 
 ### Built-in Viewer role or Custom Resource Role - which should I pick?
+
+This choice applies to the **manual** path only. The automated path always creates a custom role, with 49 permissions.
 
 Both give Pulse the same functionality.
 
@@ -334,6 +340,8 @@ Both give Pulse the same functionality.
 Note that this choice applies to *resource* access only. Billing access always uses the built-in `roles/billing.viewer` role, because Google Cloud billing accounts only accept predefined roles - a custom role is never used there.
 
 ### What do the 50 Google Cloud permissions cover?
+
+The 50 permissions are the manual path's custom role. The automated path uses the same set except `resourcemanager.projects.get` - 49 in all.
 
 They are all read-only (`list`, `get`, `searchAll`) and group by API:
 
@@ -348,7 +356,13 @@ They are all read-only (`list`, `get`, `searchAll`) and group by API:
 | `monitoring.timeSeries.list` | 1 | Cloud Monitoring metrics |
 | `serviceusage.services.list` | 1 | Which APIs are enabled in each project |
 
-The full list is on the [Google Cloud onboarding page](google.md) under *Manual Setup*. Choosing the built-in `roles/viewer` and `roles/browser` instead grants all of this and considerably more.
+Both full lists are on the [Google Cloud onboarding page](google.md), under *Automated Setup* and *Manual Setup*. Choosing the built-in `roles/viewer` and `roles/browser` instead grants all of this and considerably more.
+
+### How does Pulse use my service account without a key?
+
+On the automated path, the script grants Pulse's own service account, `pulse-gateway-prod`, the role `roles/iam.serviceAccountTokenCreator` on the service account it created in your host project - and on nothing else. That lets Pulse act as your service account, so it has exactly the read-only access the script granted that account, and no key ever exists.
+
+To end Pulse's access, remove that binding from the service account, or remove the service account's role bindings.
 
 ### Which project must the APIs be enabled on?
 
@@ -358,7 +372,7 @@ The APIs go on the project where the **Service Account was created** - not the p
 
 No. Neither the script nor the manual steps can create or enable a Cloud Billing export to BigQuery - they only grant the service account permission to read one.
 
-If no export exists yet, create it first (*Customer Prerequisites - Creating Cost Export* on the Google Cloud page), or choose **Skip billing export upload** in the wizard and add it later. If an export exists but you don't know its table, leave the Cost Export Table ID blank and the script will list the accessible projects and tables at runtime.
+If no export exists yet, create it first (*Customer Prerequisites - Creating Cost Export* on the Google Cloud page), or choose **Skip billing export upload** in the wizard and add it later.
 
 ### Why does Pulse need Security Health Analytics?
 
@@ -375,13 +389,15 @@ Both work; pick based on what else lives in the export project.
 
 Yes. The host project holding the Service Account does not need to belong to the same organisation as the resources being scanned.
 
-This matters for managed service providers: the provider can create and hold the Service Account in its own project, then grant that Service Account access on the customer organisation or on selected customer projects. If you use an existing Service Account, Pulse derives the host project from its email address.
+This matters for managed service providers: the provider can create and hold the Service Account in its own project, then grant that Service Account access on the customer organisation or on selected customer projects.
 
 Remember that the required APIs are enabled on the **host project** - the one owning the Service Account - not on the projects holding the data.
 
 ### My organisation does not have a Google Cloud organisation resource - can I still onboard?
 
-Yes, but roles must be created and assigned **per project** rather than once at organisation level, and you will need to repeat that for every project you want Pulse to see. The organisation-level path is strongly preferred where available, because new projects are then covered automatically.
+Yes, on the **manual** path. The automated flow needs an Organization ID and binds Pulse's role at organisation level, so it cannot be used without one.
+
+On the manual path, roles must be created and assigned **per project** rather than once at organisation level, and you will need to repeat that for every project you want Pulse to see. The organisation-level path is strongly preferred where available, because new projects are then covered automatically.
 
 ### Why the 30-second wait between steps?
 
